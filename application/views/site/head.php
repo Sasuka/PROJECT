@@ -9,6 +9,16 @@
 <meta name="HandheldFriendly" content="true">
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0'
       name='viewport'/>
+
+<link href="<?php echo public_url('site') ?>/css/font-awesome.min.css" rel='stylesheet' type='text/css' media='all'/>
+<link href="<?php echo public_url('site') ?>/css/styles.css?v=90" rel='stylesheet' type='text/css' media='all'/>
+
+<link href="<?php echo public_url('site') ?>/design/css/checkouts.css?v=1.1" rel='stylesheet' type='text/css'
+      media='all'/>
+<script src="<?php echo public_url('site') ?>/design/js/jquery.validate.js" type='text/javascript'></script>
+<!-- BootstrapValidator CSS -->
+<link rel="stylesheet" href="<?php echo public_url() . 'bootstrap/css/bootstrapValidator.min.css' ?>"/>
+<link rel="stylesheet" href="<?php echo public_url() . 'bootstrap/css/jquery-ui.css' ?>"/>
 <script>
     //<![CDATA[
     (function (i, s, o, g, r, a, m) {
@@ -125,15 +135,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="<?php echo public_url() ?>bootstrap/css/bootstrap.min.css">
 <!-- Latest compiled and minified JavaScript -->
-<link href="<?php echo public_url('site') ?>/css/font-awesome.min.css" rel='stylesheet' type='text/css' media='all'/>
-<link href="<?php echo public_url('site') ?>/css/styles.css?v=90" rel='stylesheet' type='text/css' media='all'/>
 
-<link href="<?php echo public_url('site') ?>/design/css/checkouts.css?v=1.1" rel='stylesheet' type='text/css'
-      media='all'/>
-<script src="<?php echo public_url('site') ?>/design/js/jquery.validate.js" type='text/javascript'></script>
-<!-- BootstrapValidator CSS -->
-<link rel="stylesheet" href="<?php echo public_url() . 'bootstrap/css/bootstrapValidator.min.css' ?>"/>
-<link rel="stylesheet" href="<?php echo public_url() . 'bootstrap/css/jquery-ui.css' ?>"/>
 <!-- BootstrapValidator JS -->
 <script type="text/javascript"
         src="<?php echo public_url() . 'bootstrap/js/bootstrapValidator.min.js' ?>"></script>

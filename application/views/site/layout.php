@@ -291,7 +291,7 @@
 
             <nav class="navbar-main navbar navbar-default cl-pri">
                 <!-- MENU MAIN -->
-                <?php $this->load->view('site/main_menu'); ?>
+                <?php $this->load->view('site/main_menu',$this->data); ?>
                 <!-- End container  -->
                 <script>
 
