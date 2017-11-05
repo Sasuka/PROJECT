@@ -332,7 +332,7 @@
                 <div class="slider-default bannerslider">
                     <?php $this->load->view('site/slider');?>
                 </div>
-                <!-- End slider -->
+                 End slider
                 <?php $this->load->view('site/news/news_breadcrumb'); ?>
             <?php
             } ?>

@@ -233,10 +233,11 @@ class Product extends MY_Controller
                 $upload_path = './uploads/product/' . $namegroup;
 
                 $upload_data = $this->upload_library->upload($upload_path, 'image');
-                //   pre($upload_data);
+                  // pre($upload_data);
                 if (isset($upload_data['file_name'])) {
 
                     $namePicture = $namegroup . '/' . $upload_data['file_name'];
+
 
                 } else {
                     $namePicture = '';
@@ -349,6 +350,17 @@ class Product extends MY_Controller
                 $upload_data = $this->upload_library->upload($upload_path, 'image');
                 if (isset($upload_data['file_name'])) {
                     $namePicture = $namegroup . '/' . strtolower($upload_data['file_name']);
+                    $this->load->library("image_lib");
+                    $config['image_library'] = 'gd2';
+                    $config['source_image'] = $namePicture;
+                    $config['create_thumb'] = TRUE;
+                    $config['maintain_ratio'] = TRUE;
+                    $config['width']     = 150;
+                    $config['height']   = 120;
+                    $this->image_lib->initialize($config);
+                    $this->image_lib->resize();
+
+
                 } else {
                     $namePicture = '';
                 }

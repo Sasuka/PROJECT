@@ -1,4 +1,5 @@
 <div class="container nav-wrapper check_nav">
+
     <div class="row">
         <div class="navbar-header">
             <div class="mobile-menu-icon-wrapper">
@@ -6,7 +7,7 @@
 
                     <h1 class="logo logo-mobile">
                         <a href="http://happylive.vn">
-                            <img src="<?php echo public_url('site');?>/design/14/logo.png?v=90"
+                            <img src="<?php echo public_url('site'); ?>/design/14/logo.png?v=90"
                                  alt="Happylive" class="img-responsive logoimg"/>
                         </a>
                     </h1>
@@ -56,53 +57,30 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav clearfix">
+
+
                 <li>
                     <a href="/" class=" current" title="Trang chủ">
                         <span>Trang chủ</span>
                     </a>
                 </li>
+
+
                 <li class="dropdown">
                     <a href="/collections/dong-ho-nam" title="Đồng hồ nam" class="">
-                        <span>Đồng hồ nam</span>
+                        <span>Thương hiệu</span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-
-                        <li>
-                            <a href="/collections/dong-ho-nam-tevise" title="Đồng hồ Tevise">Đồng hồ
-                                Tevise</a>
-
+                        <?php foreach ($listGroup as $itemGroup) { ?>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="#"><?php echo mb_convert_case(mb_strtolower($itemGroup['TEN_NHOM_SANPHAM']), MB_CASE_TITLE, "UTF-8"); ?></a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#">Link 1</a></li>
+                                <li><a href="#">Lik 2</a></li>
+                                <li><a href="#">Link 3</a></li>
+                            </ul>
                         </li>
-
-                        <li>
-                            <a href="/collections/dong-ho-nam-skmei" title="Đồng hồ Skmei">Đồng hồ
-                                Skmei</a>
-
-                        </li>
-
-                        <li>
-                            <a href="/collections/dong-ho-nam-halei" title="Đồng hồ Halei">Đồng hồ
-                                Halei</a>
-
-                        </li>
-
-                        <li>
-                            <a href="/collections/dong-ho-nam-longbo" title="Đồng hồ Longbo">Đồng hồ
-                                Longbo</a>
-
-                        </li>
-
-                        <li>
-                            <a href="/collections/dong-ho-nam-curren" title="Đồng hồ nam Curren">Đồng hồ
-                                nam Curren</a>
-
-                        </li>
-
-                        <li>
-                            <a href="/collections/dong-ho-nam-baishuns" title="Đồng hồ nam Baishuns">Đồng
-                                hồ nam Baishuns</a>
-
-                        </li>
-
+                        <?php  }?>
                     </ul>
                 </li>
 
@@ -133,21 +111,29 @@
 
                     </ul>
                 </li>
+
+
                 <li>
                     <a href="/pages/dich-vu" class="" title="Dịch vụ">
                         <span>Dịch vụ</span>
                     </a>
                 </li>
+
+
                 <li>
                     <a href="/pages/gioi-thieu" class="" title="Giới thiệu">
                         <span>Giới thiệu</span>
                     </a>
                 </li>
+
+
                 <li>
                     <a href="/blogs/news" class="" title="Blog">
                         <span>Blog</span>
                     </a>
                 </li>
+
+
             </ul>
         </div>
         <div class="hidden-xs pull-right right-menu">

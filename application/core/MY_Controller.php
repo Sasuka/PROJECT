@@ -40,6 +40,7 @@ class MY_Controller extends CI_Controller
 
             case 'admin': {
                 $this->load->helper('admin');
+
                 break;
             }
             case 'process': {
@@ -51,6 +52,14 @@ class MY_Controller extends CI_Controller
                 $listGroup = $this->group_model->getList();
                 $this->data['listGroup'] = $listGroup;
                // pre(Arrays.toString($listCategories));
+
+
+                //Lấy danh sách sản phẩm
+                $this->load->model('product_model');
+                $list = $this->product_model->getList();
+                $this->data['listProduct'] = $list;
+               // pre($list);
+
 
             }
 

@@ -5,6 +5,8 @@ class Upload extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('upload')
+
         $this->load->library('image_lib');
     }
 
@@ -28,5 +30,11 @@ class Upload extends MY_Controller
 
         $this->data['temp'] = 'admin/upload/upload_file';
         $this->load->view('admin/main', $this->data);
+    }
+
+    public function test(){
+
+        $data['errors'] = '';
+        $this->load->view("site/upload", $data);
     }
 }

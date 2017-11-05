@@ -1,0 +1,22 @@
+.main-menu li a span {
+color: yellow;
+}
+
+.main-menu .current-cus {
+background-color: rgba(85, 85, 85, 1);
+}
+
+.main-menu > li {
+display: block;
+
+}
+
+.main-menu > li:hover {
+background-color: rgba(255, 251, 147, 0.45) !important;
+
+}
+
+.main-menu > li:hover span {
+color: #ed6e08;
+}
+
