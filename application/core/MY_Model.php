@@ -1982,6 +1982,25 @@ class MY_Model extends CI_Model
         return $this->db->get()->result_array();
 
     }
+    /* table1 : table cần join, $condition: là điều kiện để join ~ on, $lrb: hình thức join, $select : thuộc tính cần select*/
+    public function getListJoinLRB1($table1, $condition,$where = array(), $lrb = 'left',$select = '')
+    {
+        if ($select !=''){
+            $this->db->select($select);
+        }else{
+            $this->db->select('*');
+        }
+
+        $this->db->from($this->table);
+
+        $this->db->join($table1, "$table1.$condition = $this->table.$condition", $lrb);
+        if ($where != ''){
+            $this->db->where($where);
+        }
+        return $this->db->get()->result_array();
+
+    }
+
 
     public function getListThreeJoin($table1, $condition1, $table2, $condition2, $where = '')
     {

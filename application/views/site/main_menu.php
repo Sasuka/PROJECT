@@ -71,16 +71,28 @@
                         <span>Thương hiệu</span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <?php foreach ($listGroup as $itemGroup) { ?>
+                        <?php for ($i = 0, $j = $i;
+                        $i < count($listGroup);
+                        $i++) {
+
+                            ?>
                         <li class="dropdown-submenu">
-                            <a tabindex="-1" href="#"><?php echo mb_convert_case(mb_strtolower($itemGroup['TEN_NHOM_SANPHAM']), MB_CASE_TITLE, "UTF-8"); ?></a>
+                            <a tabindex="-1"
+                               href="#"><?php echo mb_convert_case(mb_strtolower($listGroup[$i]['TEN_NHOM_SANPHAM']), MB_CASE_TITLE, "UTF-8"); ?></a>
                             <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#">Link 1</a></li>
-                                <li><a href="#">Lik 2</a></li>
-                                <li><a href="#">Link 3</a></li>
+                                <?php for (;$j < count($listCate);$j++) {
+                                    if ($listGroup[$i]['MA_NHOM_SANPHAM'] == $listCate[$j]['MA_NHOM_SANPHAM']) {
+                                        ?>
+                                        <li><a href="<?php echo $listCate[$j]['MA_LOAI_SANPHAM'] ?>"><?php echo $listCate[$j]['TEN_LOAI_SANPHAM'] ?></a></li>
+                                        <?php
+                                    }else{
+                                        break;
+                                    }
+                                }
+//                                ?>
                             </ul>
                         </li>
-                        <?php  }?>
+                    <?php } ?>
                     </ul>
                 </li>
 

@@ -35,12 +35,12 @@ class MY_Controller extends CI_Controller
         $this->load->model(array('site_model', 'product_model', 'catelog_model'));
 
         $controler = $this->uri->segment(1);
-
+        $controler = strtolower($controler);
         switch ($controler) {
 
             case 'admin': {
                 $this->load->helper('admin');
-
+                $this->_check_login();
                 break;
             }
             case 'process': {
@@ -48,17 +48,16 @@ class MY_Controller extends CI_Controller
                 break;
             }
             default: {
-                $this->load->model('group_model');
+                $this->load->model(array('group_model','catelog_model','product_model'));
                 $listGroup = $this->group_model->getList();
                 $this->data['listGroup'] = $listGroup;
-               // pre(Arrays.toString($listCategories));
-
-
                 //Lấy danh sách sản phẩm
-                $this->load->model('product_model');
-                $list = $this->product_model->getList();
+                $this->load->model('catelog_model');
+                $where['order'] = array('MA_NHOM_SANPHAM','ASC');
+                $listCate = $this->catelog_model->getList($where);
+                $this->data['listCate'] = $listCate;
+                $list = $this->product_model ->getList();
                 $this->data['listProduct'] = $list;
-               // pre($list);
 
 
             }
@@ -67,7 +66,7 @@ class MY_Controller extends CI_Controller
     }
 
     //   thuc hien kiem tra khi nguoi dung co tinh vao admin
-    public function _check_login()
+    private function _check_login()
     {
         $controller = $this->uri->rsegment(1);
         $controller = strtolower($controller);
