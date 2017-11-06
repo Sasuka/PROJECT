@@ -20,7 +20,7 @@ class Product extends MY_Controller
         //thuc hien load phan trang
         $this->load->library('pagination');
         $config = array();
-        $config['total_rows'] = $total_rows;;//tong tat ca cac sản phẩm trên webiste
+        $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
         $config['base_url'] = admin_url('product/index');//link hien thi ra danh sach san pham
         $config['per_page'] = 10;//hien thi so luong san pham tren 1 trang
         $config['uri_segment'] = 4;//hien thi so trang
@@ -32,7 +32,7 @@ class Product extends MY_Controller
 
         $segment = $this->uri->segment(4);
         $segment = intval($segment);
-        //   pre($segment);
+         //  pre($segment);
         $input = array();
         $input['limit'] = array($config['per_page'], $segment);
         //kiem tra theo id

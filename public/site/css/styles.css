@@ -4671,3 +4671,26 @@ position: relative;
 	padding-right: 5px;
 }
 .box-like-socials-article  .fb_iframe_widget_lift{z-index:6;}
+
+.pagination {
+	display: inline-block;
+    text-align: center;
+}
+
+.curlink {
+	color: black;
+	float: left;
+	padding: 3px 5px;
+	text-decoration: none;
+}
+
+.pagination-text curlink {
+	background-color: #4CAF50;
+	color: white;
+	border-radius: 5px;
+}
+
+.pagination-text a:hover:not(.active) {
+	background-color: #ddd;
+	border-radius: 5px;
+}
