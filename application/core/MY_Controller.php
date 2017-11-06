@@ -48,7 +48,7 @@ class MY_Controller extends CI_Controller
                 break;
             }
             default: {
-                $this->load->model(array('group_model','catelog_model','product_model'));
+                $this->load->model(array('group_model', 'catelog_model', 'product_model'));
                 $listGroup = $this->group_model->getList();
                 $this->data['listGroup'] = $listGroup;
                 //Lấy danh sách sản phẩm
@@ -58,6 +58,10 @@ class MY_Controller extends CI_Controller
                 $this->data['listCate'] = $listCate;
                 $list = $this->product_model ->getList();
                 $this->data['listProduct'] = $list;
+//                $select = 'NHOM_SANPHAM.MA_NHOM_SANPHAM,TEN_NHOM_SANPHAM,MA_LOAI_SANPHAM,TEN_LOAI_SANPHAM,MA_NHA_CUNGCAP,TRANGTHAI,LOGO';
+//                $list = $this->group_model->getListJoinLRB1('LOAI_SANPHAM', 'MA_NHOM_SANPHAM', '', 'left', $select);
+//                $this->data['list'] = $list;
+                // pre($list);
 
 
             }

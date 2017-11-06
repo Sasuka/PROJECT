@@ -11,7 +11,6 @@
         </div>
     </div>
 </div>
-
 <div id="collection" class="content-pages collection-page" data-sticky_parent>
 
     <!-- Begin collection info -->
@@ -61,12 +60,12 @@
 
     </div>
     <div class=" col-md-3 col-sm-12 col-xs-12 leftsidebar-col" data-sticky_column>
-       <?php $this->load->view('site/product_list/menu_sidebar'); ?>
+       <?php $this->load->view('site/product_list/menu_sidebar',$this->data); ?>
     </div>
     <div class="content-col col-md-9 col-sm-12 col-xs-12" data-sticky_column>
-<!--        --><?php //$this->load->view('site/product_list/product_list');?>
+        <?php $this->load->view('site/product_list/product_list',$this->data);?>
 
-        <?php $this->load->view('site/product_detail/product_detail');?>
+<!--        --><?php //$this->load->view('site/product_detail/product_detail');?>
     </div>
 
     <!-- End collection info -->

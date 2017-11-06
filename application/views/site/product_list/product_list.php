@@ -37,7 +37,8 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12 content-product-list">
             <div class="row product-list">
-                <?php foreach ($listProduct as $itemProduct) {?>
+                <?php
+                foreach ($listProduct as $itemProduct) {?>
 
                 <div class="col-md-4  col-sm-6 col-xs-12 pro-loop">
 
