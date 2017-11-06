@@ -67,7 +67,7 @@
 
 
                 <li class="dropdown">
-                    <a href="/collections/dong-ho-nam" title="Đồng hồ nam" class="">
+                    <a href="<?php echo base_url('product');?>" title="Thương Hiệu" class="">
                         <span>Thương hiệu</span>
                     </a>
                     <ul class="dropdown-menu" role="menu">

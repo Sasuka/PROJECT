@@ -57,15 +57,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav clearfix">
-
-
                 <li>
                     <a href="/" class=" current" title="Trang chủ">
                         <span>Trang chủ</span>
                     </a>
                 </li>
-
-
                 <li class="dropdown">
                     <a href="/collections/dong-ho-nam" title="Đồng hồ nam" class="">
                         <span>Thương hiệu</span>

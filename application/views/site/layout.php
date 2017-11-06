@@ -287,7 +287,6 @@
         <div id="pageContainer" class="clearfix">
 
             <?php $this->load->view('site/header_content'); ?>
-            <!--            -->
 
             <nav class="navbar-main navbar navbar-default cl-pri">
                 <!-- MENU MAIN -->

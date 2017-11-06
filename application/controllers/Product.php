@@ -50,7 +50,7 @@ class Product extends MY_Controller
 
         //khoi tao phan trang
         $this->pagination->initialize($config);
-       // pre($config);
+        // pre($config);
         $segment = $this->uri->segment(3);
         $segment = intval($segment);
 
@@ -295,6 +295,18 @@ class Product extends MY_Controller
         $this->data['list'] = $list;
 
         $this->data['temp'] = 'site/product/price_search';
+        $this->load->view('site/layout', $this->data);
+    }
+
+    /*
+     * Danh sách các sản phẩm khuyến mãi
+     * */
+    public function discount()
+    {
+        $listDis = $this->product_model->getProductPromotion();
+        $this->data['listProduct'] = $listDis;
+       // pre($listDis);
+        $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
     }
 }

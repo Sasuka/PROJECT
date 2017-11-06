@@ -17,22 +17,28 @@ class Product_model extends MY_Model
         parent::__construct();
     }
 
-    public function getProductPromotion($item=array())
+    public function getProductPromotion($item = array())
     {
         $this->db->select('*');
         $this->db->from('sanpham');
-        $this->db->join('chitiet_khuyenmai', 'sanpham.MA_SANPHAM = chitiet_khuyenmai.MA_SANPHAM');
-        $this->db->join('khuyenmai', 'chitiet_khuyenmai.MA_KHUYENMAI=khuyenmai.MA_KHUYENMAI');
-        if($item !=null){
-            $this->db->where('NGAY_BATDAU <', $item['NGAY_CAPNHAT']);
-            $this->db->or_where('NGAY_BATDAU', $item['NGAY_CAPNHAT']);
-            $this->db->where('NGAY_KETTHUC >', $item['NGAY_CAPNHAT']);
-            $this->db->or_where('NGAY_KETTHUC', $item['NGAY_CAPNHAT']);
-        }
+        $this->db->join('chitiet_khuyenmai', 'sanpham.MA_SANPHAM = chitiet_khuyenmai.MA_SANPHAM','RIGHT');
+        $this->db->join('khuyenmai', 'chitiet_khuyenmai.MA_KHUYENMAI=khuyenmai.MA_KHUYENMAI','RIGHT');
+        $where = '(NGAY_BATDAU < NGAY_CAPNHAT OR NGAY_BATDAU = NGAY_CAPNHAT)';
+        $this->db->where($where);
+        $where1 = '(NGAY_KETTHUC > NGAY_CAPNHAT OR NGAY_KETTHUC = NGAY_CAPNHAT)';
+        $this->db->where($where1);
+//
+//        if ($item != null) {
+//            $this->db->where('NGAY_BATDAU <', $item['NGAY_CAPNHAT']);
+//            $this->db->or_where('NGAY_BATDAU', $item['NGAY_CAPNHAT']);
+//            $this->db->where('NGAY_KETTHUC >', $item['NGAY_CAPNHAT']);
+//            $this->db->or_where('NGAY_KETTHUC', $item['NGAY_CAPNHAT']);
+//        }
+
         $query = $this->db->get();
-        if($query->num_rows() != 0){
-            return $query ->result_array();
-        }else{
+        if ($query->num_rows() != 0) {
+            return $query->result_array();
+        } else {
             return false;
         }
 

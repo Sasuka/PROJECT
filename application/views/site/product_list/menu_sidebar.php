@@ -11,7 +11,7 @@
 
 
             <li class="item  first">
-                <a href="/collections/onsale">
+                <a href="<?php echo base_url('product/discount')?>">
                     <span>Sản phẩm khuyến mãi</span>
                 </a>
             </li>
