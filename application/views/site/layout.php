@@ -20,7 +20,7 @@
             <div class="modal-header clearfix" style="width: 100%">
                 <a href="/products/dong-ho-nam-skmei-kim-xanh-duong" class="quickview-title text-left"
                    title="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">
-                    <h4 class="p-title modal-title">ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG</h4>
+                    <h4 class="p-title modal-title">ĐỒNG HỒ NAMNG</h4>
                 </a>
                 <div class="quickview-close">
                     <a href="javascript:void(0);"><i class="fa fa-times"></i></a>

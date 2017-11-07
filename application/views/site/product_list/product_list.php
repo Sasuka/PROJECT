@@ -97,9 +97,9 @@
                                             title="ĐỒNG HỒ LONGBO MẶT VUÔNG MÀU ĐEN"><?php echo mb_convert_case(strtolower($itemProduct['TEN_SANPHAM']), MB_CASE_TITLE, "UTF-8"); ?> </a>
                                 </h3>
                                 <div class="pro-prices">
-                                    <p class="pro-price"><?php echo $itemProduct['DONGIA_BAN']; ?></p>
+                                    <p class="pro-price"><?php echo isset($itemProduct['PHANTRAM_KM']) ?  (1-0.01*$itemProduct['PHANTRAM_KM'])*$itemProduct['DONGIA_BAN'] : ''; ?></p>
                                     <p class="pro-price-del text-left">
-                                        <del class="compare-price">500,000₫</del>
+                                        <del class="compare-price"><?php echo $itemProduct['DONGIA_BAN']; ?></del>
                                     </p>
 
 

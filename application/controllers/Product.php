@@ -57,7 +57,7 @@ class Product extends MY_Controller
         $input['limit'] = array($config['per_page'], $segment);
 
         $list = $this->product_model->getList($input);
-        //pre($list);
+       // pre($list);
         $this->data['listProduct'] = $list;
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
