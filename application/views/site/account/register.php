@@ -5,32 +5,41 @@
             <h2 class="col-md-offset-5">ĐĂNG KÝ</h2>
         </div>
     </div>
+
     <div class="col-md-12">
         <form id="form_register" method="POST" action="<?php echo base_url('user/register'); ?>" role="form" class="form-horizontal">
             <div class="form-group">
-                <label class="col-sm-3 control-label">Username</label>
+                <label class="col-sm-3 control-label">Fullname</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" name="fname" placeholder="Họ" value="<?php echo set_value('fname') ?>"/>
+                    <div name="fname_error" id="fname_error"
+                         class="clear error"><?php echo form_error('fname'); ?></div>
                 </div>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="username" placeholder="Tên" value="<?php echo set_value('lname') ?>"/>
+                    <input type="text" class="form-control" name="lname" placeholder="Tên" value="<?php echo set_value('lname') ?>"/>
+                    <div name="fname_error" id="fname_error"
+                         class="clear error"><?php echo form_error('lname'); ?></div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Số ĐT</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control" name="phone" placeholder="Số điện thoại liên lạc" value="<?php echo set_value('phone') ?>"/>
+                    <div name="phone_error" id="phone_error"
+                         class="clear error"><?php echo form_error('phone'); ?></div>
                 </div>
                 <label class="col-sm-1 control-label">Email</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="email" placeholder="Địa chỉ email..." value="<?php echo set_value('email') ?>"/>
+                    <div name="email_error" id="email_error"
+                    class="clear error"><?php echo form_error('email'); ?></div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Địa chỉ</label>
                 <div class="col-sm-6">
-                   <textarea class="form-control" rows="2" placeholder="Địa chỉ Xã/Huyện,Quận/Thị trấn, Thành phố">
-
+                   <textarea class="form-control" rows="2" placeholder="Địa chỉ Xã/Huyện,Quận/Thị trấn, Thành phố" name="address">
+                       <?php echo set_value('address'); ?>
                    </textarea>
                 </div>
             </div>
@@ -42,7 +51,7 @@
                 </div>
                 <label class="col-sm-2 control-label">Nhập lại password</label>
                 <div class="col-sm-2">
-                    <input type="password" class="form-control" name="password"/>
+                    <input type="password" class="form-control" name="re_password"/>
                 </div>
             </div>
 
@@ -51,12 +60,12 @@
                 <div class="col-sm-6">
                     <div class="radio-inline col-sm-3">
                         <label>
-                            <input type="radio" name="gender" value="male"/> Male
+                            <input type="radio" name="gender" value="0" <?php echo (set_value('gender')== '0' ? 'checked' : '') ?>/> Male
                         </label>
                     </div>
                     <div class="radio-inline col-sm-3">
                         <label>
-                            <input type="radio" name="gender" value="female"/> Female
+                            <input type="radio" name="gender" value="1" <?php echo (set_value('gender')== '1' ? 'checked' : '') ?>/> Female
                         </label>
                     </div>
 
@@ -66,7 +75,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Ngày sinh</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="birthday" id="datepicker" placeholder="DD/MM/YYYY" value="<?php echo set_value('birthday') ?>" />
+                    <input type="text" class="form-control" name="birthday" id="datepicker" placeholder="dd/mm/yyyy" value="<?php echo set_value('birthday') ?>" />
                 </div>
             </div>
 
@@ -81,9 +90,11 @@
 </div>
 <script>
     $(document).ready(function () {
+//        DateTimePicker filedatepkr = new DateTimePicker();
+//        //filedatepkr.CustomFormat = "dd/MM/yyyy";
+//        filedatepkr.Value = DateTime.Parse(fidate);
         $( "#datepicker" ).datepicker({
-//            showOtherMonths: true,
-//            selectOtherMonths: true
+            dateFormat: 'dd/mm/yy'
         });
 
         $('#form_register ').bootstrapValidator({
@@ -115,49 +126,112 @@
                         }
                     }
                 },
+                fname:{
+                    message: 'Họ và chữ lót không được để trống',
+                    validators: {
+                        stringLength: {
+                            min: 2,
+                            max: 30,
+                            message: 'Chiều dài họ và chữ lót trong khoảng từ 2 đến 30 ký tự'
+                        },
+                        regexp: {
+                            regexp: /\D+$/,
+                            message: 'Tên chứa chữ số thì không hợp lệ'
+                        },
+                        different: {
+                            field: 'password',
+                            message: 'Họ và password không được giống nhau'
+                        }
+                    }
+                },
+                lname:{
+                    message: 'Tên không được để trống',
+                    validators: {
+                        notEmpty: {
+                            message: 'Tên không được để trống'
+                        },
+                        stringLength: {
+                            min: 2,
+                            max: 30,
+                            message: 'Chiều dài họ và chữ lót trong khoảng từ 2 đến 30 ký tự'
+                        },
+                        different: {
+                            field: 'password',
+                            message: 'Tên và password không được giống nhau'
+                        }
+                    }
+                },
+                phone: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Số điện thoại được để trống'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: 'Điện thoại phải là số'
+                        },
+                        stringLength: {
+                            min: 9,
+                            max: 12,
+                            message: 'Điện thoại không hợp lệ'
+                        },
+                        different: {
+                            field: 'password',
+                            message: 'Không được đặt giống với password'
+                        }
+                    }
+                },
                 email: {
                     validators: {
                         notEmpty: {
-                            message: 'The email address is required and cannot be empty'
+                            message: 'Email không được để trống'
                         },
                         emailAddress: {
-                            message: 'The email address is not a valid'
+                            message: 'Địa chỉ mail không hợp lệ'
                         }
                     }
                 },
                 password: {
                     validators: {
                         notEmpty: {
-                            message: 'The password is required and cannot be empty'
+                            message: 'Password không được để trống'
                         },
                         different: {
-                            field: 'username',
-                            message: 'The password cannot be the same as username'
+                            field: 'lname',
+                            message: 'Password không được đặt giống với'
                         },
                         stringLength: {
-                            min: 8,
-                            message: 'The password must have at least 8 characters'
+                            min: 6,
+                            message: 'Phải ít nhất 6 ký tự'
+                        }
+                    }
+                },
+                re_password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Nhập password không được để trống'
+                        },
+                        identical: {
+                            field: 'password',
+                            message: 'password không khớp'
                         }
                     }
                 },
                 birthday: {
                     validators: {
                         notEmpty: {
-                            message: 'The date of birth is required'
-                        },
-                        date: {
-                           // format: 'DD/MM/YYYY',
-                            message: 'The date of birth is not valid'
-                        }
-                    }
-                },
-                gender: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The gender is required'
+                            message: 'Ngày sinh không được để trống'
                         }
                     }
                 }
+//                },
+//                gender: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: 'The gender is required'
+//                        }
+//                    }
+//                }
             }
         });
     });

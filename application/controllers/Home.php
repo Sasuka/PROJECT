@@ -19,10 +19,7 @@ Class Home extends MY_Controller
     //lay ma chuc vu
     public function index()
     {
-//        $this->load->model('catelog_model');
-//        $categories_list = $this->catelog_model->getList();
-//        pre($categories_list);
-     //   $this->data['temp'] = 'site/home/index';
+
         $this->data['temp'] = 'site/product_list/product_list';
         $this->load->view('site/layout',$this->data);
     }

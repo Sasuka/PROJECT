@@ -57,7 +57,7 @@ class Product extends MY_Controller
         $input['limit'] = array($config['per_page'], $segment);
 
         $list = $this->product_model->getList($input);
-       // pre($list);
+        // pre($list);
         $this->data['listProduct'] = $list;
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
@@ -109,8 +109,10 @@ class Product extends MY_Controller
         if (empty($infoCate)) {
             redirect('');
         }
+        $where1 = array('MA_NHOM_SANPHAM' => $infoCate['MA_NHOM_SANPHAM']);
+        $infoGroup = $this->group_model->get_info_rule($where1);
 
-        $this->data['infoCate'] = $infoCate;
+        $this->data['infoCate'] = array('TEN_NHOM_SANPHAM' => $infoGroup['TEN_NHOM_SANPHAM'], 'TEN_LOAI_SANPHAM' => $infoCate['TEN_LOAI_SANPHAM']);;
         $input['where'] = array('TRANGTHAI' => '1', 'DONGIA_BAN >' => '0', 'MA_LOAI_SANPHAM' => $id);//con ban va da nhap v
         $total_rows = $this->product_model->get_total($input);//lay so luong theo loai
         $this->data['total_rows'] = $total_rows;
@@ -139,7 +141,6 @@ class Product extends MY_Controller
         $query = $this->product_model->getList($input);
 
         //   $query = $this->product_model->getList($where);
-        //pre($query);
         $this->data['listProduct'] = $query;
         //thuc hien goi qua view
         $this->data['temp'] = 'site/product_list/product_content';
@@ -305,7 +306,7 @@ class Product extends MY_Controller
     {
         $listDis = $this->product_model->getProductPromotion();
         $this->data['listProduct'] = $listDis;
-       // pre($listDis);
+        // pre($listDis);
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
     }

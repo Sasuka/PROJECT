@@ -57,15 +57,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav clearfix">
-
-
                 <li>
-                    <a href="/" class=" current" title="Trang chủ">
+                    <a href="<?php echo base_url();?>" class="current" title="Trang chủ">
                         <span>Trang chủ</span>
                     </a>
                 </li>
-
-
                 <li class="dropdown">
                     <a href="<?php echo base_url('product');?>" title="Thương Hiệu" class="">
                         <span>Thương hiệu</span>
@@ -83,7 +79,7 @@
                                     <?php for (;$j < count($listCate);$j++) {
                                         if ($listGroup[$i]['MA_NHOM_SANPHAM'] == $listCate[$j]['MA_NHOM_SANPHAM']) {
                                             ?>
-                                            <li><a href="<?php echo base_url() . 'product/getProduct/' . $listCate[$i]['MA_LOAI_SANPHAM'] ?>"><?php echo $listCate[$j]['TEN_LOAI_SANPHAM'] ?></a></li>
+                                            <li><a href="<?php echo base_url() . 'product/getProduct/' . $listCate[$j]['MA_LOAI_SANPHAM'] ?>"><?php echo $listCate[$j]['TEN_LOAI_SANPHAM'] ?></a></li>
                                             <?php
                                         }else{
                                             break;

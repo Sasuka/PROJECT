@@ -5,7 +5,8 @@
                 <ol class="breadcrumb breadcrumb-arrows">
                     <li><a href="/" target="_self">Trang chủ</a></li>
                     <li><a href="/collections" target="_self">Danh mục</a></li>
-                    <li class="active"><span>Đồng hồ nam Longbo</span></li>
+                    <li><a href="/collections" target="_self"><?php echo isset($infoCate) ? $infoCate['TEN_NHOM_SANPHAM'] : '';?></a></li>
+                    <li class="active"><span><?php echo isset($infoCate) ? $infoCate['TEN_LOAI_SANPHAM'] : '';?></span></li>
                 </ol>
             </div>
         </div>

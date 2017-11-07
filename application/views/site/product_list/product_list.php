@@ -9,15 +9,11 @@
                         </h1>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-
                         <div class="browse-tags">
                             <span>Sắp xếp theo:</span>
                             <span class="custom-dropdown custom-dropdown--white">
 										<select class="sort-by custom-dropdown__select custom-dropdown__select--white">
-
 										<option value="manual">Sản phẩm nổi bật</option>
-
 											<option value="price-ascending">Giá: Tăng dần</option>
 											<option value="price-descending">Giá: Giảm dần</option>
 											<option value="title-ascending">Tên: A-Z</option>
@@ -28,13 +24,10 @@
 										</select>
 									</span>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
-
         <div class="col-md-12 col-sm-12 col-xs-12 content-product-list">
             <div class="row product-list">
                 <?php
@@ -97,9 +90,9 @@
                                             title="ĐỒNG HỒ LONGBO MẶT VUÔNG MÀU ĐEN"><?php echo mb_convert_case(strtolower($itemProduct['TEN_SANPHAM']), MB_CASE_TITLE, "UTF-8"); ?> </a>
                                 </h3>
                                 <div class="pro-prices">
-                                    <p class="pro-price"><?php echo isset($itemProduct['PHANTRAM_KM']) ?  (1-0.01*$itemProduct['PHANTRAM_KM'])*$itemProduct['DONGIA_BAN'] : ''; ?></p>
+                                    <p class="pro-price"><?php echo isset($itemProduct['PHANTRAM_KM']) ?  (1-0.01*$itemProduct['PHANTRAM_KM'])*$itemProduct['DONGIA_BAN'] : $itemProduct['DONGIA_BAN']; ?></p>
                                     <p class="pro-price-del text-left">
-                                        <del class="compare-price"><?php echo $itemProduct['DONGIA_BAN']; ?></del>
+                                        <del class="compare-price"><?php echo  isset($itemProduct['PHANTRAM_KM']) ? $itemProduct['DONGIA_BAN']: ""; ?></del>
                                     </p>
 
 
