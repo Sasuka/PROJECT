@@ -2,8 +2,8 @@
 
 class Admin extends MY_Controller
 {
-   public $lv ='';
-    protected $employee ='nhanvien';
+    public $lv = '';
+    protected $employee = 'nhanvien';
 
     public function __construct()
     {
@@ -21,7 +21,7 @@ class Admin extends MY_Controller
     {
 
 
-        $input = array('TEN_CHUCVU'=>'Admin');
+        $input = array('TEN_CHUCVU' => 'Admin');
 
         //thuc hien load danh sach nhan vien dau tien
         $this->_data['listEmploy'] = $this->admin_model->listEmploy($input);
@@ -33,10 +33,11 @@ class Admin extends MY_Controller
         $this->_data['temp'] = 'admin/admin/index';
         $this->load->view('admin/main', $this->_data);
     }
+
     public function employee()
     {
         $input = array();
-        $lv ='2';
+        $lv = '2';
         //thuc hien load danh sach nhan vien dau tien
         $this->_data['listEmploy'] = $this->admin_model->listEmploy();
 
@@ -170,16 +171,16 @@ class Admin extends MY_Controller
                 }
 ////
 //                //chuyen toi trang quan trị viên
-                if ($chucvu==1){
+                if ($chucvu == 1) {
                     redirect(admin_url('admin'));
-                }else{
+                } else {
 
                     redirect(admin_url('admin/employee'));
 
                 }
 ////
-           //     var_dump($dt);
-                echo 'Form ok';
+                //     var_dump($dt);
+              //  echo 'Form ok';
             }
         }
 
@@ -257,9 +258,9 @@ class Admin extends MY_Controller
 
                 }
                 // pre($info);
-                if ($info[0]['TEN_CHUCVU']=='Admin'){
+                if ($info[0]['TEN_CHUCVU'] == 'Admin') {
                     redirect(admin_url('admin'));
-                }else{
+                } else {
                     redirect(admin_url('admin/employee'));
                 }
             }
@@ -274,16 +275,16 @@ class Admin extends MY_Controller
     {
         $this->id = $this->uri->segment(4);
         $this->id = intval($this->id);
-        $where ='MA_NHANVIEN ='.$this->id;
+        $where = 'MA_NHANVIEN =' . $this->id;
 
         //lay thong tin cua quan tri kiem tra xem co ton tai hay khong
         $info = $this->admin_model->getInfo($this->id);
 
         if (sizeof($info) == 0) {
             $this->session->set_flashdata('message', 'Không tồn tại quản trị viên này!');
-            if ($info['TEN_CHUCVU']=='Admin'){
+            if ($info['TEN_CHUCVU'] == 'Admin') {
                 redirect(admin_url('admin'));
-            }else{
+            } else {
                 redirect(admin_url('admin/employee'));
             }
         }
@@ -295,9 +296,9 @@ class Admin extends MY_Controller
             $this->session->set_flashdata('message', 'Delete Fail!');
         }
         // pre($info);
-        if ($info[0]['TEN_CHUCVU']=='Admin'){
+        if ($info[0]['TEN_CHUCVU'] == 'Admin') {
             redirect(admin_url('admin'));
-        }else{
+        } else {
             redirect(admin_url('admin/employee'));
         }
     }

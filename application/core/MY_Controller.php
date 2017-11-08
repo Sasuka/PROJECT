@@ -140,4 +140,9 @@ class MY_Controller extends CI_Controller
         redirect(admin_url('login'));
 
     }
+    /* Viêt hoa chữ cái đầu tiên UTF-8*/
+    public function mb_ucwords($str) {
+        $str = mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
+        return ($str);
+    }
 }

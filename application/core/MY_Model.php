@@ -2000,8 +2000,6 @@ class MY_Model extends CI_Model
         return $this->db->get()->result_array();
 
     }
-
-
     public function getListThreeJoin($table1, $condition1, $table2, $condition2, $where = '')
     {
         $this->db->select('*');

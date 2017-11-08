@@ -64,16 +64,16 @@ class  User extends MY_Controller
                 $gender = $this->input->post('gender', true);
                 $birthday = $this->input->post('birthday', true);
                 $dt = array(
-                    'HO' => $ho,
-                    'TEN' => $ten,
+                    'HO' => $this->mb_ucwords($ho),
+                    'TEN' => $this->mb_ucwords($ten),
                     'MATKHAU' => md5(md5($matkhau)),
                     'SDT' => $sdt,
                     'EMAIL' => $email,
                     'DIACHI' => $address,
                     'GIOITINH' => $gender,
-                    'NGAYSINH' => $birthday
+                    'NGAYSINH' => date('Y-m-d', strtotime($birthday))
                 );
-//                pre($dt);
+                //  pre($dt);
 
                 //thuc hien kiem tra do co phai khach vang lai khong thong qua so dt hoac email
                 $condition = array('SDT' => $sdt, 'MATKHAU' => '');
@@ -124,7 +124,7 @@ class  User extends MY_Controller
                         $where = array('EMAIL' => $email, 'SDT' => $sdt);
                     }
 
-                    pre($dt);
+                    //  pre($dt);
                     if ($this->customer_model->update_rule($where, $dt)) {
                         $this->session->set_flashdata('message', 'Đăng ký thành công!');
                     } else {
@@ -138,12 +138,44 @@ class  User extends MY_Controller
                     } else {
                         $this->session->set_flashdata('message', 'Đăng ký thất bại');
                     }
-                    pre($dt);
+                    // pre($dt);
                 }
                 redirect(site_url());
             }
         }
         $this->data['temp'] = 'site/account/register';
+        $this->load->view('site/layout', $this->data);
+    }
+
+    /************ LOGIN ************/
+    public function login()
+    {
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        if ($this->input->post()) {
+            $phone = $this->input->post('phone', true);
+            $pass = md5(md5($this->input->post('password', true)));
+            $where = array('SDT' => $phone, 'MATKHAU' => $pass);
+            $customer = $this->customer_model->get_info_rule($where);
+            //pre(empty($customer));
+            if (isset($customer) && !empty($customer) && $customer['TRANGTHAI'] == '1') {
+             //    pre($customer);
+                /* add user success  -> back home,replace register and login is account*/
+                $this->data['isLogin'] = '1';
+                $this->session->set_flashdata('message', 'Đăng nhập thành công thành công!');
+                $this->data['customerInfo'] = $customer;
+//                goto end;
+            } elseif (isset($customer) && !empty($customer) && $customer['TRANGTHAI'] != '1') {
+                $this->data['isLogin'] = '2';
+                $this->session->set_flashdata('message', 'Tài khoản này đã bị khóa vui lòng liên hệ admin');
+            } else {
+                $this->data['isLogin'] = '3';
+                $this->session->set_flashdata('message', 'Tài khoản này không tồn tại!');
+                $this->session->set_flashdata('link',base_url());
+            }
+        }
+      //  end:
+        $this->data['temp'] = 'site/account/login';
         $this->load->view('site/layout', $this->data);
     }
 

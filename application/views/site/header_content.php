@@ -7,11 +7,10 @@
                         <!-- LOGO -->
                         <h1>
                             <a href="http://happylive.vn">
-                                <img src="<?php echo public_url('site')?>/design/14/logo.png?v=90"
-                                     alt="Happylive" class="img-responsive logoimg"/>
+                                <img src="Tiến Tài" class="img-responsive logoimg"/>
                             </a>
                         </h1>
-                        <h1 style="display:none"><a href="/">Happylive</a>
+                        <h1 style="display:none"><a href="/">Tiến Tài</a>
                         </h1>
                     </div>
                     <div class="hidden-lg hidden-md col-sm-5 col-xs-5 mobile-icons">
@@ -101,7 +100,7 @@
                                     <a href="#"><i class="fa fa-phone" aria-hidden="true"></i> 0917.077.025</a>
                                 </li>
                                 <li><a class="reg" href="<?php echo  base_url().'user/register'?>" title="Đăng ký">ĐĂNG KÝ</a></li>
-                                <li><a class="log" href="/account/login" title="Đăng nhập">Đăng nhập</a>
+                                <li><a class="log" href="<?php echo  base_url().'user/login';?>" title="Đăng nhập">Đăng nhập</a>
                                  </li>
                             </ul>
                         </nav>
