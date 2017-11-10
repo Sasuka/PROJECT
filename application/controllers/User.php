@@ -163,7 +163,6 @@ class  User extends MY_Controller
                 /* add user success  -> back home,replace register and login is account*/
                 $this->data['isLogin'] = '1';
                 $this->session->set_flashdata('message', 'Đăng nhập thành công thành công!');
-
                 $this->session->set_userdata('cusAccount',$customer);
                 //xpre($customer);
 

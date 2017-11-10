@@ -136,8 +136,11 @@ class MY_Controller extends CI_Controller
         if ($this->session->userdata('login')) {
 //            $this->session->sess_destroy();
             $this->session->unset_userdata('login');
+            redirect(admin_url('login'));
+        }elseif($this->session->userdata('cusAccount')){
+            $this->session->unset_userdata('cusAccount');
+            redirect(admin_url())
         }
-        redirect(admin_url('login'));
 
     }
     /* Viêt hoa chữ cái đầu tiên UTF-8*/

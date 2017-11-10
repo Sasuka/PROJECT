@@ -14,7 +14,7 @@
 </div>
 <div>
     <?php
-        if(isset($cusAccount)){
+        if($this->session->flashdata('message')){
            // pre($cusAccount);
             $this->data['message'] = 'Bạn đăng nhập thành công';
             $this->load->view('site/messager_success',$this->data);
