@@ -111,7 +111,7 @@
                                         nhập</a>
                                     <?php }else{
                                     ?>
-                                    <li></span><a href="#"><i class="glyphicon glyphicon-user" aria-hidden="true"></i><?php echo ' '.$cusAccount['HO'].' '.$cusAccount['TEN'];?> </a> </li>
+                                    <li></span><a href="<?php echo base_url().'user/edit/'.$cusAccount['MA_KHACHHANG'];?>"><i class="glyphicon glyphicon-user" aria-hidden="true"></i><?php echo ' '.$cusAccount['HO'].' '.$cusAccount['TEN'];?> </a> </li>
 
                                 <li><a class="logout" href="<?php echo base_url() . 'user/logout'; ?>" title="Đăng xuất"> Đăng xuất</a>
 

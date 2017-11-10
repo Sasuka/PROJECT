@@ -2,6 +2,7 @@
 
 class  User extends MY_Controller
 {
+    protected $id;
     public function __construct()
     {
         parent::__construct();
@@ -179,6 +180,24 @@ class  User extends MY_Controller
         }
       //  end:
         $this->data['temp'] = 'site/account/login';
+        $this->load->view('site/layout', $this->data);
+    }
+    /******** INFO DETAIL USER******/
+    public function edit($id =''){
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        //lay id cua quan trị viên cần chỉnh sửa
+        $this->id = $this->uri->segment('3');
+        $this->id = intval($this->id);
+        $where = array('MA_KHACHHANG' => $this->id);
+        //lấy thong tin của quản trị viên
+        $info = $this->customer_model->get_info_rule($where);
+        if (sizeof($info) == 0) {
+            $this->session->set_flashdata('message', 'Không tồn tại quản trị viên này!');
+            redirect(base_url('home'));
+        }
+        $this->data['info'] = $info;
+        $this->data['temp'] = 'site/account/edit';
         $this->load->view('site/layout', $this->data);
     }
 

@@ -139,7 +139,7 @@ class MY_Controller extends CI_Controller
             redirect(admin_url('login'));
         }elseif($this->session->userdata('cusAccount')){
             $this->session->unset_userdata('cusAccount');
-            redirect(admin_url())
+            redirect(base_url('home'));
         }
 
     }
