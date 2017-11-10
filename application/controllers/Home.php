@@ -19,8 +19,10 @@ Class Home extends MY_Controller
     //lay ma chuc vu
     public function index()
     {
+        $cusAccount = $this->session->userdata('cusAccount');
 
-        $this->data['temp'] = 'site/product_list/product_list';
+        $this->data['cusAccount'] = $cusAccount;
+        $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout',$this->data);
     }
 

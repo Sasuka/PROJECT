@@ -12,8 +12,16 @@
         </div>
     </div>
 </div>
+<div>
+    <?php
+        if(isset($cusAccount)){
+           // pre($cusAccount);
+            $this->data['message'] = 'Bạn đăng nhập thành công';
+            $this->load->view('site/messager_success',$this->data);
+        }
+    ?>
+</div>
 <div id="collection" class="content-pages collection-page" data-sticky_parent>
-
     <!-- Begin collection info -->
     <!-- Content-->
     <div class="col-lg-12 visible-sm visible-xs">
