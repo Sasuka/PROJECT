@@ -4,17 +4,18 @@ $tmp['TEN'] = (isset($_POST['lname']) ? $_POST['lname'] : $info['TEN']);
 $tmp['SDT'] = (isset($_POST['phone']) ? $_POST['phone'] : $info['SDT']);
 $tmp['EMAIL'] = (isset($_POST['email']) ? $_POST['email'] : $info['EMAIL']);
 $tmp['address'] = (isset($_POST['address']) ? $_POST['address'] : $info['DIACHI']);
-$tmp['address'] =  ltrim('           97 Men phường Hiệp Phú Quận 9 ',"\t.") ;// ltrim($tmp['address'],' ');
+$tmp['gender'] = (isset($_POST['gender']) ? $_POST['gender'] : $info['GIOITINH']);
+
 ?>
 <div class="row">
     <div class="col-md-12 ">
         <div class="page-header ">
-            <h2 class="col-md-offset-5">ĐĂNG KÝ</h2>
+            <h2 class="col-md-offset-4">CẬP NHẬT THÔNG TIN</h2>
         </div>
     </div>
 
     <div class="col-md-12">
-        <form id="form_edit" method="POST" action="<?php echo base_url('user/edit'); ?>" role="form" class="form-horizontal">
+        <form id="form_edit" method="POST" action="" role="form" class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-3 control-label">Fullname</label>
                 <div class="col-sm-4">
@@ -46,7 +47,7 @@ $tmp['address'] =  ltrim('           97 Men phường Hiệp Phú Quận 9 ',"\t
                 <label class="col-sm-3 control-label">Địa chỉ</label>
                 <div class="col-sm-6">
                    <textarea class="form-control" rows="2" placeholder="Địa chỉ Xã/Huyện,Quận/Thị trấn, Thành phố" name="address" style="text-indent: 10px;">
-                       <?php echo $tmp['address']; ?>
+                     <?php echo $tmp['address'] ?>
                    </textarea>
                 </div>
             </div>
@@ -67,29 +68,29 @@ $tmp['address'] =  ltrim('           97 Men phường Hiệp Phú Quận 9 ',"\t
                 <div class="col-sm-6">
                     <div class="radio-inline col-sm-3">
                         <label>
-                            <input type="radio" name="gender" value="0" <?php echo (set_value('gender')== '0' ? 'checked' : '') ?>/> Male
+                            <input type="radio" name="gender" value="0" <?php echo ($tmp['gender'] == '0' ? 'checked' : '') ?>/> Male
                         </label>
                     </div>
                     <div class="radio-inline col-sm-3">
                         <label>
-                            <input type="radio" name="gender" value="1" <?php echo (set_value('gender')== '1' ? 'checked' : '') ?>/> Female
+                            <input type="radio" name="gender" value="1" <?php echo ($tmp['gender'] == '1' ? 'checked' : '') ?>/> Female
                         </label>
                     </div>
 
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Ngày sinh</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="birthday" id="datepicker" placeholder="dd/mm/yyyy" value="<?php echo set_value('birthday') ?>" />
-                </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-3 control-label">Ngày sinh</label>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <input type="text" class="form-control" name="birthday" id="datepicker" placeholder="dd/mm/yyyy" value="--><?php //echo set_value('birthday') ?><!--" />-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-5">
                     <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
-                    <button type="submit" class="btn btn-default">ĐĂNG KÝ</button>
+                    <button type="submit" class="btn btn-default">CẬP NHẬT</button>
                 </div>
             </div>
         </form>
@@ -103,7 +104,10 @@ $tmp['address'] =  ltrim('           97 Men phường Hiệp Phú Quận 9 ',"\t
         $( "#datepicker" ).datepicker({
             dateFormat: 'dd/mm/yy'
         });
-
+        $('textarea').each(function(){
+                $(this).val($(this).val().trim());
+            }
+        );
         $('#form_edit').bootstrapValidator({
             // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
             feedbackIcons: {
@@ -200,9 +204,9 @@ $tmp['address'] =  ltrim('           97 Men phường Hiệp Phú Quận 9 ',"\t
                 },
                 password: {
                     validators: {
-                        notEmpty: {
-                            message: 'Password không được để trống'
-                        },
+//                        notEmpty: {
+//                            message: 'Password không được để trống'
+//                        },
                         different: {
                             field: 'lname',
                             message: 'Password không được đặt giống với'
@@ -215,9 +219,9 @@ $tmp['address'] =  ltrim('           97 Men phường Hiệp Phú Quận 9 ',"\t
                 },
                 re_password: {
                     validators: {
-                        notEmpty: {
-                            message: 'Nhập password không được để trống'
-                        },
+//                        notEmpty: {
+//                            message: 'Nhập password không được để trống'
+//                        },
                         identical: {
                             field: 'password',
                             message: 'password không khớp'

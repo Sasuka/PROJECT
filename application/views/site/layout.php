@@ -340,9 +340,33 @@
         </div>
 
         <section id="content" class="clearfix container">
-            <?php
+        <?php
+            /**Thông báo trạng thái**/
+            if($this->session->flashdata('message')){
+
+//                // pre($cusAccount);
+//                $this->data['message'] = 'Bạn đăng nhập thành công';
+//                $this->load->view('site/messager_success',$this->data);
+                if (isset($isLogin)){
+                    //var_dump($isLogin);
+                    if ($isLogin == '1'){
+                        $this->data['message'] = $this->session->flashdata('message');
+                        $this->load->view('site/messager_success', $this->data);
+                    }elseif ($isLogin == '2'){
+                        $this->data['message'] = $this->session->flashdata('message');
+                        $this->data['link'] = $this->session->flashdata('link');
+                        $this->load->view('site/messager_blockacc', $this->data);
+                    }elseif ($isLogin == '3'){
+                        $this->data['message'] = $this->session->flashdata('message');
+                        $this->data['link'] = $this->session->flashdata('link');
+                        $this->load->view('site/messager_notexists', $this->data);
+                    }
+                }
+            }
+            /******/
             $this->load->view($temp, $this->data);
-            ?>
+        ?>
+
         </section>
 
         <footer id="footer">

@@ -41,7 +41,31 @@ class  User extends MY_Controller
         } else
             return true;
     }
-
+    // kiểm tra số điện thoại đó phải là duy nhât chưa
+    public function check_phone_update(){
+        $phone = $this->input->post('phone');
+       //    pre($this->id);
+        $where = array('SDT' => $phone, 'MA_KHACHHANG !=' => $this->id);
+        //kiem tra table column phone
+        if ($this->customer_model->check_exist($where)) {
+            //return error
+            $this->form_validation->set_message(__FUNCTION__, 'Số điện thoại này tồn tại rồi');
+            return false;
+        } else
+            return true;
+    }
+    // kiểm tra email đó phải là duy nhât chưa
+    public  function check_email_update(){
+        $email = $this->input->post('email');
+        $where = array('EMAIL' => $email, 'MA_KHACHHANG !=' => $this->id);
+        //kiem tra table column phone
+        if ($this->customer_model->check_exist($where)) {
+            //return error
+            $this->form_validation->set_message(__FUNCTION__, 'Email này đã đăng ký');
+            return false;
+        } else
+            return true;
+    }
     /************REGISTER**************/
     public function register()
     {
@@ -61,7 +85,7 @@ class  User extends MY_Controller
                 $matkhau = $this->input->post('password', true);
                 $sdt = $this->input->post('phone', true);
                 $email = $this->input->post('email', true);
-                $address = $this->input->post(ltrim('address'), true);
+                $address = $this->input->post(ltrim('address'," "), true);
                 $gender = $this->input->post('gender', true);
                 $birthday = $this->input->post('birthday', true);
                 $dt = array(
@@ -162,11 +186,9 @@ class  User extends MY_Controller
             if (isset($customer) && !empty($customer) && $customer['TRANGTHAI'] == '1') {
              //    pre($customer);
                 /* add user success  -> back home,replace register and login is account*/
-                $this->data['isLogin'] = '1';
+//                $this->data['isLogin'] = '1';
                 $this->session->set_flashdata('message', 'Đăng nhập thành công thành công!');
                 $this->session->set_userdata('cusAccount',$customer);
-                //xpre($customer);
-
                 redirect(base_url('home'));
 //                goto end;
             } elseif (isset($customer) && !empty($customer) && $customer['TRANGTHAI'] != '1') {
@@ -183,7 +205,7 @@ class  User extends MY_Controller
         $this->load->view('site/layout', $this->data);
     }
     /******** INFO DETAIL USER******/
-    public function edit($id =''){
+    public function edit(){
         $this->load->library('form_validation');
         $this->load->helper('form');
         //lay id cua quan trị viên cần chỉnh sửa
@@ -196,6 +218,45 @@ class  User extends MY_Controller
             $this->session->set_flashdata('message', 'Không tồn tại quản trị viên này!');
             redirect(base_url('home'));
         }
+        if ($this->input->post()) {
+
+            $this->form_validation->set_rules('phone', 'Số điện thoại', 'callback_check_phone_update');
+            $this->form_validation->set_rules('email', 'Email', 'callback_check_email_update');
+            //kiem tra neu co nhap mat khau
+            $password = $this->input->post('password');
+            if ($this->form_validation->run()) {
+                $ho = $this->input->post('fname', true);
+                $ten = $this->input->post('lname', true);
+                $sdt = $this->input->post('phone', true);
+                $email = $this->input->post('email', true);
+                $address = $this->input->post(ltrim('address'," "), true);
+                $gender = $this->input->post('gender', true);
+//                $birthday = $this->input->post('birthday', true);
+                $dt = array(
+                    'HO' => $this->mb_ucwords($ho),
+                    'TEN' => $this->mb_ucwords($ten),
+                    'SDT' => $sdt,
+                    'EMAIL' => $email,
+                    'DIACHI' => $address,
+                    'GIOITINH' => $gender,
+//                    'NGAYSINH' => date('Y-m-d', strtotime($birthday))
+                );
+                //neu co  nhap mat khau thi cap nhat lai mat khau
+                if ($password) {
+                    $dt['MATKHAU'] = md5(md5($password));
+                }
+                $where = array('MA_KHACHHANG' => $this->id);
+                if ($this->customer_model->update_rule($where, $dt)){
+                    $this->session->set_flashdata('message', 'Update thành công!');
+                    redirect('home');
+                }else {
+                    $this->session->set_flashdata('message', 'Update thất bại');
+                }
+
+            }
+        }
+
+
         $this->data['info'] = $info;
         $this->data['temp'] = 'site/account/edit';
         $this->load->view('site/layout', $this->data);

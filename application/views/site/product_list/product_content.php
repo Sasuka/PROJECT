@@ -13,13 +13,13 @@
     </div>
 </div>
 <div>
-    <?php
-        if($this->session->flashdata('message')){
-           // pre($cusAccount);
-            $this->data['message'] = 'Bạn đăng nhập thành công';
-            $this->load->view('site/messager_success',$this->data);
-        }
-    ?>
+<!--    --><?php
+//        if($this->session->flashdata('message')){
+//           // pre($cusAccount);
+//            $this->data['message'] = 'Bạn đăng nhập thành công';
+//            $this->load->view('site/messager_success',$this->data);
+//        }
+//    ?>
 </div>
 <div id="collection" class="content-pages collection-page" data-sticky_parent>
     <!-- Begin collection info -->

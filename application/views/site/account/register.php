@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Địa chỉ</label>
                 <div class="col-sm-6">
-                   <textarea class="form-control" rows="2" placeholder="Địa chỉ Xã/Huyện,Quận/Thị trấn, Thành phố" name="address">
+                   <textarea class="form-control" rows="2" placeholder="Địa chỉ Xã/Huyện,Quận/Thị trấn, Thành phố" name="address" id="address">
                        <?php echo set_value('address'); ?>
                    </textarea>
                 </div>
@@ -96,7 +96,10 @@
         $( "#datepicker" ).datepicker({
             dateFormat: 'dd/mm/yy'
         });
-
+        $('textarea').each(function(){
+                $(this).val($(this).val().trim());
+            }
+        );
         $('#form_register ').bootstrapValidator({
             // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
             feedbackIcons: {

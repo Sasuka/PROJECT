@@ -1,28 +1,28 @@
 <?php
-if (isset($isLogin)) {
-    if ($isLogin == '1'){
-        /* $isLogin == 2 account block*/
-        if ($this->session->flashdata('message') != '') {
-            $this->data['message'] = $this->session->flashdata('message');
-            $this->load->view('site/messager_sucess', $this->data);
-        }
-    }elseif ($isLogin == '2') {
-        /* $isLogin == 2 account block*/
-        if ($this->session->flashdata('message') != '') {
-            $this->data['message'] = $this->session->flashdata('message');
-            $this->data['link'] = $this->session->flashdata('link');
-            $this->load->view('site/messager_blockacc', $this->data);
-        }
-    } elseif ($isLogin == '3') {
-        /*isLogin ==3 account not exists*/
-        if ($this->session->flashdata('message') != '') {
-            $this->data['message'] = $this->session->flashdata('message');
-            $this->data['link'] = $this->session->flashdata('link');
-            $this->load->view('site/messager_notexists', $this->data);
-        }
-    }
-}
-?>
+//if (isset($isLogin)) {
+//    if ($isLogin == '1'){
+//        /* $isLogin == 2 account block*/
+//        if ($this->session->flashdata('message') != '') {
+//            $this->data['message'] = $this->session->flashdata('message');
+//            $this->load->view('site/messager_sucess', $this->data);
+//        }
+//    }elseif ($isLogin == '2') {
+//        /* $isLogin == 2 account block*/
+//        if ($this->session->flashdata('message') != '') {
+//            $this->data['message'] = $this->session->flashdata('message');
+//            $this->data['link'] = $this->session->flashdata('link');
+//            $this->load->view('site/messager_blockacc', $this->data);
+//        }
+//    } elseif ($isLogin == '3') {
+//        /*isLogin ==3 account not exists*/
+//        if ($this->session->flashdata('message') != '') {
+//            $this->data['message'] = $this->session->flashdata('message');
+//            $this->data['link'] = $this->session->flashdata('link');
+//            $this->load->view('site/messager_notexists', $this->data);
+//        }
+//    }
+//}
+//?>
 <div class="row">
     <div class="col-md-12 ">
         <div class="page-header ">
