@@ -256,7 +256,7 @@ class  User extends MY_Controller
             }
         }
 
-
+        $this->data['cusAccount'] = $this->session->userdata('cusAccount');
         $this->data['info'] = $info;
         $this->data['temp'] = 'site/account/edit';
         $this->load->view('site/layout', $this->data);

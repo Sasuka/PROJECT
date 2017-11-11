@@ -11,9 +11,9 @@
       name='viewport'/>
 
 
-<link href="<?php echo public_url('site') ?>/design/css/checkouts.css?v=1.1" rel='stylesheet' type='text/css'
-      media='all'/>
-<script src="<?php echo public_url('site') ?>/design/js/jquery.validate.js" type='text/javascript'></script>
+<!--<link href="--><?php //echo public_url('site') ?><!--/design/css/checkouts.css?v=1.1" rel='stylesheet' type='text/css'-->
+<!--      media='all'/>-->
+<!--<script src="--><?php //echo public_url('site') ?><!--/design/js/jquery.validate.js" type='text/javascript'></script>-->
 <!-- BootstrapValidator CSS -->
 <link rel="stylesheet" href="<?php echo public_url() . 'bootstrap/css/bootstrapValidator.min.css' ?>"/>
 <link rel="stylesheet" href="<?php echo public_url() . 'bootstrap/css/jquery-ui.css' ?>"/>
@@ -99,7 +99,8 @@
     //]]>
 </script>
 
-<script src="<?php echo public_url() ?>/js/jquery-3.2.1.min.js"></script>
+<!--<script src="--><?php //echo public_url() ?><!--/js/jquery-3.2.1.min.js"></script>-->
+<script src="<?php echo public_url('site') ?>/design/js/jquery.min.1.11.0.js"></script>
 <script src="<?php echo public_url() ?>bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo public_url('site') ?>/js/option_selection.js" type='text/javascript'></script>
 <script src="<?php echo public_url('site') ?>/js/api.jquery.js" type='text/javascript'></script>
@@ -126,6 +127,11 @@
 
 
 <link rel="stylesheet" type="text/css" href="<?php echo public_url('site') ?>/css/roboto.css">
+<meta property="og:image" content="<?php echo public_url('site') ?>/design/14/share_fb_home.png?v=90"/>
+<meta property="og:image" content="<?php echo public_url('site') ?>/design/14/share_fb_home.png?v=90"/>
+<link href="<?php echo public_url() ?>/site/design/css/bootstrap.3.3.1.css" rel="stylesheet" type="text/css"/>
+
+
 
 <script src="<?php echo public_url() ?>/js/jquery-ui.js"></script>
 <script src="<?php echo public_url() ?>bootstrap/js/npm.js"></script>
@@ -137,8 +143,7 @@
 <![endif]-->
 <script src="<?php echo public_url('site') ?>/design/14/jquery.elevatezoom.min.js?v=90" type='text/javascript'></script>
 
-<meta property="og:image" content="<?php echo public_url('site') ?>/design/14/share_fb_home.png?v=90"/>
-<meta property="og:image" content="<?php echo public_url('site') ?>/design/14/share_fb_home.png?v=90"/>
+
 <!-- Latest compiled and minified CSS -->
 <!-- Latest compiled and minified JavaScript -->
 

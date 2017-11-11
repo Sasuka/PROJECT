@@ -283,6 +283,8 @@
 
         });
     </script>
+
+
     <section id="page_content" class="">
         <div id="pageContainer" class="clearfix">
 
@@ -323,18 +325,18 @@
                     })
                 </script>
             </nav>
-
-            <?php  $type = "";
-            if($type == "home"){
-                ?>
+<!---->
+<!--            --><?php // $type = "";
+//            if($type == "home"){
+//                ?>
                 <!-- Begin slider -->
                 <div class="slider-default bannerslider">
                     <?php $this->load->view('site/slider');?>
                 </div>
-                 End slider
+<!--                 End slider-->
                 <?php $this->load->view('site/news/news_breadcrumb'); ?>
-            <?php
-            } ?>
+<!--            --><?php
+//            } ?>
 
 
         </div>
