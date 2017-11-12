@@ -1,7 +1,7 @@
 <?php
-class ItemProduct{
-    public $title;
-}
+//class ItemProduct{
+//    public $title;
+//}
 class Product extends MY_Controller
 {
     public function __construct()
@@ -19,12 +19,13 @@ class Product extends MY_Controller
         $where['where'] = array('TRANGTHAI' => '1');
         $total_rows = $this->product_model->get_total();
         $this->data['total_rows'] = $total_rows;
-
-        //thuc hien load phan trang
-        $this->load->library('pagination');
-        $config = array();
         $config['total_rows'] = $total_rows;;//tong tat ca cac sản phẩm trên webiste
         $config['base_url'] = base_url('product/index');//link hien thi ra danh sach san pham
+
+        $this->load->library('pagination');
+        $config = array();
+//        $config['total_rows'] = $total_rows;;//tong tat ca cac sản phẩm trên webiste
+//        $config['base_url'] = base_url('product/index');//link hien thi ra danh sach san pham
         $config['per_page'] = 6;//hien thi so luong san pham tren 1 trang
         $config['uri_segment'] = 3;//hien thi so trang
 //        $config['next_link'] = "Trang kế tiếp";
@@ -286,9 +287,10 @@ class Product extends MY_Controller
 
     }
 
-    public function search()
+    public function search1()
     {
         $id = $this->uri->segment(3);
+        pre($id);
         if ($this->uri->rsegment(3) == 1) {
             //co su dung auto complate
             $key_search = $this->input->get('term');
@@ -344,6 +346,54 @@ class Product extends MY_Controller
 
         $this->data['temp'] = 'site/product/search';
         $this->load->view('site/layout', $this->data);
+    }
+    public function search(){
+        $type = isset($_GET['type']) ? $_GET['type'] : 'product';
+        $key = isset($_GET['key']) ? $_GET['key'] : '';
+//        $where['where'] = array('TRANGTHAI' => '1');
+        $input = array();
+        if ($type == 'product') {
+            $input['like'] = array('TEN_SANPHAM', $key);
+            $input['where'] = array('DONGIA_BAN >' => 0, 'TRANGTHAI' => 1);
+            $list = $this->product_model->getList($input);
+            // pre($list);
+            $total_rows = count($list);
+        }
+        $this->load->library('pagination');
+        $config = array();
+        $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
+        $config['base_url'] = base_url('product/search');//link hien thi ra danh sach san pham
+        $config['per_page'] = 6;//hien thi so luong san pham tren 1 trang
+        $config['uri_segment'] = 3;//hien thi so trang
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $this->pagination->initialize($config);
+        // pre($config);
+
+        $segment = $this->uri->segment(4);
+        $segment = intval($segment);
+
+        $input['limit'] = array($config['per_page'], $segment);
+        $this->data['listProduct'] = $list;
+        $this->data['temp'] = 'site/product_list/product_list';
+        $this->load->view('site/layout', $this->data);
+
     }
 
     public function search_price()

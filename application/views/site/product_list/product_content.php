@@ -49,9 +49,7 @@
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
                         <span class="custom-dropdown custom-dropdown--white">
 							<select class="sort-by custom-dropdown__select custom-dropdown__select--white">
-
-										<option value="manual">Sản phẩm nổi bật</option>
-
+                                <option value="manual">Sản phẩm nổi bật</option>
 								<option value="price-ascending">Giá: Tăng dần</option>
 								<option value="price-descending">Giá: Giảm dần</option>
 								<option value="title-ascending">Tên: A-Z</option>
@@ -88,6 +86,7 @@
     if (location.search.length) {
         for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
             aKeyValue = aCouples[i].split('=');
+            console.log(aKeyValue);
             if (aKeyValue.length > 1) {
                 Haravan.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
             }

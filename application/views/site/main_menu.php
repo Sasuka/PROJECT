@@ -151,9 +151,9 @@
                     <div class="search-bar">
 
                         <div class="">
-                            <form action="/search">
+                            <form action="<?php echo base_url('product').'/search'?>">
                                 <input type="hidden" name="type" value="product"/>
-                                <input type="text" name="q" placeholder="Tìm kiếm..."
+                                <input type="text" name="key" placeholder="Tìm kiếm..."
                                        autocomplete="off"/>
                             </form>
                         </div>

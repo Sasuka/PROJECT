@@ -161,6 +161,7 @@
                        // $('#page').html(product);
                         $.each(product.options, function (i, v) {
                             product.options[i] = v.name;
+                            console.log(product);
                         })
                        // item.find('.quickview-title').attr('title', product.title).attr('href', product.url).find('h4').html(product.title);
                         item.find('.quickview-title').attr('title', product[0]['TEN_SANPHAM']).attr('href', product.url).find('h4').html(product.title);
