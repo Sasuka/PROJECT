@@ -67,35 +67,115 @@ class Product extends MY_Controller
     public function getProduct1()
     {
         $id = $this->uri->segment(3);
-        pre($id);
-        $idCate = $_GET['sendId'];
-        // var_dump($idCate);
-        $input['where'] = array('TRANGTHAI' => '1', 'DONGIA_BAN >' => '0', 'MA_LOAI_SANPHAM' => $idCate);//con ban va da nhap ve
-        $query = $this->product_model->getList($input);
-//      echo json_encode($query);
-        foreach ($query as $item) {
-            ?>
-            <div class="col-md-3 text-center">
-                <img src="<?php echo public_url('images/product/') . $item['HINH_DAIDIEN']; ?>"
-                     width="150px"
-                     height="150px">
-                <br>
-                <strong><?php echo $item['TEN_SANPHAM'] ?></strong>
-                <strong><?php echo $item['DONGIA_BAN'] ?></strong>
-                <br>
-                <button id="btnid" class="btn btn-danger my-cart-btn" data-id="<?php echo $item['MA_SANPHAM'] ?>"
-                        data-name="<?php echo $item['TEN_SANPHAM'] ?>"
-                        data-summary="summary 1"
-                        data-price="<?php echo $item['DONGIA_BAN'] ?>" data-quantity="1"
-                        data-image="<?php echo public_url('images/product/') . $item['HINH_DAIDIEN']; ?>">
-                    Add
-                    to Cart
-                </button>
-                <a href="#" class="btn btn-info">Details</a>
-                <div class="clear" style="margin-bottom: 10px;"></div>
-            </div>
-            <?php
-        }
+        $id = intval($id);
+        $input['where'] = array('MA_SANPHAM' => $id);
+        //thuc hien load danh sach san pham dua vao id loai
+        $product = $this->product_model->getList($input);
+        pre($product,false);
+       //pre ($product);
+//        $this->data['itemProduct'] = $product;
+//        $this->load->view('site/layout',$this->data);
+        ?>
+
+<!--        <div id="quick-view-modal" class="wrapper-quickview" style="display: none;">-->
+<!--        <div class="quickviewOverlay"></div>-->
+<!--        <div class="jsQuickview">-->
+<!--            <div class="modal-header clearfix" style="width: 100%">-->
+<!--                <a href="/products/dong-ho-nam-skmei-kim-xanh-duong" class="quickview-title text-left"-->
+<!--                   title="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">-->
+<!--                    <h4 class="p-title modal-title">ĐỒNG HỒ NAMNG</h4>-->
+<!--                </a>-->
+<!--                <div class="quickview-close">-->
+<!--                    <a href="javascript:void(0);"><i class="fa fa-times"></i></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-5">-->
+<!--                <div class="quickview-image image-zoom">-->
+<!--                    <img class="p-product-image-feature"-->
+<!--                         src="--><?php //echo upload_url('product'); ?><!--/1_e0ed7c0240734782a8268793dce0b9b8_large.jpg"-->
+<!--                         alt="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">-->
+<!--                </div>-->
+<!--                <div id="quickview-sliderproduct">-->
+<!--                    <div class="quickview-slider">-->
+<!--                        <ul class="owl-carousel owl-theme" style="display: block; opacity: 1;">-->
+<!--                            <div class="owl-wrapper-outer">-->
+<!--                                <div class="owl-wrapper" style="width: 600px; left: 0px; display: block;">-->
+<!--                                    <div class="owl-item" style="width: 100px;">-->
+<!--                                        <li class="product-thumb active"><a href="javascript:void(0);"-->
+<!--                                                                            data-image="--><?php //echo upload_url('product'); ?><!--/1_e0ed7c0240734782a8268793dce0b9b8_large.jpg">-->
+<!--                                                <img src="--><?php //echo upload_url('product'); ?><!--/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg"></a>-->
+<!--                                        </li>-->
+<!--                                    </div>-->
+<!--                                    <div class="owl-item" style="width: 100px;">-->
+<!--                                        <li class="product-thumb"><a href="javascript:void(0);"-->
+<!--                                                                     data-image="--><?php //echo upload_url('product'); ?><!--/2_85fc5908867e488da92b768cb240477d_large.jpg">-->
+<!--                                                <img src="--><?php //echo upload_url('product'); ?><!--/2_85fc5908867e488da92b768cb240477d_small.jpg"></a>-->
+<!--                                        </li>-->
+<!--                                    </div>-->
+<!--                                    <div class="owl-item" style="width: 100px;">-->
+<!--                                        <li class="product-thumb"><a href="javascript:void(0);"-->
+<!--                                                                     data-image="--><?php //echo upload_url('product'); ?><!--/3_30be00d496bb474aa0e9324311dd02f0_large.jpg">-->
+<!--                                                <img src="--><?php //echo upload_url('product'); ?><!--/3_30be00d496bb474aa0e9324311dd02f0_small.jpg"></a>-->
+<!--                                        </li>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="owl-controls clickable" style="display: none;">-->
+<!--                                <div class="owl-pagination">-->
+<!--                                    <div class="owl-page active">-->
+<!--                                        <span class=""></span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="owl-buttons">-->
+<!--                                    <div class="owl-prev">owl-prev</div>-->
+<!--                                    <div class="owl-next">owl-next</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-7">-->
+<!--                <form id="form-quickview" method="post" action="/cart/add">-->
+<!--                    <div class="quickview-information">-->
+<!--                        <div class="form-input">-->
+<!--                            <div class="quickview-price product-price">-->
+<!--                                <span>499,000₫</span>-->
+<!--                                <del>700,000₫</del>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="quickview-variants variant-style clearfix">-->
+<!--                            <select name="id" class="" id="quickview-select" style="display: none;">-->
+<!--                                <option value="1012030836">Default Title - 49900000</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="quickview-description">-->
+<!--                        </div>-->
+<!--                        <div class="form-input ">-->
+<!--                            <label>-->
+<!--    Số lượng</label>-->
+<!--                            <input id="quantity-quickview" name="quantity" type="number" min="1" value="1">-->
+<!--                        </div>-->
+<!--                        <div class="form-input" style="width: 100%">-->
+<!--                            <button type="submit" class="btn-detail  btn-color-add btn-min-width btn-mgt btn-addcart"-->
+<!--                                    style="display: block;">-->
+<!--                                        Thêm vào giỏ-->
+<!--    </button>-->
+<!--                            <button disabled=""-->
+<!--                                    class="btn-detail addtocart btn-color-add btn-min-width btn-mgt btn-soldout"-->
+<!--                                    style="display: none;">-->
+<!--                                        Hết hàng-->
+<!--    </button>-->
+<!--                            <div class="qv-readmore">-->
+<!--                                <span>hoặc </span><a class="read-more p-url" href="" role="button">Xem chi tiết</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<?php
     }
 
     public function getProduct()

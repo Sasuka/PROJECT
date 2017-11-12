@@ -1,5 +1,4 @@
 
-
 <div class="row">
     <div class="main-content">
         <div class="col-md-12 hidden-sm hidden-xs">
@@ -33,6 +32,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12 content-product-list">
             <div class="row product-list">
                 <?php
+                //pre($listProduct);
                 foreach ($listProduct as $itemProduct) { ?>
 
                     <div class="col-md-4  col-sm-6 col-xs-12 pro-loop">
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="btn-quickview-products">
                                         <a href="javascript:void(0);" class="quickview"
-                                           data-handle="/products/dong-ho-longbo-mat-vuong-mau-trang-1"><i
+                                           data-handle="<?php echo base_url('product/getProduct1/').$itemProduct['MA_SANPHAM'];?>"><i
                                                     class="fa fa-eye"></i></a>
                                     </div>
                                 </div>

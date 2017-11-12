@@ -14,13 +14,16 @@
 <!--End Header-->
 <?php //$this ->load-> view('site/product_order/product_order');?>
 <div id="page">
+<!--    --><?php //if (isset($itemProduct)){
+//        pre($itemProduct);
+//    }?>
     <div id="quick-view-modal" class="wrapper-quickview" style="display: none;">
         <div class="quickviewOverlay"></div>
         <div class="jsQuickview">
             <div class="modal-header clearfix" style="width: 100%">
                 <a href="/products/dong-ho-nam-skmei-kim-xanh-duong" class="quickview-title text-left"
                    title="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">
-                    <h4 class="p-title modal-title">ĐỒNG HỒ NAMNG</h4>
+                    <h4 class="p-title modal-title"><?php echo $product['TEN_SANPHAM'];?></h4>
                 </a>
                 <div class="quickview-close">
                     <a href="javascript:void(0);"><i class="fa fa-times"></i></a>
@@ -115,6 +118,7 @@
     <script>
         /* QUICK VIEW JS */
         jQuery(document).ready(function () {
+
             var callBack = function (variant, selector) {
                 if (variant) {
                     item = $('.wrapper-quickview');
@@ -143,6 +147,7 @@
             }
             var quickview_html_variants = $('.quickview-variants').html();
             var quickview_image_zoom = $('.quickview-image').html();
+
             var quickViewProduct = function (purl) {
                 if ($(window).width() < 680) {
                     window.location = purl;
@@ -150,7 +155,7 @@
                 }
                 item = $('.wrapper-quickview');
                 $.ajax({
-                    url: purl + '.js',
+                    url: purl,
                     async: false,
                     success: function (product) {
                         $.each(product.options, function (i, v) {
@@ -210,6 +215,7 @@
                         }
 
                     }
+
                 });
                 return false;
             }
