@@ -23,7 +23,7 @@
             <div class="modal-header clearfix" style="width: 100%">
                 <a href="/products/dong-ho-nam-skmei-kim-xanh-duong" class="quickview-title text-left"
                    title="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">
-                    <h4 class="p-title modal-title"><?php echo $product['TEN_SANPHAM'];?></h4>
+                    <h4 class="p-title modal-title"><?php// echo $product['TEN_SANPHAM'];?></h4>
                 </a>
                 <div class="quickview-close">
                     <a href="javascript:void(0);"><i class="fa fa-times"></i></a>
@@ -158,10 +158,12 @@
                     url: purl,
                     async: false,
                     success: function (product) {
+                       // $('#page').html(product);
                         $.each(product.options, function (i, v) {
                             product.options[i] = v.name;
                         })
-                        item.find('.quickview-title').attr('title', product.title).attr('href', product.url).find('h4').html(product.title);
+                       // item.find('.quickview-title').attr('title', product.title).attr('href', product.url).find('h4').html(product.title);
+                        item.find('.quickview-title').attr('title', product[0]['TEN_SANPHAM']).attr('href', product.url).find('h4').html(product.title);
                         item.find('.quickview-variants').html(quickview_html_variants);
                         $('.quickview-image').html(quickview_image_zoom);
                         $.each(product.variants, function (i, v) {
@@ -213,7 +215,7 @@
                             });
 
                         }
-
+                        $('#page').html(result);
                     }
 
                 });
@@ -226,8 +228,11 @@
 
             //open the quick view panel
             jQuery(document).on("click", ".quickview", function (event) {
+
                 var selectedImage = $(this).parents('.product-block').find('.product-img img'),
                     slectedImageUrl = selectedImage.attr('src');
+                console.log('aaa');
+                console.log('ssss'+slectedImageUrl);
                 quickViewProduct($(this).attr('data-handle'));
 
                 animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');

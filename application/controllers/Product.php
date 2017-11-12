@@ -1,5 +1,7 @@
 <?php
-
+class ItemProduct{
+    public $title;
+}
 class Product extends MY_Controller
 {
     public function __construct()
@@ -66,12 +68,17 @@ class Product extends MY_Controller
 
     public function getProduct1()
     {
+        $itemProduct = new ItemProduct();
         $id = $this->uri->segment(3);
         $id = intval($id);
         $input['where'] = array('MA_SANPHAM' => $id);
         //thuc hien load danh sach san pham dua vao id loai
-        $product = $this->product_model->getList($input);
+        $product= $this->product_model->getList($input);
         pre($product,false);
+//     //   pre($product,false);
+//        $product.title = $item[0]['TEN_SANPHAM'];
+
+      //  pre($product,false);
        //pre ($product);
 //        $this->data['itemProduct'] = $product;
 //        $this->load->view('site/layout',$this->data);
