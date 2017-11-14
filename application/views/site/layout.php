@@ -171,7 +171,7 @@
                         item.find('.quickview-variants').html(quickview_html_variants);
                         $('.quickview-image').html(quickview_image_zoom);
                         item.find('.quickview-price').find('span').html(pro["DONGIA_BAN"]);
-
+                        item.find('.quickview-image').find('img').attr('alt', pro["TEN_SANPHAM"]).attr('src', "http://localhost/www/PROJECT/uploads/product/"+pro['HINH_DAIDIEN']);
                         var pro_price = $(".product-detail").find(".pro-prices").find(".pro-price").html();
                         console.log(pro_price);
                         //  $('#test1').text(pro["TEN_SANPHAM"]);
