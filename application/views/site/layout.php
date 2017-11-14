@@ -14,16 +14,18 @@
 <!--End Header-->
 <?php //$this ->load-> view('site/product_order/product_order');?>
 <div id="page">
-<!--    --><?php //if (isset($itemProduct)){
-//        pre($itemProduct);
-//    }?>
+    <!--    --><?php //if (isset($itemProduct)){
+    //        pre($itemProduct);
+    //    }?>
     <div id="quick-view-modal" class="wrapper-quickview" style="display: none;">
+
         <div class="quickviewOverlay"></div>
         <div class="jsQuickview">
+            <p id="test1"></p>
             <div class="modal-header clearfix" style="width: 100%">
                 <a href="/products/dong-ho-nam-skmei-kim-xanh-duong" class="quickview-title text-left"
                    title="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">
-                    <h4 class="p-title modal-title"><?php// echo $product['TEN_SANPHAM'];?></h4>
+                    <h4 class="p-title modal-title"></h4>
                 </a>
                 <div class="quickview-close">
                     <a href="javascript:void(0);"><i class="fa fa-times"></i></a>
@@ -85,9 +87,10 @@
                             </div>
                         </div>
                         <div class="quickview-variants variant-style clearfix">
-                            <select name="id" class="" id="quickview-select" style="display: none;">
-                                <option value="1012030836">Default Title - 49900000</option>
-                            </select>
+<!--                            <select name="id" class="" id="quickview-select" style="display: none;">-->
+<!--                                <option value="1012030836">Default Title - 49900000</option>-->
+<!--                            </select>-->
+                            <input name="id" class="" id="quick-view-select" style="display: none">
                         </div>
                         <div class="quickview-description">
                         </div>
@@ -158,65 +161,22 @@
                     url: purl,
                     async: false,
                     success: function (product) {
-                       // $('#page').html(product);
-                        $.each(product.options, function (i, v) {
-                            product.options[i] = v.name;
-                            console.log(product);
-                        })
-                       // item.find('.quickview-title').attr('title', product.title).attr('href', product.url).find('h4').html(product.title);
-                        item.find('.quickview-title').attr('title', product[0]['TEN_SANPHAM']).attr('href', product.url).find('h4').html(product.title);
+                        var selectedImage1 = $('.product-list').find('.product-block').find('.product-img img'),
+                            slectedImageUrl1 = selectedImage1.attr('src')
+                        ;
+                        var pro = JSON.parse(product);
+                        console.log(slectedImageUrl1);
+
+                        item.find('.quickview-title').attr('title', pro["TEN_SANPHAM"]).attr('href', slectedImageUrl1).find('h4').html(pro["TEN_SANPHAM"]);
                         item.find('.quickview-variants').html(quickview_html_variants);
                         $('.quickview-image').html(quickview_image_zoom);
-                        $.each(product.variants, function (i, v) {
-                            item.find('#quickview-select').append("<option value='" + v.id + "'>" + v.title + ' - ' + v.price + "</option>");
-                        })
-                        if (product.variants.length == 1 && product.variants[0].title.indexOf('Default') != -1)
-                            $('#quickview-select').hide();
-                        else
-                            $('#quickview-select').show();
-                        if (product.variants.length == 1 && product.variants[0].title.indexOf('Default') != -1) {
-                            callBack(product.variants[0], null);
-                        }
-                        else {
-                            new Haravan.OptionSelectors("quickview-select", {
-                                product: product,
-                                onVariantSelected: callBack
-                            });
-                            if (product.options.length == 1 && product.options[0].indexOf('Tiêu đề') == -1)
-                                item.find('.selector-wrapper:eq(0)').prepend('<label>' + product.options[0] + '</label>');
-                            $('.p-option-wrapper select:not(#p-select)').each(function () {
-                                $(this).wrap('<span class="custom-dropdown custom-dropdown--white"></span>');
-                                $(this).addClass("custom-dropdown__select custom-dropdown__select--white");
-                            });
-                            callBack(product.variants[0], null);
-                        }
-                        if (product.images.length == 0) {
-                            item.find('.quickview-image').find('img').attr('alt', product.title).attr('src', './hstatic.net/0/0/global/design/theme-default/no-image.png');
-                        }
-                        else {
-                            $('.quickview-slider').remove();
-                            $('#quickview-sliderproduct').append("<div class='quickview-slider' class='flexslider'>");
-                            $('.quickview-slider').append("<ul class='owl-carousel'>");
-                            $.each(product.images, function (i, v) {
-                                elem = $('<li class="product-thumb">').append('<a href="javascript:void(0);" data-image=""><img /></a>');
-                                elem.find('a').attr('data-image', Haravan.resizeImage(v, 'large'));
-                                elem.find('img').attr('src', Haravan.resizeImage(v, 'small'));
-                                item.find('.owl-carousel').append(elem);
-                            });
-                            item.find('.quickview-image img').attr('alt', product.title).attr('src', Haravan.resizeImage(product.featured_image, 'large'));
+                        item.find('.quickview-price').find('span').html(pro["DONGIA_BAN"]);
 
-                            $('.quickview-slider img').imagesLoaded(function () {
-                                var owl = $('.owl-carousel');
-                                owl.owlCarousel({
-                                    items: 3,
-                                    navigation: true,
-                                    navigationText: ['owl-prev', 'owl-next']
-                                });
-                                $('.quickview-slider .owl-carousel .owl-item').first().children('.product-thumb').addClass('active');
-                            });
-
-                        }
-                        $('#page').html(result);
+                        var pro_price = $(".product-detail").find(".pro-prices").find(".pro-price").html();
+                        console.log(pro_price);
+                        //  $('#test1').text(pro["TEN_SANPHAM"]);
+//
+                        console.log(pro);
                     }
 
                 });
@@ -232,8 +192,8 @@
 
                 var selectedImage = $(this).parents('.product-block').find('.product-img img'),
                     slectedImageUrl = selectedImage.attr('src');
-                console.log('aaa');
-                console.log('ssss'+slectedImageUrl);
+//                console.log('aaa');
+//                console.log('ssss' + slectedImageUrl);
                 quickViewProduct($(this).attr('data-handle'));
 
                 animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
@@ -304,7 +264,7 @@
 
             <nav class="navbar-main navbar navbar-default cl-pri">
                 <!-- MENU MAIN -->
-                <?php $this->load->view('site/main_menu',$this->data); ?>
+                <?php $this->load->view('site/main_menu', $this->data); ?>
                 <!-- End container  -->
                 <script>
 
@@ -337,40 +297,40 @@
                     })
                 </script>
             </nav>
-<!---->
-<!--            --><?php // $type = "";
-//            if($type == "home"){
-//                ?>
-                <!-- Begin slider -->
-                <div class="slider-default bannerslider">
-                    <?php $this->load->view('site/slider');?>
-                </div>
-<!--                 End slider-->
-                <?php $this->load->view('site/news/news_breadcrumb'); ?>
-<!--            --><?php
-//            } ?>
+            <!---->
+            <!--            --><?php // $type = "";
+            //            if($type == "home"){
+            //                ?>
+            <!-- Begin slider -->
+            <div class="slider-default bannerslider">
+                <?php $this->load->view('site/slider'); ?>
+            </div>
+            <!--                 End slider-->
+            <?php $this->load->view('site/news/news_breadcrumb'); ?>
+            <!--            --><?php
+            //            } ?>
 
 
         </div>
 
         <section id="content" class="clearfix container">
-        <?php
+            <?php
             /**Thông báo trạng thái**/
-            if($this->session->flashdata('message')){
+            if ($this->session->flashdata('message')) {
 
 //                // pre($cusAccount);
 //                $this->data['message'] = 'Bạn đăng nhập thành công';
 //                $this->load->view('site/messager_success',$this->data);
-                if (isset($isLogin)){
+                if (isset($isLogin)) {
                     //var_dump($isLogin);
-                    if ($isLogin == '1'){
+                    if ($isLogin == '1') {
                         $this->data['message'] = $this->session->flashdata('message');
                         $this->load->view('site/messager_success', $this->data);
-                    }elseif ($isLogin == '2'){
+                    } elseif ($isLogin == '2') {
                         $this->data['message'] = $this->session->flashdata('message');
                         $this->data['link'] = $this->session->flashdata('link');
                         $this->load->view('site/messager_blockacc', $this->data);
-                    }elseif ($isLogin == '3'){
+                    } elseif ($isLogin == '3') {
                         $this->data['message'] = $this->session->flashdata('message');
                         $this->data['link'] = $this->session->flashdata('link');
                         $this->load->view('site/messager_notexists', $this->data);
@@ -379,7 +339,7 @@
             }
             /******/
             $this->load->view($temp, $this->data);
-        ?>
+            ?>
 
         </section>
 

@@ -1,5 +1,7 @@
+<?php
+    $tmp['key'] = isset($_POST['key']) ? $_POST['key'] : "";
+?>
 <div class="container nav-wrapper check_nav">
-
     <div class="row">
         <div class="navbar-header">
             <div class="mobile-menu-icon-wrapper">
@@ -151,9 +153,9 @@
                     <div class="search-bar">
 
                         <div class="">
-                            <form action="<?php echo base_url('product').'/search'?>">
+                            <form action="<?php echo base_url('product').'/search'?>" method="POST">
                                 <input type="hidden" name="type" value="product"/>
-                                <input type="text" name="key" placeholder="Tìm kiếm..."
+                                <input type="text" name="key"  value="<?php echo $tmp['key'] ;?>" placeholder="Tìm kiếm..."
                                        autocomplete="off"/>
                             </form>
                         </div>

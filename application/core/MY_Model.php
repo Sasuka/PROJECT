@@ -1911,6 +1911,8 @@ class MY_Model extends CI_Model
         if (isset($input['limit'][0]) && isset($input['limit'][1])) {
             $this->db->limit($input['limit'][0], $input['limit'][1]);
         }
+
+
     }
 
     // them du lieu
@@ -1923,7 +1925,6 @@ class MY_Model extends CI_Model
             return FALSE;
         }
     }
-
     public function count($input)
     {
         // Select
@@ -1950,20 +1951,17 @@ class MY_Model extends CI_Model
         return $query->result_array();
 
     }
-
     public function _count($table = '', $count = '', $group_by = '')
     {
         $this->db->get($table);
         $this->db->select(COUNT($count) . 'AS COUNT');
         $this->db->group_by($group_by);
     }
-
     public function getGroupByCate($input = array())
     {
         $this->db->where($input['where']);
         return $this->db->get($this->table)->result_array();
     }
-
     public function getListJoin($tabl1, $condition, $where = array())
     {
         $this->db->select('*');
@@ -2010,6 +2008,38 @@ class MY_Model extends CI_Model
             $this->db->where("$this->table.$condition1 = $where");
         }
         return $this->db->get()->result_array();
+    }
+
+    public function getListSearch($limit,$start,$input= array()){
+
+//            pre($start);
+//        $sql = "SELECT * FROM sanpham where sanpham.TEN_SANPHAM1 like '%$st%' limit " . $start . ", " . $limit;
+//        $query = $this->db->query($sql);
+//        return $query->result_array();
+        if (isset($input['select'])) {
+            $this->db->select($input['select']);
+        }
+        // Thêm điều kiện cho câu truy vấn truyền qua biến $input['where']
+
+        if ((isset($input['where'])) && $input['where']) {
+            $this->db->where($input['where']);
+        }
+        //tim kiem theo like
+        if ((isset($input['like'])) && $input['like']) {
+            $this->db->like($input['like'][0], $input['like'][1]);
+        }
+        // Thêm sắp xếp dữ liệu thông qua biến $input['order'] (ví dụ $input['order'] = array('id','DESC'))
+        if (isset($input['order'][0]) && isset($input['order'][1])) {
+            $this->db->order_by($input['order'][0], $input['order'][1]);
+        }
+//        if ($limit != '' && $start !=''){
+//            $this->db->limit($limit,$start);
+//        }
+        $this->db->limit($limit,$start);
+        $query = $this->db->get($this->table);
+        //tra ve du lieu
+//        pre($query->result_array());
+        return $query->result_array();
     }
 
 }

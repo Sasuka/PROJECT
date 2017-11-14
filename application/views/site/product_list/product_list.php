@@ -113,33 +113,9 @@
         <div class="col-md-12 col-sm-12 col-xs-12 ">
             <div class="clearfix">
                 <div class="text-center">
-
-                    <!--                    <div class="col-lg-2 col-md-2 col-sm-3 hidden-xs">-->
-                    <!---->
-                    <!--                    </div>-->
-
-                    <!--                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 text-center">-->
-
                     <?php
                     echo $this->pagination->create_links();
                     ?>
-
-                    <!--                        <span class="page-node current">1</span>-->
-                    <!---->
-                    <!---->
-                    <!--                        <a class="page-node"-->
-                    <!--                           href="/collections/dong-ho-nam-longbo?page=2">2</a>-->
-
-
-                    <!--                    </div>-->
-                    <!--                    <div class="col-lg-2 col-md-2 col-sm-3 hidden-xs">-->
-                    <!---->
-                    <!--<!--                        <a class="pull-right next fa fa-angle-right"-->
-                    <!--<!--                           href="/collections/dong-ho-nam-longbo?page=2"><span>Trang sau</span></a>-->
-                    <!---->
-                    <!--                    </div>-->
-
-
                 </div>
 
             </div>

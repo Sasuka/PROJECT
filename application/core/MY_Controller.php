@@ -59,9 +59,6 @@ class MY_Controller extends CI_Controller
                 $config['base_url'] = base_url('home/index');//link hien thi ra danh sach san pham
                 $config['per_page'] = 6;//hien thi so luong san pham tren 1 trang
                 $config['uri_segment'] = 3;//hien thi so trang
-//        $config['next_link'] = "Trang kế tiếp";
-//        $config['prev_link'] = "Trang trước";
-//$config['full_tag_open'] = '<div class="pagination">';
 
                 $config['full_tag_open'] = '<ul class="pagination">';
                 $config['full_tag_close'] = '</ul>';
@@ -99,10 +96,6 @@ class MY_Controller extends CI_Controller
                 $this->data['listCate'] = $listCate;
                 $list = $this->product_model ->getList($input);
                 $this->data['listProduct'] = $list;
-//                $select = 'NHOM_SANPHAM.MA_NHOM_SANPHAM,TEN_NHOM_SANPHAM,MA_LOAI_SANPHAM,TEN_LOAI_SANPHAM,MA_NHA_CUNGCAP,TRANGTHAI,LOGO';
-//                $list = $this->group_model->getListJoinLRB1('LOAI_SANPHAM', 'MA_NHOM_SANPHAM', '', 'left', $select);
-//                $this->data['list'] = $list;
-                // pre($list);
 
 
             }
