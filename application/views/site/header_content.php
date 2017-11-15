@@ -25,7 +25,7 @@
                 <aside class="top-info">
                     <div class="cart-info hidden-xs">
                         <a class="cart-link" href="/cart"><span class="icon-cart"></span>
-                            <div class="cart-number">5</div>
+                            <div class="cart-number"><?php echo $this->cart->total_items();?></div>
                         </a>
                         <div class="cart-view clearfix" style="display: none;">
                             <table id="clone-item-cart" class="table-clone-cart">

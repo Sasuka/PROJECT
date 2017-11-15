@@ -92,7 +92,7 @@ class Product extends MY_Controller
         //tao phan tran
         $this->load->library('pagination');
         $config = array();
-        $config['total_rows'] = $total_rows;;//tong tat ca cac sản phẩm trên webiste
+        $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
         $config['base_url'] = base_url('product/getProduct/' . $id);//link hien thi ra danh sach san pham
         $config['per_page'] = 3;//hien thi so luong san pham tren 1 trang
         $config['uri_segment'] = 4;//hien thi so trang
@@ -270,10 +270,10 @@ class Product extends MY_Controller
         $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $this->pagination->initialize($config);
 
-        $input['like'] = array('TEN_SANPHAM'=>$keyWord);
-        $input['where'] = array('TRANGTHAI'=>1);
+//        $input['like'] = array('TEN_SANPHAM'=>$keyWord);
+//        $input['where'] = array('TRANGTHAI'=>1);
         $list = $this->product_model->getListSearch($config['per_page'],$data['page'],$input);
-      //  pre($list);
+//        pre($list);
         $this->data['listProduct'] = $list;
         $this->data['temp'] = 'site/product_list/product_list';
         $this->load->view('site/layout', $this->data);

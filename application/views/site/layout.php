@@ -12,11 +12,8 @@
 <!--The header-->
 <?php $this->load->view('site/header'); ?>
 <!--End Header-->
-<?php //$this ->load-> view('site/product_order/product_order');?>
 <div id="page">
-    <!--    --><?php //if (isset($itemProduct)){
-    //        pre($itemProduct);
-    //    }?>
+
     <div id="quick-view-modal" class="wrapper-quickview" style="display: none;">
 
         <div class="quickviewOverlay"></div>
@@ -78,7 +75,7 @@
                 </div>
             </div>
             <div class="col-md-7">
-                <form id="form-quickview" method="post" action="/cart/add">
+                <form id="form-quickview" method="post" action="<?php echo base_url(); ?>cart/add">
                     <div class="quickview-information">
                         <div class="form-input">
                             <div class="quickview-price product-price">
@@ -90,7 +87,8 @@
                             <!--                            <select name="id" class="" id="quickview-select" style="display: none;">-->
                             <!--                                <option value="1012030836">Default Title - 49900000</option>-->
                             <!--                            </select>-->
-                            <input name="id" class="" id="quick-view-select" style="display: none">
+                            <input type="hidden" name="id" class="quick-view-select" style="display: none "/>
+
                         </div>
                         <div class="quickview-description">
                         </div>
@@ -99,7 +97,7 @@
                                 Số lượng</label>
                             <input id="quantity-quickview" name="quantity" type="number" min="1" value="1">
                         </div>
-                        <div class="form-input" style="width: 100%">
+                        <div class="form-input btnAction" style="width: 100%">
                             <button type="submit" class="btn-detail  btn-color-add btn-min-width btn-mgt btn-addcart"
                                     style="display: block;">
                                 Thêm vào giỏ
@@ -109,6 +107,8 @@
                                     style="display: none;">
                                 Hết hàng
                             </button>
+                            <input type="hidden" name="btnAddCart" id="btnAddCart"
+                                   value="<?php echo base_url('cart/add') ?>"/>
                             <div class="qv-readmore">
                                 <span>hoặc </span><a class="read-more p-url" href="" role="button">Xem chi tiết</a>
                             </div>
@@ -121,7 +121,11 @@
     <script>
         /* QUICK VIEW JS */
         jQuery(document).ready(function () {
-
+            /*****************/
+            $("[type='number']").keypress(function (evt) {
+                evt.preventDefault();
+            });
+            /**************/
             var callBack = function (variant, selector) {
                 if (variant) {
                     item = $('.wrapper-quickview');
@@ -173,8 +177,9 @@
                         item.find('.quickview-price').find('span').html(pro["DONGIA_BAN"] + " $");
                         item.find('.quickview-image').find('img').attr('alt', pro["TEN_SANPHAM"]).attr('src', "http://localhost/www/PROJECT/uploads/product/" + pro['HINH_DAIDIEN']);
                         item.find('.quickview-image').find('img').css({"width": "345px", "height": "260px"});
+                        item.find('.quickview-variants').find('.quick-view-select').val(pro["MA_SANPHAM"]);
                         var pro_price = $(".product-detail").find(".pro-prices").find(".pro-price").html();
-                        console.log(pro_price);
+                        console.log("ssss" + item.find('.quickview-variants').find('.quick-view-select').val());
                         //  $('#test1').text(pro["TEN_SANPHAM"]);
 //
                         console.log(pro);
@@ -212,7 +217,6 @@
 
             $(document).on('click', '.quickview-close, .quickviewOverlay', function (e) {
                 $(".wrapper-quickview").fadeOut(500);
-
                 $('.jsQuickview').fadeOut(500);
             });
 
@@ -234,17 +238,35 @@
                 event.preventDefault();
                 variant_id_quickview = $('#quickview-select').val();
                 quantity_quickview = $('#quantity-quickview').val();
+                id_product = item.find('.quickview-variants').find('.quick-view-select').val();
+                var btnCart = item.find('#form-quickview').attr('action');
+                //   console.log(btnCart);
+
                 var params = {
                     type: 'POST',
-                    url: '/cart/add.js',
-                    async: true,
-                    data: 'quantity=' + quantity_quickview + '&id=' + variant_id_quickview,
+                    url: btnCart,
+                    async: false,
+                    data: 'quantity=' + quantity_quickview + '&id=' + id_product,
                     dataType: 'json',
                     success: function (line_item) {
-                        window.location = '/cart';
+                        //  window.location = '/cart';
+                        switch (line_item) {
+                            case 0:
+                                msg = "Đặt mua thành công";
+                                break;
+                            case 1:
+                                msg = "Đặt mua thất bại";
+                                break;
+                            default:
+                                msg = "Đang chờ xử lý";
+                        }
+                        $(".wrapper-quickview").fadeOut(500);
+                        $('.jsQuickview').fadeOut(500);
+                        alert(msg);
                     },
                     error: function (XMLHttpRequest, textStatus) {
-                        alert('Sản phẩm bạn vừa mua đã vượt quá tồn kho');
+                        /// alert('Sản phẩm bạn vừa mua đã vượt quá tồn kho');
+                        alert(dump(XMLHttpRequest));
                     }
                 };
                 jQuery.ajax(params);
@@ -299,7 +321,7 @@
             <?php
             //echo $_SERVER['REQUEST_URI']."<pre>";
 
-          //  echo base_url();
+            //  echo base_url();
             if ($this->uri->segment(1) == "") {
                 ?>
                 <!-- Begin slider -->
