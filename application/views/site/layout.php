@@ -87,9 +87,9 @@
                             </div>
                         </div>
                         <div class="quickview-variants variant-style clearfix">
-<!--                            <select name="id" class="" id="quickview-select" style="display: none;">-->
-<!--                                <option value="1012030836">Default Title - 49900000</option>-->
-<!--                            </select>-->
+                            <!--                            <select name="id" class="" id="quickview-select" style="display: none;">-->
+                            <!--                                <option value="1012030836">Default Title - 49900000</option>-->
+                            <!--                            </select>-->
                             <input name="id" class="" id="quick-view-select" style="display: none">
                         </div>
                         <div class="quickview-description">
@@ -170,8 +170,9 @@
                         item.find('.quickview-title').attr('title', pro["TEN_SANPHAM"]).attr('href', slectedImageUrl1).find('h4').html(pro["TEN_SANPHAM"]);
                         item.find('.quickview-variants').html(quickview_html_variants);
                         $('.quickview-image').html(quickview_image_zoom);
-                        item.find('.quickview-price').find('span').html(pro["DONGIA_BAN"]);
-                        item.find('.quickview-image').find('img').attr('alt', pro["TEN_SANPHAM"]).attr('src', "http://localhost/www/PROJECT/uploads/product/"+pro['HINH_DAIDIEN']);
+                        item.find('.quickview-price').find('span').html(pro["DONGIA_BAN"] + " $");
+                        item.find('.quickview-image').find('img').attr('alt', pro["TEN_SANPHAM"]).attr('src', "http://localhost/www/PROJECT/uploads/product/" + pro['HINH_DAIDIEN']);
+                        item.find('.quickview-image').find('img').css({"width": "345px", "height": "260px"});
                         var pro_price = $(".product-detail").find(".pro-prices").find(".pro-price").html();
                         console.log(pro_price);
                         //  $('#test1').text(pro["TEN_SANPHAM"]);
@@ -192,10 +193,7 @@
 
                 var selectedImage = $(this).parents('.product-block').find('.product-img img'),
                     slectedImageUrl = selectedImage.attr('src');
-//                console.log('aaa');
-//                console.log('ssss' + slectedImageUrl);
                 quickViewProduct($(this).attr('data-handle'));
-
                 animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
 
                 //update the visible slider image in the quick view panel
@@ -297,18 +295,21 @@
                     })
                 </script>
             </nav>
-            <!---->
-            <!--            --><?php // $type = "";
-            //            if($type == "home"){
-            //                ?>
-            <!-- Begin slider -->
-            <div class="slider-default bannerslider">
-                <?php $this->load->view('site/slider'); ?>
-            </div>
-            <!--                 End slider-->
-            <?php $this->load->view('site/news/news_breadcrumb'); ?>
-            <!--            --><?php
-            //            } ?>
+
+            <?php
+            //echo $_SERVER['REQUEST_URI']."<pre>";
+
+          //  echo base_url();
+            if ($this->uri->segment(1) == "") {
+                ?>
+                <!-- Begin slider -->
+                <div class="slider-default bannerslider">
+                    <?php $this->load->view('site/slider'); ?>
+                </div>
+                <!--                 End slider-->
+                <?php
+            } ?>
+            <?php //$this->load->view('site/news/news_breadcrumb'); ?>
 
 
         </div>
