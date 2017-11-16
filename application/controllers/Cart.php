@@ -24,10 +24,7 @@ class Cart extends MY_Controller
             $this->session->set_flashdata('message', 'Đặt hàng thất bại!');
             redirect();
         }
-//        $product = json_encode($product);
-//        echo $product;
-        //tong so san pham
-        // pre($product);
+
         $qty = $quantity;
         $this->data = array();
         $this->data['id'] = $id;
@@ -36,13 +33,16 @@ class Cart extends MY_Controller
         $this->data['image'] = $product['HINH_DAIDIEN'];
         $this->data['price'] = $product['DONGIA_BAN'];
         if($this->cart->insert($this->data)){
-            echo 0;
+            $cart = $this->cart->contents();
+            $cart = json_encode($cart);
+            echo $cart;
+
         }else{
             echo 1;
         }
-//        $cart = $this->cart->contents();
-//        $cart = json_encode($cart);
-//        echo $cart;
+       // $cart = $this->cart->contents();
+        //$cart = json_encode($cart);
+      //  echo $cart;
 //        chuyen dánh sach sang trang gio hang
 //        redirect(base_url('cart'));
 
@@ -52,15 +52,11 @@ class Cart extends MY_Controller
     {
         //hien thi danh sách trong gio hang
         $cart = $this->cart->contents();
-//        pre($cart);
-        $this->data['carts'] = $cart;
         $total_items = $this->cart->total_items();
+
+        $this->data['carts'] = $cart;
         $this->data['total_items'] = $total_items;
-
-
         $this->data['temp'] = 'site/cart/index';
-
-
         $this->load->view('site/layout', $this->data);
     }
 
@@ -83,7 +79,8 @@ class Cart extends MY_Controller
 
     public function del()
     {
-        $id = $this->uri->rsegment(3);
+        $id = $_POST['id'];
+        $quantity = $_POST['quantity'];
         $id = intval($id);
         if ($id > 0) {
 
@@ -94,14 +91,17 @@ class Cart extends MY_Controller
                 if ($row['id'] == $id) {
                     $data = array();
                     $data['rowid'] = $key;
-                    $data['qty'] = 0;
-                    $this->cart->update($data);
+                    $data['qty'] = $quantity;
+                    if ($this->cart->update($data)){
+                        echo '1';
+                    }else{
+                        echo '0';
+                    }
                 }
             }
         } else {
             //xoa toan bo gio hang
             $this->cart->destroy();
         }
-        redirect(base_url('cart'));
     }
 }

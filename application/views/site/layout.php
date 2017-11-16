@@ -181,7 +181,7 @@
                         var pro_price = $(".product-detail").find(".pro-prices").find(".pro-price").html();
                         console.log("ssss" + item.find('.quickview-variants').find('.quick-view-select').val());
                         //  $('#test1').text(pro["TEN_SANPHAM"]);
-//
+
                         console.log(pro);
                     }
 
@@ -251,18 +251,18 @@
                     success: function (line_item) {
                         //  window.location = '/cart';
                         switch (line_item) {
-                            case 0:
-                                msg = "Đặt mua thành công";
-                                break;
                             case 1:
                                 msg = "Đặt mua thất bại";
                                 break;
                             default:
-                                msg = "Đang chờ xử lý";
+                                msg = "Đặt hàng thành công";
+                                alert(msg);
+                                setTimeout(window.location.reload(true), 2000);
+
                         }
                         $(".wrapper-quickview").fadeOut(500);
                         $('.jsQuickview').fadeOut(500);
-                        alert(msg);
+
                     },
                     error: function (XMLHttpRequest, textStatus) {
                         /// alert('Sản phẩm bạn vừa mua đã vượt quá tồn kho');

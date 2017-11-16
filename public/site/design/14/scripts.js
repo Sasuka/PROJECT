@@ -129,17 +129,22 @@ function clone_item(product){
 }
 
 // Delete variant in modalCart
-function deleteCart(variant_id){
+function deleteCart(id){
+	var url = $('.remove-cart > a').attr('name');
+	//console.log(url);
 	var params = {
 		type: 'POST',
-		url: '/cart/change.js',
-		data: 'quantity=0&id=' + variant_id,
+		url: url,
+		data: 'quantity=0&id=' + id,
 		dataType: 'json',
-		success: function(cart) {
-			getCartModal();
+		success: function(isSucc) {
+			if(isSucc){
+				alert('Xóa thành công');
+                location.reload();
+			}
 		},
 		error: function(XMLHttpRequest, textStatus) {
-			Haravan.onError(XMLHttpRequest, textStatus);
+
 		}
 	};
 	jQuery.ajax(params);

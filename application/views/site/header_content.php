@@ -25,7 +25,7 @@
                 <aside class="top-info">
                     <div class="cart-info hidden-xs">
                         <a class="cart-link" href="/cart"><span class="icon-cart"></span>
-                            <div class="cart-number"><?php echo $this->cart->total_items();?></div>
+                            <div class="cart-number"><?php echo $this->cart->total_items(); ?></div>
                         </a>
                         <div class="cart-view clearfix" style="display: none;">
                             <table id="clone-item-cart" class="table-clone-cart">
@@ -39,55 +39,40 @@
                                     </td>
                                 </tr>
                             </table>
+
                             <table id="cart-view">
-                                <tr>
-                                    <td class="img">
-                                        <a href="/products/dong-ho-nam-skmei-kim-xanh-duong">
-                                            <img src="<?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg "
-                                                 alt="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG"/>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="pro-title-view" href="/products/dong-ho-nam-skmei-kim-xanh-duong"
-                                           title="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG</a>
-                                        <span class="variant"></span>
-                                        <span class="pro-quantity-view">2</span>
-                                        <span class="pro-price-view">499,000₫</span>
-                                        <span class="remove_link remove-cart">
-                                <a href='javascript:void(0);' onclick='deleteCart(1012030836)'><i
-                                            class='fa fa-times'></i></a>
-                            </span>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="img">
-                                        <a href="/products/dong-ho-nam-tevise-1952-chay-co-cuc-chat">
-                                            <img src="<?php echo upload_url('product'); ?>/7_0590d26379fb4da3ba8d9b57564ee6b0_small.jpg "
-                                                 alt="ĐỒNG HỒ NAM TEVISE 1952 CHẠY CƠ CỰC CHẤT"/>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="pro-title-view"
-                                           href="/products/dong-ho-nam-tevise-1952-chay-co-cuc-chat"
-                                           title="ĐỒNG HỒ NAM TEVISE 1952 CHẠY CƠ CỰC CHẤT">ĐỒNG HỒ NAM
-                                            TEVISE 1952 CHẠY CƠ CỰC CHẤT</a>
-                                        <span class="variant">
-
-					</span>
-                                        <span class="pro-quantity-view">3</span>
-                                        <span class="pro-price-view">800,000₫</span>
-                                        <span class="remove_link remove-cart">
-						<a href='javascript:void(0);' onclick='deleteCart(1012006173)'><i class='fa fa-times'></i></a>
-					</span>
-                                    </td>
-                                </tr>
+                                <?php
+                                $cart = $this->cart->contents();
+                                $sum = 0;
+                                foreach ($cart as $row) {
+                                    $sum += $row['subtotal'];
+                                    ?>
+                                    <tr>
+                                        <td class="img">
+                                            <a href="/products/dong-ho-nam-skmei-kim-xanh-duong">
+                                                <img src="<?php echo upload_url('product/') . $row['image']; ?>"
+                                                     alt="<?php echo $row['name']; ?>"/>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="pro-title-view" href="#"
+                                               title="<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a>
+                                            <span class="variant"></span>
+                                            <span class="pro-quantity-view"><?php echo $row['qty']; ?></span>
+                                            <span class="pro-price-view"><?php echo " X " . $row['price'] . " = <span style='color:#0000FF;'> " . $row['subtotal'] . "</span> $"; ?></span>
+                                            <span class="remove_link remove-cart">
+                                        <a href='javascript:void(0);' onclick='deleteCart(<?php echo $row['id']; ?>)' name="<?php echo base_url('cart/del')?>">
+                                            <i class='fa fa-times'></i></a>
+                                        </span>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </table>
                             <span class="line"></span>
                             <table class="table-total">
                                 <tr>
                                     <td class="text-left">TỔNG TIỀN:</td>
-                                    <td class="text-right" id="total-view-cart">3,398,000₫</td>
+                                    <td class="text-right" id="total-view-cart"><?php echo $sum . "  $ "; ?></td>
                                 </tr>
                                 <tr>
                                     <td><a href="/cart" class="linktocart">Xem giỏ hàng</a></td>
@@ -104,18 +89,23 @@
                                 <li>
                                     <a href="#"><i class="fa fa-phone" aria-hidden="true"></i> 0917.077.025</a>
                                 </li>
-                                <?php if (empty($cusAccount)) {?>
+                                <?php if (empty($cusAccount)) { ?>
                                 <li><a class="reg" href="<?php echo base_url() . 'user/register' ?>" title="Đăng ký">ĐĂNG
                                         KÝ</a></li>
                                 <li><a class="log" href="<?php echo base_url() . 'user/login'; ?>" title="Đăng nhập">Đăng
                                         nhập</a>
                                     <?php }else{
                                     ?>
-                                    <li></span><a href="<?php echo base_url().'user/edit/'.$cusAccount['MA_KHACHHANG'];?>"><i class="glyphicon glyphicon-user" aria-hidden="true"></i><?php echo ' '.$cusAccount['HO'].' '.$cusAccount['TEN'];?> </a> </li>
+                                <li></span><a
+                                            href="<?php echo base_url() . 'user/edit/' . $cusAccount['MA_KHACHHANG']; ?>"><i
+                                                class="glyphicon glyphicon-user"
+                                                aria-hidden="true"></i><?php echo ' ' . $cusAccount['HO'] . ' ' . $cusAccount['TEN']; ?>
+                                    </a></li>
 
-                                <li><a class="logout" href="<?php echo base_url() . 'user/logout'; ?>" title="Đăng xuất"> Đăng xuất</a>
+                                <li><a class="logout" href="<?php echo base_url() . 'user/logout'; ?>"
+                                       title="Đăng xuất"> Đăng xuất</a>
 
-                                    <?php }?>
+                                    <?php } ?>
                                 </li>
                             </ul>
                         </nav>
@@ -127,3 +117,37 @@
         </div>
     </div>
 </header>
+<script>
+//    function deleteCart(id) {
+//        /* Trường hợp xóa 1 sản phẩm*/
+//
+//        <?php
+//        $id = interval(id);
+//        if ($id > 0) {
+//            $carts = $this->cart->contents();
+//            foreach ($carts  as $key =>$item){
+//                if ($row['id'] == id){
+//
+//                }
+//            }
+//
+//
+//
+//        }
+//        ?>
+//    }
+    jQuery(document).ready(function () {
+        jQuery(document).on("click", ".quickview", function (event) {
+            
+        });
+        function deleteCart(id) {
+            ajax({
+                url: <?php echo base_url('cart/del/')?>+id,
+                async: false,
+                success: function (product) {
+                    alert(product);
+                }
+            });
+        }
+    });
+</script>
