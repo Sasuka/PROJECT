@@ -6,7 +6,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-7 col-xs-7">
                         <!-- LOGO -->
                         <h1>
-                            <a href="http://happylive.vn">
+                            <a href="#">
                                 <img src="Tiến Tài" class="img-responsive logoimg"/>
                             </a>
                         </h1>
@@ -24,7 +24,7 @@
             <div class="col-lg-7 hidden-md hidden-sm hidden-xs">
                 <aside class="top-info">
                     <div class="cart-info hidden-xs">
-                        <a class="cart-link" href="/cart"><span class="icon-cart"></span>
+                        <a class="cart-link" href="<?php echo base_url('cart')?>"><span class="icon-cart"></span>
                             <div class="cart-number"><?php echo $this->cart->total_items(); ?></div>
                         </a>
                         <div class="cart-view clearfix" style="display: none;">
@@ -75,7 +75,7 @@
                                     <td class="text-right" id="total-view-cart"><?php echo $sum . "  $ "; ?></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="/cart" class="linktocart">Xem giỏ hàng</a></td>
+                                    <td><a href="<?php echo base_url('cart')?>" class="linktocart">Xem giỏ hàng</a></td>
                                     <td><a href="/checkout" class="linktocheckout">Thanh toán</a></td>
                                 </tr>
                             </table>

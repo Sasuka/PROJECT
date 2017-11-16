@@ -56,7 +56,7 @@ class Cart extends MY_Controller
 
         $this->data['carts'] = $cart;
         $this->data['total_items'] = $total_items;
-        $this->data['temp'] = 'site/cart/index';
+        $this->data['temp'] = 'site/product_cart/product_cart';
         $this->load->view('site/layout', $this->data);
     }
 
