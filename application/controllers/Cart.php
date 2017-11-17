@@ -92,6 +92,7 @@ class Cart extends MY_Controller
                     $data = array();
                     $data['rowid'] = $key;
                     $data['qty'] = $quantity;
+                   // pre($data);
                     if ($this->cart->update($data)){
                         echo '1';
                     }else{
@@ -103,5 +104,10 @@ class Cart extends MY_Controller
             //xoa toan bo gio hang
             $this->cart->destroy();
         }
+    }
+/* Thực hiện các điều kiện trước khi mua hàng*/
+    public function checkout(){
+
+
     }
 }
