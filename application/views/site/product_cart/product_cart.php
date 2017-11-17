@@ -110,7 +110,7 @@
 <script>
     jQuery(document).ready(function () {
         $('#checkout').on('click', function (evt) {
-            alert('sss');
+
         });
     });
 </script>
