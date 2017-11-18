@@ -140,7 +140,7 @@
         </div>
     </div>
     <!-- list product-->
-    <div class="main">
+    <div class="main" style="width: 62%;">
         <div class="main-header">
             <a href="#" class="logo">
                 <h1 class="logo-text">Tiến Tài</h1>
@@ -162,6 +162,8 @@
             $this->load->view('site/product_order/pay_bills');
          }elseif ($type == '2'){
             $this->load->view('site/product_order/order_main');
+        }elseif ($type == '3'){
+            $this->load->view('site/product_order/order_complete');
         }?>
         <div class="main-footer">
         </div>

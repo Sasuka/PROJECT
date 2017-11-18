@@ -76,7 +76,7 @@
                                 </tr>
                                 <tr>
                                     <td><a href="<?php echo base_url('cart')?>" class="linktocart">Xem giỏ hàng</a></td>
-                                    <td><a href="/checkout" class="linktocheckout">Thanh toán</a></td>
+                                    <td><a href="<?php echo base_url('cart/checkout/1')?>" class="linktocheckout">Thanh toán</a></td>
                                 </tr>
                             </table>
                         </div>
