@@ -118,31 +118,13 @@
     </div>
 </header>
 <script>
-//    function deleteCart(id) {
-//        /* Trường hợp xóa 1 sản phẩm*/
-//
-//        <?php
-//        $id = interval(id);
-//        if ($id > 0) {
-//            $carts = $this->cart->contents();
-//            foreach ($carts  as $key =>$item){
-//                if ($row['id'] == id){
-//
-//                }
-//            }
-//
-//
-//
-//        }
-//        ?>
-//    }
+ /* Trường hợp xóa 1 sản phẩm*/
+
     jQuery(document).ready(function () {
-        jQuery(document).on("click", ".quickview", function (event) {
-            
-        });
+
         function deleteCart(id) {
-            ajax({
-                url: <?php echo base_url('cart/del/')?>+id,
+            $.ajax({
+                url: "<?php echo base_url('cart/del/')?>+id",
                 async: false,
                 success: function (product) {
                     alert(product);

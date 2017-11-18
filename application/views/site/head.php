@@ -134,7 +134,7 @@
 
 
 <script src="<?php echo public_url() ?>/js/jquery-ui.js"></script>
-<script src="<?php echo public_url() ?>bootstrap/js/npm.js"></script>
+<!--<script src="--><?php //echo public_url() ?><!--bootstrap/js/npm.js"></script>-->
 <script src="<?php echo public_url('site') ?>/js/customer_area.js" type='text/javascript'></script>
 <script src="<?php echo public_url('site') ?>/js/haravan_common.js" type='text/javascript'></script>
 
@@ -154,4 +154,3 @@
 <link rel="stylesheet" href="<?php echo public_url() ?>bootstrap/css/bootstrap.min.css">
 <link href="<?php echo public_url('site') ?>/css/font-awesome.min.css" rel='stylesheet' type='text/css' media='all'/>
 <link href="<?php echo public_url('site') ?>/css/styles.css?v=90" rel='stylesheet' type='text/css' media='all'/>
-

@@ -106,7 +106,9 @@ class Cart extends MY_Controller
         }
     }
 /* Thực hiện các điều kiện trước khi mua hàng*/
-    public function checkout(){
+    public function checkout($type ='1'){
+
+        $this->data['type'] = $type;
         $this->data['temp'] = 'site/product_order/product_order';
         $this->load->view('site/layout', $this->data);
     }

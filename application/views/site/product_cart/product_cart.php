@@ -9,7 +9,7 @@
 			<span class="header-page clearfix">
 				<h1>Giỏ hàng</h1>
 			</span>
-                    <form action="<?php echo base_url('cart/checkout')?>" method="post" id="cartformpage">
+                    <form action="<?php echo base_url('cart/checkout/1')?>" method="post" id="cartformpage">
                         <table>
                             <thead>
                             <tr>
@@ -81,7 +81,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12 cart-buttons inner-right inner-left">
                                 <div class="buttons clearfix">
                                     <button type="submit" id="checkout" class="button-default"
-                                            name="checkout" value="">Thanh toán
+                                            name="checkout" value="1">Thanh toán
                                     </button>
                                     <button type="submit" id="update-cart" class="button-default"
                                             name="update" value="">Cập nhật
