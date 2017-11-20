@@ -4,6 +4,14 @@ $tmp['TEN'] = (isset($_POST['lname']) ? $_POST['lname'] : '');
 $tmp['SDT'] = (isset($_POST['phone']) ? $_POST['phone'] :'');
 $tmp['EMAIL'] = (isset($_POST['email']) ? $_POST['email'] : '');
 $tmp['DIACHI'] = (isset($_POST['address']) ? $_POST['address'] : '');
+/* Nếu đã đăng nhập*/
+if (!empty($cusAccount)){
+    $tmp['HO'] = (isset($_POST['fname']) ? $_POST['fname'] : $cusAccount['HO']);
+    $tmp['TEN'] = (isset($_POST['lname']) ? $_POST['lname'] : $cusAccount['TEN']);
+    $tmp['SDT'] = (isset($_POST['phone']) ? $_POST['phone'] :$cusAccount['SDT']);
+    $tmp['EMAIL'] = (isset($_POST['email']) ? $_POST['email'] : $cusAccount['EMAIL']);
+    $tmp['DIACHI'] = (isset($_POST['address']) ? $_POST['address'] : $cusAccount['DIACHI']);
+}
 
 
 
@@ -35,7 +43,7 @@ $tmp['DIACHI'] = (isset($_POST['address']) ? $_POST['address'] : '');
                                     <div class="form-group">
                                     <input placeholder="Họ và tên lót" autocapitalize="off" spellcheck="false"
                                            class="field-input" size="30" id="fname"
-                                           name="fname" value="<?php set_value($tmp['HO'])?>" type="text" maxlength="11">
+                                           name="fname" value="<?php echo $tmp['HO'];?>" type="text" maxlength="11" <?php echo (!empty($cusAccount['HO'])) ? 'disabled' : ''; ?>>
                                     </div>
                                 </div>
 
@@ -46,7 +54,9 @@ $tmp['DIACHI'] = (isset($_POST['address']) ? $_POST['address'] : '');
                                     <div class="form-group">
                                     <input placeholder="Tên" autocapitalize="off" spellcheck="false"
                                            class="field-input" size="30" maxlength="11" id="lname"
-                                           name="lname" value="<?php set_value($tmp['TEN'])?>" type="tel">
+                                           name="lname" value="<?php echo $tmp['TEN'];?>" type="tel"
+                                        <?php echo (!empty($cusAccount['TEN'])) ? 'disabled' : ''; ?>
+                                    >
                                     </div>
                                 </div>
                             </div>
@@ -58,8 +68,10 @@ $tmp['DIACHI'] = (isset($_POST['address']) ? $_POST['address'] : '');
                                     <div class="form-group">
                                     <input placeholder="Email" autocapitalize="off" spellcheck="false"
                                            class="field-input"
-                                           size="30" id="email" name="email" value="<?php set_value($tmp['EMAIL'])?>"
-                                           type="email">
+                                           size="30" id="email" name="email" value="<?php echo  $tmp['EMAIL'];?>"
+                                           type="email"
+                                        <?php echo (!empty($cusAccount['EMAIL'])) ? 'disabled' : ''; ?>
+                                    >
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +80,9 @@ $tmp['DIACHI'] = (isset($_POST['address']) ? $_POST['address'] : '');
                                     <label class="field-label" for="phone">Số điện thoại</label>
                                     <div class="form-group">
                                         <input placeholder="Số điện thoại"
-                                               class="field-input " size="30" maxlength="11" name="phone" value="<?php set_value($tmp['SDT'])?>" type="text">
+                                               class="field-input " size="30" maxlength="11" name="phone" value="<?php echo $tmp['SDT'];?>" type="text"
+                                            <?php echo (!empty($cusAccount['SDT'])) ? 'disabled' : ''; ?>
+                                        >
                                     </div>
 
                                 </div>
@@ -79,7 +93,7 @@ $tmp['DIACHI'] = (isset($_POST['address']) ? $_POST['address'] : '');
                                     <div class="form-group">
                                     <input placeholder="Địa chỉ" autocapitalize="off" spellcheck="false"
                                            class="field-input"
-                                           size="30" id="address" name="address" value="<?php set_value($tmp['DIACHI'])?>"
+                                           size="30" id="address" name="address" value="<?php echo $tmp['DIACHI'];?>"
                                            type="text" required>
                                     </div>
                                 </div>

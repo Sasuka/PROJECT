@@ -8,6 +8,8 @@
  */
 class PayBills extends MY_Controller
 {
+    public $dt;
+    public $str;
     public function __construct()
     {
         parent::__construct();
@@ -24,6 +26,12 @@ class PayBills extends MY_Controller
     {
         /* Thực hiện kiểm tra đã đăng nhập hay chưa*/
 
+        /*Nếu chưa đăng nhập*/
+//        if (!empty($cusAccount)){
+//            pre($cusAccount);
+//        }
+
+        $this->data['cusAccount'] = $this->session->userdata('cusAccount');
         $this->data['type'] = 1;
         $this->data['temp'] = 'site/product_order/product_order';
         $this->load->view('site/layout', $this->data);
@@ -32,6 +40,8 @@ class PayBills extends MY_Controller
     public function method_checkout()
     {
         /*Chuyển cục đa ta*/
+       // global  $str;
+        $str = 'method_checkout';
         if ($this->input->post()) {
 
             $fname = $this->input->post('fname', true);
@@ -39,6 +49,7 @@ class PayBills extends MY_Controller
             $phone = $this->input->post('phone', true);
             $email = $this->input->post('email', true);
             $address = $this->input->post('address', true);
+            global $dt;
             $dt = array('HO' => $fname,
                 'TEN' => $lname,
                 'SDT' => $phone,

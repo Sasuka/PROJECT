@@ -17,50 +17,40 @@
                             </tr>
                             </thead>
                             <tbody>
-
-                            <tr class="product" data-product-id="1004862902" data-variant-id="1012030836">
-                                <td class="product-image">
-                                    <div class="product-thumbnail">
-                                        <div class="product-thumbnail-wrapper">
-                                            <img class="product-thumbnail-image" alt="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG"
-                                                 src="./product.hstatic.net/1000177652/product/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg">
+                            <?php
+                            $product = $this->cart->contents();
+                            $sum_price = 0;
+                            foreach ($product as $row) {
+                                $sum_price += $row['subtotal'];
+                                ?>
+                                <tr class="product" data-product-id="<?php echo $row['rowid']; ?>"
+                                    data-variant-id="<?php echo $row['rowid']; ?>">
+                                    <td class="product-image">
+                                        <div class="product-thumbnail">
+                                            <div class="product-thumbnail-wrapper">
+                                                <img class="product-thumbnail-image" alt="<?php echo $row['name']; ?>"
+                                                     src="<?php echo upload_url('product/') . $row['image']; ?>">
+                                            </div>
+                                            <span class="product-thumbnail-quantity"
+                                                  aria-hidden="true"><?php echo $row['qty']; ?></span>
                                         </div>
-                                        <span class="product-thumbnail-quantity" aria-hidden="true">7</span>
-                                    </div>
-                                </td>
-                                <td class="product-description">
-                                    <span class="product-description-name order-summary-emphasis">ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG</span>
+                                    </td>
+                                    <td class="product-description">
+                                        <span class="product-description-name order-summary-emphasis"><?php echo $row['name']; ?></span>
 
-                                </td>
-                                <td class="product-quantity visually-hidden">7</td>
-                                <td class="product-price">
-                                    <span class="order-summary-emphasis">3,493,000₫</span>
-                                </td>
-                            </tr>
-
-                            <tr class="product" data-product-id="1004853557" data-variant-id="1012006173">
-                                <td class="product-image">
-                                    <div class="product-thumbnail">
-                                        <div class="product-thumbnail-wrapper">
-                                            <img class="product-thumbnail-image"
-                                                 alt="ĐỒNG HỒ NAM TEVISE 1952 CHẠY CƠ CỰC CHẤT"
-                                                 src="./product.hstatic.net/1000177652/product/7_0590d26379fb4da3ba8d9b57564ee6b0_small.jpg">
-                                        </div>
-                                        <span class="product-thumbnail-quantity" aria-hidden="true">4</span>
-                                    </div>
-                                </td>
-                                <td class="product-description">
-                                    <span class="product-description-name order-summary-emphasis">ĐỒNG HỒ NAM TEVISE 1952 CHẠY CƠ CỰC CHẤT</span>
-
-                                </td>
-                                <td class="product-quantity visually-hidden">4</td>
-                                <td class="product-price">
-                                    <span class="order-summary-emphasis">3,200,000₫</span>
-                                </td>
-                            </tr>
-
+                                    </td>
+                                    <td class="product-quantity visually-hidden"><?php echo $row['qty']; ?></td>
+                                    <td class="product-price">
+                                        <span class="order-summary-emphasis"><span
+                                                    style="color: #0000FF"> <?php echo $row['subtotal']; ?></span> $</span>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
                             </tbody>
                         </table>
+                        <input type="hidden" name="sum_price" id="sum_price" value="<?php echo $sum_price; ?>"/>
                     </div>
 
                     <div class="order-summary-section order-summary-section-discount"
@@ -101,20 +91,20 @@
                             <tr class="total-line total-line-subtotal">
                                 <td class="total-line-name">Tạm tính</td>
                                 <td class="total-line-price">
-															<span class="order-summary-emphasis"
-                                                                  data-checkout-subtotal-price-target="669300000">
-																6,693,000₫
+															<span class="order-summary-emphasis" id="summary"
+                                                                  data-checkout-subtotal-price-target="669300000"
+                                                                  style="color: red;">
+
 															</span>
+                                    $
                                 </td>
                             </tr>
 
                             <tr class="total-line total-line-shipping">
                                 <td class="total-line-name">Phí vận chuyển</td>
                                 <td class="total-line-price">
-															<span class="order-summary-emphasis"
+															<span class="order-summary-emphasis" id="ship_costs"
                                                                   data-checkout-total-shipping-target="0">
-
-																	—
 
 															</span>
                                 </td>
@@ -126,9 +116,9 @@
                                     <span class="payment-due-label-total">Tổng cộng</span>
                                 </td>
                                 <td class="total-line-name payment-due">
-                                    <span class="payment-due-currency">VND</span>
-                                    <span class="payment-due-price" data-checkout-payment-due-target="669300000">
-																6,693,000₫
+                                    <span class="payment-due-currency">$</span>
+                                    <span class="payment-due-price" data-checkout-payment-due-target="669300000" id="total_costs">
+
 															</span>
                                 </td>
                             </tr>
@@ -161,11 +151,11 @@
         <?php
 
         if ($type == '1') {
-            $this->load->view('site/product_order/pay_bills',$this->data);
+            $this->load->view('site/product_order/pay_bills', $this->data);
         } elseif ($type == '2') {
-            $this->load->view('site/product_order/order_main',$this->data);
+            $this->load->view('site/product_order/order_main', $this->data);
         } elseif ($type == '3') {
-            $this->load->view('site/product_order/order_complete',$this->data);
+            $this->load->view('site/product_order/order_complete', $this->data);
         } ?>
         <div class="main-footer">
         </div>
@@ -1698,3 +1688,13 @@
     }
 
 </style>
+<!-- JS update price sum-->
+<script>
+    $(document).ready(function () {
+        //    alert($('#sum_price').val());
+        var sum_price = $('#summary').text($('#sum_price').val());
+        var ship_costs = $('#ship_costs').text();
+        console.log(sum_price+"-"+ship_costs);
+        $('#total_costs').text(sum_price + ship_costs);
+    });
+</script>

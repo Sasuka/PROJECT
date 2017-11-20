@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 cart-buttons inner-right inner-left">
                                 <div class="buttons clearfix">
-                                    <a  href="<?php echo base_url('payBills/checkout/1')?>" id="checkout" class="button-default"
+                                    <a  href="<?php echo base_url('payBills/checkout')?>" id="checkout" class="button-default"
                                             name="checkout" value="1" style="text-align:center ">Thanh toán
                                     </a>
                                     <button type="submit" id="update-cart" class="button-default"
