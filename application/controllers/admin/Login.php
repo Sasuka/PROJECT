@@ -18,6 +18,8 @@ class Login extends MY_Controller
             if ($this->form_validation->run()){
                 //kiem tra cho biet da dang nhap thanh cong hay chua
                 $this->session->set_userdata('login',true);
+                /* Quay lại trang trước đó sau khi login thành công*/
+              //  header('Location: ' . $_SERVER['HTTP_REFERER']);
                 redirect(admin_url('home'));
             }
         }

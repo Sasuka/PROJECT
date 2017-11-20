@@ -19,8 +19,7 @@ Class Home extends MY_Controller
     //lay ma chuc vu
     public function index()
     {
-        $cusAccount = $this->session->userdata('cusAccount');
-        $this->data['cusAccount'] = $cusAccount;
+        //$this->data['cusAccount'] = $cusAccount;
         if (isset($cusAccount)){
 
           $this->data['isLogin'] = '1';

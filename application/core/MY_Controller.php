@@ -96,7 +96,8 @@ class MY_Controller extends CI_Controller
                 $this->data['listCate'] = $listCate;
                 $list = $this->product_model ->getList($input);
                 $this->data['listProduct'] = $list;
-
+                $cusAccount = $this->session->userdata('cusAccount');
+                $this->data['cusAccount'] =  $cusAccount;
 
             }
 

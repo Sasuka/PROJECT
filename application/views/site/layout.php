@@ -6,11 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BÁN PHỤ TÙNG Ô TÔ</title>
-    <?php $this->load->view('site/head'); ?>
+    <?php $this->load->view('site/head',$this->data); ?>
 </head>
 <body>
 <!--The header-->
-<?php $this->load->view('site/header'); ?>
+<?php $this->load->view('site/header',$this->data); ?>
 <!--End Header-->
 <div id="page">
 <?php //pre($carts);?>
@@ -324,7 +324,7 @@
                 ?>
                 <!-- Begin slider -->
                 <div class="slider-default bannerslider">
-                    <?php $this->load->view('site/slider'); ?>
+                    <?php $this->load->view('site/slider',$this->data); ?>
                 </div>
                 <!--                 End slider-->
                 <?php
@@ -366,10 +366,10 @@
 
         <footer id="footer">
             <div class="footer-bottom">
-                <?php $this->load->view('site/footer_bottom'); ?>
+                <?php $this->load->view('site/footer_bottom',$this->data); ?>
             </div>
             <div class="footer-copyright">
-                <?php $this->load->view('site/footer_copyright'); ?>
+                <?php $this->load->view('site/footer_copyright',$this->data); ?>
             </div>
         </footer>
         <a href="#" class="scrollToTop show">

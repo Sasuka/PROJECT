@@ -65,7 +65,7 @@ class PayBills extends MY_Controller
     }
 
     public function complete_checkout()
-    {
+    {/*HUY VD2 Y gửi 900*/
         /*1. Nếu đã đăng nhập thì cập nhật address vào table khách hàng
         * 2. Nếu chưa đăng nhập thì tạo mới khách hàng vãng lai table khách hàng.
         * Cập nhật mã hàng khàch hàng vào mã hóa đơn, chi tiết hóa đon.

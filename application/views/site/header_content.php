@@ -89,7 +89,9 @@
                                 <li>
                                     <a href="#"><i class="fa fa-phone" aria-hidden="true"></i> 0917.077.025</a>
                                 </li>
-                                <?php if (empty($cusAccount)) { ?>
+                                <?php
+                                    //    $cusAccount = $this->session->userdata['cusAccount'];
+                                if (empty($cusAccount)) { ?>
                                 <li><a class="reg" href="<?php echo base_url() . 'user/register' ?>" title="Đăng ký">ĐĂNG
                                         KÝ</a></li>
                                 <li><a class="log" href="<?php echo base_url() . 'user/login'; ?>" title="Đăng nhập">Đăng
