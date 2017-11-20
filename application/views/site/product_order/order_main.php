@@ -68,7 +68,7 @@
         <div class="step-footer">
 
 
-            <form id="form_next_step" accept-charset="UTF-8" method="post" action="<?php echo base_url('cart/checkout/3');?>">
+            <form id="form_next_step" accept-charset="UTF-8" method="post" action="<?php echo base_url('payBills/complete_checkout');?>">
                 <input name="utf8" value="✓" type="hidden">
                 <button type="submit" class="step-footer-continue-btn btn">
                     <span class="btn-content">Hoàn tất đơn hàng</span>

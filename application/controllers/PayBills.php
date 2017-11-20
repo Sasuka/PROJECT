@@ -10,6 +10,7 @@ class PayBills extends MY_Controller
 {
     public $dt;
     public $str;
+
     public function __construct()
     {
         parent::__construct();
@@ -40,7 +41,7 @@ class PayBills extends MY_Controller
     public function method_checkout()
     {
         /*Chuyển cục đa ta*/
-       // global  $str;
+        // global  $str;
         $str = 'method_checkout';
         if ($this->input->post()) {
 
@@ -61,5 +62,15 @@ class PayBills extends MY_Controller
         $this->data['type'] = 2;
         $this->data['temp'] = 'site/product_order/product_order';
         $this->load->view('site/layout', $this->data);
+    }
+
+    public function complete_checkout()
+    {
+        /*1. Nếu đã đăng nhập thì cập nhật address vào table khách hàng
+        * 2. Nếu chưa đăng nhập thì tạo mới khách hàng vãng lai table khách hàng.
+        * Cập nhật mã hàng khàch hàng vào mã hóa đơn, chi tiết hóa đon.
+        **/
+
+
     }
 }
