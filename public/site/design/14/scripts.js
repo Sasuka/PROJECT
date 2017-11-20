@@ -6,7 +6,7 @@ var check_show_modal = true;
 var add_item_show_modalCart = function(id) {
 	if( check_show_modal ) {
 		check_show_modal = false;
-		timeOut_modalCart = setTimeout(function(){ 
+		timeOut_modalCart = setTimeout(function(){
 			check_show_modal = true;
 		}, 3000);
 		if ( $('.addtocart-modal').hasClass('clicked_buy') ) {
@@ -16,20 +16,26 @@ var add_item_show_modalCart = function(id) {
 		}
 		var params = {
 			type: 'POST',
-			url: '/cart/add.js',
+			url: "cart/add",
 			async: true,
 			data: 'quantity=' + quantity + '&id=' + id,
 			dataType: 'json',
 			success: function(line_item) {
-				if ( jQuery(window).width() >= 768 ) {
-					getCartModal();					
-					jQuery('#myCart').modal('show');				
-					jQuery('.modal-backdrop').css({'height':jQuery(document).height(),'z-index':'99'});
-				} else {
-					window.location = '/cart';
-				}
-				$('.addtocart-modal').removeClass('clicked_buy');
-			},
+
+                switch (line_item) {
+                    case 1:
+                        msg = "Đặt mua thất bại";
+                        break;
+                    default:
+                        msg = "Đặt hàng thành công";
+                        alert(msg);
+                        setTimeout(window.location.reload(true), 2000);
+
+                }
+                $(".wrapper-quickview").fadeOut(500);
+                $('.jsQuickview').fadeOut(500);
+
+            },
 			error: function(XMLHttpRequest, textStatus) {
 				alert('Sản phẩm bạn vừa mua đã vượt quá tồn kho');
 			}
@@ -151,29 +157,29 @@ function deleteCart(id){
 }
 
 // Update product in modalCart
-jQuery(document).on("click","#update-cart-modal",function(event){
-	event.preventDefault();
-	if (jQuery('#cartform').serialize().length <= 5) return;
-	jQuery(this).html('Đang cập nhật');
-	var params = {
-		type: 'POST',
-		url: '/cart/update.js',
-		data: jQuery('#cartform').serialize(),
-		dataType: 'json',
-		success: function(cart) {
-			if ((typeof callback) === 'function') {
-				callback(cart);
-			} else {
-				getCartModal();
-			}
-			jQuery('#update-cart-modal').html('Cập nhật');
-		},
-		error: function(XMLHttpRequest, textStatus) {
-			Haravan.onError(XMLHttpRequest, textStatus);
-		}
-	};
-	jQuery.ajax(params);
-});
+// jQuery(document).on("click","#update-cart-modal",function(event){
+// 	event.preventDefault();
+// 	if (jQuery('#cartform').serialize().length <= 5) return;
+// 	jQuery(this).html('Đang cập nhật');
+// 	var params = {
+// 		type: 'POST',
+// 		url: '/cart/update.js',
+// 		data: jQuery('#cartform').serialize(),
+// 		dataType: 'json',
+// 		success: function(cart) {
+// 			if ((typeof callback) === 'function') {
+// 				callback(cart);
+// 			} else {
+// 				getCartModal();
+// 			}
+// 			jQuery('#update-cart-modal').html('Cập nhật');
+// 		},
+// 		error: function(XMLHttpRequest, textStatus) {
+// 			Haravan.onError(XMLHttpRequest, textStatus);
+// 		}
+// 	};
+// 	jQuery.ajax(params);
+// });
 
 
 // Cart header hover

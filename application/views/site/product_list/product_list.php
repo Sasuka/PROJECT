@@ -62,7 +62,7 @@
                                 <div class="actionss">
                                     <div class="btn-cart-products">
                                         <a href="javascript:void(0);"
-                                           onclick="add_item_show_modalCart(1012031097)">
+                                           onclick="add_item_show_modalCart(<?php echo$itemProduct['MA_SANPHAM'] ?>)">
                                             <i class="fa fa-shopping-bag"
                                                aria-hidden="true"></i>
                                         </a>

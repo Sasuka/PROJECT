@@ -13,7 +13,7 @@
 <?php $this->load->view('site/header'); ?>
 <!--End Header-->
 <div id="page">
-
+<?php //pre($carts);?>
     <div id="quick-view-modal" class="wrapper-quickview" style="display: none;">
 
         <div class="quickviewOverlay"></div>
@@ -122,9 +122,7 @@
         /* QUICK VIEW JS */
         jQuery(document).ready(function () {
             /*****************/
-            $("[type='number']").keypress(function (evt) {
-                evt.preventDefault();
-            });
+//          s
             /**************/
             var callBack = function (variant, selector) {
                 if (variant) {
@@ -280,7 +278,7 @@
     <section id="page_content" class="">
         <div id="pageContainer" class="clearfix">
 
-            <?php $this->load->view('site/header_content'); ?>
+            <?php $this->load->view('site/header_content',$this->data); ?>
 
             <nav class="navbar-main navbar navbar-default cl-pri">
                 <!-- MENU MAIN -->

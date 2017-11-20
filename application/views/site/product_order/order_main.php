@@ -1,3 +1,6 @@
+<?php
+pre($dt);
+?>
 <div class="main-content">
 
     <div class="step">
@@ -72,7 +75,7 @@
                     <i class="btn-spinner icon icon-button-spinner"></i>
                 </button>
             </form>
-            <a href="<?php echo base_url('cart/checkout/1');?>"
+            <a href="<?php echo base_url('payBills/checkout');?>"
                class="step-footer-previous-link">
                 <svg class="previous-link-icon icon-chevron icon" xmlns="http://www.w3.org/2000/svg" width="6.7"
                      height="11.3" viewBox="0 0 6.7 11.3">

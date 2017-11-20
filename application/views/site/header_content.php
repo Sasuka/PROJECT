@@ -42,14 +42,14 @@
 
                             <table id="cart-view">
                                 <?php
-                                $cart = $this->cart->contents();
+                                $carts = $this->cart->contents();
                                 $sum = 0;
-                                foreach ($cart as $row) {
+                                foreach ($carts as $row) {
                                     $sum += $row['subtotal'];
                                     ?>
                                     <tr>
                                         <td class="img">
-                                            <a href="/products/dong-ho-nam-skmei-kim-xanh-duong">
+                                            <a href="<?php echo upload_url('product/') . $row['image']; ?>">
                                                 <img src="<?php echo upload_url('product/') . $row['image']; ?>"
                                                      alt="<?php echo $row['name']; ?>"/>
                                             </a>
@@ -75,8 +75,8 @@
                                     <td class="text-right" id="total-view-cart"><?php echo $sum . "  $ "; ?></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="<?php echo base_url('cart')?>" class="linktocart">Xem giỏ hàng</a></td>
-                                    <td><a href="<?php echo base_url('cart/checkout/1')?>" class="linktocheckout">Thanh toán</a></td>
+                                    <td><a href="<?php echo base_url('cart')?>" class="linktocart" name="show_cart">Xem giỏ hàng</a></td>
+                                    <td><a href="<?php echo base_url('cart/checkout/1/pay_bill')?>" class="linktocheckout">Thanh toán</a></td>
                                 </tr>
                             </table>
                         </div>

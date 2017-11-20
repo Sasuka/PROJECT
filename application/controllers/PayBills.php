@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: tient
+ * Date: 20/11/2017
+ * Time: 5:12
+ */
+class PayBills extends MY_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+    }
+
+    public function index()
+    {
+
+    }
+
+    public function checkout()
+    {
+        /* Thực hiện kiểm tra đã đăng nhập hay chưa*/
+
+        $this->data['type'] = 1;
+        $this->data['temp'] = 'site/product_order/product_order';
+        $this->load->view('site/layout', $this->data);
+    }
+
+    public function method_checkout()
+    {
+        /*Chuyển cục đa ta*/
+        if ($this->input->post()) {
+
+            $fname = $this->input->post('fname', true);
+            $lname = $this->input->post('lname', true);
+            $phone = $this->input->post('phone', true);
+            $email = $this->input->post('email', true);
+            $address = $this->input->post('address', true);
+            $dt = array('HO' => $fname,
+                'TEN' => $lname,
+                'SDT' => $phone,
+                'EMAIL' => $email,
+                'DIACHI' => $address);
+            $this->data['dt'] = $dt;
+
+        }
+        $this->data['type'] = 2;
+        $this->data['temp'] = 'site/product_order/product_order';
+        $this->load->view('site/layout', $this->data);
+    }
+}

@@ -9,7 +9,7 @@
 			<span class="header-page clearfix">
 				<h1>Giỏ hàng</h1>
 			</span>
-                    <form action="<?php echo base_url('cart/checkout/1')?>" method="post" id="cartformpage">
+                    <form action="<?php echo base_url('cart/checkout/1') ?>" method="post" id="cartformpage">
                         <table>
                             <thead>
                             <tr>
@@ -22,9 +22,9 @@
                             </thead>
                             <tbody>
                             <?php
-                            $cart = $this->cart->contents();
+                            $carts = $this->cart->contents();
                             $sum = 0;
-                            foreach ($cart as $row) {
+                            foreach ($carts as $row) {
                                 $sum += $row['subtotal'];
                                 ?>
                                 <tr>
@@ -33,7 +33,7 @@
                                             <a href="<?php echo upload_url('product/') . $row['image']; ?>"
                                                target="_blank">
                                                 <img src="<?php echo upload_url('product/') . $row['image']; ?>"
-                                                     alt="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG"/>
+                                                     alt="<?php echo $row['name']; ?>"/>
 
                                             </a>
                                         </div>
@@ -44,13 +44,16 @@
 
                                         </a>
                                     </td>
+                                    <td class="hidden"><input id="itemprice_<?php echo $row['id']; ?>"
+                                                              value="<?php echo $row['price']; ?>"/></td>
                                     <td class="qty">
-                                        <input type="number" size="4" name="updates[]" min="1"
-                                               id="updates_<?php echo $row['rowid']; ?>"
-                                               value="<?php echo $row['qty']; ?>" onfocus="this.select();"
+                                        <input type="number" size="4" name="qty_<?php echo $row['id']; ?>" min="1"
+                                               id="qty_<?php echo $row['id']; ?>"
+                                               value="<?php echo $row['qty']; ?>"
                                                class="tc item-quantity"/>
                                     </td>
-                                    <td class="price"><?php echo $row['subtotal']; ?></td>
+                                    <td class="price"
+                                        id="price_<?php echo $row['rowid']; ?>"><?php echo $row['subtotal']; ?></td>
                                     <td class="remove">
                                         <a href="javascript:void(0);" onclick='deleteCart(<?php echo $row['id']; ?>)'
                                            name="<?php echo base_url('cart/del') ?>" class="cart">Xóa</a>
@@ -75,16 +78,17 @@
                             <div class="col-md-6 col-sm-6 col-xs-12 inner-left inner-right">
                                 <div class="checkout-buttons clearfix">
                                     <label for="note">Ghi chú </label>
-                                    <textarea id="note" name="note" rows="8" cols="50"></textarea>
+                                    <textarea id="note" name="note" rows="8"
+                                              cols="50"><?php echo (isset($note)) ? $note : ""; ?></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 cart-buttons inner-right inner-left">
                                 <div class="buttons clearfix">
-                                    <button type="submit" id="checkout" class="button-default"
-                                            name="checkout" value="1">Thanh toán
-                                    </button>
+                                    <a  href="<?php echo base_url('payBills/checkout/1')?>" id="checkout" class="button-default"
+                                            name="checkout" value="1" style="text-align:center ">Thanh toán
+                                    </a>
                                     <button type="submit" id="update-cart" class="button-default"
-                                            name="update" value="">Cập nhật
+                                            name="update" value="1">Cập nhật
                                     </button>
                                 </div>
                             </div>
@@ -98,19 +102,8 @@
                     </form>
                 </div>
             </div>
-
-
             <!-- End cart -->
-
         </div>
-
-
     </div>
 </section>
-<script>
-    jQuery(document).ready(function () {
-        $('#checkout').on('click', function (evt) {
 
-        });
-    });
-</script>

@@ -158,26 +158,22 @@
                 </li>
             </ul>
         </div>
-        <?php if ($type == '1'){
-            $this->load->view('site/product_order/pay_bills');
-         }elseif ($type == '2'){
-            $this->load->view('site/product_order/order_main');
-        }elseif ($type == '3'){
-            $this->load->view('site/product_order/order_complete');
-        }?>
+        <?php
+
+        if ($type == '1') {
+            $this->load->view('site/product_order/pay_bills',$this->data);
+        } elseif ($type == '2') {
+            $this->load->view('site/product_order/order_main',$this->data);
+        } elseif ($type == '3') {
+            $this->load->view('site/product_order/order_complete',$this->data);
+        } ?>
         <div class="main-footer">
         </div>
     </div>
 </div>
 
 <style>
-    /*    @font-face {*/
-    /*        font-family: "Roboto";*/
-    /*        font-style: normal;*/
-    /*        font-weight: 500;*/
-    /*        src: local("roboto medium"), local("roboto medium"), url("*/
-    <?php //echo public_url('site')?> /*/design/member/fonts-master/apache/roboto/roboto-medium.ttf") format("truetype");*/
-    /*    }*/
+
     @-webkit-keyframes rotate {
         0% {
             -webkit-transform: rotate(0);
