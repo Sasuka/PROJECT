@@ -15,9 +15,10 @@ class  User extends MY_Controller
     }
 
     //kiem tra so dien thoai da dang ky chua
-    public function check_phone_exists()
-    {
-        $phone = $this->input->post('phone');
+    public function check_phone_exists($phone = '')
+    {   if ($phone == ''){
+           $phone = $this->input->post('phone');
+        }
         $where = array('SDT' => $phone, 'MATKHAU !=' => '');
         //kiem tra table column phone
         if ($this->customer_model->check_exist($where)) {
@@ -29,9 +30,12 @@ class  User extends MY_Controller
     }
 
     //kiem tra so dien thoai da dang ky chua
-    public function check_email_exists()
+    public function check_email_exists($email = '')
     {
-        $email = $this->input->post('email');
+        if($email == ''){
+            $email = $this->input->post('email');
+        }
+
         $where = array('EMAIL' => $email, 'MATKHAU !=' => '');
         //kiem tra check_exists trong MY_MODEL
         if ($this->customer_model->check_exist($where)) {
@@ -214,6 +218,7 @@ class  User extends MY_Controller
         $where = array('MA_KHACHHANG' => $this->id);
         //lấy thong tin của quản trị viên
         $info = $this->customer_model->get_info_rule($where);
+
         if (sizeof($info) == 0) {
             $this->session->set_flashdata('message', 'Không tồn tại quản trị viên này!');
             redirect(base_url('home'));

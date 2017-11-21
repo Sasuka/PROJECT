@@ -91,13 +91,13 @@ class MY_Controller extends CI_Controller
                 $this->data['listGroup'] = $listGroup;
                 //Lấy danh sách sản phẩm
                 $this->load->model('catelog_model');
-                $where['order'] = array('MA_NHOM_SANPHAM','ASC');
+                $where['order'] = array('MA_NHOM_SANPHAM', 'ASC');
                 $listCate = $this->catelog_model->getList($where);
                 $this->data['listCate'] = $listCate;
-                $list = $this->product_model ->getList($input);
+                $list = $this->product_model->getList($input);
                 $this->data['listProduct'] = $list;
                 $cusAccount = $this->session->userdata('cusAccount');
-                $this->data['cusAccount'] =  $cusAccount;
+                $this->data['cusAccount'] = $cusAccount;
 
             }
 
@@ -131,15 +131,51 @@ class MY_Controller extends CI_Controller
 //            $this->session->sess_destroy();
             $this->session->unset_userdata('login');
             redirect(admin_url('login'));
-        }elseif($this->session->userdata('cusAccount')){
+        } elseif ($this->session->userdata('cusAccount')) {
             $this->session->unset_userdata('cusAccount');
             redirect(base_url('home'));
         }
 
     }
+
     /* Viêt hoa chữ cái đầu tiên UTF-8*/
-    public function mb_ucwords($str) {
+    public function mb_ucwords($str)
+    {
         $str = mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
         return ($str);
+    }
+
+    //kiem tra so dien thoai da dang ky chua true: không tồn tại, false: tồn tại
+    public function check_phone_exist($model = '', $phone = '')
+    {
+        if ($phone == '') {
+            $phone = $this->input->post('phone');
+        }
+        $this->load->model($model);
+        $where = array('SDT' => $phone, 'MATKHAU !=' => '');
+        //kiem tra table column phone
+        if ($this->$model->check_exist($where)) {
+            //return error
+            $this->form_validation->set_message(__FUNCTION__, 'Số điện thoại này đã đăng ký');
+            return false;
+        } else
+            return true;
+    }
+
+    //kiem tra so dien thoai da dang ky chua
+    public function check_email_exist($model = '',$email = '')
+    {
+        if($email == ''){
+            $email = $this->input->post('email');
+        }
+        $this->load->model($model);
+        $where = array('EMAIL' => $email, 'MATKHAU !=' => '');
+        //kiem tra check_exists trong MY_MODEL
+        if ($this->$model->check_exist($where)) {
+            //return error
+            $this->form_validation->set_message(__FUNCTION__, 'Email này đã đăng ký');
+            return false;
+        } else
+            return true;
     }
 }

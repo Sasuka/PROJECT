@@ -19,9 +19,10 @@ function upload_url($url = ''){
 //    return base_url()
 //}
 function pre($list , $exit = true){
-    echo '<pre>';
+//    echo "<pre>";
     print_r($list);
     if ($exit){
         die();
     }
+
 }

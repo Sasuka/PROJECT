@@ -43,7 +43,7 @@ if (!empty($cusAccount)){
                                     <div class="form-group">
                                     <input placeholder="Họ và tên lót" autocapitalize="off" spellcheck="false"
                                            class="field-input" size="30" id="fname"
-                                           name="fname" value="<?php echo $tmp['HO'];?>" type="text" maxlength="11" <?php echo (!empty($cusAccount['HO'])) ? 'disabled' : ''; ?>>
+                                           name="fname" value="<?php echo $tmp['HO'];?>" type="text" maxlength="11" <?php echo (!empty($cusAccount['HO'])) ? 'readonly' : ''; ?>>
                                     </div>
                                 </div>
 
@@ -55,7 +55,7 @@ if (!empty($cusAccount)){
                                     <input placeholder="Tên" autocapitalize="off" spellcheck="false"
                                            class="field-input" size="30" maxlength="11" id="lname"
                                            name="lname" value="<?php echo $tmp['TEN'];?>" type="tel"
-                                        <?php echo (!empty($cusAccount['TEN'])) ? 'disabled' : ''; ?>
+                                        <?php echo (!empty($cusAccount['TEN'])) ? 'readonly' : ''; ?>
                                     >
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@ if (!empty($cusAccount)){
                                            class="field-input"
                                            size="30" id="email" name="email" value="<?php echo  $tmp['EMAIL'];?>"
                                            type="email"
-                                        <?php echo (!empty($cusAccount['EMAIL'])) ? 'disabled' : ''; ?>
+                                        <?php echo (!empty($cusAccount['EMAIL'])) ? 'readonly' : ''; ?>
                                     >
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@ if (!empty($cusAccount)){
                                     <div class="form-group">
                                         <input placeholder="Số điện thoại"
                                                class="field-input " size="30" maxlength="11" name="phone" value="<?php echo $tmp['SDT'];?>" type="text"
-                                            <?php echo (!empty($cusAccount['SDT'])) ? 'disabled' : ''; ?>
+                                            <?php echo (!empty($cusAccount['SDT'])) ? 'readonly' : ''; ?>
                                         >
                                     </div>
 
