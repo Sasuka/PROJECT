@@ -81,7 +81,6 @@
                 afterMove: nextslide,
                 afterInit: nextslide,
             });
-
             function nextslide() {
                 $(".hrv-banner-container .owl-item .hrv-banner-caption").css('display', 'none');
                 $(".hrv-banner-container .owl-item .hrv-banner-caption").removeClass('hrv-caption')

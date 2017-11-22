@@ -7,7 +7,6 @@
 
                 <div class="os-header-heading">
                     <h2 class="os-header-title">
-
                         Đặt hàng thành công
 
                     </h2>
