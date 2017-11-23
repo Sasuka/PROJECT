@@ -90,7 +90,7 @@
                                     <div class="btn-quickview-products">
                                         <a href="javascript:void(0);" class="quickview"
                                            data-handle="<?php echo base_url('product/getProduct1/') . $itemProduct['MA_SANPHAM']; ?>"><i
-                                                    class="fa fa-eye"></i></a>
+                                                    class="fa fa-eye" ></i></a>
                                     </div>
                                 </div>
 
@@ -116,9 +116,9 @@
                                     foreach ($promotion as $itemPromotion) {
                                         if ($itemProduct['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
                                             ?>
-                                            <p class="pro-price"><?php echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $itemProduct['DONGIA_BAN']; ?></p>
+                                            <p class="pro-price discount-cost"><?php echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $itemProduct['DONGIA_BAN']; ?></p>
 
-                                            <p class="pro-price-del text-left">
+                                            <p class="pro-price-del text-left discount-original">
                                                 <del class="compare-price"><?php echo $itemProduct['DONGIA_BAN'] ?></del>
                                             </p>
                                             <?php
@@ -128,7 +128,7 @@
                                     }
                                     if ($check == 0){
                                         ?>
-                                        <p class="pro-price"><?php echo $itemProduct['DONGIA_BAN']; ?></p>
+                                        <p class="pro-price discount-cost"><?php echo $itemProduct['DONGIA_BAN']; ?></p>
                                     <?php
                                     }
                                     ?>

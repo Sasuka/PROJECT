@@ -1989,8 +1989,11 @@ class MY_Model extends CI_Model
         $this->db->from($this->table);
         $this->db->join($table1, "$table1.$condition1=$this->table.$condition1");
         $this->db->join($table2, "$table2.$condition2=$this->table.$condition2");
-        if ($where != '') {
+        if (!is_array($where) && $where != '') {
             $this->db->where("$this->table.$condition1 = $where");
+        }
+        if (!empty($where) && is_array($where)){
+            $this->db->where($where);
         }
         return $this->db->get()->result_array();
     }

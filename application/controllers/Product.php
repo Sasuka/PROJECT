@@ -57,12 +57,17 @@ class Product extends MY_Controller
 
     public function getProduct1()
     {
-
+        $this->load->model(array('catelog_model','promotionDetail_model'));
         $id = $this->uri->segment(3);
         $id = intval($id);
-        $input['where'] = array('MA_SANPHAM' => $id);
+        $where = array('sanpham.MA_SANPHAM'=> $id);
+        $promotionList = $this->promotionDetail_model->getListThreeJoin('khuyenmai','MA_KHUYENMAI','sanpham','MA_SANPHAM',$where);
+//        pre($promotionList[0]['']);
+        $product = $this->catelog_model->getListThreeJoin('sanpham','MA_LOAI_SANPHAM','nhom_sanpham','MA_NHOM_SANPHAM',$where);
+       // pre($list);
+        //$input['where'] = array('MA_SANPHAM' => $id);
         //thuc hien load danh sach san pham dua vao id loai
-        $product= $this->product_model->getList($input);
+        //$product= $this->product_model->getList($input);
         $product = $product[0];
         $product = json_encode($product);
         echo $product;

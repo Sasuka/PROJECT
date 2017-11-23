@@ -7,23 +7,24 @@
 
                 <div class="inner about_us">
 
-                    <p class="message">OXYWATCH cam kết, tất cả đồng hồ được bán trực tiếp tại hệ thống
-                        các cửa hàng của chúng tôi và bán Online đều là hàng chính hãng 100%</p>
+                    <p class="message">Công ty chúng tôi cung cấp đầy đủ các chủng loại các linh kiện phụ tùng chính hãng 100%,
+                        đồng thời các mặt hàng nhiều quốc gia tương đương với giá cả phải chăng và chất lượng đảm bảo.
+                    </p>
 
                     <ul class="list-unstyled">
 
                         <li>
-                            <i class="fa fa-home"></i>Quận Bắc Từ Liêm, Hà Nội
+                            <i class="fa fa-home"></i>97 Man Thiện Quận 9, Hồ Chí Minh
                         </li>
 
 
                         <li>
-                            <i class="fa fa-envelope-o"></i> <a href="mailto:Suport@oxywatch.vn">Suport@oxywatch.vn</a>
+                            <i class="fa fa-envelope-o"></i> <a href="mailto:Suport@oxywatch.vn">tientai206@gmail.com</a>
                         </li>
 
 
                         <li>
-                            <i class="fa fa-phone"></i>0978.825.365
+                            <i class="fa fa-phone"></i>0917.077.025
                         </li>
 
 
@@ -43,29 +44,26 @@
                     <ul class="list-unstyled list-styled">
 
                         <li>
-                            <a href="/">Trang chủ</a>
+                            <a href="<?php echo base_url();?>">Trang chủ</a>
                         </li>
 
                         <li>
-                            <a href="/collections/dong-ho-nam">Đồng hồ nam</a>
+                            <a href="<?php echo base_url('product');?>">Thương hiệu</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('product/discount');?>">Khuyến mãi</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('service');?>">Dịch vụ</a>
                         </li>
 
                         <li>
-                            <a href="/collections/dong-ho-nu">Đồng hồ nữ</a>
+                            <a href="<?php echo base_url('introduct');?>">Giới thiệu</a>
                         </li>
 
                         <li>
-                            <a href="/pages/dich-vu">Dịch vụ</a>
+                            <a href="<?php echo base_url('blog');?>">Blog</a>
                         </li>
-
-                        <li>
-                            <a href="/pages/gioi-thieu">Giới thiệu</a>
-                        </li>
-
-                        <li>
-                            <a href="/blogs/news">Blog</a>
-                        </li>
-
                     </ul>
                 </div>
             </div>
@@ -81,7 +79,7 @@
                 <div class="inner">
 
 
-                    <form accept-charset='UTF-8' action='/account/contact' class='contact-form'
+                    <form accept-charset='UTF-8' action='#' class='contact-form'
                           method='post'>
                         <input name='form_type' type='hidden' value='customer'>
                         <input name='utf8' type='hidden' value='✓'>
@@ -109,58 +107,33 @@
                     <ul class="list-inline">
 
                         <li>
-                            <a target="_blank" href="/" class="social-wrapper facebook">
-        <span class="social-icon">
-          <i class="fa fa-facebook"></i>
-        </span>
+                            <a target="_blank" href="https://www.facebook.com/tientai206" class="social-wrapper facebook">
+                            <span class="social-icon">
+                              <i class="fa fa-facebook"></i>
+                            </span>
                             </a>
                         </li>
-
-
                         <li>
-                            <a target="_blank" href="/" class="social-wrapper twitter">
-        <span class="social-icon">
-          <i class="fa fa-twitter"></i>
-        </span>
+                            <a target="_blank" href="https://twitter.com/" class="social-wrapper twitter">
+                            <span class="social-icon">
+                              <i class="fa fa-twitter"></i>
+                            </span>
                             </a>
                         </li>
-
-
                         <li>
-                            <a target="_blank" href="/" class="social-wrapper pinterest">
-        <span class="social-icon">
-          <i class="fa fa-pinterest"></i>
-        </span>
+                            <a target="_blank" href="<?php echo base_url();?>" class="social-wrapper pinterest">
+                            <span class="social-icon">
+                              <i class="fa fa-pinterest"></i>
+                            </span>
                             </a>
                         </li>
-
-
                         <li>
-                            <a target="_blank" href="/" class="social-wrapper google">
-        <span class="social-icon">
-          <i class="fa fa-google-plus"></i>
-        </span>
+                            <a target="_blank" href="https://plus.google.com/u/0/108531141792470875862" class="social-wrapper google">
+                            <span class="social-icon">
+                              <i class="fa fa-google-plus"></i>
+                            </span>
                             </a>
                         </li>
-
-
-                        <li>
-                            <a target="_blank" href="/" class="social-wrapper youtube">
-        <span class="social-icon">
-          <i class="fa fa-youtube"></i>
-        </span>
-                            </a>
-                        </li>
-
-
-                        <li>
-                            <a target="_blank" href="/" class="social-wrapper instagram">
-        <span class="social-icon">
-          <i class="fa fa-instagram"></i>
-        </span>
-                            </a>
-                        </li>
-
                     </ul>
                 </div>
 
@@ -178,7 +151,7 @@
                     <!-- Facebook widget -->
 
                     <div class="footer-static-content">
-                        <div class="fb-page" data-href="https://www.facebook.com/happylive.vn"
+                        <div class="fb-page" data-href="https://www.facebook.com/Phutungototientaicom-1950013108603246/"
                              data-height="300" data-small-header="false"
                              data-adapt-container-width="true" data-hide-cover="false"
                              data-show-facepile="true" data-show-posts="false"></div>
