@@ -2,7 +2,6 @@
 
 class MY_Controller extends CI_Controller
 {
-    //transtion data to view
     public $data = array();
 
     //lay danh sach nhom san pham
@@ -16,7 +15,6 @@ class MY_Controller extends CI_Controller
         return $this->site_model->cateMenu();
     }
 
-//    ====================PRODUCT====================//
     public function getAllProduct()
     {
         $this->product_model->getAllListProduct();
@@ -25,9 +23,10 @@ class MY_Controller extends CI_Controller
     public function listProduct($product = '')
     {
         $this->site_model->addProduct($product);
-
-
     }
+
+    /* Lấy tất cả thông tin cả phẩm gồm nhóm, loại, sản phẩm
+     * */
 
     public function __construct()
     {
@@ -48,59 +47,27 @@ class MY_Controller extends CI_Controller
                 break;
             }
             default: {
-                $this->load->model(array('group_model', 'catelog_model', 'product_model'));
                 /***************/
-                //thuc hien load phan trang
-                $total_rows = $this->product_model->get_total();
-                $this->data['total_rows'] = $total_rows;
-                $this->load->library('pagination');
-                $config = array();
-                $config['total_rows'] = $total_rows;;//tong tat ca cac sản phẩm trên webiste
-                $config['base_url'] = base_url('home/index');//link hien thi ra danh sach san pham
-                $config['per_page'] = 6;//hien thi so luong san pham tren 1 trang
-                $config['uri_segment'] = 3;//hien thi so trang
-
-                $config['full_tag_open'] = '<ul class="pagination">';
-                $config['full_tag_close'] = '</ul>';
-                $config['first_link'] = false;
-                $config['last_link'] = false;
-                $config['first_tag_open'] = '<li>';
-                $config['first_tag_close'] = '</li>';
-                $config['prev_link'] = '&laquo';
-                $config['prev_tag_open'] = '<li class="prev">';
-                $config['prev_tag_close'] = '</li>';
-                $config['next_link'] = '&raquo';
-                $config['next_tag_open'] = '<li>';
-                $config['next_tag_close'] = '</li>';
-                $config['last_tag_open'] = '<li>';
-                $config['last_tag_close'] = '</li>';
-                $config['cur_tag_open'] = '<li class="active"><a href="#">';
-                $config['cur_tag_close'] = '</a></li>';
-                $config['num_tag_open'] = '<li>';
-                $config['num_tag_close'] = '</li>';
-
-                //khoi tao phan trang
-                $this->pagination->initialize($config);
-                // pre($config);
-                $segment = $this->uri->segment(3);
-                $segment = intval($segment);
-
-                $input['limit'] = array($config['per_page'], $segment);
-                /*******************/
+                $this->load->model(array('group_model', 'catelog_model', 'product_model'));
                 $listGroup = $this->group_model->getList();
                 $this->data['listGroup'] = $listGroup;
-                //Lấy danh sách sản phẩm
                 $this->load->model('catelog_model');
                 $where['order'] = array('MA_NHOM_SANPHAM', 'ASC');
                 $listCate = $this->catelog_model->getList($where);
                 $this->data['listCate'] = $listCate;
-                $list = $this->product_model->getList($input);
+
+                $list = $this->product_model->getPaging('home/index');
+
+               // pre($list);
+                /* Thông tin toàn bộ sản phẩm*/
                 $this->data['listProduct'] = $list;
+                /*Thông tin các sản phẩm được khuyến mãi*/
+                $promotion = $this->product_model->getProductPromotion();
+               // pre($promotion);
+                $this->data['promotion'] = $promotion;
                 $cusAccount = $this->session->userdata('cusAccount');
                 $this->data['cusAccount'] = $cusAccount;
-
             }
-
         }
     }
 
@@ -163,9 +130,9 @@ class MY_Controller extends CI_Controller
     }
 
     //kiem tra so dien thoai da dang ky chua
-    public function check_email_exist($model = '',$email = '')
+    public function check_email_exist($model = '', $email = '')
     {
-        if($email == ''){
+        if ($email == '') {
             $email = $this->input->post('email');
         }
         $this->load->model($model);

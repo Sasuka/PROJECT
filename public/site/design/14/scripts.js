@@ -3,7 +3,7 @@ var timeOut_modalCart;
 var viewout = true;
 var check_show_modal = true;
 // Add a product and show modal cart
-var add_item_show_modalCart = function (id) {
+var add_item_show_modalCart = function (id){
     if (check_show_modal) {
         check_show_modal = false;
         timeOut_modalCart = setTimeout(function () {
@@ -14,9 +14,11 @@ var add_item_show_modalCart = function (id) {
         } else {
             var quantity = 1;
         }
+        var url = $('.shopping-bag').attr('data-handle');
+        console.log(url);
         var params = {
             type: 'POST',
-            url: "cart/add",
+            url: url+"/cart/add",
             async: true,
             data: 'quantity=' + quantity + '&id=' + id,
             dataType: 'json',

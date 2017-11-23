@@ -1805,9 +1805,6 @@ class MY_Model extends CI_Model
         return TRUE;
     }
 
-    public function getAllListProduct()
-    {
-    }
 
     public function findTimes($where = array())
     {
@@ -2027,5 +2024,6 @@ class MY_Model extends CI_Model
 //        pre($query->result_array());
         return $query->result_array();
     }
+
 
 }

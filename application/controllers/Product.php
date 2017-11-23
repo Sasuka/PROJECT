@@ -9,7 +9,6 @@ class Product extends MY_Controller
         parent::__construct();
         $this->load->model('product_model');
     }
-
     public function index()
     {
         $this->data['message'] = $this->session->flashdata('message');
@@ -119,7 +118,6 @@ class Product extends MY_Controller
 
 
     }
-
 //    hien thi trang chi tiet san pham
     public function view()
     {
@@ -350,13 +348,16 @@ class Product extends MY_Controller
         $config['num_tag_close'] = '</li>';
         $choice = $config["total_rows"]/$config["per_page"];
         $config["num_links"] = floor($choice);
-        $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
         $this->pagination->initialize($config);
+
         $list = $this->product_model->getProductPromotion($config['per_page'],$data['page']);
-      //  pre($list);
+     //   pre($list);
         $this->data['listProduct'] =  $list;
         // print_r($listDis);
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
     }
+
 }
