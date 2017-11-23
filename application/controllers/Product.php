@@ -204,12 +204,10 @@ class Product extends MY_Controller
 
         $segment = $this->uri->segment(4);
         $segment = intval($segment);
-//           pre($segment);
 
         $input['limit'] = array($config['per_page'], $segment);
         $list = $this->product_model->getList($input);
-//        pre($list);
-//       pre($list);
+
         $this->data['list'] = $list;
         if ($this->uri->rsegment(3) == 1) {
             $result = array();
@@ -270,8 +268,6 @@ class Product extends MY_Controller
         $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $this->pagination->initialize($config);
 
-//        $input['like'] = array('TEN_SANPHAM'=>$keyWord);
-//        $input['where'] = array('TRANGTHAI'=>1);
         $list = $this->product_model->getListSearch($config['per_page'],$data['page'],$input);
 //        pre($list);
         $this->data['listProduct'] = $list;
@@ -325,9 +321,41 @@ class Product extends MY_Controller
      * */
     public function discount()
     {
+        $input = array();
+        $this->load->library('pagination');
         $listDis = $this->product_model->getProductPromotion();
-        $this->data['listProduct'] = $listDis;
-        // pre($listDis);
+        $total_rows = count($listDis);
+        $config = array();
+        $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
+        $config['base_url'] = base_url("product/discount");//link hien thi ra danh sach san pham
+        $config['per_page'] = 6;//hien thi so luong san pham tren 1 trang
+        $config['uri_segment'] = 4;//hien thi so trang
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $choice = $config["total_rows"]/$config["per_page"];
+        $config["num_links"] = floor($choice);
+        $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $this->pagination->initialize($config);
+        $list = $this->product_model->getProductPromotion($config['per_page'],$data['page']);
+      //  pre($list);
+        $this->data['listProduct'] =  $list;
+        // print_r($listDis);
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
     }

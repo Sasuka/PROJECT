@@ -22,7 +22,7 @@ class MY_Controller extends CI_Controller
         $this->product_model->getAllListProduct();
     }
 
-    public function listProct($product = '')
+    public function listProduct($product = '')
     {
         $this->site_model->addProduct($product);
 

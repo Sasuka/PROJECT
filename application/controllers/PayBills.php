@@ -6,10 +6,12 @@
  * Date: 20/11/2017
  * Time: 5:12
  */
-require_once APPPATH.'controllers/User.php';
+require_once APPPATH . 'controllers/User.php';
+
 class PayBills extends MY_Controller
 {
     public $dt;
+
     public function __construct()
     {
         parent::__construct();
@@ -72,35 +74,33 @@ class PayBills extends MY_Controller
         /* Thực hiện lấy dữ liệu*/
 
         if ($this->input->post()) {
-            $ship_info = isset($_POST['ship_info']) ? $_POST['ship_info']: '';
+            $this->load->model('customer_model');
+            $ship_info = isset($_POST['ship_info']) ? $_POST['ship_info'] : '';
             $ship_rate = isset($_POST['ship_rate']) ? $_POST['ship_rate'] : '';
             $payment_method = $_POST['payment_method'];
             $arr_ship_info = unserialize($ship_info);
             /*Kiểm tra thông tin này đã tồn tại hay chưa?*/
 //            echo $arr_ship_info['HO'];
             /*Nếu chưa login thì kiểm tra sự tồn tại của email và phone */
-            if (!isset($cusAccount)){
-                if($this->check_phone_exist('customer_model',$arr_ship_info['SDT']) &&
-                    $this->check_email_exist('customer_model',$arr_ship_info['EMAIL'])) {
+            if (!isset($cusAccount)) {
+                if ($this->check_phone_exist('customer_model', $arr_ship_info['SDT']) &&
+                    $this->check_email_exist('customer_model', $arr_ship_info['EMAIL'])) {
                     /* Not exists then conitnue*/
+                    /*1. Tạo TK KH vãng lai; 2. Cập nhật địa chỉ giao hàng*/
+//                    pre($arr_ship_info);
+                    if ($this->customer_model->add($arr_ship_info)) {
+                    }
 
 
-                } else{
+                } else {
                     /*Exists email or phone*/
 
-
                 }
-//                if($this->check_phone_exist('customer_model',$arr_ship_info['SDT'])){
-//                    $this->session->set_flashdata('message', 'Email hoặc Số điện thoại này đã tồn tại!');
-//                    $this->data['type'] = 3;
-//                    $this->data['temp'] = 'site/product_order/product_order';
-//                    $this->load->view('site/layout', $this->data);
-//                }else{
-//                    /* Thực hiện create customer*/
-//                    $this->data['type'] = 2;
-//                    $this->data['temp'] = 'site/product_order/product_order';
-//                    $this->load->view('site/layout', $this->data);
-//                }
+                $customer = $this->customer_model->get_info_rule(array('SDT' => $arr_ship_info['SDT']));
+               // pre($customer);
+                pre($this->cart->contents());
+
+
             }
         }
 
