@@ -15,8 +15,10 @@
                             <tr>
                                 <th class="image">&nbsp;</th>
                                 <th class="item">Tên sản phẩm</th>
+                                <th class="gift">Quà tặng (nếu có)</th>
+                                <th class="unit">Đơn giá</th>
                                 <th class="qty">Số lượng</th>
-                                <th class="price">Giá tiền<br><span style="color: #ff0a10;">(DVT: $)</span></th>
+                                <th class="price">Giá tiền<br><span style="color: #0eff0c;">(DVT: $)</span></th>
                                 <th class="remove">&nbsp;</th>
                             </tr>
                             </thead>
@@ -43,10 +45,16 @@
                                             <strong><?php echo $row['name']; ?></strong>
 
                                         </a>
-                                        <span style="color:blue;font-family: Arial;"><?php echo (isset($row['gitf_pro'])) ? $row['gitf_pro'] : ""; ?></span>
                                     </td>
                                     <td class="hidden"><input id="itemprice_<?php echo $row['id']; ?>"
                                                               value="<?php echo $row['price']; ?>"/></td>
+                                    <td class="gift">
+                                        <span style="color:blue;font-family: Arial;"><?php echo $row['gitf_pro'];?></span>
+                                    </td>
+                                    <td class="unit">
+                                        <span style="color: #fb3108;font-weight: bold;"><?php echo $row['price'];?></span>
+                                       <del> <?php echo $row['price_original'];?></del>
+                                    </td>
                                     <td class="qty">
                                         <input type="number" size="4" name="qty_<?php echo $row['id']; ?>" min="1"
                                                id="qty_<?php echo $row['id']; ?>"

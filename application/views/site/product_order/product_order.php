@@ -50,7 +50,7 @@
                             ?>
                             </tbody>
                         </table>
-                        <input type="hidden" name="sum_price" id="sum_price" value="<?php echo $sum_price; ?>"/>
+<!--                        <input type="hidden" name="sum_price" id="sum_price" value="--><?php //echo $sum_price; ?><!--"/>-->
                     </div>
 
                     <div class="order-summary-section order-summary-section-discount"
@@ -114,11 +114,13 @@
                             <tr class="total-line">
                                 <td class="total-line-name payment-due-label">
                                     <span class="payment-due-label-total">Tổng cộng</span>
+
                                 </td>
                                 <td class="total-line-name payment-due">
                                     <span class="payment-due-currency">$</span>
-                                    <span class="payment-due-price" data-checkout-payment-due-target="669300000" id="total_costs">
-
+                                    <span class="payment-due-price" data-checkout-payment-due-target="669300000"
+                                          id="total_costs" style="color: #0000FF;cursor: pointer;font-size: 1.9em;">
+ <?php echo $sum_price;?>
 															</span>
                                 </td>
                             </tr>
@@ -1689,12 +1691,3 @@
 
 </style>
 <!-- JS update price sum-->
-<script>
-    $(document).ready(function () {
-        //    alert($('#sum_price').val());
-        var sum_price = $('#summary').text($('#sum_price').val());
-        var ship_costs = $('#ship_costs').text();
-        console.log(sum_price+"-"+ship_costs);
-        $('#total_costs').text(sum_price + ship_costs);
-    });
-</script>

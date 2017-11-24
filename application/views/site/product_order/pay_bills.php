@@ -39,11 +39,11 @@ if (!empty($cusAccount)){
                         <div class="fieldset">
                             <div class="field field-two-thirds">
                                 <div class="field-input-wrapper">
-                                    <label class="field-label" for="billing_fname">Họ và tên đệm</label>
+                                    <label class="field-label" for="billing_fname">Họ Và Tên Đệm</label>
                                     <div class="form-group">
-                                    <input placeholder="Họ và tên lót" autocapitalize="off" spellcheck="false"
+                                    <input placeholder="Họ Và Tên Đệm" autocapitalize="off" spellcheck="false"
                                            class="field-input" size="30" id="fname"
-                                           name="fname" value="<?php echo $tmp['HO'];?>" type="text" maxlength="11" <?php echo (!empty($cusAccount['HO'])) ? 'readonly' : ''; ?>>
+                                           name="fname" value="<?php echo $tmp['HO'];?>" type="text" maxlength="50" <?php echo (!empty($cusAccount['HO'])) ? 'readonly' : ''; ?>>
                                     </div>
                                 </div>
 
