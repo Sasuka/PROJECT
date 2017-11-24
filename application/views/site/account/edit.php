@@ -68,12 +68,12 @@ $tmp['gender'] = (isset($_POST['gender']) ? $_POST['gender'] : $info['GIOITINH']
                 <div class="col-sm-6">
                     <div class="radio-inline col-sm-3">
                         <label>
-                            <input type="radio" name="gender" value="0" <?php echo ($tmp['gender'] == '0' ? 'checked' : '') ?>/> Male
+                            <input type="radio" name="gender" value="0" <?php echo ($tmp['gender'] == '0' ? 'checked' : '') ?>/> Nam
                         </label>
                     </div>
                     <div class="radio-inline col-sm-3">
                         <label>
-                            <input type="radio" name="gender" value="1" <?php echo ($tmp['gender'] == '1' ? 'checked' : '') ?>/> Female
+                            <input type="radio" name="gender" value="1" <?php echo ($tmp['gender'] == '1' ? 'checked' : '') ?>/> Nữ
                         </label>
                     </div>
 

@@ -2102,7 +2102,7 @@ letter-spacing: 0;
 
 #quick-view-modal .form-input {
 	float: left;
-	width: 300px;
+	width: 95%;
 	max-width: 100%;
 	padding: 10px 0px;
 }

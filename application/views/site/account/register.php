@@ -60,12 +60,12 @@
                 <div class="col-sm-6">
                     <div class="radio-inline col-sm-3">
                         <label>
-                            <input type="radio" name="gender" value="0" <?php echo (set_value('gender')== '0' ? 'checked' : '') ?>/> Male
+                            <input type="radio" name="gender" value="0" <?php echo (set_value('gender')== '0' ? 'checked' : '') ?>/> Nam
                         </label>
                     </div>
                     <div class="radio-inline col-sm-3">
                         <label>
-                            <input type="radio" name="gender" value="1" <?php echo (set_value('gender')== '1' ? 'checked' : '') ?>/> Female
+                            <input type="radio" name="gender" value="1" <?php echo (set_value('gender')== '1' ? 'checked' : '') ?>/> Nữ
                         </label>
                     </div>
 
@@ -201,7 +201,7 @@
                         },
                         different: {
                             field: 'lname',
-                            message: 'Password không được đặt giống với'
+                            message: 'Password không được đặt giống với tên'
                         },
                         stringLength: {
                             min: 6,

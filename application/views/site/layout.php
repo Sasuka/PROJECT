@@ -6,14 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BÁN PHỤ TÙNG Ô TÔ</title>
-    <?php $this->load->view('site/head',$this->data); ?>
+    <?php $this->load->view('site/head', $this->data); ?>
 </head>
 <body>
 <!--The header-->
-<?php $this->load->view('site/header',$this->data); ?>
+<?php $this->load->view('site/header', $this->data); ?>
 <!--End Header-->
 <div id="page">
-<?php //pre($carts);?>
+    <?php //pre($carts);?>
     <div id="quick-view-modal" class="wrapper-quickview" style="display: none;">
 
         <div class="quickviewOverlay"></div>
@@ -34,55 +34,79 @@
                          src="<?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_large.jpg"
                          alt="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">
                 </div>
-                <div id="quickview-sliderproduct">
-                    <div class="quickview-slider">
-                        <ul class="owl-carousel owl-theme" style="display: block; opacity: 1;">
-                            <div class="owl-wrapper-outer">
-                                <div class="owl-wrapper" style="width: 600px; left: 0px; display: block;">
-                                    <div class="owl-item" style="width: 100px;">
-                                        <li class="product-thumb active"><a href="javascript:void(0);"
-                                                                            data-image="<?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_large.jpg">
-                                                <img src="<?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg"></a>
-                                        </li>
-                                    </div>
-                                    <div class="owl-item" style="width: 100px;">
-                                        <li class="product-thumb"><a href="javascript:void(0);"
-                                                                     data-image="<?php echo upload_url('product'); ?>/2_85fc5908867e488da92b768cb240477d_large.jpg">
-                                                <img src="<?php echo upload_url('product'); ?>/2_85fc5908867e488da92b768cb240477d_small.jpg"></a>
-                                        </li>
-                                    </div>
-                                    <div class="owl-item" style="width: 100px;">
-                                        <li class="product-thumb"><a href="javascript:void(0);"
-                                                                     data-image="<?php echo upload_url('product'); ?>/3_30be00d496bb474aa0e9324311dd02f0_large.jpg">
-                                                <img src="<?php echo upload_url('product'); ?>/3_30be00d496bb474aa0e9324311dd02f0_small.jpg"></a>
-                                        </li>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-controls clickable" style="display: none;">
-                                <div class="owl-pagination">
-                                    <div class="owl-page active">
-                                        <span class=""></span>
-                                    </div>
-                                </div>
-                                <div class="owl-buttons">
-                                    <div class="owl-prev">owl-prev</div>
-                                    <div class="owl-next">owl-next</div>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
+                <!--                <div id="quickview-sliderproduct">-->
+                <!--                    <div class="quickview-slider">-->
+                <!--                        <ul class="owl-carousel owl-theme" style="display: block; opacity: 1;">-->
+                <!--                            <div class="owl-wrapper-outer">-->
+                <!--                                <div class="owl-wrapper" style="width: 600px; left: 0px; display: block;">-->
+                <!--                                    <div class="owl-item" style="width: 100px;">-->
+                <!--                                        <li class="product-thumb active"><a href="javascript:void(0);"-->
+                <!--                                                                            data-image="-->
+                <?php //echo upload_url('product'); ?><!--/1_e0ed7c0240734782a8268793dce0b9b8_large.jpg">-->
+                <!--                                                <img src="-->
+                <?php //echo upload_url('product'); ?><!--/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg"></a>-->
+                <!--                                        </li>-->
+                <!--                                    </div>-->
+                <!--                                    <div class="owl-item" style="width: 100px;">-->
+                <!--                                        <li class="product-thumb"><a href="javascript:void(0);"-->
+                <!--                                                                     data-image="-->
+                <?php //echo upload_url('product'); ?><!--/2_85fc5908867e488da92b768cb240477d_large.jpg">-->
+                <!--                                                <img src="-->
+                <?php //echo upload_url('product'); ?><!--/2_85fc5908867e488da92b768cb240477d_small.jpg"></a>-->
+                <!--                                        </li>-->
+                <!--                                    </div>-->
+                <!--                                    <div class="owl-item" style="width: 100px;">-->
+                <!--                                        <li class="product-thumb"><a href="javascript:void(0);"-->
+                <!--                                                                     data-image="-->
+                <?php //echo upload_url('product'); ?><!--/3_30be00d496bb474aa0e9324311dd02f0_large.jpg">-->
+                <!--                                                <img src="-->
+                <?php //echo upload_url('product'); ?><!--/3_30be00d496bb474aa0e9324311dd02f0_small.jpg"></a>-->
+                <!--                                        </li>-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                            <div class="owl-controls clickable" style="display: none;">-->
+                <!--                                <div class="owl-pagination">-->
+                <!--                                    <div class="owl-page active">-->
+                <!--                                        <span class=""></span>-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                                <div class="owl-buttons">-->
+                <!--                                    <div class="owl-prev">owl-prev</div>-->
+                <!--                                    <div class="owl-next">owl-next</div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </ul>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
             <div class="col-md-7">
                 <form id="form-quickview" method="post" action="<?php echo base_url(); ?>cart/add">
                     <div class="quickview-information">
                         <div class="form-input">
                             <div class="quickview-price product-price">
-                                <span>499,000₫</span>
-                                <del>700,000₫</del>
+                                <i style="color: blue;"> Đơn giá:</i>
+                                <span>0</span>
+                                <del></del>
+                                <div class="discount-cost" style="display: inline-block;">
+                                    <i style="color: red;text-indent: 30px;"> Tiết kiệm : <span
+                                                style="color: #ffa20a;"></span>.</i>
+                                </div>
+                            </div>
+                            <div class="summary">
+                                <br><strong style="color: #0000FF;">Tên sản phẩm: <span
+                                            class="product-name" style="color: #ff9f0a; font-family: "Courier New", Courier, mono"></span></strong>
+                                <hr>
+                                <strong style="color: #0000FF;"> Loại sản phẩm:&nbsp;<span class="categories-name" style="color: #ff9f0a; font-family: "Courier New", Courier, mono">  </span>
+                                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Thương hiệu: &nbsp;<span class="branch-name" style="color: #ff9f0a; font-family: "Courier New", Courier, mono"></span>
+                                </strong>
+                                <hr>
+
+                                <strong >Tặng phẩm: <span class="gift-name"></span> </strong>
+
                             </div>
                         </div>
+
                         <div class="quickview-variants variant-style clearfix">
                             <!--                            <select name="id" class="" id="quickview-select" style="display: none;">-->
                             <!--                                <option value="1012030836">Default Title - 49900000</option>-->
@@ -91,11 +115,13 @@
 
                         </div>
                         <div class="quickview-description">
+
+
                         </div>
                         <div class="form-input ">
                             <label>
                                 Số lượng</label>
-                            <input id="quantity-quickview" name="quantity" type="number" min="1" value="1">
+                            <input id="quantity-quickview" name="quantity" type="number" min="1" max="7" value="1">
                         </div>
                         <div class="form-input btnAction" style="width: 100%">
                             <button type="submit" class="btn-detail  btn-color-add btn-min-width btn-mgt btn-addcart"
@@ -172,7 +198,28 @@
                         item.find('.quickview-title').attr('title', pro["TEN_SANPHAM"]).attr('href', slectedImageUrl1).find('h4').html(pro["TEN_SANPHAM"]);
                         item.find('.quickview-variants').html(quickview_html_variants);
                         $('.quickview-image').html(quickview_image_zoom);
-                        item.find('.quickview-price').find('span').html(pro["DONGIA_BAN"] + " $");
+                        console.log(pro['PHANTRAM_KM']);
+                        if (typeof pro['PHANTRAM_KM'] == 'undefined') {
+                            item.find('.quickview-price').find('span').html(pro["DONGIA_BAN"] + " $");
+                            item.find('.discount-cost').find('i').css({'display': 'none'});
+                            item.find('.summary').find('.gift-name').css({'display': 'none'});
+                        } else {
+                            item.find('.quickview-price').find('span').html((1 - 0.01 * pro['PHANTRAM_KM']) * pro["DONGIA_BAN"] + " $");
+                            item.find('.quickview-price').find('del').html(pro["DONGIA_BAN"] + " $");
+                            item.find('.discount-cost').find('i').css({'display': 'block'});
+                            item.find('.summary').find('.gift-name').css({'display': 'block'});
+                            item.find('.discount-cost').find('span').html(pro["PHANTRAM_KM"] + " %");
+                            if(pro['TANGPHAM'] != ''){
+                                item.find('.summary').find('.gift-name').html(pro['TANGPHAM']);
+                            }else{
+                                item.find('.summary').find('.gift-name').html('Không có.');
+                            }
+                        }
+                        console.log( 'max '+item.find('#quantity-quickview').attr('max'));
+                        item.find('#quantity-quickview').attr('max',pro['SOLUONG_BAN']);
+                        item.find('.summary').find('.product-name').html(pro['TEN_SANPHAM']);
+                        item.find('.summary').find('.categories-name').html(pro['TEN_LOAI_SANPHAM']);
+                        item.find('.summary').find('.branch-name').html(pro['TEN_NHOM_SANPHAM']);
                         item.find('.quickview-image').find('img').attr('alt', pro["TEN_SANPHAM"]).attr('src', "http://localhost/www/PROJECT/uploads/product/" + pro['HINH_DAIDIEN']);
                         item.find('.quickview-image').find('img').css({"width": "345px", "height": "260px"});
                         item.find('.quickview-variants').find('.quick-view-select').val(pro["MA_SANPHAM"]);
@@ -278,7 +325,7 @@
     <section id="page_content" class="">
         <div id="pageContainer" class="clearfix">
 
-            <?php $this->load->view('site/header_content',$this->data); ?>
+            <?php $this->load->view('site/header_content', $this->data); ?>
 
             <nav class="navbar-main navbar navbar-default cl-pri">
                 <!-- MENU MAIN -->
@@ -324,7 +371,7 @@
                 ?>
                 <!-- Begin slider -->
                 <div class="slider-default bannerslider">
-                    <?php $this->load->view('site/slider',$this->data); ?>
+                    <?php $this->load->view('site/slider', $this->data); ?>
                 </div>
                 <!--                 End slider-->
                 <?php
@@ -366,10 +413,10 @@
 
         <footer id="footer">
             <div class="footer-bottom">
-                <?php $this->load->view('site/footer_bottom',$this->data); ?>
+                <?php $this->load->view('site/footer_bottom', $this->data); ?>
             </div>
             <div class="footer-copyright">
-                <?php $this->load->view('site/footer_copyright',$this->data); ?>
+                <?php $this->load->view('site/footer_copyright', $this->data); ?>
             </div>
         </footer>
         <a href="#" class="scrollToTop show">

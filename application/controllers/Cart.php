@@ -13,7 +13,7 @@ class Cart extends MY_Controller
     public function add()
     {
         //lay san pham muon them vao gio hang
-        $this->load->model('product_model');
+        $this->load->model(array('product_model','catelog_model', 'promotionDetail_model'));
         $id = $_POST['id'];
         $quantity = $_POST['quantity'];
 //        pre($quantity);
@@ -24,14 +24,26 @@ class Cart extends MY_Controller
             $this->session->set_flashdata('message', 'Đặt hàng thất bại!');
             redirect();
         }
+        $where = array('sanpham.MA_SANPHAM' => $id);
+        $promotionList = $this->promotionDetail_model->getListThreeJoin('khuyenmai', 'MA_KHUYENMAI', 'sanpham', 'MA_SANPHAM', $where);
+        // pre($promotionList[0]);
+        $product = $this->catelog_model->getListThreeJoin('sanpham', 'MA_LOAI_SANPHAM', 'nhom_sanpham', 'MA_NHOM_SANPHAM', $where);
+        if (!empty($promotionList)) {
+            $product[0]['PHANTRAM_KM'] = $promotionList[0]['PHANTRAM_KM'];
+            $product[0]['TANGPHAM'] = $promotionList[0]['TANGPHAM'];
+            $product[0]['TEN_KHUYENMAI'] = $promotionList[0]['TEN_KHUYENMAI'];
 
-        $qty = $quantity;
+        }
+        $product = $product[0];
+      //  pre($product);
         $this->data = array();
         $this->data['id'] = $id;
-        $this->data['qty'] = $qty;
+        $this->data['qty'] = $quantity;
         $this->data['name'] = url_title($product['TEN_SANPHAM']);
         $this->data['image'] = $product['HINH_DAIDIEN'];
         $this->data['price'] = $product['DONGIA_BAN'];
+        $this->data['per_discount'] = isset($product['PHANTRAM_KM']) ? $product['PHANTRAM_KM'] : '';
+
         if ($this->cart->insert($this->data)) {
             $cart = $this->cart->contents();
             $cart = json_encode($cart);

@@ -9,6 +9,7 @@ class Product extends MY_Controller
         parent::__construct();
         $this->load->model('product_model');
     }
+
     public function index()
     {
         $this->data['message'] = $this->session->flashdata('message');
@@ -24,7 +25,7 @@ class Product extends MY_Controller
         $config = array();
         $config['per_page'] = 6;//hien thi so luong san pham tren 1 trang
         $config['uri_segment'] = 3;//hien thi so trang
-        $choice =  $total_rows/$config["per_page"];
+        $choice = $total_rows / $config["per_page"];
         $config["num_links"] = floor($choice);
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -47,7 +48,7 @@ class Product extends MY_Controller
         //khoi tao phan trang
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        $list = $this->product_model->getListSearch($config['per_page'],$data['page'],$where);
+        $list = $this->product_model->getListSearch($config['per_page'], $data['page'], $where);
 //         pre($list);
         $this->data['listProduct'] = $list;
         $this->data['temp'] = 'site/product_list/product_content';
@@ -57,14 +58,21 @@ class Product extends MY_Controller
 
     public function getProduct1()
     {
-        $this->load->model(array('catelog_model','promotionDetail_model'));
+        $this->load->model(array('catelog_model', 'promotionDetail_model'));
         $id = $this->uri->segment(3);
         $id = intval($id);
-        $where = array('sanpham.MA_SANPHAM'=> $id);
-        $promotionList = $this->promotionDetail_model->getListThreeJoin('khuyenmai','MA_KHUYENMAI','sanpham','MA_SANPHAM',$where);
-//        pre($promotionList[0]['']);
-        $product = $this->catelog_model->getListThreeJoin('sanpham','MA_LOAI_SANPHAM','nhom_sanpham','MA_NHOM_SANPHAM',$where);
-       // pre($list);
+        $where = array('sanpham.MA_SANPHAM' => $id);
+        $promotionList = $this->promotionDetail_model->getListThreeJoin('khuyenmai', 'MA_KHUYENMAI', 'sanpham', 'MA_SANPHAM', $where);
+
+       // pre($promotionList[0]);
+        $product = $this->catelog_model->getListThreeJoin('sanpham', 'MA_LOAI_SANPHAM', 'nhom_sanpham', 'MA_NHOM_SANPHAM', $where);
+        if (!empty($promotionList)) {
+            $product[0]['PHANTRAM_KM'] = $promotionList[0]['PHANTRAM_KM'];
+            $product[0]['TANGPHAM'] = $promotionList[0]['TANGPHAM'];
+            $product[0]['TEN_KHUYENMAI'] = $promotionList[0]['TEN_KHUYENMAI'];
+
+        }
+     //   pre($product[0]);
         //$input['where'] = array('MA_SANPHAM' => $id);
         //thuc hien load danh sach san pham dua vao id loai
         //$product= $this->product_model->getList($input);
@@ -123,6 +131,7 @@ class Product extends MY_Controller
 
 
     }
+
 //    hien thi trang chi tiet san pham
     public function view()
     {
@@ -231,11 +240,13 @@ class Product extends MY_Controller
         $this->data['temp'] = 'site/product/search';
         $this->load->view('site/layout', $this->data);
     }
-    public function search(){
-        $keyWord = ($this->input->post("key"))? $this->input->post("key") : "";
+
+    public function search()
+    {
+        $keyWord = ($this->input->post("key")) ? $this->input->post("key") : "";
         $search = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyWord;
         $type = isset($_GET['type']) ? $_GET['type'] : 'product';
-       // $key = isset($_GET['key']) ? $_GET['key'] : '';
+        // $key = isset($_GET['key']) ? $_GET['key'] : '';
         $input = array();
         if ($type == 'product') {
             $input['like'] = array('TEN_SANPHAM', $keyWord);
@@ -266,12 +277,12 @@ class Product extends MY_Controller
         $config['cur_tag_close'] = '</a></li>';
         $config['num_tag_open'] = '<li>';
         $config['num_tag_close'] = '</li>';
-        $choice = $config["total_rows"]/$config["per_page"];
+        $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
         $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $this->pagination->initialize($config);
 
-        $list = $this->product_model->getListSearch($config['per_page'],$data['page'],$input);
+        $list = $this->product_model->getListSearch($config['per_page'], $data['page'], $input);
 //        pre($list);
         $this->data['listProduct'] = $list;
         $this->data['temp'] = 'site/product_list/product_list';
@@ -351,15 +362,15 @@ class Product extends MY_Controller
         $config['cur_tag_close'] = '</a></li>';
         $config['num_tag_open'] = '<li>';
         $config['num_tag_close'] = '</li>';
-        $choice = $config["total_rows"]/$config["per_page"];
+        $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         $this->pagination->initialize($config);
 
-        $list = $this->product_model->getProductPromotion($config['per_page'],$data['page']);
-     //   pre($list);
-        $this->data['listProduct'] =  $list;
+        $list = $this->product_model->getProductPromotion($config['per_page'], $data['page']);
+        //   pre($list);
+        $this->data['listProduct'] = $list;
         // print_r($listDis);
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
