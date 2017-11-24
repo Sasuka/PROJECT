@@ -43,6 +43,7 @@
                             <table id="cart-view">
                                 <?php
                                 $carts = $this->cart->contents();
+                               // pre($carts);
                                 $sum = 0;
                                 foreach ($carts as $row) {
                                     $sum += $row['subtotal'];
@@ -56,7 +57,11 @@
                                         </td>
                                         <td>
                                             <a class="pro-title-view" href="#"
-                                               title="<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a>
+                                               title="<?php echo $row['name']; ?>"><?php
+                                                echo $row['name'];
+                                               echo  (isset($row['gitf_pro'])) ? $row['gitf_pro'] : "";
+                                                ?>
+                                            </a>
                                             <span class="variant"></span>
                                             <span class="pro-quantity-view"><?php echo $row['qty']; ?></span>
                                             <span class="pro-price-view"><?php echo " X " . $row['price'] . " = <span style='color:#0000FF;'> " . $row['subtotal'] . "</span> $"; ?></span>

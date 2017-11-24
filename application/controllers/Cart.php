@@ -13,7 +13,7 @@ class Cart extends MY_Controller
     public function add()
     {
         //lay san pham muon them vao gio hang
-        $this->load->model(array('product_model','catelog_model', 'promotionDetail_model'));
+        $this->load->model(array('product_model', 'catelog_model', 'promotionDetail_model'));
         $id = $_POST['id'];
         $quantity = $_POST['quantity'];
 //        pre($quantity);
@@ -35,14 +35,16 @@ class Cart extends MY_Controller
 
         }
         $product = $product[0];
-      //  pre($product);
+        //  pre($product);
         $this->data = array();
         $this->data['id'] = $id;
         $this->data['qty'] = $quantity;
         $this->data['name'] = url_title($product['TEN_SANPHAM']);
         $this->data['image'] = $product['HINH_DAIDIEN'];
-        $this->data['price'] = $product['DONGIA_BAN'];
+        $this->data['price_original'] = $product['DONGIA_BAN'];
+        $this->data['price'] = isset($product['PHANTRAM_KM']) ? (1 - 0.01*$product['PHANTRAM_KM']) * $product['DONGIA_BAN'] : $product['DONGIA_BAN'];
         $this->data['per_discount'] = isset($product['PHANTRAM_KM']) ? $product['PHANTRAM_KM'] : '';
+        $this->data['gitf_pro'] = isset($product['TANGPHAM']) ? $product['TANGPHAM'] : '';
 
         if ($this->cart->insert($this->data)) {
             $cart = $this->cart->contents();
@@ -126,12 +128,12 @@ class Cart extends MY_Controller
         $this->load->helper('form');
 
         $type = $this->uri->segment(3);
-        $pay_bills =  $this->uri->segment(4) ;
-       // pre($pay_bills);
+        $pay_bills = $this->uri->segment(4);
+        // pre($pay_bills);
         if (isset($_POST['checkout'])) {
 
             $this->data['pay_bills'] = $pay_bills;
-         //   pre($this->data['pay_bill']);
+            //   pre($this->data['pay_bill']);
             $this->data['type'] = $type;
             $this->data['temp'] = 'site/product_order/product_order';
             $this->load->view('site/layout', $this->data);
@@ -145,10 +147,12 @@ class Cart extends MY_Controller
                 $data['qty'] = $total_qty;
                 $this->cart->update($data);
             }
-           redirect(base_url('cart'));
+            redirect(base_url('cart'));
         }
     }
-    public function update_cart(){
+
+    public function update_cart()
+    {
         $carts = $this->cart->contents();
         foreach ($carts as $key => $row) {
             $total_qty = $this->input->post('qty_' . $row['id']);

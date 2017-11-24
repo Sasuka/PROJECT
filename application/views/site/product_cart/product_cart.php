@@ -43,6 +43,7 @@
                                             <strong><?php echo $row['name']; ?></strong>
 
                                         </a>
+                                        <span style="color:blue;font-family: Arial;"><?php echo (isset($row['gitf_pro'])) ? $row['gitf_pro'] : ""; ?></span>
                                     </td>
                                     <td class="hidden"><input id="itemprice_<?php echo $row['id']; ?>"
                                                               value="<?php echo $row['price']; ?>"/></td>
@@ -84,8 +85,9 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 cart-buttons inner-right inner-left">
                                 <div class="buttons clearfix">
-                                    <a  href="<?php echo base_url('payBills/checkout')?>" id="checkout" class="button-default"
-                                            name="checkout" value="1" style="text-align:center ">Thanh toán
+                                    <a href="<?php echo base_url('payBills/checkout') ?>" id="checkout"
+                                       class="button-default"
+                                       name="checkout" value="1" style="text-align:center ">Thanh toán
                                     </a>
                                     <button type="submit" id="update-cart" class="button-default"
                                             name="update" value="1">Cập nhật
