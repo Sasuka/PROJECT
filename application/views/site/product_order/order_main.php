@@ -1,5 +1,5 @@
 <?php
-//pre($dt);
+pre($info);
 ?>
 <div class="main-content">
 

@@ -73,7 +73,7 @@ if (!empty($cusAccount)){
                                         <?php echo (!empty($cusAccount['EMAIL'])) ? 'readonly' : ''; ?>
                                     >
                                         <div name="email_error" id="email_error"
-                                             class="clear error"><?php echo form_error('email'); ?></div>
+                                             class="clear error" style="color: #FF0000;font-weight:lighter; "><?php echo form_error('email'); ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@ if (!empty($cusAccount)){
                                             <?php echo (!empty($cusAccount['SDT'])) ? 'readonly' : ''; ?>
                                         >
                                         <div name="phone_error" id="phone_error"
-                                             class="clear error"><?php echo form_error('phone'); ?></div>
+                                             class="clear error" style="color: #FF0000;font-weight:lighter; "><?php echo form_error('phone'); ?></div>
                                     </div>
 
                                 </div>

@@ -6,10 +6,12 @@
  * Date: 20/11/2017
  * Time: 5:12
  */
+
 //require_once APPPATH . 'controllers/User.php';
 class PayBills extends MY_Controller
 {
     public $dt;
+
     public function __construct()
     {
         parent::__construct();
@@ -17,8 +19,11 @@ class PayBills extends MY_Controller
         $this->load->helper('form');
         $this->load->model('customer_model');
     }
+
     public function index()
-    {}
+    {
+    }
+
     public function checkout()
     {
         /* Thực hiện kiểm tra đã đăng nhập hay chưa*/
@@ -31,48 +36,63 @@ class PayBills extends MY_Controller
         $this->data['temp'] = 'site/product_order/product_order';
         $this->load->view('site/layout', $this->data);
     }
+
     /* Kiểm tra số điện thoại đã tồn tại trong table khách hàng */
     public function check_phone_exists_in_customer()
     {
         $phone = $this->input->post('phone');
-        $where = array('SDT' => $phone);
+        $where = array('SDT' => $phone, 'MATKHAU!=' => '');
         if ($this->customer_model->check_exist($where)) {
             $this->form_validation->set_message(__FUNCTION__, 'Số điện thoại này đã đăng ký');
             return false;
         } else
             return true;
     }
+
     /* Kiểm tra sự tồn tại của email trong table khách hàng*/
     public function check_email_exists_in_customer()
     {
         $email = $this->input->post('email');
-        $where = array('EMAIL' => $email);
+        $where = array('EMAIL' => $email, 'MATKHAU!=' =>'');
         if ($this->customer_model->check_exist($where)) {
             //return error
             $this->form_validation->set_message(__FUNCTION__, 'Email này đã đăng ký');
             return false;
         } else true;
     }
+
     public function method_checkout()
     {
         if ($this->input->post()) {
-            $this->form_validation->set_rules('phone', 'Số điện thoại', 'callback_check_phone_exists_in_customer');
-            $this->form_validation->set_rules('email', 'Email', 'callback_check_email_exists_in_customer');
-            if ($this->form_validation->run()) {
-                $fname = $this->input->post('fname', true);
-                $lname = $this->input->post('lname', true);
-                $phone = $this->input->post('phone', true);
-                $email = $this->input->post('email', true);
-                $address = $this->input->post('address', true);
+            $dt = array();
+            $fname = $this->input->post('fname', true);
+            $lname = $this->input->post('lname', true);
+            $phone = $this->input->post('phone', true);
+            $email = $this->input->post('email', true);
+            $address = $this->input->post('address', true);
+            $dt = array('HO' => $this->mb_ucwords($fname),
+                'TEN' => $this->mb_ucwords($lname),
+                'SDT' => $phone,
+                'EMAIL' => $email,
+                'DIACHI' => $address);
 
-                $dt = array('HO' => $this->mb_ucwords($fname),
-                    'TEN' => $this->mb_ucwords($lname),
-                    'SDT' => $phone,
-                    'EMAIL' => $email,
-                    'DIACHI' => $address);
-                pre($dt);
-                $this->data['dt'] = $dt;
+            if (!($this->session->userdata('cusAccount'))) {
+                /* Thêm mới thông tin giao hàng*/
+                $this->form_validation->set_rules('phone', 'Số điện thoại', 'callback_check_phone_exists_in_customer');
+                $this->form_validation->set_rules('email', 'Email', 'callback_check_email_exists_in_customer');
+                if ($this->form_validation->run()) {
+                    $this->data['type'] = 2;
+                } else {
+                    $this->data['type'] = 1;
+                }
+
+            } else {
+                $this->data['type'] = 2;
             }
+            $this->data['info'] = $dt;
+            $this->data['temp'] = 'site/product_order/product_order';
+            $this->load->view('site/layout', $this->data);
+
 
 //
 //            //   $this->data['dt'] = $dt;
