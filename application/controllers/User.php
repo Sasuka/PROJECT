@@ -75,7 +75,7 @@ class  User extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('form');
-        echo "TaiLT6ssss";
+       // echo "TaiLT6ssss";
 
         if ($this->input->post()) {
             //

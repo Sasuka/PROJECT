@@ -58,12 +58,12 @@ class MY_Controller extends CI_Controller
 
                 $list = $this->product_model->getPaging('home/index');
 
-               // pre($list);
+                // pre($list);
                 /* Thông tin toàn bộ sản phẩm*/
                 $this->data['listProduct'] = $list;
                 /*Thông tin các sản phẩm được khuyến mãi*/
                 $promotion = $this->product_model->getProductPromotion();
-               // pre($promotion);
+                // pre($promotion);
                 $this->data['promotion'] = $promotion;
                 $cusAccount = $this->session->userdata('cusAccount');
                 $this->data['cusAccount'] = $cusAccount;
@@ -144,5 +144,39 @@ class MY_Controller extends CI_Controller
             return false;
         } else
             return true;
+    }
+
+    /*Kiểm tra số điện thoại này đã đăng ký ở khách hàng vãng lại hay chưa*/
+    public function check_phone_exist_client($model = '', $phone = '')
+    {
+        if ($phone == '') {
+            $phone = $this->input->post('phone');
+        }
+        $this->load->model($model);
+        $where = array('SDT' => $phone, 'MATKHAU IS NULL' );
+        $this->db->last_query();
+        //kiem tra table column phone
+        if ($this->$model->check_exist($where)) {
+            //return error
+            $this->form_validation->set_message(__FUNCTION__, 'Số điện thoại này đã đăng ký thông tin giao hàng.');
+            return true;
+        } else
+            return false;
+    }
+    /*Kiểm tra email này đã đăng lý ở khach hàng vãng lai hay chưa?*/
+    public function check_email_exist_client($model = '', $email = '')
+    {
+        if ($email == '') {
+            $email = $this->input->post('email');
+        }
+        $this->load->model($model);
+        $where = array('EMAIL' => $email, 'MATKHAU IS NULL');
+        //kiem tra check_exists trong MY_MODEL
+        if ($this->$model->check_exist($where)) {
+            //return error
+            $this->form_validation->set_message(__FUNCTION__, 'Email này đã đăng ký thông tin giao hàng');
+            return true;
+        } else
+            return false;
     }
 }
