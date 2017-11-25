@@ -72,6 +72,8 @@ if (!empty($cusAccount)){
                                            type="email"
                                         <?php echo (!empty($cusAccount['EMAIL'])) ? 'readonly' : ''; ?>
                                     >
+                                        <div name="email_error" id="email_error"
+                                             class="clear error"><?php echo form_error('email'); ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +85,8 @@ if (!empty($cusAccount)){
                                                class="field-input " size="30" maxlength="11" name="phone" value="<?php echo $tmp['SDT'];?>" type="text"
                                             <?php echo (!empty($cusAccount['SDT'])) ? 'readonly' : ''; ?>
                                         >
+                                        <div name="phone_error" id="phone_error"
+                                             class="clear error"><?php echo form_error('phone'); ?></div>
                                     </div>
 
                                 </div>

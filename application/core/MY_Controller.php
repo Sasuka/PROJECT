@@ -3,23 +3,19 @@
 class MY_Controller extends CI_Controller
 {
     public $data = array();
-
     //lay danh sach nhom san pham
     public function getListGroup()
     {
         return $this->site_model->groupMenu();
     }
-
     public function getListCate()
     {
         return $this->site_model->cateMenu();
     }
-
     public function getAllProduct()
     {
         $this->product_model->getAllListProduct();
     }
-
     public function listProduct($product = '')
     {
         $this->site_model->addProduct($product);
@@ -27,11 +23,9 @@ class MY_Controller extends CI_Controller
 
     /* Lấy tất cả thông tin cả phẩm gồm nhóm, loại, sản phẩm
      * */
-
     public function __construct()
     {
-        parent::__construct();
-        $this->load->model(array('site_model', 'product_model', 'catelog_model'));
+        parent::__construct();$this->load->model(array('site_model', 'product_model', 'catelog_model'));
 
         $controler = $this->uri->segment(1);
         $controler = strtolower($controler);
@@ -70,7 +64,6 @@ class MY_Controller extends CI_Controller
             }
         }
     }
-
     //   thuc hien kiem tra khi nguoi dung co tinh vao admin
     private function _check_login()
     {

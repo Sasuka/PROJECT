@@ -79,7 +79,7 @@ class  User extends MY_Controller
 
         if ($this->input->post()) {
             //
-            echo "TaiLT6 post";
+            //echo "TaiLT6 post";
             $this->form_validation->set_rules('phone', 'Số điện thoại', 'callback_check_phone_exists');
             $this->form_validation->set_rules('email', 'Email', 'callback_check_email_exists');
 
