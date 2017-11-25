@@ -27,6 +27,7 @@
                         <a class="cart-link" href="<?php echo base_url('cart')?>"><span class="icon-cart"></span>
                             <div class="cart-number"><?php echo $this->cart->total_items(); ?></div>
                         </a>
+                        <?php if ($this->cart->contents()){?>
                         <div class="cart-view clearfix" style="display: none;">
                             <table id="clone-item-cart" class="table-clone-cart">
                                 <tr class="item_2 hidden">
@@ -73,6 +74,7 @@
                                     </tr>
                                 <?php } ?>
                             </table>
+
                             <span class="line"></span>
                             <table class="table-total">
                                 <tr>
@@ -85,7 +87,7 @@
                                 </tr>
                             </table>
                         </div>
-
+                        <?php }?>
                     </div>
 
                     <div class="navholder">

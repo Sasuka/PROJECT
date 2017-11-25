@@ -1,7 +1,5 @@
-<link rel="shortcut icon" href="./theme.hstatic.net/1000177652/1000229231/14/favicon.png?v=90"
-      type="image/png"/>
 <meta charset="utf-8"/>
-<title>OxyWatch </title>
+<link rel="shortcut icon" href="<?php echo upload_url('avatar/car_logo.png');?>">
 <meta name="robots" content="index,follow"/>
 <meta name="revisit-after" content="1 day"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

@@ -1,5 +1,5 @@
 <?php
-pre($info);
+//pre($info);
 ?>
 <div class="main-content">
 
@@ -48,13 +48,13 @@ pre($info);
                             <div class="radio-wrapper content-box-row">
                                 <label class="radio-label" for="payment_method_id_485706">
                                     <div class="radio-input" style="float: left;">
-                                        <input id="payment_method" class="input-radio" name="payment_method_id"
-                                               value="0" type="radio" required>
+                                        <input id="payment_method_ship" class="input-radio" name="payment_method_id"
+                                               value="1" type="radio" required>
                                         <span>Thanh toán khi giao hàng</span>
                                     </div>
                                     <div class="radio-input" style="float: right;">
                                         <input id="payment_method_id" class="input-radio" name="payment_method_id"
-                                               value="1" type="radio" required>
+                                               value="2" type="radio" required>
                                         <span>Thanh toán trực tuyến</span>
                                     </div>
                                 </label>
@@ -74,7 +74,7 @@ pre($info);
                 </button>
                 <!-- Nhờ sau khi click hoàn tất gởi thông tin lên-->
                 <input type="hidden" id="ship_info" name="ship_info"
-                       value="<?php echo isset($dt) ? htmlentities(serialize($dt)) : ''; ?> ">
+                       value="<?php echo isset($info) ? htmlentities(serialize($info)) : ''; ?> ">
                 <input type="hidden" id="ship_rate" name="ship_rate" value=""/>
                 <input type="hidden" id="payment_method" name="payment_method" value=""/>
                 <a href="<?php echo base_url('payBills/checkout'); ?>"
