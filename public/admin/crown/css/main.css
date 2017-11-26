@@ -99,7 +99,8 @@ p { padding-top: 12px; }
 .floatR { float: right; }
 .floatL { float: left; }
 
-.nobg { background: none!important; }
+/*.nobg { background: none!important; }*/
+.nobg { background: none; }
 .nomargin { margin: 0; }
 .nomarginL { margin-left: 0!important; }
 .nomarginR { margin-right: 0!important; }
@@ -124,7 +125,7 @@ select[multiple] { border: 1px solid #ddd; box-shadow: 0 0 0 2px #f4f4f4; -webki
 
 
 /* ==========  Login page  ========== */
-
+.loginPage { background-image: url(../images/backgrounds/background_logo.jpg) ;background-size: cover;}
 .loginPage .userNav { margin-right: 0!important; }
 .loginPage .topNav { text-align: center; position: static; }
 .loginPage .userNav, .loginPage .userNav ul { float: none; border: none; }
@@ -684,12 +685,12 @@ input[type=submit], input[type=reset], input[type=button], button { padding: 7px
 
 .widget { background: #f9f9f9; border: 1px solid #cdcdcd; margin-top: 10px; clear: both; }
 .widget .title { height: 36px; background: #efefef url(../images/backgrounds/titleBg.png) repeat-x; border-bottom: 1px solid #cdcdcd; }
-.widget .title .titleIcon { float: left; padding: 11px 11px; border-right: 1px solid #D5D5D5; }
+.widget .title .titleIcon { float: left; padding: 11px 11px; border-right: 1px solid #D5D5D5;height: 15px;width: 15px;}
 
 .toggle { background: #f9f9f9; border: 1px solid #cdcdcd; margin-top: 32px; clear: both; border-bottom: none; }
 .toggle .title { height: 36px; background: #efefef url(../images/backgrounds/titleBg.png) repeat-x; border-bottom: 1px solid #cdcdcd; cursor: pointer; }
 .toggle .title h6 { float: left; font-size: 12px; font-weight: bold; padding: 9px 12px 8px 12px; display: block; } 
-.toggle .titleIcon { float: left; padding: 11px 11px; border-right: 1px solid #D5D5D5; }
+.toggle .titleIcon { float: left; padding: 11px 11px; border-right: 1px solid #D5D5D5;}
 .toggle .body, .toggle .menu_body { padding: 12px 14px; border-bottom: 1px solid #cdcdcd; }
 .toggle .inactive { color: #2B6893; }
 

@@ -39,7 +39,7 @@ $this->load->view('admin/transaction/head', $this->data);
             <tr>
                 <td colspan="7">
                     <div class="itemActions">
-                        <a href="<?php echo admin_url('transaction/dell_all'); ?>"  class="button blueB">
+                        <a href="<?php echo admin_url(''); ?>"  class="button blueB">
                             <span style="color:white;">Quay lại</span>
                         </a>
                     </div>

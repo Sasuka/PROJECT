@@ -2,9 +2,9 @@
 <meta name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+<title>ADMIN PHỤ TÙNG Ô TÔ</title>
 <meta name="robots" content="noindex, nofollow" />
-<link rel="shortcut icon" href="<?php echo public_url(); ?>/images/icon.png" type="image/x-icon"/>
+<link rel="shortcut icon" href="<?php echo public_url('admin/'); ?>images/icons/icon_admin.png" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/admin/crown/css/main.css');?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo public_url('admin/css'); ?>/css.css" media="screen" />
 <!--<link rel="stylesheet" type="text/css" href="--><?php //echo public_url('css'); ?><!--/bootstrap.min.css" media="screen" />-->

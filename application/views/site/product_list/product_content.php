@@ -3,9 +3,9 @@
         <div class="row main-header">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5  ">
                 <ol class="breadcrumb breadcrumb-arrows">
-                    <li><a href="/" target="_self">Trang chủ</a></li>
-                    <li><a href="/collections" target="_self">Danh mục</a></li>
-                    <li><a href="/collections" target="_self"><?php echo isset($infoCate) ? $infoCate['TEN_NHOM_SANPHAM'] : '';?></a></li>
+                    <li><a href="<?php echo base_url('home');?>" target="_self">Trang chủ</a></li>
+                    <li><a href="#" target="_self">Danh mục</a></li>
+                    <li><a href="#" target="_self"><?php echo isset($infoCate) ? $infoCate['TEN_NHOM_SANPHAM'] : '';?></a></li>
                     <li class="active"><span><?php echo isset($infoCate) ? $infoCate['TEN_LOAI_SANPHAM'] : '';?></span></li>
                 </ol>
             </div>

@@ -142,7 +142,7 @@ $this->load->view('admin/product/head', $this->data);
                                     echo '<p style="color: red;">';
                                     //gia-=gia*%roi format don gia
 
-                                    echo number_format($dongia -= $dongia * $itemDis['PHANTRAM_KM'] * 0.01, 3, '.', '.') . ' đ';
+                                    echo ($dongia -= $dongia * $itemDis['PHANTRAM_KM'] * 0.01). ' $';
                                     echo '</p>';
                                 }
 
