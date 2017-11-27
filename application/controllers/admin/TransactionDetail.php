@@ -32,7 +32,7 @@ class TransactionDetail extends MY_Controller
 
         $id = $this->uri->rsegment(4);
         $id = intval($id);
-//   pre($list);
+   //pre($list);
         //thuc hien load phan trang
         $this->load->library('pagination');
         $config = array();

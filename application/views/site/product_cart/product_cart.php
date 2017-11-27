@@ -26,7 +26,10 @@
                             <?php
                             $carts = $this->cart->contents();
                             $sum = 0;
-                            foreach ($carts as $row) {
+
+                            foreach ($carts
+
+                                     as $row) {
                                 $sum += $row['subtotal'];
                                 ?>
                                 <tr>
@@ -49,11 +52,13 @@
                                     <td class="hidden"><input id="itemprice_<?php echo $row['id']; ?>"
                                                               value="<?php echo $row['price']; ?>"/></td>
                                     <td class="gift">
-                                        <span style="color:blue;font-family: Arial;"><?php echo $row['gitf_pro'];?></span>
+                                        <span style="color:blue;font-family: Arial;"><?php echo $row['gitf_pro']; ?></span>
                                     </td>
                                     <td class="unit">
-                                        <span style="color: #fb3108;font-weight: bold;"><?php echo $row['price'];?></span>
-                                       <del> <?php echo $row['price_original'];?></del>
+                                        <span style="color: #fb3108;font-weight: bold;"><?php echo $row['price']; ?></span>
+                                        <?php if ($row['price'] != $row['price_original']) { ?>
+                                            <del> <?php echo $row['price_original']; ?></del>
+                                        <?php } ?>
                                     </td>
                                     <td class="qty">
                                         <input type="number" size="4" name="qty_<?php echo $row['id']; ?>" min="1"

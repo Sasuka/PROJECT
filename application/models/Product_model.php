@@ -20,6 +20,7 @@ class Product_model extends MY_Model
        * Không có sử dụng phân trang paging
        * Thực hiện join 3 table : nhóm right join loại right join san phẩm.
        * */
+
     private function getAllListProduct($limit = '', $start = '')
     {
         $product = 'sanpham';

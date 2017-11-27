@@ -17,7 +17,7 @@ $this->load->view('admin/product/head', $this->data);
             <span class="titleIcon"><input id="titleCheck" name="titleCheck" type="checkbox"></span>
             <h6>
                 Danh sách sản phẩm </h6>
-            <div class="num f12">Số lượng: <b><?php echo $total_rows; ?></b></div>
+            <div class="num f12">Số lượng: <b><?php echo count($list); ?></b></div>
         </div>
 
         <table class="sTable mTable myTable" id="checkAll" width="100%" cellspacing="0" cellpadding="0">
@@ -38,10 +38,10 @@ $this->load->view('admin/product/head', $this->data);
                                 <td class="item" style="width:155px;"><input name="name" value="<?php echo $this->input->get('name');?>" id="filter_iname"
                                                                              style="width:155px;" type="text"></td>
 
-                                <td class="label" style="width:60px;"><label for="filter_status">Nhóm:</label></td>
+                                <td class="label" style="width:120px;"><label for="filter_status">Thương hiệu</label></td>
                                 <td class="item">
-                                    <select name="group" id="group-product">
-                                        <option value="0">Chọn nhóm</option>
+                                    <select name="group" id="group-product" data-handle="<?php echo admin_url('');?>">
+                                        <option value="0">Thương hiệu</option>
                                         <?php
                                         foreach ($listGroup as $itemGroup) {
                                             ?>
@@ -132,28 +132,29 @@ $this->load->view('admin/product/head', $this->data);
                     <td class="textR">
                         <b style="font-weight: bold;">
                             <?php
-                            $dongia = $item['DONGIA_BAN'];
-                            foreach ($listDis as $itemDis) {
-                                if (
-                                    $item['MA_SANPHAM'] == $itemDis['MA_SANPHAM']
-                                    && (date('d-m-Y', strtotime($item['NGAY_CAPNHAT'])) >= date('d-m-Y', strtotime($itemDis['NGAY_BATDAU'])))
-                                    && (date('d-m-Y', strtotime($item['NGAY_CAPNHAT'])) <= date('d-m-Y', strtotime($itemDis['NGAY_KETTHUC'])))
-                                ) {
-                                    echo '<p style="color: red;">';
-                                    //gia-=gia*%roi format don gia
-
-                                    echo ($dongia -= $dongia * $itemDis['PHANTRAM_KM'] * 0.01). ' $';
-                                    echo '</p>';
+//                            $dongia = $item['DONGIA_BAN'];
+                            $check = 0;
+                            foreach ($promotion as $itemPromotion) {
+                                if ($item['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
+                                    echo '<span style="color: red;">';
+                                    echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $item['DONGIA_BAN'];
+                                    echo '</span> $ <br>';
+                                    echo '<del>';
+                                    echo $item['DONGIA_BAN'];
+                                    echo '</del>';
+                                    echo ' $';
+                                    $check =1;
+                                    break;
                                 }
-
+                            }
+                            if ($check == 0){
+                                echo '<span style="color: red;">';
+                                echo $item['DONGIA_BAN'];
+                                echo '</span> $<br>';
                             }
                             ?>
                         </b>
-
-                        <b style="text-decoration: line-through"><?php echo number_format($item['DONGIA_BAN'], 3, '.', '.'); ?></b>
-                        đ
                     </td>
-
 
                     <td class="textC"><?php echo date('d-m-Y', strtotime($item['NGAY_CAPNHAT'])); ?></td>
 

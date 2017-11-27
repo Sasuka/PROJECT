@@ -52,7 +52,7 @@ $level = $this->session->userdata('level');
 
             <a href="#" class=" exp">
                 <span>Sản phẩm</span>
-                <strong><?php echo ($level == 'Employee') ? '4' : '3'; ?> </strong>
+                <strong><?php echo ($level == 'Admin') ? '4' : '3'; ?> </strong>
             </a>
 
             <ul class="sub">
@@ -68,13 +68,13 @@ $level = $this->session->userdata('level');
                     <a href="<?php echo admin_url('catelog') ?>">
                         Loại sản phẩm </a>
                 </li>
-                <?php if ($level == 'Employee') { ?>
+                <?php //if ($level == 'Admin') { ?>
                     <li>
                         <a href="<?php echo admin_url('import') ?>">
                             Nhập hàng </a>
                     </li>
                     <?php
-                }
+             //  }
                 ?>
             </ul>
 

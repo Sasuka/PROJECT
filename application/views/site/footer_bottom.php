@@ -3,12 +3,21 @@
         <div class="col-sm-6 col-md-3 col-xs-12 clear-sm">
             <div class="widget-wrapper animated">
 
-                <h3 class="title title_left">Giới thiệu</h3>
+                <h3 class="title title_left">Tổng kết</h3>
 
                 <div class="inner about_us">
 
-                    <p class="message">Công ty chúng tôi cung cấp đầy đủ các chủng loại các linh kiện phụ tùng chính hãng 100%,
-                        đồng thời các mặt hàng nhiều quốc gia tương đương với giá cả phải chăng và chất lượng đảm bảo.
+                    <p class="message">
+                        <marquee behavior="scroll" direction="left"
+                                 onmouseover="this.setAttribute('scrollamount', 3, 0);"
+                                 onmouseout="this.setAttribute('scrollamount', 6, 0);">
+                            &check; GVHD: Ths. Ninh Xuân Hải.<br>
+                            &check;SVTTH: Lê Tiến Tài.
+                        </marquee>
+                        &nbsp;&nbsp;&nbsp;Xin chân thành gởi đến lời cảm tới toàn thể giáo viên trong trường HVCNBCVT PTIT HCM dã
+                        dạy cho em những kiến thức quý báu.Đặc biệt, là thầy Ninh Xuân Hải đã nhiệt tình giúp đỡ em
+                        để hoàn thành bài báo cáo tốt nghiệp này.
+
                     </p>
 
                     <ul class="list-unstyled">
@@ -19,7 +28,8 @@
 
 
                         <li>
-                            <i class="fa fa-envelope-o"></i> <a href="mailto:Suport@oxywatch.vn">tientai206@gmail.com</a>
+                            <i class="fa fa-envelope-o"></i> <a
+                                    href="mailto:tientai206@gmail.com">tientai206@gmail.com</a>
                         </li>
 
 
@@ -44,25 +54,25 @@
                     <ul class="list-unstyled list-styled">
 
                         <li>
-                            <a href="<?php echo base_url();?>">Trang chủ</a>
+                            <a href="<?php echo base_url(); ?>">Trang chủ</a>
                         </li>
 
                         <li>
-                            <a href="<?php echo base_url('product');?>">Thương hiệu</a>
+                            <a href="<?php echo base_url('product'); ?>">Thương hiệu</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('product/discount');?>">Khuyến mãi</a>
+                            <a href="<?php echo base_url('product/discount'); ?>">Khuyến mãi</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('service');?>">Dịch vụ</a>
-                        </li>
-
-                        <li>
-                            <a href="<?php echo base_url('introduct');?>">Giới thiệu</a>
+                            <a href="<?php echo base_url('service'); ?>">Dịch vụ</a>
                         </li>
 
                         <li>
-                            <a href="<?php echo base_url('blog');?>">Blog</a>
+                            <a href="<?php echo base_url('introduct'); ?>">Giới thiệu</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url('blog'); ?>">Blog</a>
                         </li>
                     </ul>
                 </div>
@@ -107,7 +117,8 @@
                     <ul class="list-inline">
 
                         <li>
-                            <a target="_blank" href="https://www.facebook.com/tientai206" class="social-wrapper facebook">
+                            <a target="_blank" href="https://www.facebook.com/tientai206"
+                               class="social-wrapper facebook">
                             <span class="social-icon">
                               <i class="fa fa-facebook"></i>
                             </span>
@@ -121,14 +132,15 @@
                             </a>
                         </li>
                         <li>
-                            <a target="_blank" href="<?php echo base_url();?>" class="social-wrapper pinterest">
+                            <a target="_blank" href="<?php echo base_url(); ?>" class="social-wrapper pinterest">
                             <span class="social-icon">
                               <i class="fa fa-pinterest"></i>
                             </span>
                             </a>
                         </li>
                         <li>
-                            <a target="_blank" href="https://plus.google.com/u/0/108531141792470875862" class="social-wrapper google">
+                            <a target="_blank" href="https://plus.google.com/u/0/108531141792470875862"
+                               class="social-wrapper google">
                             <span class="social-icon">
                               <i class="fa fa-google-plus"></i>
                             </span>

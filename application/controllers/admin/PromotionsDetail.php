@@ -53,8 +53,6 @@ class PromotionsDetail extends MY_Controller
 
         $id = $this->uri->rsegment(3);//lay id kiem tra co ton tai phieu nhap do hay chua
         $id = intval($id);
-        //  pre($id);
-
 
         //thuc hien load phan trang
         $this->load->library('pagination');
@@ -72,12 +70,10 @@ class PromotionsDetail extends MY_Controller
         $this->data['id'] = $id;
         //thuc hien load danh sach chi tiet nhap dua vao id
         $input = array('MA_KHUYEMAI' => $id);
-        // pre($id);
+//         pre($id);
         //load danh sach khuyen mai
         $list = $this->promotionDetail_model->getListThreeJoin('khuyenmai', 'MA_KHUYENMAI', 'sanpham', 'MA_SANPHAM', $id);
         $this->data['list'] = $list;
-      //   pre($list);
-
 
         $this->data['temp'] = 'admin/promotions_detail/index';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);

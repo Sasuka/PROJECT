@@ -42,8 +42,8 @@ $level = $this->session->userdata('level');
                 <td style="width:60px;">Mã sản phẩm</td>
                 <td>Tên sản phẩm</td>
                 <td>Số lượng nhập</td>
-                <td>Đơn giá nhập</td>
-                <td>Thành tiền</td>
+                <td>Đơn giá nhập <p style="color: #0000FF;">(DVT:$)</p> </td>
+                <td>Thành tiền <p style="color: #0000FF;">(DVT:$)</p></td>
                 <td style="width:120px;">Hành động</td>
             </tr>
             </thead>
@@ -92,13 +92,13 @@ $level = $this->session->userdata('level');
 
                     <td class="textC">
                         <a class="tipS" title="">
-                            <b><?php echo number_format($list[$i]['DONGIA_NHAP'], 3, '.', '.'); ?></b>
+                            <b><?php echo $list[$i]['DONGIA_NHAP']; ?></b>
                         </a>
                     </td>
                     <!-- THANH TIEN -->
                     <td class="textC">
                         <a class="tipS" title="">
-                            <b><?php echo number_format($list[$i]['THANHTIEN'], 3, '.', '.'); ?></b>
+                            <b><?php echo $list[$i]['THANHTIEN']; ?></b>
                         </a>
                     </td>
 

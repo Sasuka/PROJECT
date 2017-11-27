@@ -4490,11 +4490,16 @@ display: inline-block;
 float: left;
 box-sizing: border-box;
 }
-
+.product-block .product-image .has-img{
+	height: 253px !important;
+	width: 253px !important;
+	background-size: cover;
+}
 .product-img.image-resize.view.view-third {
 	padding: 0 5px;
 	text-align: center;
 	position: relative;
+
 }
 .row.content-product-list.products-resize {
 	border-top: 1px solid #adbac7;

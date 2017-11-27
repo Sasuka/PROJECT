@@ -55,7 +55,7 @@ class Catelog extends MY_Controller
             echo '0';
         }
     }
-//   ================LẤY DS LOAI SAN PHAM THEO NHOM================================//
+//   ================LẤY DS LOAI SAN PHAM THEO THƯƠNG HIỆU================================//
     public function getListCateLogByGroup()
     {
         if (isset($_POST["groupId"]) && !empty($_POST["groupId"])) {
@@ -63,10 +63,15 @@ class Catelog extends MY_Controller
             $input['where'] = array('MA_NHOM_SANPHAM' => $groupId);
             // print_r($this->catelog_model->getList($input));
             $listCate = $this->catelog_model->getList($input);
-            if (!$listCate) {
+//            if (empty($listCate)){
+//                $listCate = 'Không có';
+//            }else{
+//                $listCate = json_encode($listCate);
+//            }
+//            pre($listCate);
+            if (empty($listCate)) {
                 echo '<option value="0">Không có</option>';
-            }
-            if ($listCate > 0) {
+            }else if ($listCate > 0) {
                 ?>
                 <option value="0">Chọn loại sản phẩm</option>
                 <?php
@@ -76,6 +81,7 @@ class Catelog extends MY_Controller
                     <?php
                 }
             }
+
 
         }
 

@@ -60,6 +60,7 @@ class Transaction extends MY_Controller
 
         //lay id cua quan trị viên cần chỉnh sửa
         $idTransaction = $this->uri->segment('4');
+//        pre($idTransaction);
         if ($this->input->post()) {
             $status = $this->input->post('status');
 
@@ -79,8 +80,6 @@ class Transaction extends MY_Controller
     public function transaction_suc(){
         $idEmployee = $this->input->post('employeeId');
         $status = $this->input->post('status');
-
-
         $data = array(
             'MA_NHANVIEN' => $idEmployee,
             'TRANGTHAI' => $status
@@ -88,7 +87,7 @@ class Transaction extends MY_Controller
         //thuc hien cac cau lenh khi lap hoa don
         $this->db->trans_start();
         $idTransaction = $this->uri->rsegment(3);
-
+        pre('d'.$idTransaction);
         $input['where'] = array(
             'MA_GIAODICH' => $idTransaction
         );

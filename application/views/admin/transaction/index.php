@@ -68,7 +68,7 @@ $this->load->view('admin/transaction/head', $this->data);
                     <td class="textC"><?= $item['MA_GIAODICH'] ?></td>
 
                     <td>
-                        <?php echo number_format($item['TONG_THANHTIEN']); ?>
+                        <?php echo $item['TONG_THANHTIEN']; ?>
                     </td>
 
                     <td>
@@ -77,13 +77,11 @@ $this->load->view('admin/transaction/head', $this->data);
                     <td>
                         <?php
                             if ($item['MA_HINHTHUC']==1){
-                                echo 'Ngân Lượng';
+                                echo 'Tiền mặt';
                             }else if ($item['MA_HINHTHUC']==2){
                                 echo 'Paypal';
-                            }else if ($item['MA_HINHTHUC']==3){
-                                echo 'Bảo Kim';
-                            }else{
-                                echo 'Tiền mặt';
+                            }else {
+                                echo 'Không xác định '.$item['MA_HINHTHUC'];
                             }
                         ?>
                     </td>

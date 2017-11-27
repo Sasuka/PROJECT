@@ -12,30 +12,9 @@ class Product extends MY_Controller
     {
         //lay noi dung cua messager
         $this->data['message'] = $this->session->flashdata('message');
-
-        //lay tông số lượng tất cả các sản phẩm
         $total_rows = $this->product_model->get_total();
-        $this->data['total_rows'] = $total_rows;
-
-        //thuc hien load phan trang
         $this->load->library('pagination');
-        $config = array();
-        $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
-        $config['base_url'] = admin_url('product/index');//link hien thi ra danh sach san pham
-        $config['per_page'] = 10;//hien thi so luong san pham tren 1 trang
-        $config['uri_segment'] = 4;//hien thi so trang
-        $config['next_link'] = "Trang kế tiếp";
-        $config['prev_link'] = "Trang trước";
-
-        //khoi tao phan trang
-        $this->pagination->initialize($config);
-
-        $segment = $this->uri->segment(4);
-        $segment = intval($segment);
-         //  pre($segment);
         $input = array();
-        $input['limit'] = array($config['per_page'], $segment);
-        //kiem tra theo id
         $id = $this->input->get('id');
         $idProduct = intval($id);
         if ($id != 0) {
@@ -47,7 +26,15 @@ class Product extends MY_Controller
         if ($nameProduct) {
             $input['like'] = array('TEN_SANPHAM', $nameProduct);
         }
+        /*tim theo thuong hieu*/
 
+//        if (isset($_GET['group']) && $_GET['group'] != '0'){
+//            $input['where'] = array('MA_NHOM_SANPHAM' => $_GET['group']);
+//        }
+        if (isset($_GET['catelog']) && $_GET['catelog'] != '0'){
+            $input['where'] = array('MA_LOAI_SANPHAM' => $_GET['catelog']);
+        }
+/*
         //lay danh sach san pham
         $list = $this->product_model->getList($input);
         // pre($list);
@@ -58,7 +45,31 @@ class Product extends MY_Controller
         $this->data['listGroup'] = $this->group_model->getList();//danh sach nhom san pham
 //        pre($this->group_model->getList());
         $this->data['listDis'] = $listDis;//danh sach san pham dc khuyen mai
+  */
+        /* Phân trang*/
+        $config = array();
+        $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
+        $config['base_url'] = admin_url('product/index');//link hien thi ra danh sach san pham
+        $config['per_page'] = 10;//hien thi so luong san pham tren 1 trang
+        $config['uri_segment'] = 4;//hien thi so trang
+        $config['per_page'] = 10;//hien thi so luong san pham tren 1 trang
+        $choice = $total_rows / $config["per_page"];
+        $config["num_links"] = floor($choice);
+        $config['next_link'] = "Trang kế tiếp";
+        $config['prev_link'] = "Trang trước";
+        $this->pagination->initialize($config);
+
+        $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $list = $this->product_model->getListSearch($config['per_page'], $data['page'],$input);
+
+//        pre($list);
+        /*Thông tin các sản phẩm được khuyến mãi*/
+        $promotion = $this->product_model->getProductPromotion();
+      //   pre($promotion);
+
         $this->data['list'] = $list;//danh sach tat ca san pham
+        $this->data['promotion'] = $promotion;
+        $this->data['listGroup'] = $this->group_model->getList();
         $this->data['temp'] = 'admin/product/index';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
@@ -70,14 +81,15 @@ class Product extends MY_Controller
             $catelogId = $_POST["catelogId"];
             $input['where'] = array('MA_LOAI_SANPHAM' => $catelogId);
             // print_r($this->catelog_model->getList($input));
+            $promotion = $this->product_model->getProductPromotion();
             $list = $this->product_model->getList($input);
-            if (!$list) {
+            if (empty($list)) {
                 echo '<p style="text-align: center;color: #0000FF;margin: 30% 2%">Not Found</p>';
             } else {
                 // pre($list);
                 foreach ($list as $item) {
                     ?>
-                    <tr class="row_9">
+                    <tr class="row_<?php echo $item['MA_SANPHAM'];?>">
                         <td><input name="id[]" value="<?= $item['MA_SANPHAM'] ?>" type="checkbox"></td>
 
                         <td class="textC"><?= $item['MA_SANPHAM'] ?></td>
@@ -94,7 +106,7 @@ class Product extends MY_Controller
                             </a>
 
                             <div class="f11">
-                                Đã bán: <?php echo $item['DABAN']; ?> | Loại: <?php echo $item['LOAI']; ?>
+                                Loại: <?php echo $item['LOAI']; ?> | Kinh doanh:<span style="color:red;"> <?php echo ($item['TRANGTHAI']=='0') ? 'Hết' :'<span style="color:forestgreen;">Còn</span>'; ?></span>
                             </div>
 
                         </td>
@@ -102,28 +114,29 @@ class Product extends MY_Controller
                         <td class="textR">
                             <b style="font-weight: bold;">
                                 <?php
-                                $dongia = $item['DONGIA_BAN'];
-                                foreach ($listDis as $itemDis) {
-                                    if (
-                                        $item['MA_SANPHAM'] == $itemDis['MA_SANPHAM']
-                                        && (date('d-m-Y', strtotime($item['NGAY_CAPNHAT'])) >= date('d-m-Y', strtotime($itemDis['NGAY_BATDAU'])))
-                                        && (date('d-m-Y', strtotime($item['NGAY_CAPNHAT'])) <= date('d-m-Y', strtotime($itemDis['NGAY_KETTHUC'])))
-                                    ) {
-                                        echo '<p style="color: red;">';
-                                        //gia-=gia*%roi format don gia
-
-                                        echo number_format($dongia -= $dongia * $itemDis['PHANTRAM_KM'] * 0.01, 3, '.', '.') . ' đ';
-                                        echo '</p>';
+                                //                            $dongia = $item['DONGIA_BAN'];
+                                $check = 0;
+                                foreach ($promotion as $itemPromotion) {
+                                    if ($item['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
+                                        echo '<span style="color: red;">';
+                                        echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $item['DONGIA_BAN'];
+                                        echo '</span> $ <br>';
+                                        echo '<del>';
+                                        echo $item['DONGIA_BAN'];
+                                        echo '</del>';
+                                        echo ' $';
+                                        $check =1;
+                                        break;
                                     }
-
+                                }
+                                if ($check == 0){
+                                    echo '<span style="color: red;">';
+                                    echo $item['DONGIA_BAN'];
+                                    echo '</span> $<br>';
                                 }
                                 ?>
                             </b>
-
-                            <b style="text-decoration: line-through"><?php echo number_format($item['DONGIA_BAN'], 3, '.', '.'); ?></b>
-                            đ
                         </td>
-
 
                         <td class="textC"><?php echo date('d-m-Y', strtotime($item['NGAY_CAPNHAT'])); ?></td>
 
@@ -134,11 +147,11 @@ class Product extends MY_Controller
                             <a href="product/view/9.html" target="_blank" class="tipS" title="Xem chi tiết sản phẩm">
                                 <img src="<?php echo public_url('admin/images') ?>/icons/color/view.png">
                             </a>
-                            <a href="admin/product/edit/9.html" title="Chỉnh sửa" class="tipS">
+                            <a href="<?php echo admin_url('product/edit/'.$item['MA_SANPHAM']);?>" title="Chỉnh sửa" class="tipS">
                                 <img src="<?php echo public_url('admin/images') ?>/icons/color/edit.png">
                             </a>
 
-                            <a href="admin/product/del/9.html" title="Xóa" class="tipS verify_action">
+                            <a href="<?php echo admin_url('product/delete/'.$item['MA_SANPHAM']);?>" title="Xóa" class="tipS verify_action">
                                 <img src="<?php echo public_url('admin/images') ?>/icons/color/delete.png">
                             </a>
                         </td>
@@ -424,20 +437,17 @@ class Product extends MY_Controller
     public function edit(){
         $id = $this->uri->rsegment(3);
         $id = intval($id);
-        //  pre($info);
-        //load thu vien validate de su dung kiem tra khi upload
         $this->load->library('form_validation');
         $this->load->helper('form');
 
-        //lấy thong tin của quản trị viên
-        $input = array('MA_SANPHAM' => $id);
-        $info = $this->product_model->get_info_rule($input);
-//        pre($info);
+        $input = array('sanpham.MA_SANPHAM' => $id);
+        $info = $this->catelog_model->getListThreeJoin('sanpham', 'MA_LOAI_SANPHAM', 'nhom_sanpham', 'MA_NHOM_SANPHAM', $input);
+        $info = $info[0];
+     //   pre($info);
         if (!$info) {
             $this->session->set_flashdata('message', 'Không tồn tại sản phẩm này!');
             redirect(admin_url('product'));
         }
-
         $this->form_validation->set_rules('namepro', 'Tên sản phẩm', 'required');
 
         //khi submit
@@ -446,29 +456,18 @@ class Product extends MY_Controller
             $name = $this->input->post('namepro', true);
             $warranty = $this->input->post('warranty', true);
             $catelog_dis = $this->input->post('catelog_dis', true);
-
+            $price = $this->input->post('price',true);
             $idmade = $this->input->post('idmade', true);
             $description = $this->input->post('description', true);
-
-            $idGroup = $this->input->post('group');
             $status = $this->input->post('status');
-            $input['where'] = array('MA_NHOM_SANPHAM' => $idGroup);
-            $nameGroup = $this->group_model->getList($input);
-
-           //   pre($status);
-            if ($nameGroup) {
-                $namegroup = strtolower($nameGroup[0]['TEN_NHOM_SANPHAM']);
-
-            } else {
-                $namegroup = '';
-            }
+            $namegroup = url_title(strtolower($info['TEN_NHOM_SANPHAM']));
 
             //lay ten file anh minh hoa dc upload len
             $this->load->library('upload_library');
             $upload_path = './uploads/product/' . $namegroup;
 
             $upload_data = $this->upload_library->upload($upload_path, 'image');
-            //   pre($upload_data);
+              // pre($upload_data);
             if (isset($upload_data['file_name'])) {
 
                 $namePicture = $namegroup . '/' . $upload_data['file_name'];
@@ -476,16 +475,14 @@ class Product extends MY_Controller
             } else {
                 $namePicture = '';
             }
-
             //upload danh sach anh kem theo
-            // $namePicture =strtolower($namePicture);
             $image_list = array();
             $image_list = $this->upload_library->upload_file($upload_path, 'image_list');
             $image_list = json_encode($image_list);
 
             $dt = array(
                 'TEN_SANPHAM' => $name,
-                'HINH_DAIDIEN' => $namePicture,
+                'DONGIA_BAN' => $price,
                 'DS_HINHANH' => $image_list,
                 'BAOHANH' => $warranty,
                 'LOAI' => $catelog_dis,
@@ -493,10 +490,12 @@ class Product extends MY_Controller
                 'MOTA' => $description,
                 'TRANGTHAI' =>$status
             );
-//              pre($dt);
+            if ($namePicture !=''){
+                $dt['HINH_DAIDIEN'] = $namePicture;
+            }
+        //      pre($dt);
      //        pre($input);
-            $where = array('MA_SANPHAM' => $input['MA_SANPHAM']);
-            if ($this->product_model->update_rule($where,$dt)) {
+            if ($this->product_model->update_rule($input,$dt)) {
                 $this->session->set_flashdata('message', 'Update thành công!');
             } else {
                 $this->session->set_flashdata('message', 'Update thất bại');

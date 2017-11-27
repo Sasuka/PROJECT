@@ -59,15 +59,16 @@
                                 }
                                 ?>
 
-                                <a href="/products/dong-ho-longbo-mat-vuong-mau-trang-1"
-                                   title="ĐỒNG HỒ LONGBO MẶT VUÔNG MÀU ĐEN">
+                                <a href="javascript:void(0);"  class="quickview"
+                                   data-handle="<?php echo base_url('product/getProduct1/') . $itemProduct['MA_SANPHAM']; ?>"
+                                   title="<?php echo mb_strtoupper($itemProduct['TEN_SANPHAM'], 'UTF-8'); ?>">
                                     <img class="first-image  has-img"
                                          alt="<?php echo mb_strtoupper($itemProduct['TEN_SANPHAM'], 'UTF-8'); ?>"
                                          src="<?php echo upload_url('product/') . $itemProduct['HINH_DAIDIEN']; ?>"/>
 
                                     <img class="second-image"
-                                         src="./product.hstatic.net/1000177652/product/4_ec0319148ec348789ae2a59fc5289855_large.jpg"
-                                         alt=" ĐỒNG HỒ LONGBO MẶT VUÔNG MÀU ĐEN "/>
+                                         src="#"
+                                         alt="<?php echo mb_strtoupper($itemProduct['TEN_SANPHAM'], 'UTF-8'); ?>"/>
 
                                 </a>
 

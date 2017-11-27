@@ -106,7 +106,7 @@ $account = $this->session->userdata('account');
             <tbody class="list_item">
             <div id="loading" style="width: 50px;height: 50px;position: absolute;z-index: 99;margin:15% 45%;"></div>
             <?php
-      //      pre($importDe);
+               // pre($list);
             $i =0;
             foreach ($list as $item) {
                 ?>

@@ -51,9 +51,7 @@ class Import extends MY_Controller
         $this->load->model('importDetail_model');
         $this->data['importDe'] = $this->importDetail_model->getList();
         $dt = $this->import_model->getListJoin('chitiet_nhap','MA_PHIEUNHAP');
-      //  $dt = $this->importDetail_model->getListJoinLRB($table1,$condition,'left');
-     //   pre($dt);
-//        pre($this->data['importDe']);
+
 
         //lay danh sach  phieu nhap
         $list = $this->import_model->getListThreeJoin('nhanvien', 'MA_NHANVIEN', 'nha_cungcap', 'MA_NHA_CUNGCAP');

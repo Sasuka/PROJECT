@@ -70,8 +70,6 @@ class ImportDetail extends MY_Controller
 
         $id = $this->uri->rsegment(3);//lay id kiem tra co ton tai phieu nhap do hay chua
         $id = intval($id);
-
-        //lấy thong tin của quản trị viên
         $input = array('MA_PHIEUNHAP' => $id);
         $info = $this->import_model->get_info_rule($input);
         // pre($info['MA_NHA_CUNGCAP']);
@@ -101,18 +99,7 @@ class ImportDetail extends MY_Controller
                 $this->session->set_flashdata('message', 'Lập phiếu nhập thất bại');
             }
             ?>
-            <!--          //  <script>-->
-            <!--               var conf = confirm('Bạn có muốn tiếp tục không ?');-->
-            <!--                if (conf) {-->
-            <!--                    //tiep tuc them-->
-            <!--                                        --><?php //echo admin_url('importDetail/add/'.$id) ;?>
-            <!--//                    window.location = "--><?php ////echo admin_url('importDetail/add/' . $id) ?><!--//";-->
-            <!--//                } else {-->
-            <!--//                    //huy bo-->
-            <!--//                    --><?php ////redirect(admin_url('importDetail')); ?>
-            <!--//                }-->
-            <!--//-->
-            <!--//            </script>-->
+
             <?php
             redirect(admin_url('importDetail/index/' . $id));
         }

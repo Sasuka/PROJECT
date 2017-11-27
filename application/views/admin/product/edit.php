@@ -184,12 +184,12 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $product['TRAN
                                 <label class="radio-inline"><input type="radio" id="param_status" name="status"
                                                                    value="0"
                                         <?php echo $tmp['TRANGTHAI'] == '0' ? 'checked' : ''; ?>
-                                    >Hết hàng</label>
+                                    >Ngừng kinh doanh</label>
                                 <label class="radio-inline"><input type="radio" id="param_status" name="status"
                                                                    value="1"
                                         <?php echo $tmp['TRANGTHAI'] == '1' ? 'checked' : ''; ?>
 
-                                    >Còn hàng</label>
+                                    >Kinh doanh</label>
                                 <span name="status_autocheck" class="autocheck"></span>
                                 <div name="status_error" class="clear error">
                                     <?php echo form_error('status'); ?></div>

@@ -55,12 +55,14 @@ $this->load->view('admin/transaction_detail/head', $this->data);
 
             <thead>
             <tr>
-                <td style="width:5px;">STT</td>
+                <td style="width:2px;">STT</td>
                 <td style="width:5px;">Mã sản phẩm</td>
-                <td style="width:110px;">Tên sản phẩm</td>
+                <td style="width:80px;">Tên sản phẩm</td>
                 <td style="width: 10px;">Số lượng</td>
-                <td style="width:45px;">Thành tiền (USD)</td>
+                <td style="width:10px;">Giá gốc (USD)</td>
+                <td style="width:15px;">Giá sau khi giảm(USD)</td>
                 <td style="width:25px;">Thanh toán</td>
+                <td style="width:25px;">Tặng phẩm</td>
 
             </tr>
             </thead>
@@ -87,6 +89,7 @@ $this->load->view('admin/transaction_detail/head', $this->data);
             <div id="loading" style="width: 50px;height: 50px;position: absolute;z-index: 99;margin:15% 45%;"></div>
             <?php
             $i=1;
+            //pre($list);
             foreach ($list as $item) {
                 ?>
                 <tr class="row_<?php echo $item['MA_SANPHAM']; ?>">
@@ -104,11 +107,16 @@ $this->load->view('admin/transaction_detail/head', $this->data);
                         <?php echo $item['SOLUONG']; ?>
                     </td>
                     <td>
-                        <?php echo number_format($item['THANHTIEN']); ?>
+                        <?php echo $item['DONGIA_HT']; ?>
                     </td>
                     <td>
-                        <?php echo $item['THANHTIEN']; ?>
-
+                        <?php echo $item['THANHTOAN']; ?>
+                    </td>
+                    <td>
+                        <?php echo $item['THANHTOAN']*$item['SOLUONG']; ?>
+                    </td>
+                    <td>
+                        <?php echo $item['TANGPHAM'];?>
                     </td>
 
                 </tr>
