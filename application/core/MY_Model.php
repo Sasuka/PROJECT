@@ -1654,7 +1654,7 @@ class MY_Model extends CI_Model
      */
     protected function is_assoc(array $array)
     {
-       // return (bool)count(array_filter(array_keys($array), 'is_string'));
+        // return (bool)count(array_filter(array_keys($array), 'is_string'));
     }
 
     /**
@@ -1910,6 +1910,7 @@ class MY_Model extends CI_Model
             return FALSE;
         }
     }
+
     public function count($input)
     {
         // Select
@@ -1936,69 +1937,81 @@ class MY_Model extends CI_Model
         return $query->result_array();
 
     }
+
     public function _count($table = '', $count = '', $group_by = '')
     {
         $this->db->get($table);
         $this->db->select(COUNT($count) . 'AS COUNT');
         $this->db->group_by($group_by);
     }
+
     public function getGroupByCate($input = array())
     {
         $this->db->where($input['where']);
         return $this->db->get($this->table)->result_array();
     }
+
     public function getListJoin($tabl1, $condition, $where = array())
     {
         $this->db->select('*');
         $this->db->from($this->table);
         $this->db->join($tabl1, "$tabl1.$condition=$this->table.$condition");
-        if ($where !=''){
+        if ($where != '') {
             $this->db->where($where);
         }
         return $this->db->get()->result_array();
 
     }
-    public function getListJoinLRB($table1,$condition,$lrb ='left'){
+
+    public function getListJoinLRB($table1, $condition, $lrb = 'left')
+    {
         $this->db->select('*');
         $this->db->from($this->table);
-        $this->db->join($table1,"$table1.$condition=$this->table.$condition",$lrb);
+        $this->db->join($table1, "$table1.$condition=$this->table.$condition", $lrb);
         return $this->db->get()->result_array();
 
     }
+
     /* table1 : table cần join, $condition: là điều kiện để join ~ on, $lrb: hình thức join, $select : thuộc tính cần select*/
-    public function getListJoinLRB1($table1, $condition,$where = array(), $lrb = 'left',$select = '')
+    public function getListJoinLRB1($table1, $condition, $where = array(), $lrb = 'left', $select = '')
     {
-        if ($select !=''){
+        if ($select != '') {
             $this->db->select($select);
-        }else{
+        } else {
             $this->db->select('*');
         }
 
         $this->db->from($this->table);
 
         $this->db->join($table1, "$table1.$condition = $this->table.$condition", $lrb);
-        if ($where != ''){
+        if ($where != '') {
             $this->db->where($where);
         }
         return $this->db->get()->result_array();
 
     }
-    public function getListThreeJoin($table1, $condition1, $table2, $condition2, $where = '')
+
+    public function getListThreeJoin($table1, $condition1, $table2, $condition2, $where = '', $input = array())
     {
-        $this->db->select('*');
+        if (empty($input)) {
+            $this->db->select('*');
+        } else {
+            $this->db->select($input);
+        }
         $this->db->from($this->table);
         $this->db->join($table1, "$table1.$condition1=$this->table.$condition1");
         $this->db->join($table2, "$table2.$condition2=$this->table.$condition2");
         if (!is_array($where) && $where != '') {
             $this->db->where("$this->table.$condition1 = $where");
         }
-        if (!empty($where) && is_array($where)){
+        if (!empty($where) && is_array($where)) {
             $this->db->where($where);
         }
         return $this->db->get()->result_array();
     }
 
-    public function getListSearch($limit,$start,$input= array()){
+    public function getListSearch($limit, $start, $input = array())
+    {
 
 //            pre($start);
 //        $sql = "SELECT * FROM sanpham where sanpham.TEN_SANPHAM1 like '%$st%' limit " . $start . ", " . $limit;
@@ -2021,7 +2034,7 @@ class MY_Model extends CI_Model
             $this->db->order_by($input['order'][0], $input['order'][1]);
         }
 
-        $this->db->limit($limit,$start);
+        $this->db->limit($limit, $start);
         $query = $this->db->get($this->table);
         //tra ve du lieu
 //        pre($query->result_array());

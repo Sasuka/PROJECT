@@ -8,7 +8,7 @@ $tmp['LOAI'] = (isset($_POST['catelog_dis']) ? $_POST['catelog_dis'] : $product[
 $tmp['MOTA'] = (isset($_POST['description']) ? $_POST['description'] : $product['MOTA']);
 $tmp['MA_XUATXU'] = (isset($_POST['MA_XUATXU']) ? $_POST['MA_XUATXU'] : $product['MA_XUATXU']);
 $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $product['TRANGTHAI']);
-//pre($product);
+
 ?>
 <div class="line"></div>
 <div class="wrapper">
@@ -104,6 +104,10 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $product['TRAN
                                 <div class="clear"></div>
                             </div>
                             <?php
+                        }else{
+                            ?>
+                            <input name="price" value="<?php echo 0; ?>" type="hidden">
+                        <?php
                         }
                         ?>
 

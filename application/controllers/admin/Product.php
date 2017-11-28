@@ -31,21 +31,21 @@ class Product extends MY_Controller
 //        if (isset($_GET['group']) && $_GET['group'] != '0'){
 //            $input['where'] = array('MA_NHOM_SANPHAM' => $_GET['group']);
 //        }
-        if (isset($_GET['catelog']) && $_GET['catelog'] != '0'){
+        if (isset($_GET['catelog']) && $_GET['catelog'] != '0') {
             $input['where'] = array('MA_LOAI_SANPHAM' => $_GET['catelog']);
         }
-/*
-        //lay danh sach san pham
-        $list = $this->product_model->getList($input);
-        // pre($list);
-        //danh sach san pham duoc giam gia
-        //  $idSP_ProDetail = $this->productDetail_model->get
-        $listDis = $this->product_model->getProductPromotion();
-        // pre($list);
-        $this->data['listGroup'] = $this->group_model->getList();//danh sach nhom san pham
-//        pre($this->group_model->getList());
-        $this->data['listDis'] = $listDis;//danh sach san pham dc khuyen mai
-  */
+        /*
+                //lay danh sach san pham
+                $list = $this->product_model->getList($input);
+                // pre($list);
+                //danh sach san pham duoc giam gia
+                //  $idSP_ProDetail = $this->productDetail_model->get
+                $listDis = $this->product_model->getProductPromotion();
+                // pre($list);
+                $this->data['listGroup'] = $this->group_model->getList();//danh sach nhom san pham
+        //        pre($this->group_model->getList());
+                $this->data['listDis'] = $listDis;//danh sach san pham dc khuyen mai
+          */
         /* Phân trang*/
         $config = array();
         $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
@@ -60,12 +60,12 @@ class Product extends MY_Controller
         $this->pagination->initialize($config);
 
         $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-        $list = $this->product_model->getListSearch($config['per_page'], $data['page'],$input);
+        $list = $this->product_model->getListSearch($config['per_page'], $data['page'], $input);
 
 //        pre($list);
         /*Thông tin các sản phẩm được khuyến mãi*/
         $promotion = $this->product_model->getProductPromotion();
-      //   pre($promotion);
+        //   pre($promotion);
 
         $this->data['list'] = $list;//danh sach tat ca san pham
         $this->data['promotion'] = $promotion;
@@ -89,7 +89,7 @@ class Product extends MY_Controller
                 // pre($list);
                 foreach ($list as $item) {
                     ?>
-                    <tr class="row_<?php echo $item['MA_SANPHAM'];?>">
+                    <tr class="row_<?php echo $item['MA_SANPHAM']; ?>">
                         <td><input name="id[]" value="<?= $item['MA_SANPHAM'] ?>" type="checkbox"></td>
 
                         <td class="textC"><?= $item['MA_SANPHAM'] ?></td>
@@ -106,7 +106,8 @@ class Product extends MY_Controller
                             </a>
 
                             <div class="f11">
-                                Loại: <?php echo $item['LOAI']; ?> | Kinh doanh:<span style="color:red;"> <?php echo ($item['TRANGTHAI']=='0') ? 'Hết' :'<span style="color:forestgreen;">Còn</span>'; ?></span>
+                                Loại: <?php echo $item['LOAI']; ?> | Kinh doanh:<span
+                                        style="color:red;"> <?php echo ($item['TRANGTHAI'] == '0') ? 'Hết' : '<span style="color:forestgreen;">Còn</span>'; ?></span>
                             </div>
 
                         </td>
@@ -125,11 +126,11 @@ class Product extends MY_Controller
                                         echo $item['DONGIA_BAN'];
                                         echo '</del>';
                                         echo ' $';
-                                        $check =1;
+                                        $check = 1;
                                         break;
                                     }
                                 }
-                                if ($check == 0){
+                                if ($check == 0) {
                                     echo '<span style="color: red;">';
                                     echo $item['DONGIA_BAN'];
                                     echo '</span> $<br>';
@@ -147,11 +148,13 @@ class Product extends MY_Controller
                             <a href="product/view/9.html" target="_blank" class="tipS" title="Xem chi tiết sản phẩm">
                                 <img src="<?php echo public_url('admin/images') ?>/icons/color/view.png">
                             </a>
-                            <a href="<?php echo admin_url('product/edit/'.$item['MA_SANPHAM']);?>" title="Chỉnh sửa" class="tipS">
+                            <a href="<?php echo admin_url('product/edit/' . $item['MA_SANPHAM']); ?>" title="Chỉnh sửa"
+                               class="tipS">
                                 <img src="<?php echo public_url('admin/images') ?>/icons/color/edit.png">
                             </a>
 
-                            <a href="<?php echo admin_url('product/delete/'.$item['MA_SANPHAM']);?>" title="Xóa" class="tipS verify_action">
+                            <a href="<?php echo admin_url('product/delete/' . $item['MA_SANPHAM']); ?>" title="Xóa"
+                               class="tipS verify_action">
                                 <img src="<?php echo public_url('admin/images') ?>/icons/color/delete.png">
                             </a>
                         </td>
@@ -172,7 +175,7 @@ class Product extends MY_Controller
             $catelogId = $_POST["catelogId"];
             $input['where'] = array('MA_LOAI_SANPHAM' => $catelogId);
             // print_r($this->catelog_model->getList($input));
-            $listProduct= $this->product_model->getList($input);
+            $listProduct = $this->product_model->getList($input);
             // pre($listCate);
             if (!$listProduct) {
                 echo '<option value="0">Không có</option>';
@@ -246,7 +249,7 @@ class Product extends MY_Controller
                 $upload_path = './uploads/product/' . $namegroup;
 
                 $upload_data = $this->upload_library->upload($upload_path, 'image');
-                  // pre($upload_data);
+                // pre($upload_data);
                 if (isset($upload_data['file_name'])) {
 
                     $namePicture = $namegroup . '/' . $upload_data['file_name'];
@@ -263,7 +266,7 @@ class Product extends MY_Controller
                 $image_list = json_encode($image_list);
 
                 $dt = array(
-                    'TEN_SANPHAM' => $name,
+                    'TEN_SANPHAM' => $this->mb_ucwords($name),
                     'HINH_DAIDIEN' => $namePicture,
                     'DS_HINHANH' => $image_list,
                     'BAOHANH' => $warranty,
@@ -272,7 +275,7 @@ class Product extends MY_Controller
                     'MA_XUATXU' => $idmade,
                     'MOTA' => $description
                 );
-                //  pre($dt);
+
                 if ($this->product_model->add($dt)) {
                     $this->session->set_flashdata('message', 'Thêm sản phẩm thành công!');
                 } else {
@@ -294,7 +297,6 @@ class Product extends MY_Controller
         $this->data['listGroup'] = $this->group_model->getList();//danh sach nhom san pham
 //        pre($this->group_model->getList());
         $this->data['listDis'] = $listDis;//danh sach san pham dc khuyen mai
-
 
         $this->data['temp'] = 'admin/product/add';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
@@ -338,8 +340,8 @@ class Product extends MY_Controller
                 $name = $this->input->post('namepro', true);
                 $warranty = $this->input->post('warranty', true);
                 //$catelog_dis = $this->input->post('catelog_dis', true);
-               // pre($catelog_dis);
-              //  $catelog = $this->input->post('catelog', true);
+                // pre($catelog_dis);
+                //  $catelog = $this->input->post('catelog', true);
 
                 $idmade = $this->input->post('idmade', true);
                 $description = $this->input->post('description', true);
@@ -368,8 +370,8 @@ class Product extends MY_Controller
                     $config['source_image'] = $namePicture;
                     $config['create_thumb'] = TRUE;
                     $config['maintain_ratio'] = TRUE;
-                    $config['width']     = 150;
-                    $config['height']   = 120;
+                    $config['width'] = 150;
+                    $config['height'] = 120;
                     $this->image_lib->initialize($config);
                     $this->image_lib->resize();
 
@@ -387,8 +389,8 @@ class Product extends MY_Controller
                 $dt = array(
                     'TEN_SANPHAM' => $name,
                     'BAOHANH' => $warranty,
-                  //  'LOAI' => $catelog_dis,
-                   // 'MA_LOAI_SANPHAM' => $catelog,
+                    //  'LOAI' => $catelog_dis,
+                    // 'MA_LOAI_SANPHAM' => $catelog,
                     'MA_XUATXU' => $idmade,
                     'MOTA' => $description
                 );
@@ -434,16 +436,18 @@ class Product extends MY_Controller
         $this->data['temp'] = 'admin/product/edit';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
-    public function edit(){
+
+    public function edit()
+    {
         $id = $this->uri->rsegment(3);
         $id = intval($id);
         $this->load->library('form_validation');
         $this->load->helper('form');
 
-        $input = array('sanpham.MA_SANPHAM' => $id);
-        $info = $this->catelog_model->getListThreeJoin('sanpham', 'MA_LOAI_SANPHAM', 'nhom_sanpham', 'MA_NHOM_SANPHAM', $input);
+        $where = array('sanpham.MA_SANPHAM' => $id);
+       $info = $this->product_model->getProductFull($where);
         $info = $info[0];
-     //   pre($info);
+       // pre($info);
         if (!$info) {
             $this->session->set_flashdata('message', 'Không tồn tại sản phẩm này!');
             redirect(admin_url('product'));
@@ -456,7 +460,7 @@ class Product extends MY_Controller
             $name = $this->input->post('namepro', true);
             $warranty = $this->input->post('warranty', true);
             $catelog_dis = $this->input->post('catelog_dis', true);
-            $price = $this->input->post('price',true);
+            $price = $this->input->post('price', true);
             $idmade = $this->input->post('idmade', true);
             $description = $this->input->post('description', true);
             $status = $this->input->post('status');
@@ -467,7 +471,7 @@ class Product extends MY_Controller
             $upload_path = './uploads/product/' . $namegroup;
 
             $upload_data = $this->upload_library->upload($upload_path, 'image');
-              // pre($upload_data);
+            // pre($upload_data);
             if (isset($upload_data['file_name'])) {
 
                 $namePicture = $namegroup . '/' . $upload_data['file_name'];
@@ -488,24 +492,20 @@ class Product extends MY_Controller
                 'LOAI' => $catelog_dis,
                 'MA_XUATXU' => $idmade,
                 'MOTA' => $description,
-                'TRANGTHAI' =>$status
+                'TRANGTHAI' => $status
             );
-            if ($namePicture !=''){
+            if ($namePicture != '') {
                 $dt['HINH_DAIDIEN'] = $namePicture;
             }
-        //      pre($dt);
-     //        pre($input);
-            if ($this->product_model->update_rule($input,$dt)) {
+            //      pre($dt);
+            //        pre($input);
+            if ($this->product_model->update_rule($where, $dt)) {
                 $this->session->set_flashdata('message', 'Update thành công!');
             } else {
                 $this->session->set_flashdata('message', 'Update thất bại');
             }
             redirect(admin_url('product'));
         }
-
-
-
-
 
 
         $this->data['madeIn'] = $this->madeIn_model->getList();

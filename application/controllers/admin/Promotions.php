@@ -41,8 +41,8 @@ class Promotions extends MY_Controller
         $segment = intval($segment);
         //lay tat ca cac ma khuyen mai trong chi tiet khuyen mai ra xem no da lap hay chua
         $this->load->model('promotionDetail_model');
-        $this->data['detailPro']= $this->promotionDetail_model->getList();
-       // pre($this->data['detailPro']);
+        $this->data['detailPro'] = $this->promotionDetail_model->getList();
+        // pre($this->data['detailPro']);
 
         //thuc hien load danh sach khyên mai ra
         $list = $this->promotion_model->getList();
@@ -58,17 +58,17 @@ class Promotions extends MY_Controller
         $this->load->helper('form');
         //khi nhan submit thi kiem tra du lieu ok xong thì thuc hien submit
         if ($this->input->post()) {
-            $name = $this->input->post('name',true);
-            $begin = $this->input->post('begin',true);
-            $end = $this->input->post('end',true);
+            $name = $this->input->post('name', true);
+            $begin = $this->input->post('begin', true);
+            $end = $this->input->post('end', true);
             $begin = date('Y-m-d', strtotime($begin));//ep kieu them vao database
-            $end  = date('Y-m-d', strtotime($end));//ep kieu them vao database
+            $end = date('Y-m-d', strtotime($end));//ep kieu them vao database
 
 
             $data = array(
-                'TEN_KHUYENMAI'=>$name,
-                'NGAY_BATDAU'=>$begin,
-                'NGAY_KETTHUC'=>$end
+                'TEN_KHUYENMAI' => $name,
+                'NGAY_BATDAU' => $begin,
+                'NGAY_KETTHUC' => $end
             );
             if ($this->promotion_model->add($data)) {
                 //tao noi dung thong bao
@@ -76,7 +76,7 @@ class Promotions extends MY_Controller
                 redirect(admin_url('promotions'));
             } else {
                 $this->session->set_flashdata('message', 'Thêm khuyến mãi thất bại');
-               redirect(admin_url('promtion/add'));
+                redirect(admin_url('promtion/add'));
             }
 
         }
@@ -84,6 +84,7 @@ class Promotions extends MY_Controller
         $this->data['temp'] = 'admin/promotions/add';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
+
     public function edit()
     {
         $this->load->library('form_validation');
@@ -106,18 +107,18 @@ class Promotions extends MY_Controller
 
         //khi nhan submit thi kiem tra du lieu ok xong thì thuc hien submit
         if ($this->input->post()) {
-            $name = $this->input->post('name',true);
-            $begin = $this->input->post('begin',true);
-            $end = $this->input->post('end',true);
+            $name = $this->input->post('name', true);
+            $begin = $this->input->post('begin', true);
+            $end = $this->input->post('end', true);
             $begin = date('Y-m-d', strtotime($begin));//ep kieu them vao database
-            $end  = date('Y-m-d', strtotime($end));//ep kieu them vao database
+            $end = date('Y-m-d', strtotime($end));//ep kieu them vao database
 
             $data = array(
-                'TEN_KHUYENMAI'=>$name,
-                'NGAY_BATDAU'=>$begin,
-                'NGAY_KETTHUC'=>$end
+                'TEN_KHUYENMAI' => $name,
+                'NGAY_BATDAU' => $begin,
+                'NGAY_KETTHUC' => $end
             );
-            if ($this->promotion_model->update_rule($input,$data)) {
+            if ($this->promotion_model->update_rule($input, $data)) {
                 //tao noi dung thong bao
                 $this->session->set_flashdata('message', 'Cập nhật khuyến mãi thành công!');
                 redirect(admin_url('promotions'));
@@ -127,12 +128,14 @@ class Promotions extends MY_Controller
             }
 
         }
-        $this->data['info']=$info;
+        $this->data['info'] = $info;
 
         $this->data['temp'] = 'admin/promotions/edit';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
-    public function delete(){
+
+    public function delete()
+    {
         $this->load->library('form_validation');
         $this->load->helper('form');
 

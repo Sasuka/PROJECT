@@ -134,17 +134,19 @@ $this->load->view('admin/product/head', $this->data);
                             <?php
 //                            $dongia = $item['DONGIA_BAN'];
                             $check = 0;
-                            foreach ($promotion as $itemPromotion) {
-                                if ($item['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
-                                    echo '<span style="color: red;">';
-                                    echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $item['DONGIA_BAN'];
-                                    echo '</span> $ <br>';
-                                    echo '<del>';
-                                    echo $item['DONGIA_BAN'];
-                                    echo '</del>';
-                                    echo ' $';
-                                    $check =1;
-                                    break;
+                            if(isset($promotion) &&  !empty($promotion)){
+                                foreach ($promotion as $itemPromotion) {
+                                    if ($item['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
+                                        echo '<span style="color: red;">';
+                                        echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $item['DONGIA_BAN'];
+                                        echo '</span> $ <br>';
+                                        echo '<del>';
+                                        echo $item['DONGIA_BAN'];
+                                        echo '</del>';
+                                        echo ' $';
+                                        $check =1;
+                                        break;
+                                    }
                                 }
                             }
                             if ($check == 0){
