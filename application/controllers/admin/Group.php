@@ -64,7 +64,7 @@ class Group extends MY_Controller
                 } else {
                     $namePicture = '';
                 }
-                pre($upload_data);
+               // pre($upload_data);
                 $dt = array(
 
                 );

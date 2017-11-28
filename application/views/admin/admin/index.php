@@ -3,7 +3,6 @@
 $this->load->view('admin/admin/head', $this->_data);
 $account = $this->session->userdata('account');
 $level = $this->session->userdata('level');
-
 ?>
 <!-- table member -->
 <div class="line">

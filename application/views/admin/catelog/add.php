@@ -14,11 +14,11 @@ $this->load->view('admin/catelog/head', $this->data);
     <div class="widget">
         <div class="title">
             <img src="<?php echo public_url('admin') ?>/images/icons/dark/add.png" class="titleIcon">
-            <h6>Thêm mới nhóm sản phẩm</h6>
+            <h6>Thêm mới loại sản phẩm</h6>
         </div>
 
         <form class="form" id="form-catelog" action="" method="post" enctype="multipart/form-data"
-              onclick="return check();">
+             >
             <fieldset>
                 <!-- ten loai san pham -->
                 <div class="formRow">
@@ -34,11 +34,11 @@ $this->load->view('admin/catelog/head', $this->data);
                 </div>
                 <!-- nhom san pham -->
                 <div class="formRow">
-                    <label class="formLeft" for="param_groupID">Nhóm sản phẩm<span class="req">*</span></label>
+                    <label class="formLeft" for="param_groupID">Thương hiệu<span class="req">*</span></label>
                     <div class="formRight">
                                 <span class="oneTwo">
                                     <select _autocheck="true" id="groupID" name="groupID">
-                                        <option value="0">Chọn nhóm sản phẩm</option>
+                                        <option value="0">Chọn thương hiệu</option>
                                         <?php foreach ($listGroup as $itemGroup) { ?>
                                             <option value="<?= $itemGroup['MA_NHOM_SANPHAM']; ?>"><?= $itemGroup['TEN_NHOM_SANPHAM']; ?></option>
                                         <?php } ?>
@@ -80,22 +80,20 @@ $this->load->view('admin/catelog/head', $this->data);
 </div>
 
 <script>
+    function checkExistsCate(){
+
+    }
+
     $(document).ready(function () {
+
         $('#groupID').change(function (e) {
-
             groupID = $(this).val();
-
             catelogName = $('#param_catelogName').val();
-
             providersID = $('#providersID').val();
-
             data = {'groupID': groupID, 'catelogName': catelogName};
-
-
             if (groupID == 0) {
                 alert('Vui lòng chọn nhóm sản phẩm');
                 $('#catelogName_error').html('');
-
             } else if (catelogName == '') {
                 e.preventDefault();
                 $('#catelogName_error').html('Vui lòng điền loại sản phẩm');
@@ -108,7 +106,6 @@ $this->load->view('admin/catelog/head', $this->data);
                     url: 'checkCatelogByGroup',
                     type: 'GET',
                     data: {'data': JSON.stringify(data)},
-//                    data: 'sendName='+catelogName+'&groupId='+groupID,
                     async: true
                 }).done(function (result) {
                     if (result == '1') {
@@ -116,13 +113,12 @@ $this->load->view('admin/catelog/head', $this->data);
 //                        $('#form-catelog').attr('onsubmit', 'return false;');
                         $('#catelogName_error').html('Loại sản phẩm này đã tồn tại');
                         e.preventDefault();
+                        $('#form-catelog').attr('onsubmit', 'return false;');
                         return false;
-
                     } else {
                         $('#form-catelog').attr('onsubmit', 'return true;');
                         $('#catelogName_error').html('');
                         $('#groupID_error').html('');
-
                     }
                 });
             }
@@ -140,7 +136,7 @@ $this->load->view('admin/catelog/head', $this->data);
             $('#groupID_error').html('');
             if ($('#groupID').val() == 0) {
                 e.preventDefault();
-                $('#groupID_error').html('<span style="color:red;">Vui lòng chọn nhóm sản phẩm</span>');
+                $('#groupID_error').html('<span style="color:red;">Vui lòng chọn thương hiệu</span>');
                 return false;
             }
             if ($('#providersID').val() == 0) {
@@ -172,10 +168,11 @@ $this->load->view('admin/catelog/head', $this->data);
                         return false;
                     } else {
                        alert('Thành công');
+                       return true;
                     }
                 });
             }
         });
+    });
 
-    })
 </script>

@@ -1,56 +1,3 @@
-<!-- head -->
-<script>
-    $(function () {
-        $('#birthday').datepicker();
-        $('#phone').keyup(function (e) {
-            e.preventDefault();
-            var phone = $(this).val();
-            if (isNaN(phone) == true) {
-                $('#phone_error').html('<span style="color: #0000FF;">Điện thoại phải là số là số</span>');
-//                alert(phone);
-                return false;
-            } else if (phone < 8) {
-                $('#phone_error').html('Số điện thoại tối thiểu là 8 số');
-                return false;
-            } else {
-                $('#phone_error').html('');
-                return true;
-            }
-
-        });
-//        if($('#phone').val() <8 ||$('#phone').val() > 15){
-//            $('#phone_error').html('Số điện thoại tối thiểu là 8 số và tối đa là 15 số');
-//        }
-
-        $('#level').change(function (e) {
-            var level = $(this).val();
-
-            if (level == -1) {
-                alert('Vui lòng chọn chức vụ');
-                return false;
-            } else {
-                $('#level_error').html('');
-            }
-
-        });
-        $('#form-employ-update').submit(function (e) {
-            if ($('#level').val() == -1) {
-                e.preventDefault();
-                $('#level_error').html('<span style="color:red;">Vui lòng chọn chức vụ</span>');
-            }
-
-        })
-
-    })
-
-    function check() {
-        var level = document.getElementById('level').val();
-        if (level == -1)
-            return false;
-        else
-            return true;
-    }
-</script>
 <?php
 $this->load->view('admin/admin/head', $this->data);
 
@@ -83,7 +30,7 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $info[0]['TRAN
         </div>
 
         <form class="form" id="form-employ-update" action="" method="post" enctype="multipart/form-data"
-              onclick="return check();">
+        >
             <fieldset>
 
                 <!-- chức vụ -->
@@ -192,8 +139,10 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $info[0]['TRAN
                 <div class="formRow">
                     <label class="formLeft" for="param_site_title">Địa chỉ:</label>
                     <div class="formRight">
-                            <span class="oneTwo"><textarea name="address" id="address" _autocheck="true" rows="4"
-                                                           cols=""><?php echo $tmp['DIACHI']; ?></textarea></span>
+                            <span class="oneTwo">
+                                <textarea name="address" id="address" _autocheck="true" rows="4"
+                                                           cols="50" required><?php echo $tmp['DIACHI']; ?>
+                                </textarea></span>
                         <span name="address_autocheck" class="autocheck"></span>
                         <div name="address_error" class="clear error"></div>
                     </div>
@@ -237,12 +186,12 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $info[0]['TRAN
                     <div class="formRight">
                                 <span class="one-two"><input name="status" id="param_status" _autocheck="true"
                                                              type="radio" value="0"
-                                        <?php echo ($tmp['TRANGTHAI'] ==0 ? 'checked': '');?>
+                                        <?php echo($tmp['TRANGTHAI'] == 0 ? 'checked' : ''); ?>
                                     >
                                 </span><label>Nghỉ việc</label>
                         <span class="one-two"><input name="status" id="param_status" _autocheck="true"
                                                      type="radio" value="1"
-                                <?php echo ($tmp['TRANGTHAI'] ==1 ? 'checked': '');?>
+                                <?php echo($tmp['TRANGTHAI'] == 1 ? 'checked' : ''); ?>
                             >
                                 </span><label>Làm việc</label>
                         <span name="status_autocheck" class="autocheck"></span>
@@ -252,7 +201,7 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $info[0]['TRAN
                     </div>
                 </div><!-- End tab_container-->
                 <div class="formSubmit">
-                    <input value="Cập nhật" class="redB" type="submit">
+                    <input value="Cập nhật" class="redB" id="btnAdd" type="submit">
                     <input value="Hủy bỏ" class="basic" type="reset">
                 </div>
                 <div class="clear"></div>

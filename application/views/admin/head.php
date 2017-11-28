@@ -4,11 +4,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>ADMIN PHỤ TÙNG Ô TÔ</title>
 <meta name="robots" content="noindex, nofollow" />
+<!--TaiLT6 -->
+<link rel="stylesheet" href="<?php echo public_url() . 'bootstrap/css/bootstrapValidator.min.css' ?>"/>
+<!-- TaiLT6-->
 <link rel="shortcut icon" href="<?php echo public_url('admin/'); ?>images/icons/icon_admin.png" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/admin/crown/css/main.css');?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo public_url('admin/css'); ?>/css.css" media="screen" />
 <!--<link rel="stylesheet" type="text/css" href="--><?php //echo public_url('css'); ?><!--/bootstrap.min.css" media="screen" />-->
-
 <style>
     .tooltip {
         position: relative;
@@ -48,8 +50,9 @@
 </script>
 
 <script type="text/javascript" src="<?php echo public_url(); ?>js/jquery.min.js"></script>
+<script src="<?php echo public_url() ?>js/jquery-ui.js"></script>
 
-<script type="text/javascript" src="<?php echo public_url('admin/crown'); ?>/js/plugins/spinner/jquery.mousewheel.js"></script>
+<!--<script type="text/javascript" src="--><?php //echo public_url('admin/crown'); ?><!--/js/plugins/spinner/jquery.mousewheel.js"></script>-->
 
 <script type="text/javascript" src="<?php echo public_url('admin/crown'); ?>/js/plugins/forms/uniform.js"></script>
 <script type="text/javascript" src="<?php echo public_url('admin/crown'); ?>/js/plugins/forms/jquery.tagsinput.min.js"></script>
@@ -73,15 +76,18 @@
 <script type="text/javascript" src="<?php echo public_url('admin/crown'); ?>/js/custom.js"></script>
 
 
-<script type="text/javascript" src="<?php echo public_url(); ?>js/ckeditor/ckeditor.js"></script>
+<!--<script type="text/javascript" src="--><?php //echo public_url(); ?><!--js/ckeditor/ckeditor.js"></script>-->
 <script type="text/javascript" src="<?php echo public_url(); ?>js/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo public_url(); ?>js/scrollTo/jquery.scrollTo.js"></script>
 <script type="text/javascript" src="<?php echo public_url(); ?>js/number/jquery.number.min.js"></script>
 <script type="text/javascript" src="<?php echo public_url(); ?>js/formatCurrency/jquery.formatCurrency-1.4.0.min.js"></script>
-<script type="text/javascript" src="<?php echo public_url(); ?>js/zclip/jquery.zclip.js"></script>
+<!--<script type="text/javascript" src="--><?php //echo public_url(); ?><!--js/zclip/jquery.zclip.js"></script>-->
 
 <script type="text/javascript" src="<?php echo public_url(); ?>js/colorbox/jquery.colorbox.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo public_url(); ?>js/colorbox/colorbox.css" media="screen" />
-
+<!--TaiLT6 add-->
+<script type="text/javascript"
+        src="<?php echo public_url() . 'bootstrap/js/bootstrapValidator.min.js' ?>"></script>
+<!--TaiLT6 add-->
 <script type="text/javascript" src="<?php echo public_url(); ?>js/custom_admin.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo public_url(); ?>js/bootstrap.min.js" type="text/javascript"></script>

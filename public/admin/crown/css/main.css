@@ -125,7 +125,7 @@ select[multiple] { border: 1px solid #ddd; box-shadow: 0 0 0 2px #f4f4f4; -webki
 
 
 /* ==========  Login page  ========== */
-.loginPage { background-image: url(../images/backgrounds/background_logo.jpg) ;background-size: cover;}
+.loginPage { background-image: url(../images/backgrounds/background_admin.jpg) ;background-size: cover;}
 .loginPage .userNav { margin-right: 0!important; }
 .loginPage .topNav { text-align: center; position: static; }
 .loginPage .userNav, .loginPage .userNav ul { float: none; border: none; }

@@ -1,101 +1,11 @@
 <!-- head -->
-<script>
-    $(function () {
-        $('#birthday').datepicker();
-        $('#phone').keyup(function (e) {
-            e.preventDefault();
-            var phone = $(this).val();
-            if (isNaN(phone) == true) {
-                $('#phone_error').html('<span style="color: #0000FF;">Điện thoại phải là số là số</span>');
-//                alert(phone);
-                return false;
-            } else if (phone < 8) {
-                $('#phone_error').html('Số điện thoại tối thiểu là 8 số');
-                return false;
-            } else {
-                $('#phone_error').html('');
-                return true;
-            }
+<!--<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
 
-        });
-        $('#level').change(function (e) {
-            var level = $(this).val();
 
-            if (level == -1) {
-                alert('Vui lòng chọn chức vụ');
-                return false;
-            } else {
-                $('#level_error').html('');
-                $(this).val(level);
-            }
-
-        });
-        $('#form-employ').submit(function (e) {
-
-            if ($('#level').val() == -1) {
-                e.preventDefault();
-                $(this).focus();
-                $('#level_error').html('<span style="color:red;">Vui lòng chọn chức vụ</span>');
-                return false;
-            } else {
-                $('#level_error').html('');
-                $('#level').attr('selected');
-
-            }
-            if ($('#fname').val() == '') {
-                e.preventDefault();
-                $(this).focus();
-                $('#fname_error').html('<span style="color:red;">Vui lòng điền vào</span>');
-                return false;
-            } else {
-                $('#fname_error').html('');
-            }
-            if ($('#lname').val() == '') {
-                e.preventDefault();
-                $(this).focus();
-                $('#lname_error').html('<span style="color:red;">Vui lòng điền vào</span>');
-                return false;
-            } else {
-                $('#lname_error').html('');
-            }
-            if ($('#password').val() == '') {
-                e.preventDefault();
-                $(this).focus();
-                $('#password_error').html('<span style="color:red;">Vui lòng điền vào</span>');
-                return false;
-            } else {
-                $('#password_error').html('');
-            }
-            if ($('#re-pass').val() == '') {
-                e.preventDefault();
-                $(this).focus();
-                $('#re-pass_error').html('<span style="color:red;">Vui lòng điền vào</span>');
-                return false;
-            } else {
-                $('#re-pass_error').html('');
-            }
-            if ($('#email').val() == '') {
-                e.preventDefault();
-                $(this).focus();
-                $('#email_error').html('<span style="color:red;">Vui lòng điền vào</span>');
-                return false;
-            } else {
-                $('#email_error').html('');
-            }
-        })
-
-    })
-
-    function check() {
-        var level = document.getElementById('level').val();
-        if (level == -1)
-            return false;
-        else
-            return true;
-    }
-</script>
 <?php
 $this->load->view('admin/admin/head', $this->data);
+
+
 ?>
 <div class="line">
 </div>
@@ -113,38 +23,39 @@ $this->load->view('admin/admin/head', $this->data);
             <h6>Thêm mới quản trị viên</h6>
         </div>
 
-        <form class="form" id="form-employ" action="add" method="post" enctype="multipart/form-data"
-              onclick="return check();">
+        <form class="form" id="form-employ" action="add" method="post" enctype="multipart/form-data">
             <fieldset>
 
-                <!-- chức vụ -->
-                <div class="formRow">
-                    <label class="formLeft" for="param_cat">Chức vụ:<span class="req">*</span></label>
-                    <div class="formRight">
-                        <select name="level" _autocheck="true" id='level' class="left">
-                            <option value="-1">&nbsp;Lựa chọn chức vụ &nbsp;</option>
-
-                            <?php
-                            foreach ($level as $item) {
-                                ?>
-                                <option value="<?= $item['MA_CHUCVU']; ?>"><?= $item['TEN_CHUCVU']; ?></option>
-                                <?php
-                            }
-                            //                         print_r($level);
-                            ?>
-                        </select>
-                        <span name="cat_autocheck" class="autocheck"></span>
-                        <div name="level_error" class="clear error" id="level_error"></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-
+                <!--                <!-- chức vụ -->
+                <!--                <div class="formRow">-->
+                <!--                    <label class="formLeft" for="param_cat">Chức vụ:<span class="req">*</span></label>-->
+                <!--                    <div class="formRight">-->
+                <!--                        <select name="level" _autocheck="true" id='level' class="left">-->
+                <!--                            <option value="-1">&nbsp;Lựa chọn chức vụ &nbsp;</option>-->
+                <!---->
+                <!--                            --><?php
+                //                            foreach ($level as $item) {
+                //                                ?>
+                <!--                                <option value="--><? //= $item['MA_CHUCVU']; ?><!--">-->
+                <? //= $item['TEN_CHUCVU']; ?><!--</option>-->
+                <!--                                --><?php
+                //                            }
+                //                            //                         print_r($level);
+                //                            ?>
+                <!--                        </select>-->
+                <!--                        <span name="cat_autocheck" class="autocheck"></span>-->
+                <!--                        <div name="level_error" class="clear error" id="level_error"></div>-->
+                <!--                    </div>-->
+                <!--                    <div class="clear"></div>-->
+                <!--                </div>-->
+                <input type="hidden" name="level" value="<?php echo $type; ?>">
                 <!-- ho -->
                 <div class="formRow">
                     <label class="formLeft" for="param_fname">Họ:<span class="req">*</span></label>
                     <div class="formRight">
-                                <span class="oneTwo"><input name="fname" id="fname" _autocheck="true"
-                                                            type="text" value="<?php echo set_value('fname') ?>"></span>
+                                <span class="oneTwo">
+                                    <input name="fname" id="fname" _autocheck="true"
+                                           type="text" value="<?php echo set_value('fname') ?>" required></span>
                         <span name="fname_autocheck" class="autocheck"></span>
                         <div name="fname_error" id="fname_error"
                              class="clear error"><?php echo form_error('fname'); ?></div>
@@ -156,7 +67,8 @@ $this->load->view('admin/admin/head', $this->data);
                     <label class="formLeft" for="param_name">Tên:<span class="req">*</span></label>
                     <div class="formRight">
                                 <span class="oneTwo"><input name="lname" id="lname" _autocheck="true"
-                                                            type="text" value="<?php echo set_value('lname') ?>"></span>
+                                                            type="text" value="<?php echo set_value('lname') ?>"
+                                                            required></span>
                         <span name="lname_autocheck" class="autocheck"></span>
                         <div name="lname_error" id="lname_error"
                              class="clear error"><?php echo form_error('lname'); ?></div>
@@ -166,10 +78,10 @@ $this->load->view('admin/admin/head', $this->data);
                 <!-- mat khau -->
                 <div class="formRow">
                     <label class="formLeft" for="param_name">Mật khẩu:<span class="req">*</span></label>
-                    <div class="formRight">
-                                <span class="oneTwo"><input name="password" id="password" _autocheck="true"
-                                                            type="password"
-                                                            value="<?php echo set_value('password') ?>"></span>
+                    <div class="formRight"><span class="oneTwo">
+                    <input name="password" id="password" _autocheck="true" type="password" value="<?php echo set_value('password') ?>"
+                           required>
+                        </span>
                         <span name="name_autocheck" class="autocheck"></span>
                         <div name="name_error" id="password_error"
                              class="clear error"><?php echo form_error('password'); ?></div>
@@ -182,7 +94,7 @@ $this->load->view('admin/admin/head', $this->data);
                     <div class="formRight">
                                 <span class="oneTwo"><input name="re-pass" id="re-pass" _autocheck="true"
                                                             type="password"
-                                                            value="<?php echo set_value('re-pass') ?>"></span>
+                                                            value="<?php echo set_value('re-pass') ?>" required min="6"></span>
                         <span name="name_autocheck" class="autocheck"></span>
                         <div name="name_error" id="re-pass_error"
                              class="clear error"><?php echo form_error('re-pass'); ?></div>
@@ -195,7 +107,7 @@ $this->load->view('admin/admin/head', $this->data);
                     <div class="formRight">
                                 <span class="oneTwo"><input name="phone" id="phone" _autocheck="true"
                                                             type="text" value="<?php echo set_value('phone') ?>"
-                                                            maxlength="15"></span>
+                                                            maxlength="15" required></span>
                         <span name="name_autocheck" class="autocheck"></span>
                         <div name="name_error" class="clear error"
                              id="phone_error"><?php echo form_error('phone'); ?></div>
@@ -209,7 +121,7 @@ $this->load->view('admin/admin/head', $this->data);
                                 <span class="oneTwo"><input name="email" id="email" _autocheck="true"
                                                             type="email"
                                                             value="<?php echo set_value('email') ?>"
-                                                            class="check_email"></span>
+                                                            class="check_email" required></span>
                         <span name="name_autocheck" class="autocheck" id="mail_autocheck"></span>
                         <div name="name_error" class="clear error"
                              id="email_error"><?php echo form_error('email'); ?></div>
@@ -220,8 +132,9 @@ $this->load->view('admin/admin/head', $this->data);
                 <div class="formRow">
                     <label class="formLeft" for="param_site_title">Địa chỉ:</label>
                     <div class="formRight">
-                            <span class="oneTwo"><textarea name="address" id="address" _autocheck="true" rows="4"
-                                                           cols=""><?php echo set_value('address') ?> </textarea></span>
+                            <span class="oneTwo"><textarea name="address" id="address" rows="4" cols="50" required>
+                                    <?php echo set_value('address') ?>
+                                </textarea></span>
                         <span name="address_autocheck" class="autocheck"></span>
                         <div name="address_error" id="address_error" class="clear error"></div>
                     </div>
@@ -254,12 +167,12 @@ $this->load->view('admin/admin/head', $this->data);
                 <div class="formRow">
                     <label class="formLeft" for="param_name">Giới tính:</label>
                     <div class="formRight">
-                                <span class="one-two"><input name="gender" id="param_name" _autocheck="true"
-                                                             type="radio" value="0" checked>
-                                </span><label>Nam</label>
-                        <span class="one-two"><input name="gender" id="param_name" _autocheck="true"
-                                                     type="radio" value="1">
-                                </span><label>Nữ</label>
+                        <div class="radio-inline">
+                            <input name="gender" id="param_name" _autocheck="true" type="radio" value="0" required> Nam
+                        </div>
+                        <div class="radio-inline">
+                            <input name="gender" id="param_name" _autocheck="true" type="radio" value="1" required> Nữ
+                        </div>
                         <span name="name_autocheck" class="autocheck"></span>
                         <div name="name_error" class="clear error"><?php echo form_error('gender'); ?></div>
                     </div>
@@ -267,7 +180,7 @@ $this->load->view('admin/admin/head', $this->data);
                 </div>
 
                 <div class="formSubmit">
-                    <input value="Thêm mới" class="redB" type="submit">
+                    <input value="Thêm mới" class="redB" id="btnAdd" type="submit">
                     <input value="Hủy bỏ" class="basic" type="reset">
                 </div>
                 <div class="clear"></div>

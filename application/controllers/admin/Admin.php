@@ -36,14 +36,14 @@ class Admin extends MY_Controller
 
     public function employee()
     {
-        $input = array();
-        $lv = '2';
+
         //thuc hien load danh sach nhan vien dau tien
         $this->_data['listEmploy'] = $this->admin_model->listEmploy();
 
 
         //lay noi dung cua messager
         $this->_data['message'] = $this->session->flashdata('message');
+        $this->_data['type'] = '2';
         $this->_data['temp'] = 'admin/admin/index';
         $this->load->view('admin/main', $this->_data);
     }
@@ -110,14 +110,13 @@ class Admin extends MY_Controller
 
     public function add()
     {
-        $this->_data['level'] = $this->getLevel();
+        //$this->_data['level'] = $this->getLevel();
         $this->load->library('form_validation');
         $this->load->helper('form');
         //khi nhan submit
-        if ($this->input->post()) {
-            //tien hanh kiem tra du lieu
-//            echo 'Nhap submit';
+        $type = isset($_GET['type']) ? $_GET['type'] : '2';
 
+        if ($this->input->post()) {
             $this->form_validation->set_rules('fname', 'Tên', 'min_length[2]');
             $this->form_validation->set_rules('lname', 'Họ', 'min_length[2]');
             $this->form_validation->set_rules('password', 'Mật khẩu', 'min_length[2]');
@@ -131,7 +130,6 @@ class Admin extends MY_Controller
 
             //kiem tra dieu kien validate co form_validation thi no chay ham nay
             if ($this->form_validation->run()) {
-
                 $ho = $this->input->post('fname', true);
                 $ten = $this->input->post('lname', true);
                 $matkhau = $this->input->post('password', true);
@@ -156,34 +154,34 @@ class Admin extends MY_Controller
                     'MA_CHUCVU' => $chucvu
                 );
 
+
                 if ($_FILES['image']['name'] != '') {
 
                     $hinhanh = 'avatar/' . $_FILES['image']['name'];
                     $dt['HINHANH'] = $hinhanh;
                 }
-
                 if ($this->admin_model->add($dt)) {
-                    //tao noi dung thong bao
-                    $this->session->set_flashdata('message', 'Thêm quản trị viên thành công!');
+                    if ($chucvu == '2')
+                         $this->session->set_flashdata('message', 'Thêm nhân viên thành công!');
+                    else
+                         $this->session->set_flashdata('message', 'Thêm quản trị viên thành công!');
                 } else {
-                    $this->session->set_flashdata('message', 'Thêm quản trị viên thất bại');
-//                    echo 'Them thất bại';
+                    if ($chucvu == '2')
+                    $this->session->set_flashdata('message', 'Thêm nhân viên thất bại');
+                    else
+                    $this->session->set_flashdata('message', 'Thêm nhân viên thất bại');
                 }
-////
+
 //                //chuyen toi trang quan trị viên
                 if ($chucvu == 1) {
                     redirect(admin_url('admin'));
                 } else {
-
                     redirect(admin_url('admin/employee'));
-
                 }
-////
-                //     var_dump($dt);
-              //  echo 'Form ok';
             }
         }
 
+        $this->data['type'] = $type;
         $this->_data['temp'] = 'admin/admin/add';
         $this->load->view('admin/main', $this->_data);
     }
@@ -198,20 +196,19 @@ class Admin extends MY_Controller
         $this->id = intval($this->id);
         //lấy thong tin của quản trị viên
         $info = $this->admin_model->getInfo($this->id);
-        if (sizeof($info) == 0) {
+        if (empty($info)) {
             $this->session->set_flashdata('message', 'Không tồn tại quản trị viên này!');
             redirect(admin_url('admin'));
         }
         $this->_data['level'] = $this->getLevel();
         $this->_data['info'] = $info;
         if ($this->input->post()) {
-            $this->form_validation->set_rules('fname', 'Tên', 'required|min_length[2]');
-            $this->form_validation->set_rules('lname', 'Họ', 'required|min_length[2]');
 
-            $this->form_validation->set_rules('phone', 'Số điện thoại', 'required|min_length[9]|callback_check_phone_update');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_check_email_update');
-            $this->form_validation->set_rules('address', 'address', 'required');
-            $this->form_validation->set_rules('birthday', 'Ngày sinh', 'required');
+
+            $this->form_validation->set_rules('phone', 'Số điện thoại', 'required|callback_check_phone_update');
+            $this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_update');
+//            $this->form_validation->set_rules('address', 'address', 'required');
+//            $this->form_validation->set_rules('birthday', 'Ngày sinh', 'required');
             $this->form_validation->set_rules('gender', 'Giới tính', 'required');
             $this->form_validation->set_rules('level', 'Chức vụ', 'required');
             //kiem tra neu co nhap mat khau
@@ -222,18 +219,17 @@ class Admin extends MY_Controller
             }
 
             if ($this->form_validation->run()) {
-//              //thuc thi khi ham kiem tra xong dieu kien
-//                $this->id = $this->input->post('id');
+
                 $ho = $this->input->post('fname', true);
-                $ten = $this->input->post('lname');
-                $sdt = $this->input->post('phone');
-                $email = $this->input->post('email');
-                $diachi = $this->input->post('address');
-                $ngaysinh = $this->input->post('birthday');
+                $ten = $this->input->post('lname',true);
+                $sdt = $this->input->post('phone',true);
+                $email = $this->input->post('email',true);
+                $diachi = $this->input->post('address',true);
+                $ngaysinh = $this->input->post('birthday',true);
                 $ngaysinh = date('Y-m-d', strtotime($ngaysinh));//ep kieu them vao database
-                $gioitinh = $this->input->post('gender');
-                $chucvu = $this->input->post('level');
-                $trangthai = $this->input->post('status');
+                $gioitinh = $this->input->post('gender',true);
+                $chucvu = $this->input->post('level',true);
+                $trangthai = $this->input->post('status',true);
 
                 $dt = array(
                     'HO' => $ho,
@@ -246,6 +242,7 @@ class Admin extends MY_Controller
                     'MA_CHUCVU' => $chucvu,
                     'TRANGTHAI' => $trangthai
                 );
+
                 //neu co  nhap mat khau thi cap nhat lai mat khau
                 if ($password) {
                     $dt['MATKHAU'] = md5(md5($password));
@@ -257,7 +254,7 @@ class Admin extends MY_Controller
                     $this->session->set_flashdata('message', 'Update thất bại');
 
                 }
-                // pre($info);
+
                 if ($info[0]['TEN_CHUCVU'] == 'Admin') {
                     redirect(admin_url('admin'));
                 } else {

@@ -33,7 +33,7 @@ class Login extends MY_Controller
 //        $data =$this->db->get_where($this->employee,)
         $password = md5(md5($password));
         $this->load->model('admin_model');
-        $where = array('EMAIL' =>$userName,'MATKHAU' =>$password);
+        $where = array('EMAIL' =>$userName,'MATKHAU' =>$password,'TRANGTHAI !=' => 0);
         if ($this->admin_model->check_exists($where, $this->employee)){
             $this->session->set_userdata('username',$userName);
             $this->session->set_userdata('password',$password);

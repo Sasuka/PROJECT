@@ -3,7 +3,7 @@ $this->load->view('admin/catelog/head', $this->data);
 
 $tmp['TEN_LOAI_SANPHAM'] = (isset($_POST['param_catelogName']) ? $_POST['param_catelogName'] : $info['TEN_LOAI_SANPHAM']);
 $tmp['MA_NHOM_SANPHAM'] = (isset($_POST['groupID']) ? $_POST['groupID'] : $info['MA_NHOM_SANPHAM']);
-$tmp['MA_NHA_CUNGCAP'] = (isset($_POST['providersID']) ? $_POST['providersID'] : $info['MA_NHA_CUNGCAP']);
+//$tmp['MA_NHA_CUNGCAP'] = (isset($_POST['providersID']) ? $_POST['providersID'] : $info['MA_NHA_CUNGCAP']);
 //pre($tmp['MA_NHA_CUNGCAP']);
 //var_dump($tmp['MA_NHOM_SANPHAM']);
 //pre($list);
@@ -40,48 +40,26 @@ $tmp['MA_NHA_CUNGCAP'] = (isset($_POST['providersID']) ? $_POST['providersID'] :
                     <div class="clear"></div>
                 </div>
                 <!-- nhom san pham -->
-                <div class="formRow">
-                    <label class="formLeft" for="param_groupID">Nhóm sản phẩm<span class="req">*</span></label>
-                    <div class="formRight">
-                    <span class="oneTwo">
-                        <select _autocheck="true" id="groupID" name="groupID">
-                            <option value="0">Chọn nhóm sản phẩm</option>
-                            <?php foreach ($listGroup as $itemGroup) { ?>
-                                <option value="<?= $itemGroup['MA_NHOM_SANPHAM']; ?>"
-                                    <?php echo ($tmp['MA_NHOM_SANPHAM'] == $itemGroup['MA_NHOM_SANPHAM']) ? 'selected' : ''; ?>>
-                                    <?= $itemGroup['TEN_NHOM_SANPHAM']; ?></option>
-                            <?php } ?>
-                        </select>
-                    </span>
-                        <span name="groupID_autocheck" class="autocheck"></span>
-                        <div name="groupID_error" class="clear error"
-                             id="groupID_error"><?php echo form_error('groupID'); ?></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <!-- nhà cung cap -->
 <!--                <div class="formRow">-->
-<!--                    <label class="formLeft" for="providersID">Nhà cung cấp <span class="req">*</span></label>-->
+<!--                    <label class="formLeft" for="param_groupID">Nhóm sản phẩm<span class="req">*</span></label>-->
 <!--                    <div class="formRight">-->
-<!--                                <span class="oneTwo">-->
-<!--                                    <select _autocheck="true" id="providersID" name="providersID">-->
-<!--                                        <option value="0">Chọn nhà cung cấp</option>-->
-<!--                                        --><?php //foreach ($list as $item) { ?>
-<!--                                            <option value="--><?//= $item['MA_NHA_CUNGCAP']; ?><!--"-->
-<!--                                            --><?php //echo ($item['MA_NHA_CUNGCAP'] ==$tmp['MA_NHA_CUNGCAP']) ? 'selected':'';?>
-<!--                                            >-->
-<!---->
-<!--                                                --><?//= $item['TEN_NHA_CUNGCAP']; ?><!--</option>-->
-<!--                                        --><?php //} ?>
-<!--                                    </select>-->
-<!--                                </span>-->
-<!--                        <span name="providersID_autocheck" class="autocheck"></span>-->
-<!--                        <div name="providersID_error" class="clear error"-->
-<!--                             id="providersID_error">--><?php //echo form_error('providersID'); ?><!--</div>-->
+<!--                    <span class="oneTwo">-->
+<!--                        <select _autocheck="true" id="groupID" name="groupID">-->
+<!--                            <option value="0">Chọn nhóm sản phẩm</option>-->
+<!--                            --><?php //foreach ($listGroup as $itemGroup) { ?>
+<!--                                <option value="--><?//= $itemGroup['MA_NHOM_SANPHAM']; ?><!--"-->
+<!--                                    --><?php //echo ($tmp['MA_NHOM_SANPHAM'] == $itemGroup['MA_NHOM_SANPHAM']) ? 'selected' : ''; ?><!-->
+<!--                                    --><?//= $itemGroup['TEN_NHOM_SANPHAM']; ?><!--</option>-->
+<!--                            --><?php //} ?>
+<!--                        </select>-->
+<!--                    </span>-->
+<!--                        <span name="groupID_autocheck" class="autocheck"></span>-->
+<!--                        <div name="groupID_error" class="clear error"-->
+<!--                             id="groupID_error">--><?php //echo form_error('groupID'); ?><!--</div>-->
 <!--                    </div>-->
 <!--                    <div class="clear"></div>-->
 <!--                </div>-->
-
+<!---->
                 <div class="formSubmit">
                     <input value="Cập nhật" class="redB" type="submit">
                     <input value="Hủy bỏ" class="basic" type="reset">
@@ -97,7 +75,8 @@ $tmp['MA_NHA_CUNGCAP'] = (isset($_POST['providersID']) ? $_POST['providersID'] :
     $(document).ready(function () {
         $('#groupID').change(function (e) {
 
-            groupID = $(this).val();
+         //   groupID = $(this).val();
+            groupID = $tmp['MA_NHOM_SANPHAM'];
             catelogName = $('#param_catelogName').val();
             var data = {'groupID': groupID, 'catelogName': catelogName};
 //            var str = groupID + '-' + catelogName;

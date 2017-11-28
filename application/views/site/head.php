@@ -70,7 +70,7 @@
 
 
 
-<script src="<?php echo public_url() ?>/js/jquery-ui.js"></script>
+<script src="<?php echo public_url() ?>js/jquery-ui.js"></script>
 <!--<script src="--><?php //echo public_url() ?><!--bootstrap/js/npm.js"></script>-->
 <script src="<?php echo public_url('site') ?>/js/customer_area.js" type='text/javascript'></script>
 <script src="<?php echo public_url('site') ?>/js/haravan_common.js" type='text/javascript'></script>

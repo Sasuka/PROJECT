@@ -37,17 +37,13 @@ class Catelog extends MY_Controller
             echo '0';
         }
     }
+
 //   ================INSERT  LOAI SAN PHAM================================//
     public function addCateGroup()
     {
         $data = json_decode($_GET['data'], true);
-//        print_r($arr[0]);
-
         $data['catelogName'] = strtoupper($data['catelogName']);
-        $input = array('TEN_LOAI_SANPHAM' => $data['catelogName'], 'MA_NHOM_SANPHAM' => $data['groupID'],'MA_NHA_CUNGCAP' =>$data['providersID']);
-
-//        echo $data['groupID'];
-//
+        $input = array('TEN_LOAI_SANPHAM' => $data['catelogName'], 'MA_NHOM_SANPHAM' => $data['groupID'], 'MA_NHA_CUNGCAP' => $data['providersID']);
         if ($this->catelog_model->check_exist($input)) {
             echo '1';
         } else {
@@ -55,6 +51,7 @@ class Catelog extends MY_Controller
             echo '0';
         }
     }
+
 //   ================LẤY DS LOAI SAN PHAM THEO THƯƠNG HIỆU================================//
     public function getListCateLogByGroup()
     {
@@ -71,7 +68,7 @@ class Catelog extends MY_Controller
 //            pre($listCate);
             if (empty($listCate)) {
                 echo '<option value="0">Không có</option>';
-            }else if ($listCate > 0) {
+            } else if ($listCate > 0) {
                 ?>
                 <option value="0">Chọn loại sản phẩm</option>
                 <?php
@@ -87,15 +84,15 @@ class Catelog extends MY_Controller
 
     }
 
-    //   ================LẤY DS LOAI SAN PHAM THEO NHA CUNG CAP================================//
+//================LẤY DS LOAI SAN PHAM THEO NHA CUNG CAP================================//
     public function getCateByProviders()
     {
         if (isset($_POST["providersId"]) && !empty($_POST["providersId"])) {
             $providersId = $_POST["providersId"];
-            $input['where'] = array('MA_NHA_CUNGCAP' => $providersId );
+            $input['where'] = array('MA_NHA_CUNGCAP' => $providersId);
             // print_r($this->catelog_model->getList($input));
             $listCate = $this->catelog_model->getList($input);
-           // pre($listCate);
+            // pre($listCate);
             if (!$listCate) {
                 echo '<option value="0">Không có</option>';
             }
@@ -113,6 +110,7 @@ class Catelog extends MY_Controller
         }
 
     }
+
 //   ================THEM LOAI SAN PHAM================================//
     public function add()
     {

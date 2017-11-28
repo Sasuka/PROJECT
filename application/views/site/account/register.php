@@ -90,9 +90,7 @@
 </div>
 <script>
     $(document).ready(function () {
-//        DateTimePicker filedatepkr = new DateTimePicker();
-//        //filedatepkr.CustomFormat = "dd/MM/yyyy";
-//        filedatepkr.Value = DateTime.Parse(fidate);
+
         $( "#datepicker" ).datepicker({
             dateFormat: 'dd/mm/yy'
         });
@@ -238,7 +236,4 @@
             }
         });
     });
-
-
-
 </script>
