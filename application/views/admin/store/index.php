@@ -21,68 +21,68 @@ $this->load->view('admin/store/head', $this->data);
 
         <table class="sTable mTable myTable" id="checkAll" width="100%" cellspacing="0" cellpadding="0">
 
-            <thead class="filter">
-            <tr>
-                <td colspan="6">
-                    <form class="list_filter form" action="<?php echo admin_url('product'); ?>" method="get">
-                        <table width="100%" cellspacing="0" cellpadding="0">
-                            <tbody>
-
-                            <tr>
-                                <td class="label" style="width:40px;"><label for="filter_id">Mã số</label></td>
-                                <td class="item"><input name="id" value="<?php echo $this->input->get('id'); ?>"
-                                                        id="filter_id" style="width:55px;"
-                                                        type="text"></td>
-
-                                <td class="label" style="width:40px;"><label for="filter_id">Tên</label></td>
-                                <td class="item" style="width:155px;"><input name="name"
-                                                                             value="<?php echo $this->input->get('name'); ?>"
-                                                                             id="filter_iname"
-                                                                             style="width:155px;" type="text"></td>
-
-                                <td class="label" style="width:60px;"><label for="filter_status">Nhóm:</label></td>
-                                <td class="item">
-                                    <select name="group" id="group-product">
-                                        <option value="0">Chọn nhóm</option>
-                                        <?php
-                                        foreach ($listGroup as $itemGroup) {
-                                            ?>
-                                            <option value="<?= $itemGroup['MA_NHOM_SANPHAM']; ?>"><?= $itemGroup['TEN_NHOM_SANPHAM']; ?></option>
-                                            <?php
-                                        }
-                                        ?>
-
-                                    </select>
-                                </td>
-                                <td class="label" style="width:60px;"><label for="filter_status">Thể loại</label></td>
-                                <td class="item">
-                                    <select name="catalog" id="catelog-product">
-                                        <option value="0">Chọn loại trước</option>
-                                    </select>
-                                </td>
-                                <td style="width:150px">
-                                    <input class="button blueB" value="Lọc" type="submit">
-                                    <input class="basic" value="Reset"
-                                           onclick="window.location.href = '<?php echo admin_url("product") ?>'; "
-                                           type="reset">
-                                </td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-                    </form>
-                </td>
-            </tr>
-            </thead>
+<!--            <thead class="filter">-->
+<!--            <tr>-->
+<!--                <td colspan="6">-->
+<!--                    <form class="list_filter form" action="--><?php //echo admin_url('product'); ?><!--" method="get">-->
+<!--                        <table width="100%" cellspacing="0" cellpadding="0">-->
+<!--                            <tbody>-->
+<!---->
+<!--                            <tr>-->
+<!--                                <td class="label" style="width:40px;"><label for="filter_id">Mã số</label></td>-->
+<!--                                <td class="item"><input name="id" value="--><?php //echo $this->input->get('id'); ?><!--"-->
+<!--                                                        id="filter_id" style="width:55px;"-->
+<!--                                                        type="text"></td>-->
+<!---->
+<!--                                <td class="label" style="width:40px;"><label for="filter_id">Tên</label></td>-->
+<!--                                <td class="item" style="width:155px;"><input name="name"-->
+<!--                                                                             value="--><?php //echo $this->input->get('name'); ?><!--"-->
+<!--                                                                             id="filter_iname"-->
+<!--                                                                             style="width:155px;" type="text"></td>-->
+<!---->
+<!--                                <td class="label" style="width:60px;"><label for="filter_status">Nhóm:</label></td>-->
+<!--                                <td class="item">-->
+<!--                                    <select name="group" id="group-product">-->
+<!--                                        <option value="0">Chọn nhóm</option>-->
+<!--                                        --><?php
+//                                        foreach ($listGroup as $itemGroup) {
+//                                            ?>
+<!--                                            <option value="--><?//= $itemGroup['MA_NHOM_SANPHAM']; ?><!--">--><?//= $itemGroup['TEN_NHOM_SANPHAM']; ?><!--</option>-->
+<!--                                            --><?php
+//                                        }
+//                                        ?>
+<!---->
+<!--                                    </select>-->
+<!--                                </td>-->
+<!--                                <td class="label" style="width:60px;"><label for="filter_status">Thể loại</label></td>-->
+<!--                                <td class="item">-->
+<!--                                    <select name="catalog" id="catelog-product">-->
+<!--                                        <option value="0">Chọn loại trước</option>-->
+<!--                                    </select>-->
+<!--                                </td>-->
+<!--                                <td style="width:150px">-->
+<!--                                    <input class="button blueB" value="Lọc" type="submit">-->
+<!--                                    <input class="basic" value="Reset"-->
+<!--                                           onclick="window.location.href = '--><?php //echo admin_url("product") ?>//'; "
+<!--//                                           type="reset">-->
+<!--//                                </td>-->
+<!--//-->
+<!--//                            </tr>-->
+<!--//                            </tbody>-->
+<!--//                        </table>-->
+<!--//                    </form>-->
+<!--//                </td>-->
+<!--//            </tr>-->
+<!--//            </thead>-->
 
             <thead>
             <tr>
                 <td style="width:21px;"><img src="<?php echo public_url('admin/images') ?>/icons/tableArrows.png"></td>
                 <td style="width:60px;">Mã kho</td>
                 <td>Tên kho</td>
-                <td>Số lượng tồn</td>
+<!--                <td>Số lượng tồn</td>-->
                 <td>Tên loại sản phẩm</td>
-                <td style="width:120px;">Hành động</td>
+<!--                <td style="width:120px;">Hành động</td>-->
             </tr>
             </thead>
 
@@ -122,26 +122,26 @@ $this->load->view('admin/store/head', $this->data);
 
                     </td>
 
-                    <td>
-                        <span><?php echo $item['SOLUONG_TON']; ?></span>
-                    </td>
+<!--                    <td>-->
+<!--                        <span>--><?php //echo $item['SOLUONG_TON']; ?><!--</span>-->
+<!--                    </td>-->
 
 
                     <td class="textC">
                         <span><?php echo $item['TEN_LOAI_SANPHAM']; ?></span>
                     </td>
 
-                    <td class="option textC">
-
-                        <a href="<?php echo admin_url('store/edit/' . $item['MA_KHO']); ?>" title="Chỉnh sửa"
-                           class="tipS">
-                            <img src="<?php echo public_url('admin/images') ?>/icons/color/edit.png">
-                        </a>
-
-                        <a href="<?php echo admin_url('store/delete/' . $item['MA_KHO']); ?>" title="Xóa"
-                           class="tipS verify_action">
-                            <img src="<?php echo public_url('admin/images') ?>/icons/color/delete.png">
-                        </a>
+<!--                    <td class="option textC">-->
+<!---->
+<!--                        <a href="--><?php //echo admin_url('store/edit/' . $item['MA_KHO']); ?><!--" title="Chỉnh sửa"-->
+<!--                           class="tipS">-->
+<!--                            <img src="--><?php //echo public_url('admin/images') ?><!--/icons/color/edit.png">-->
+<!--                        </a>-->
+<!---->
+<!--                        <a href="--><?php //echo admin_url('store/delete/' . $item['MA_KHO']); ?><!--" title="Xóa"-->
+<!--                           class="tipS verify_action">-->
+<!--                            <img src="--><?php //echo public_url('admin/images') ?><!--/icons/color/delete.png">-->
+<!--                        </a>-->
                     </td>
                 </tr>
                 <?php

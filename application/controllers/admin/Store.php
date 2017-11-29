@@ -1,4 +1,5 @@
 <?php
+
 class Store extends MY_Controller
 {
     public function __construct()
@@ -6,20 +7,25 @@ class Store extends MY_Controller
         parent::__construct();
         $this->load->model(array('store_model'));
     }
+
 //kiem tra kho co chua loai hay khong
-    public function checkCateInStore(){
+    public function checkCateInStore()
+    {
         $cateId = $_POST['cateId'];
-        $input = array('MA_LOAI_SANPHAM'=>$cateId);
-      // pre($this->store_model->check_exist($input));
-        if ($this->store_model->check_exist($input)){
+        $input = array('MA_LOAI_SANPHAM' => $cateId);
+        // pre($this->store_model->check_exist($input));
+        if ($this->store_model->check_exist($input)) {
             echo '1';
-        }else{
+        } else {
             echo '0';
         }
     }
-    public function getCateByProvider($condition=array()){
+
+    public function getCateByProvider($condition = array())
+    {
 
     }
+
     public function index()
     {
 //       //lay noi dung cua messager
@@ -52,23 +58,24 @@ class Store extends MY_Controller
         $idProduct = intval($id);
 
 
-
-
-    //thuc hien lay danh sach kho
-        $this->data['list'] = $this->store_model->getListJoin('loai_sanpham','MA_LOAI_SANPHAM');
+        //thuc hien lay danh sach kho
+        $this->data['list'] = $this->store_model->getListJoin('loai_sanpham', 'MA_LOAI_SANPHAM');
 
         $this->data['temp'] = 'admin/store/index';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
-    public function add(){
+
+    public function add()
+    {
 //load thu vien validate de su dung kiem tra khi upload
         $this->load->library('form_validation');
         $this->load->helper('form');
         //khi nhan submit
-        if ($this->input->post()){
+        if ($this->input->post()) {
             $name = $this->input->post('name', true);
             $cate = $this->input->post('cate', true);
-            $data = array('TEN_KHO' =>$name,'MA_LOAI_SANPHAM' =>$cate);
+            $data = array('TEN_KHO' => strtoupper($name),
+                'MA_LOAI_SANPHAM' => $cate);
             if ($this->store_model->add($data)) {
                 $this->session->set_flashdata('message', 'Thêm kho thành công!');
             } else {
@@ -83,7 +90,9 @@ class Store extends MY_Controller
         $this->data['temp'] = 'admin/store/add';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
-    public function edit(){
+
+    public function edit()
+    {
 
     }
 }

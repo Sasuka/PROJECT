@@ -120,7 +120,7 @@ $this->load->view('admin/product/head', $this->data);
                         </div>
 
                         <a href="product/view/9.html" class="tipS" title="" target="_blank">
-                            <b><?php echo $item['TEN_SANPHAM']; ?></b>
+                            <b><?php echo $this->mb_ucwords($item['TEN_SANPHAM']); ?></b>
                         </a>
 
                         <div class="f11">

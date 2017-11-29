@@ -92,8 +92,8 @@ class ImportDetail extends MY_Controller
                 'MA_SANPHAM' => $product_import_add,
                 'SOLUONGNHAP' => $amount,
                 'DONGIA_NHAP' => $price);
-
-            if ($this->addInput($data, $per_price)) {
+            $dis_price = $price * (1 + $per_price * 0.01);
+            if ($this->addInput($data,  $dis_price)) {
                 $this->session->set_flashdata('message', 'Lập phiếu nhập thành công!');
             } else {
                 $this->session->set_flashdata('message', 'Lập phiếu nhập thất bại');
@@ -134,7 +134,7 @@ class ImportDetail extends MY_Controller
 
         $id = $this->uri->rsegment(3);
         $id = intval($id);
-        pre($id);
+       // pre($id);
         //lấy thong tin của quản trị viên
         $input = array('MA_PHIEUNHAP' => $id);
         $info = $this->importDetail_model->get_info_rule($input);
@@ -157,10 +157,11 @@ class ImportDetail extends MY_Controller
         //execute sql
         //thuc hien insert phieu nhap
         $this->importDetail_model->add($data);
-        $input = array('DONGIA_BAN' => $data['DONGIA_NHAP'] * (1 + $per_price * 0.01));
+        $input = array('DONGIA_BAN' => $per_price);
         $where = array('MA_SANPHAM' => $data['MA_SANPHAM']);
         $this->load->model('product_model');
         $this->product_model->update_rule($where, $input);
+        $this->db->last_query();
 
         //thuc hien cap nhat lai gia
 

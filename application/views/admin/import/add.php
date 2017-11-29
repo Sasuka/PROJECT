@@ -68,7 +68,6 @@ $tmp['fname'] = $account['HO'] . ' ' . $account['TEN'];
 
                 <div class="formSubmit">
                     <input value="Thêm mới" class="redB" type="submit">
-                    <input value="Hủy bỏ" class="basic" type="reset" href="<?php echo admin_url('admin/import')?>">
                 </div>
                 <div class="clear"></div>
             </fieldset>

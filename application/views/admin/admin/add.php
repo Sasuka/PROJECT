@@ -80,7 +80,8 @@ $this->load->view('admin/admin/head', $this->data);
                     <label class="formLeft" for="param_name">Mật khẩu:<span class="req">*</span></label>
                     <div class="formRight"><span class="oneTwo">
                     <input name="password" id="password" _autocheck="true" type="password" value="<?php echo set_value('password') ?>"
-                           required>
+                           required="" inputmode="numeric" minlength="6"
+                           maxlength="15" size="15">
                         </span>
                         <span name="name_autocheck" class="autocheck"></span>
                         <div name="name_error" id="password_error"
@@ -94,7 +95,8 @@ $this->load->view('admin/admin/head', $this->data);
                     <div class="formRight">
                                 <span class="oneTwo"><input name="re-pass" id="re-pass" _autocheck="true"
                                                             type="password"
-                                                            value="<?php echo set_value('re-pass') ?>" required min="6"></span>
+                                                            value="<?php echo set_value('re-pass') ?>" required="" inputmode="numeric" minlength="6"
+                                                            maxlength="15" size="15"></span>
                         <span name="name_autocheck" class="autocheck"></span>
                         <div name="name_error" id="re-pass_error"
                              class="clear error"><?php echo form_error('re-pass'); ?></div>
@@ -107,7 +109,8 @@ $this->load->view('admin/admin/head', $this->data);
                     <div class="formRight">
                                 <span class="oneTwo"><input name="phone" id="phone" _autocheck="true"
                                                             type="text" value="<?php echo set_value('phone') ?>"
-                                                            maxlength="15" required></span>
+                                                            inputmode="numeric" minlength="10"
+                                                            maxlength="13" size="13"  required></span>
                         <span name="name_autocheck" class="autocheck"></span>
                         <div name="name_error" class="clear error"
                              id="phone_error"><?php echo form_error('phone'); ?></div>
@@ -147,7 +150,7 @@ $this->load->view('admin/admin/head', $this->data);
                     <div class="formRight">
                                 <span class="oneTwo"><input name="birthday" id="birthday" _autocheck="true"
                                                             type="text"
-                                                            value="<?php echo set_value('birthday') ?>"></span>
+                                                            value="<?php echo set_value('birthday') ?>" required=""></span>
                         <span name="name_autocheck" class="autocheck"></span>
                         <div name="name_error" class="clear error"><?php echo form_error('birthday'); ?></div>
                     </div>
@@ -158,7 +161,7 @@ $this->load->view('admin/admin/head', $this->data);
                     <label class="formLeft">Hình ảnh:<span class="req"></span></label>
                     <div class="formRight">
                         <div class="left"><input id="image" name="image" type="file"
-                                                 value="<?php echo set_value('avatar') ?>"></div>
+                                                 value="<?php echo set_value('avatar') ?>" ></div>
                         <div name="image_error" class="clear error"><?php echo form_error('avatar'); ?></div>
                     </div>
                     <div class="clear"></div>

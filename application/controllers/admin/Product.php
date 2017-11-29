@@ -70,6 +70,7 @@ class Product extends MY_Controller
         $this->data['list'] = $list;//danh sach tat ca san pham
         $this->data['promotion'] = $promotion;
         $this->data['listGroup'] = $this->group_model->getList();
+
         $this->data['temp'] = 'admin/product/index';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
@@ -482,12 +483,10 @@ class Product extends MY_Controller
             //upload danh sach anh kem theo
             $image_list = array();
             $image_list = $this->upload_library->upload_file($upload_path, 'image_list');
-            $image_list = json_encode($image_list);
 
             $dt = array(
                 'TEN_SANPHAM' => $name,
                 'DONGIA_BAN' => $price,
-                'DS_HINHANH' => $image_list,
                 'BAOHANH' => $warranty,
                 'LOAI' => $catelog_dis,
                 'MA_XUATXU' => $idmade,
@@ -496,6 +495,10 @@ class Product extends MY_Controller
             );
             if ($namePicture != '') {
                 $dt['HINH_DAIDIEN'] = $namePicture;
+            }
+            if (sizeof($image_list)){
+                $image_list = json_encode($image_list);
+                $dt['DS_HINHANH'] = $image_list;
             }
             //      pre($dt);
             //        pre($input);
@@ -509,6 +512,7 @@ class Product extends MY_Controller
 
 
         $this->data['madeIn'] = $this->madeIn_model->getList();
+     //   pre($info);
         $this->data['product'] = $info;
 
         $this->data['temp'] = 'admin/product/edit';//khung tieu de cua admin duoc giu lai

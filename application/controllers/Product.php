@@ -49,8 +49,9 @@ class Product extends MY_Controller
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $list = $this->product_model->getListSearch($config['per_page'], $data['page'], $where);
-//         pre($list);
+
         $this->data['listProduct'] = $list;
+
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
 

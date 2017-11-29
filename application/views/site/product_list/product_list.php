@@ -20,7 +20,7 @@
 											<option value="title-descending">Tên: Z-A</option>
 											<option value="created-ascending">Cũ nhất</option>
 											<option value="created-descending">Mới nhất</option>
-											<option value="best-selling">Bán chạy nhất</option>
+
 										</select>
 									</span>
                         </div>
@@ -46,30 +46,37 @@
                                         %</span>
                                     </div>
                                 <?php }
-                                foreach ($promotion as $itemPromotion) {
-                                    if ($itemProduct['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
-                                        ?>
-                                        <div class="product-sale">
+                                if (isset($promotion) && !empty($promotion)) {
+                                    foreach ($promotion as $itemPromotion) {
+                                        if ($itemProduct['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
+                                            ?>
+                                            <div class="product-sale">
                                     <span><label
                                                 class="sale-lb">- </label> <?php echo $itemPromotion['PHANTRAM_KM']; ?>%</span>
-                                        </div>
-                                        <?php
-                                        break;
+                                            </div>
+                                            <?php
+                                            break;
+                                        }
                                     }
                                 }
                                 ?>
 
-                                <a href="javascript:void(0);"  class="quickview"
+                                <a href="javascript:void(0);" class="quickview"
                                    data-handle="<?php echo base_url('product/getProduct1/') . $itemProduct['MA_SANPHAM']; ?>"
                                    title="<?php echo mb_strtoupper($itemProduct['TEN_SANPHAM'], 'UTF-8'); ?>">
                                     <img class="first-image  has-img"
                                          alt="<?php echo mb_strtoupper($itemProduct['TEN_SANPHAM'], 'UTF-8'); ?>"
                                          src="<?php echo upload_url('product/') . $itemProduct['HINH_DAIDIEN']; ?>"/>
+                                    <?php
+                                    $list_image = json_decode($itemProduct['DS_HINHANH']);
+                                   // pre($list_image);
+                                    if (!empty($list_image)) {
+                                        ?>
+                                        <img class="second-image"
+                                             src="<?php echo base_url('uploads/product/'.strtolower($itemProduct['TEN_NHOM_SANPHAM']).'/'. $list_image[0]) ?>"
+                                             alt="<?php echo mb_strtoupper($itemProduct['TEN_SANPHAM'], 'UTF-8'); ?>"/>
 
-                                    <img class="second-image"
-                                         src="#"
-                                         alt="<?php echo mb_strtoupper($itemProduct['TEN_SANPHAM'], 'UTF-8'); ?>"/>
-
+                                    <?php }?>
                                 </a>
 
                                 <div class="actionss">
@@ -82,16 +89,10 @@
                                         </a>
                                     </div>
 
-                                    <div class="view-details">
-                                        <a href="/collections/dong-ho-nam-longbo/products/dong-ho-longbo-mat-vuong-mau-trang-1"
-                                           class="view-detail">
-                                            <span><i class="fa fa-clone"> </i></span>
-                                        </a>
-                                    </div>
                                     <div class="btn-quickview-products">
                                         <a href="javascript:void(0);" class="quickview"
                                            data-handle="<?php echo base_url('product/getProduct1/') . $itemProduct['MA_SANPHAM']; ?>"><i
-                                                    class="fa fa-eye" ></i></a>
+                                                    class="fa fa-eye"></i></a>
                                     </div>
                                 </div>
 
@@ -102,8 +103,8 @@
 
                                 <!-- sử dụng pull-left -->
                                 <h3 class="pro-name"><a
-                                            href="/collections/dong-ho-nam-longbo/products/dong-ho-longbo-mat-vuong-mau-trang-1"
-                                            title="ĐỒNG HỒ LONGBO MẶT VUÔNG MÀU ĐEN"><?php echo mb_convert_case(strtolower($itemProduct['TEN_SANPHAM']), MB_CASE_TITLE, "UTF-8"); ?> </a>
+                                            href="#"
+                                            title="<?php echo  $itemProduct['TEN_SANPHAM']; ?>"><?php echo $itemProduct['TEN_SANPHAM']; ?> </a>
                                 </h3>
                                 <div class="pro-prices">
                                     <!--                                    <p class="pro-price">-->
@@ -114,23 +115,25 @@
                                     <!--                                    </p>-->
                                     <?php
                                     $check = 0;// dò xem hết có hay không
-                                    foreach ($promotion as $itemPromotion) {
-                                        if ($itemProduct['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
-                                            ?>
-                                            <p class="pro-price discount-cost"><?php echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $itemProduct['DONGIA_BAN']; ?></p>
+                                    if (isset($promotion) && !empty($promotion)) {
+                                        foreach ($promotion as $itemPromotion) {
+                                            if ($itemProduct['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
+                                                ?>
+                                                <p class="pro-price discount-cost"><?php echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $itemProduct['DONGIA_BAN']; ?></p>
 
-                                            <p class="pro-price-del text-left discount-original">
-                                                <del class="compare-price"><?php echo $itemProduct['DONGIA_BAN'] ?></del>
-                                            </p>
-                                            <?php
-                                            $check =1;
-                                            break;
+                                                <p class="pro-price-del text-left discount-original">
+                                                    <del class="compare-price"><?php echo $itemProduct['DONGIA_BAN'] ?></del>
+                                                </p>
+                                                <?php
+                                                $check = 1;
+                                                break;
+                                            }
                                         }
                                     }
-                                    if ($check == 0){
+                                    if ($check == 0) {
                                         ?>
                                         <p class="pro-price discount-cost"><?php echo $itemProduct['DONGIA_BAN']; ?></p>
-                                    <?php
+                                        <?php
                                     }
                                     ?>
                                 </div>

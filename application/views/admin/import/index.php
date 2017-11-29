@@ -21,58 +21,6 @@ $account = $this->session->userdata('account');
         </div>
 
         <table class="sTable mTable myTable" id="checkAll" width="100%" cellspacing="0" cellpadding="0">
-
-            <thead class="filter">
-            <tr>
-                <td colspan="6">
-                    <form class="list_filter form" action="<?php echo admin_url('import');?>" method="get">
-                        <table width="100%" cellspacing="0" cellpadding="0">
-                            <tbody>
-
-                            <tr>
-                                <td class="label" style="width:40px;"><label for="filter_id">Mã số</label></td>
-                                <td class="item"><input name="id" value="<?php echo $this->input->get('id');?>" id="filter_id" style="width:55px;"
-                                                        type="text"></td>
-
-                                <td class="label" style="width:40px;"><label for="filter_id">Tên </label></td>
-                                <td class="item" style="width:155px;"><input name="name" value="<?php echo $this->input->get('name');?>" id="filter_iname"
-                                                                             style="width:155px;" type="text"></td>
-
-                                <td class="label" style="width:60px;"><label for="filter_status">Nhóm:</label></td>
-                                <td class="item">
-                                    <select name="group" id="group-product">
-                                        <option value="0">Chọn nhóm</option>
-<!--                                        --><?php
-//                                        foreach ($listGroup as $itemGroup) {
-//                                            ?>
-<!--                                            <option value="--><?//= $itemGroup['MA_NHOM_SANPHAM']; ?><!--">--><?//= $itemGroup['TEN_NHOM_SANPHAM']; ?><!--</option>-->
-<!--                                            --><?php
-//                                        }
-//                                        ?>
-
-                                    </select>
-                                </td>
-                                <td class="label" style="width:60px;"><label for="filter_status">Thể loại</label></td>
-                                <td class="item">
-                                    <select name="catalog" id="catelog-product">
-                                        <option value="0">Chọn loại trước</option>
-                                    </select>
-                                </td>
-                                <td style="width:150px">
-                                    <input class="button blueB" value="Lọc" type="submit">
-                                    <input class="basic" value="Reset"
-                                           onclick="window.location.href = '<?php echo admin_url("import")?>'; "
-                                           type="reset">
-                                </td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-                    </form>
-                </td>
-            </tr>
-            </thead>
-
             <thead>
             <tr>
                 <td style="width:21px;"><img src="<?php echo public_url('admin/images') ?>/icons/tableArrows.png"></td>
@@ -87,7 +35,7 @@ $account = $this->session->userdata('account');
 
             <tfoot class="auto_check_pages">
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     <div class="list_action itemActions">
                         <a href="#submit" id="submit" class="button blueB" url="<?php echo admin_url('import/dell_all');?>">
                             <span style="color:white;">Xóa hết</span>

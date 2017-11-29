@@ -65,7 +65,7 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $product['TRAN
                                         foreach ($list_image as $item_image) {
                                             ?>
 
-                                            <img src="<?php echo base_url('uploads/product/' . $product['HINH_DAIDIEN']) ?>"
+                                            <img src="<?php echo base_url('uploads/product/'.strtolower($product['TEN_NHOM_SANPHAM']).'/'. $item_image) ?>"
                                                  style="width: 100px;height: 70px; margin: 5px;">
 
                                             <?php
@@ -208,7 +208,7 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $product['TRAN
 <input type="hidden" value="<?php echo $product['MA_LOAI_SANPHAM'] ;?>" name="group">
                 <div class="formSubmit">
                     <input value="Cập nhật" class="redB" type="submit">
-                    <input value="Hủy bỏ" class="basic" type="reset">
+                   
                 </div>
                 <div class="clear"></div>
             </div>
