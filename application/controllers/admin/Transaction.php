@@ -51,7 +51,6 @@ class Transaction extends MY_Controller
         $this->data['temp'] = 'admin/transaction/index';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
-
     public function view()
     {
         $this->load->library('form_validation');
@@ -60,13 +59,13 @@ class Transaction extends MY_Controller
 
         //lay id cua quan trị viên cần chỉnh sửa
         $idTransaction = $this->uri->segment('4');
-//        pre($idTransaction);
+
         if ($this->input->post()) {
             $status = $this->input->post('status');
 
             if ($status == 1) {
                 //neu la giao hang
-                $this->transaction_suc();
+                $this->transaction_suc($idTransaction);
             } else if ($status == 2) {
                 //neu la huy don hang
                 $this->transaction_cancell();
@@ -80,10 +79,10 @@ class Transaction extends MY_Controller
         $this->load->view('admin/main', $this->data);
 
     }
-    public function transaction_suc(){
+    public function transaction_suc($id = ''){
         $idEmployee = $this->input->post('employeeId');
-        $status = $this->input->post('status');
-//        pre($status);
+        $status = '1';
+
         $data = array(
             'MA_NHANVIEN' => $idEmployee,
             'TRANGTHAI' => $status
@@ -91,7 +90,7 @@ class Transaction extends MY_Controller
         //thuc hien cac cau lenh khi lap hoa don
         $this->db->trans_start();
         $idTransaction = $this->uri->rsegment(3);
-      //  pre('d'.$idTransaction);
+      //  pre($idTransaction);
         $input['where'] = array(
             'MA_GIAODICH' => $idTransaction
         );
@@ -123,7 +122,7 @@ class Transaction extends MY_Controller
             );
             $where1 = array('MA_GIAODICH'=>$idTransaction);
             if($this->transaction_model->update_rule($where1, $data)){
-                $this->data['status']='1';
+//                $this->data['status']='1';
                 $this->session->set_flashdata('message', 'Đang giao hàng!');
             }
 

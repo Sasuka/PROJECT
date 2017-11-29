@@ -180,7 +180,6 @@ class Product extends MY_Controller
 
 
     }
-
     public function search1()
     {
         $id = $this->uri->segment(3);
@@ -239,7 +238,6 @@ class Product extends MY_Controller
         $this->data['temp'] = 'site/product/search';
         $this->load->view('site/layout', $this->data);
     }
-
     public function search()
     {
         $keyWord = ($this->input->post("key")) ? $this->input->post("key") : "";
@@ -288,7 +286,6 @@ class Product extends MY_Controller
         $this->load->view('site/layout', $this->data);
 
     }
-
     public function search_price()
     {
         $id = $this->uri->segment(3);
@@ -328,7 +325,6 @@ class Product extends MY_Controller
         $this->data['temp'] = 'site/product/price_search';
         $this->load->view('site/layout', $this->data);
     }
-
     /*
      * Danh sách các sản phẩm khuyến mãi
      * */
