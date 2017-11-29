@@ -31,7 +31,7 @@
                     </a>
                     <div class="actionss">
                         <div class="btn-cart-products">
-                            <a href="xemgiohang.html">
+                            <a href="#">
                                 <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                             </a>
                         </div>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="btn-quickview-products">
                             <a href="javascript:void(0);" class="quickview"
-                               data-handle="/products/dong-ho-nam-skmei-kim-xanh-duong"><i
+                               data-handle="/ss"><i
                                     class="fa fa-eye"></i></a>
                         </div>
                     </div>

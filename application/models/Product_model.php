@@ -17,7 +17,7 @@ class Product_model extends MY_Model
     }
 
     /*Lấy tát cả san phẩm theo thông tin */
-    public function getProductFull($where = array())
+    public function getProductFull($limit = '', $start = '0',$input = array())
     {
         $product = 'sanpham';
         $categories = 'loai_sanpham';
@@ -48,8 +48,24 @@ class Product_model extends MY_Model
         $this->db->from($group_pro);
         $this->db->join($categories, $categories . '.MA_NHOM_SANPHAM =' . $group_pro . '.MA_NHOM_SANPHAM', 'right');
         $this->db->join($product, $product . '.MA_LOAI_SANPHAM = ' . $categories . '.MA_LOAI_SANPHAM', 'right');
-        if (!empty($where)) {
-            $this->db->where($where);
+        if (isset($input['select'])) {
+            $this->db->select($input['select']);
+        }
+        // Thêm điều kiện cho câu truy vấn truyền qua biến $input['where']
+
+        if ((isset($input['where'])) && $input['where']) {
+            $this->db->where($input['where']);
+        }
+        //tim kiem theo like
+        if ((isset($input['like'])) && $input['like']) {
+            $this->db->like($input['like'][0], $input['like'][1]);
+        }
+        // Thêm sắp xếp dữ liệu thông qua biến $input['order'] (ví dụ $input['order'] = array('id','DESC'))
+        if (isset($input['order'][0]) && isset($input['order'][1])) {
+            $this->db->order_by($input['order'][0], $input['order'][1]);
+        }
+        if ($limit !=''){
+            $this->db->limit($limit, $start);
         }
         return $this->db->get()->result_array();
     }

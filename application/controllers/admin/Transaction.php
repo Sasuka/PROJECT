@@ -73,6 +73,9 @@ class Transaction extends MY_Controller
             }
 
         }
+        $where['where'] = array('MA_GIAODICH' => $idTransaction);
+        $list =  $this->transaction_model->getList($where);
+        $this->data['list'] =$list;
         $this->data['temp'] = 'admin/bill/index';
         $this->load->view('admin/main', $this->data);
 
@@ -80,6 +83,7 @@ class Transaction extends MY_Controller
     public function transaction_suc(){
         $idEmployee = $this->input->post('employeeId');
         $status = $this->input->post('status');
+//        pre($status);
         $data = array(
             'MA_NHANVIEN' => $idEmployee,
             'TRANGTHAI' => $status
@@ -87,7 +91,7 @@ class Transaction extends MY_Controller
         //thuc hien cac cau lenh khi lap hoa don
         $this->db->trans_start();
         $idTransaction = $this->uri->rsegment(3);
-        pre('d'.$idTransaction);
+      //  pre('d'.$idTransaction);
         $input['where'] = array(
             'MA_GIAODICH' => $idTransaction
         );
@@ -113,37 +117,24 @@ class Transaction extends MY_Controller
             $dt = array('SOLUONG_BAN' => $item['SOLUONG_BAN']);
             $this->product_model->update_rule($wh, $dt);
 
-            $storeInfo = $this->store_model->get_info_rule(array('MA_LOAI_SANPHAM' => $item['MA_LOAI_SANPHAM']));
-//                pre($storeInfo);
-            $storeInfo['SOLUONG_TON'] -= $item['SOLUONG'];
-            //pre($storeInfo);
-//                //thuc hien update
-            $wh1 = array('MA_LOAI_SANPHAM' => $item['MA_LOAI_SANPHAM']);
-            $dt1 = array('SOLUONG_TON' => $storeInfo['SOLUONG_TON']);
-            if($this->store_model->update_rule($wh1, $dt1)){
-                //sau khi thuc hien thanh cong thi update lai bang giao dich
-//                pre($this->store_model->getList());
-
-                $data = array(
-                    'MA_NHANVIEN' => $idEmployee,
-                    'TRANGTHAI' => '1'
-                );
-                $where1 = array('MA_GIAODICH'=>$idTransaction);
-               if($this->transaction_model->update_rule($where1, $data)){
-                   $this->data['status']='1';
-                   $this->session->set_flashdata('message', 'Đang giao hàng!');
-               }
+            $data = array(
+                'MA_NHANVIEN' => $idEmployee,
+                'TRANGTHAI' => '1'
+            );
+            $where1 = array('MA_GIAODICH'=>$idTransaction);
+            if($this->transaction_model->update_rule($where1, $data)){
+                $this->data['status']='1';
+                $this->session->set_flashdata('message', 'Đang giao hàng!');
             }
 
         }
-
-
-        // thuc cap nhat lai trang thai cua
-
-
         $this->db->trans_complete();
       //  pre($storeInfo);
 
     }
+    public function transaction_cancell(){
+
+    }
+
 
 }

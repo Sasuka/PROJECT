@@ -17,15 +17,8 @@
             </li>
 
 
-            <li class="item  ">
-                <a href="/collections/hot-products">
-                    <span>Sản phẩm nổi bật</span>
-                </a>
-            </li>
-
-
             <li class="item  last">
-                <a href="/collections/all">
+                <a href="<?php echo base_url('product');?>">
                     <span>Tất cả sản phẩm</span>
                 </a>
             </li>

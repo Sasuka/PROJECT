@@ -3,8 +3,8 @@ $this->load->view('admin/bill/head', $this->data);
 $account = $this->session->userdata('account');
 //pre($account);
 $tmp['fname'] = $account['HO'] . ' ' . $account['TEN'];
-pre($list);
-$tmp['status'] = (isset($_POST['status'])) ? $_POST['$status'] : '0';
+//pre($list);
+$tmp['status'] = (isset($_POST['status'])) ? $_POST['status'] : '0';
 
 
 

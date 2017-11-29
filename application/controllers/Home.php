@@ -21,7 +21,6 @@ Class Home extends MY_Controller
     {
         //$this->data['cusAccount'] = $cusAccount;
         if (isset($cusAccount)){
-
           $this->data['isLogin'] = '1';
         }
         $this->data['temp'] = 'site/product_list/product_content';

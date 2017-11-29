@@ -120,11 +120,14 @@ $this->load->view('admin/product/head', $this->data);
                         </div>
 
                         <a href="product/view/9.html" class="tipS" title="" target="_blank">
-                            <b><?php echo $this->mb_ucwords($item['TEN_SANPHAM']); ?></b>
+                            <b><?php echo $item['TEN_SANPHAM']; ?></b>
                         </a>
 
                         <div class="f11">
                             Loại: <?php echo $item['LOAI']; ?> | Kinh doanh:<span style="color:red;"> <?php echo ($item['TRANGTHAI']=='0') ? 'Hết' :'<span style="color:forestgreen;">Còn</span>'; ?></span>
+                        </div>
+                        <div class="f11">
+                            Số lượng tồn: <?php echo $item['SOLUONG_BAN']; ?>
                         </div>
 
                     </td>

@@ -52,8 +52,8 @@ class MY_Controller extends CI_Controller
 
                 $list = $this->product_model->getPaging('home/index');
 
-                // pre($list);
-                /* Thông tin toàn bộ sản phẩm*/
+               //  pre($list);
+                 /* Thông tin toàn bộ sản phẩm*/
                // pre($list);
                 $this->data['listProduct'] = $list;
                 /*Thông tin các sản phẩm được khuyến mãi*/

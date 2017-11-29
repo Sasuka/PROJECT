@@ -48,8 +48,9 @@ class Product extends MY_Controller
         //khoi tao phan trang
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        $list = $this->product_model->getListSearch($config['per_page'], $data['page'], $where);
-
+        //$list = $this->product_model->getListSearch($config['per_page'], $data['page'], $where);
+        //  pre($list);
+        $list = $this->product_model->getPaging('product/index');
         $this->data['listProduct'] = $list;
 
         $this->data['temp'] = 'site/product_list/product_content';
@@ -65,7 +66,7 @@ class Product extends MY_Controller
         $where = array('sanpham.MA_SANPHAM' => $id);
         $promotionList = $this->promotionDetail_model->getListThreeJoin('khuyenmai', 'MA_KHUYENMAI', 'sanpham', 'MA_SANPHAM', $where);
 
-       // pre($promotionList[0]);
+        // pre($promotionList[0]);
         $product = $this->catelog_model->getListThreeJoin('sanpham', 'MA_LOAI_SANPHAM', 'nhom_sanpham', 'MA_NHOM_SANPHAM', $where);
         if (!empty($promotionList)) {
             $product[0]['PHANTRAM_KM'] = $promotionList[0]['PHANTRAM_KM'];
@@ -73,7 +74,7 @@ class Product extends MY_Controller
             $product[0]['TEN_KHUYENMAI'] = $promotionList[0]['TEN_KHUYENMAI'];
 
         }
-     //   pre($product[0]);
+        //   pre($product[0]);
         //$input['where'] = array('MA_SANPHAM' => $id);
         //thuc hien load danh sach san pham dua vao id loai
         //$product= $this->product_model->getList($input);
@@ -122,8 +123,7 @@ class Product extends MY_Controller
         $input['where'] = array('MA_LOAI_SANPHAM' => $id);
 
         //thuc hien load danh sach san pham dua vao id loai
-        $query = $this->product_model->getList($input);
-
+        $query = $this->product_model->getProductFull($input);
         //   $query = $this->product_model->getList($where);
         $this->data['listProduct'] = $query;
         //thuc hien goi qua view
@@ -165,10 +165,7 @@ class Product extends MY_Controller
         $this->load->model('productDetail_model');
         $condition4 = array('MA_SANPHAM' => $id, 'MA_LOAI_SANPHAM' => $info['MA_SANPHAM']);
         $detailProduct = $this->productDetail_model->get_info_rule($condition4);
-        //  pre($detailProduct);
 
-        //  pre($madeIn);
-//            pre($info);
 
         //thuc hien load file chi thiet
         $this->data['product'] = $info;
@@ -250,8 +247,8 @@ class Product extends MY_Controller
         // $key = isset($_GET['key']) ? $_GET['key'] : '';
         $input = array();
         if ($type == 'product') {
-            $input['like'] = array('TEN_SANPHAM', $keyWord);
-            $input['where'] = array('DONGIA_BAN >' => 0, 'TRANGTHAI' => 1);
+            $input['like'] = array('sanpham.TEN_SANPHAM', $keyWord);
+            $input['where'] = array('sanpham.DONGIA_BAN >' => 0, 'sanpham.TRANGTHAI' => 1);
             $total_rows = $this->product_model->get_total($input);
         }
         $this->load->library('pagination');
@@ -283,7 +280,7 @@ class Product extends MY_Controller
         $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $this->pagination->initialize($config);
 
-        $list = $this->product_model->getListSearch($config['per_page'], $data['page'], $input);
+        $list = $this->product_model->getProductFull($config['per_page'], $data['page'], $input);
 //        pre($list);
         $this->data['listProduct'] = $list;
         $this->data['temp'] = 'site/product_list/product_list';
@@ -369,10 +366,11 @@ class Product extends MY_Controller
 
         $this->pagination->initialize($config);
 
-        $list = $this->product_model->getProductPromotion($config['per_page'], $data['page']);
-        //   pre($list);
-        $this->data['listProduct'] = $list;
-        // print_r($listDis);
+        //$list = $this->product_model->getProductPromotion($config['per_page'], $data['page']);
+        //  pre($list);
+        //$this->data['listProduct'] = $list;
+       // $this->data['promotion'] = $this->product_model->getProductFull($config['per_page'], $data['page'], $input);
+        $this->data['type'] = 'discount';
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
     }

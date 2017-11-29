@@ -3,23 +3,25 @@
         <div class="row main-header">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5  ">
                 <ol class="breadcrumb breadcrumb-arrows">
-                    <li><a href="<?php echo base_url('home');?>" target="_self">Trang chủ</a></li>
+                    <li><a href="<?php echo base_url('home'); ?>" target="_self">Trang chủ</a></li>
                     <li><a href="#" target="_self">Danh mục</a></li>
-                    <li><a href="#" target="_self"><?php echo isset($infoCate) ? $infoCate['TEN_NHOM_SANPHAM'] : '';?></a></li>
-                    <li class="active"><span><?php echo isset($infoCate) ? $infoCate['TEN_LOAI_SANPHAM'] : '';?></span></li>
+                    <li><a href="#"
+                           target="_self"><?php echo isset($infoCate) ? $infoCate['TEN_NHOM_SANPHAM'] : ''; ?></a></li>
+                    <li class="active"><span><?php echo isset($infoCate) ? $infoCate['TEN_LOAI_SANPHAM'] : ''; ?></span>
+                    </li>
                 </ol>
             </div>
         </div>
     </div>
 </div>
 <div>
-<!--    --><?php
-//        if($this->session->flashdata('message')){
-//           // pre($cusAccount);
-//            $this->data['message'] = 'Bạn đăng nhập thành công';
-//            $this->load->view('site/messager_success',$this->data);
-//        }
-//    ?>
+    <!--    --><?php
+    //        if($this->session->flashdata('message')){
+    //           // pre($cusAccount);
+    //            $this->data['message'] = 'Bạn đăng nhập thành công';
+    //            $this->load->view('site/messager_success',$this->data);
+    //        }
+    //    ?>
 </div>
 <div id="collection" class="content-pages collection-page" data-sticky_parent>
     <!-- Begin collection info -->
@@ -27,7 +29,7 @@
     <div class="col-lg-12 visible-sm visible-xs">
         <div class="visible-sm visible-xs">
             <h1 class="title-sm">
-                Đồng hồ nam Longbo1
+                SẢN PHẨM
             </h1>
         </div>
 
@@ -56,7 +58,7 @@
 								<option value="title-descending">Tên: Z-A</option>
 								<option value="created-ascending">Cũ nhất</option>
 								<option value="created-descending">Mới nhất</option>
-								<option value="best-selling">Bán chạy nhất</option>
+
 							</select>
 						</span>
                     </div>
@@ -67,12 +69,18 @@
 
     </div>
     <div class=" col-md-3 col-sm-12 col-xs-12 leftsidebar-col" data-sticky_column>
-       <?php $this->load->view('site/product_list/menu_sidebar',$this->data); ?>
+        <?php $this->load->view('site/product_list/menu_sidebar', $this->data); ?>
     </div>
     <div class="content-col col-md-9 col-sm-12 col-xs-12" data-sticky_column>
-        <?php $this->load->view('site/product_list/product_list',$this->data);?>
 
-<!--        --><?php //$this->load->view('site/product_detail/product_detail');?>
+        <?php
+            if(isset($type) && $type == 'discount') {
+                $this->load->view('site/product_list/product_discount', $this->data);
+            }else{
+                $this->load->view('site/product_list/product_list', $this->data);
+            }
+        ?>
+
     </div>
 
     <!-- End collection info -->

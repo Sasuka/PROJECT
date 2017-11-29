@@ -31,12 +31,16 @@
         <div class="col-md-12 col-sm-12 col-xs-12 content-product-list">
             <div class="row product-list">
                 <?php
-                //pre($listProduct);
+
+//                $tmpArr = array();
+//                if (isset($listProduct[0]['MA_KHUYENMAI'])){
+//                    $tmpArr = $listProduct;
+//                    $listProduct = $promotion;
+//                    $promotion = $tmpArr;
+//                }
+
                 foreach ($listProduct as $itemProduct) { ?>
-
                     <div class="col-md-4  col-sm-6 col-xs-12 pro-loop">
-
-
                         <div class="product-block product-resize">
                             <div class="product-img image-resize view view-third">
                                 <?php if (isset($itemProduct['PHANTRAM_KM'])) { ?>
@@ -49,10 +53,11 @@
                                 if (isset($promotion) && !empty($promotion)) {
                                     foreach ($promotion as $itemPromotion) {
                                         if ($itemProduct['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
+
                                             ?>
                                             <div class="product-sale">
                                     <span><label
-                                                class="sale-lb">- </label> <?php echo $itemPromotion['PHANTRAM_KM']; ?>%</span>
+                                                class="sale-lb">- </label> <?php echo ($itemPromotion['PHANTRAM_KM']); ?>%</span>
                                             </div>
                                             <?php
                                             break;
@@ -69,7 +74,7 @@
                                          src="<?php echo upload_url('product/') . $itemProduct['HINH_DAIDIEN']; ?>"/>
                                     <?php
                                     $list_image = json_decode($itemProduct['DS_HINHANH']);
-                                   // pre($list_image);
+                                    // pre($list_image);
                                     if (!empty($list_image)) {
                                         ?>
                                         <img class="second-image"
