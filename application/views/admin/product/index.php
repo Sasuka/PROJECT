@@ -109,9 +109,7 @@ $this->load->view('admin/product/head', $this->data);
                 ?>
                 <tr class="row_<?php echo $item['MA_SANPHAM'];?>">
                     <td><input name="id[]" value="<?= $item['MA_SANPHAM'] ?>" type="checkbox"></td>
-
                     <td class="textC"><?= $item['MA_SANPHAM'] ?></td>
-
                     <td>
                         <div class="image_thumb">
                             <img src="<?php echo base_url('uploads/product/' . $item['HINH_DAIDIEN']) ?>"

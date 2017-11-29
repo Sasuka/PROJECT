@@ -76,6 +76,8 @@
         <?php
             if(isset($type) && $type == 'discount') {
                 $this->load->view('site/product_list/product_discount', $this->data);
+            }else if(isset($type) && $type == 'getProduct'){
+                $this->load->view('site/product_list/product_get', $this->data);
             }else{
                 $this->load->view('site/product_list/product_list', $this->data);
             }

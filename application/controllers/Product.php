@@ -118,15 +118,16 @@ class Product extends MY_Controller
 
         $segment = $this->uri->segment(4);
         $segment = intval($segment);
-//           pre($segment);
+          // pre($id);
         $input['limit'] = array($config['per_page'], $segment);
-        $input['where'] = array('MA_LOAI_SANPHAM' => $id);
+        $input['where'] = array('MA_LOAI_SANPHAM' => $id,'DONGIA_BAN>' => '0');
 
         //thuc hien load danh sach san pham dua vao id loai
-        $query = $this->product_model->getProductFull($input);
-        //   $query = $this->product_model->getList($where);
-        $this->data['listProduct'] = $query;
+        $query = $this->product_model->getList($input);
+       // pre($query);
+        $this->data['getProduct'] = $query;
         //thuc hien goi qua view
+        $this->data['type'] = 'getProduct';
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
 
