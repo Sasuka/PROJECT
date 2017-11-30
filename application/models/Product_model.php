@@ -17,7 +17,7 @@ class Product_model extends MY_Model
     }
 
     /*Lấy tát cả san phẩm theo thông tin */
-    public function getProductFull($limit = '', $start = '0',$input = array())
+    public function getProductFull($limit = '', $start = '0', $input = array())
     {
         $product = 'sanpham';
         $categories = 'loai_sanpham';
@@ -41,8 +41,8 @@ class Product_model extends MY_Model
             $product . '.NGAY_CAPNHAT,' .
             $product . '.MA_XUATXU,' .
             $product . '.MOTA,' .
-            $product.'.BAOHANH,'.
-            $product.'.LOAI,'.
+            $product . '.BAOHANH,' .
+            $product . '.LOAI,' .
             $product . '.TRANGTHAI,' .
             $product . '.VIEW');
         $this->db->from($group_pro);
@@ -64,17 +64,36 @@ class Product_model extends MY_Model
         if (isset($input['order'][0]) && isset($input['order'][1])) {
             $this->db->order_by($input['order'][0], $input['order'][1]);
         }
-        if ($limit !=''){
+        if ($limit != '') {
             $this->db->limit($limit, $start);
         }
         return $this->db->get()->result_array();
+    }
+
+    /*Lấy danh sách sản phẩm theo loại*/
+    public function getProductCategories($where_in = array(), $where = array(),$limit = '',$start = '0')
+    {
+        $this->db->where_in('MA_LOAI_SANPHAM', $where_in);
+        $this->db->from($this->table);
+        if ($limit !=''){
+            $this->db->limit($limit,$start);
+        }
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+        $list = $this->db->get();
+
+        if (empty($list)) {
+            return false;
+        } else {
+            return $list->result_array();
+        }
     }
 
     /* Lấy tất cả thông tin của san phẩm : nhóm, loại, sản phẩm với trạng thái =1 ( hoạt động)
        * Không có sử dụng phân trang paging
        * Thực hiện join 3 table : nhóm right join loại right join san phẩm.
        * */
-
     private function getAllListProduct($limit = '', $start = '')
     {
         $product = 'sanpham';
@@ -195,4 +214,5 @@ class Product_model extends MY_Model
         }
 
     }
+
 }

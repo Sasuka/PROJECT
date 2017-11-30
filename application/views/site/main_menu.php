@@ -69,14 +69,13 @@
                         <span>Thương hiệu</span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <?php for ($i = 0, $j = $i;
-                                   $i < count($listGroup);
-                                   $i++) {
+                        <?php
+                        for ($i = 0, $j = $i; $i < count($listGroup); $i++) {
 
                             ?>
                             <li class="dropdown-submenu">
                                 <a tabindex="-1"
-                                   href="#"><?php echo mb_convert_case(mb_strtolower($listGroup[$i]['TEN_NHOM_SANPHAM']), MB_CASE_TITLE, "UTF-8"); ?></a>
+                                   href="<?php echo base_url() .'product/getProductGroup/' . $listGroup[$i]['MA_NHOM_SANPHAM'] ;?>"><?php echo mb_convert_case(mb_strtolower($listGroup[$i]['TEN_NHOM_SANPHAM']), MB_CASE_TITLE, "UTF-8"); ?></a>
                                 <ul class="dropdown-menu">
                                     <?php for (;$j < count($listCate);$j++) {
                                         if ($listGroup[$i]['MA_NHOM_SANPHAM'] == $listCate[$j]['MA_NHOM_SANPHAM']) {

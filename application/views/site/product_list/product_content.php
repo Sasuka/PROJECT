@@ -7,7 +7,7 @@
                     <li><a href="#" target="_self">Danh mục</a></li>
                     <li><a href="#"
                            target="_self"><?php echo isset($infoCate) ? $infoCate['TEN_NHOM_SANPHAM'] : ''; ?></a></li>
-                    <li class="active"><span><?php echo isset($infoCate) ? $infoCate['TEN_LOAI_SANPHAM'] : ''; ?></span>
+                    <li class="active"><span><?php echo isset($infoCate['TEN_LOAI_SANPHAM']) ? $infoCate['TEN_LOAI_SANPHAM'] : ''; ?></span>
                     </li>
                 </ol>
             </div>
@@ -78,6 +78,8 @@
                 $this->load->view('site/product_list/product_discount', $this->data);
             }else if(isset($type) && $type == 'getProduct'){
                 $this->load->view('site/product_list/product_get', $this->data);
+            }else if(isset($type) && $type == 'getProductGroup'){
+                $this->load->view('site/product_list/product_group', $this->data);
             }else{
                 $this->load->view('site/product_list/product_list', $this->data);
             }

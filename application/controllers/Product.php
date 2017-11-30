@@ -96,13 +96,10 @@ class Product extends MY_Controller
         }
         $where1 = array('MA_NHOM_SANPHAM' => $infoCate['MA_NHOM_SANPHAM']);
         $infoGroup = $this->group_model->get_info_rule($where1);
-
         $this->data['infoCate'] = array('TEN_NHOM_SANPHAM' => $infoGroup['TEN_NHOM_SANPHAM'], 'TEN_LOAI_SANPHAM' => $infoCate['TEN_LOAI_SANPHAM']);;
         $input['where'] = array('TRANGTHAI' => '1', 'DONGIA_BAN >' => '0', 'MA_LOAI_SANPHAM' => $id);//con ban va da nhap v
         $total_rows = $this->product_model->get_total($input);//lay so luong theo loai
         $this->data['total_rows'] = $total_rows;
-
-
         //tao phan tran
         $this->load->library('pagination');
         $config = array();
@@ -118,18 +115,78 @@ class Product extends MY_Controller
 
         $segment = $this->uri->segment(4);
         $segment = intval($segment);
-          // pre($id);
         $input['limit'] = array($config['per_page'], $segment);
-        $input['where'] = array('MA_LOAI_SANPHAM' => $id,'DONGIA_BAN>' => '0');
+        $input['where'] = array('MA_LOAI_SANPHAM' => $id, 'DONGIA_BAN>' => '0');
 
         //thuc hien load danh sach san pham dua vao id loai
         $query = $this->product_model->getList($input);
-       // pre($query);
+        // pre($query);
         $this->data['getProduct'] = $query;
         //thuc hien goi qua view
         $this->data['type'] = 'getProduct';
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);
+    }
+
+    /*Tìm kiếm sản phẩm theo nhóm sản phẩm*/
+    public function getProductGroup()
+    {
+        $id = $this->uri->segment(3);
+        $this->load->model('group_model');
+        $where = array('MA_NHOM_SANPHAM' => $id);
+        $infoGroup = $this->group_model->get_info_rule($where);
+        if (empty($infoGroup)) {
+            redirect('');
+        }
+        /* Trang không tìm thấy*/
+        if ($infoGroup['TRANGTHAI'] == '1') {
+            $this->data['temp'] = '';
+            $this->load->view('site/layout', $this->data);
+            redirect();
+        } else {
+            /*Lấy ra những danh sách loại thuộc nhóm đó*/
+            $where1['where'] = array('MA_NHOM_SANPHAM' => $infoGroup['MA_NHOM_SANPHAM']);
+            $catelog = $this->catelog_model->getList($where1);
+             /* Lấy ra những danh sách san phẩm thuộc loại*/
+            $where2['where'] = array('TRANGTHAI >' => 0);
+            $product = $this->product_model->getList($where2);
+            $categoriesArr = array();
+            for ($i = 0; $i < count($catelog); $i++) {
+                $categoriesArr[$i] = $catelog[$i]['MA_LOAI_SANPHAM'];
+            }
+
+            $status = array('TRANGTHAI!=' => 0,'DONGIA_BAN!=' => 0);
+            $list = $this->product_model->getProductCategories($categoriesArr,$status);
+            /*Thực hiện phân trang*/
+            $this->load->library('pagination');
+            $total_rows = count($list);
+            $config = array();
+            $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
+            $config['base_url'] = base_url('product/getProductGroup/' . $id);//link hien thi ra danh sach san pham
+            $config['per_page'] = 3;//hien thi so luong san pham tren 1 trang
+            $config['uri_segment'] = 4;//hien thi so trang
+            $config['next_link'] = "Next";
+            $config['prev_link'] = "Prev";
+            //khoi tao phan trang
+            $this->pagination->initialize($config);
+            $start = $this->uri->segment(4);
+            $start = intval($start);
+            $list = $this->product_model->getProductCategories($categoriesArr,$status,$config['per_page'],$start);
+
+            for ($i = 0; $i < count($list); $i++) {
+                 for ($j =0;$j < count($catelog);$j++){
+                     if ($list[$i]['MA_LOAI_SANPHAM'] == $catelog[$j]['MA_LOAI_SANPHAM']){
+                         $list[$i]['TEN_LOAI_SANPHAM'] = $catelog[$j]['TEN_LOAI_SANPHAM'];
+                         break;
+                     }
+                 }
+            }
+            $this->data['infoCate'] = $infoGroup;
+            $this->data['type'] = 'getProductGroup';
+            $this->data['productGroup'] = $list;
+            $this->data['temp'] = 'site/product_list/product_content';
+            $this->load->view('site/layout', $this->data);
+        }
 
 
     }
@@ -180,6 +237,7 @@ class Product extends MY_Controller
 
 
     }
+
     public function search1()
     {
         $id = $this->uri->segment(3);
@@ -238,6 +296,7 @@ class Product extends MY_Controller
         $this->data['temp'] = 'site/product/search';
         $this->load->view('site/layout', $this->data);
     }
+
     public function search()
     {
         $keyWord = ($this->input->post("key")) ? $this->input->post("key") : "";
@@ -286,6 +345,7 @@ class Product extends MY_Controller
         $this->load->view('site/layout', $this->data);
 
     }
+
     public function search_price()
     {
         $id = $this->uri->segment(3);
@@ -325,6 +385,7 @@ class Product extends MY_Controller
         $this->data['temp'] = 'site/product/price_search';
         $this->load->view('site/layout', $this->data);
     }
+
     /*
      * Danh sách các sản phẩm khuyến mãi
      * */
@@ -366,7 +427,7 @@ class Product extends MY_Controller
         //$list = $this->product_model->getProductPromotion($config['per_page'], $data['page']);
         //  pre($list);
         //$this->data['listProduct'] = $list;
-       // $this->data['promotion'] = $this->product_model->getProductFull($config['per_page'], $data['page'], $input);
+        // $this->data['promotion'] = $this->product_model->getProductFull($config['per_page'], $data['page'], $input);
         $this->data['type'] = 'discount';
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout', $this->data);

@@ -31,10 +31,8 @@
         <div class="col-md-12 col-sm-12 col-xs-12 content-product-list">
             <div class="row product-list">
                 <?php
-
                 //pre($getProduct);
-
-                foreach ($getProduct as $itemProduct) { ?>
+                foreach ($productGroup as $itemProduct) { ?>
                     <div class="col-md-4  col-sm-6 col-xs-12 pro-loop">
                         <div class="product-block product-resize">
                             <div class="product-img image-resize view view-third">
