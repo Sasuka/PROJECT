@@ -105,6 +105,7 @@ $this->load->view('admin/product/head', $this->data);
             <tbody class="list_item">
             <div id="loading" style="width: 50px;height: 50px;position: absolute;z-index: 99;margin:15% 45%;"></div>
             <?php
+//            pre($list);
             foreach ($list as $item) {
                 ?>
                 <tr class="row_<?php echo $item['MA_SANPHAM'];?>">
@@ -118,9 +119,8 @@ $this->load->view('admin/product/head', $this->data);
                         </div>
 
                         <a href="product/view/9.html" class="tipS" title="" target="_blank">
-                            <b><?php echo $item['TEN_SANPHAM']; ?></b>
+                            <b><?php echo $item['TEN_SANPHAM']; ?></b>| <span style="color:#0000FF;"><?php echo $item['TEN_LOAI_SANPHAM'];?></span>
                         </a>
-
                         <div class="f11">
                             Loại: <?php echo $item['LOAI']; ?> | Kinh doanh:<span style="color:red;"> <?php echo ($item['TRANGTHAI']=='0') ? 'Hết' :'<span style="color:forestgreen;">Còn</span>'; ?></span>
                         </div>

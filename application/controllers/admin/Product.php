@@ -60,9 +60,19 @@ class Product extends MY_Controller
         $this->pagination->initialize($config);
 
         $data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-        $list = $this->product_model->getListSearch($config['per_page'], $data['page'], $input);
+        $catelog = $this->catelog_model->getList();
 
-//        pre($list);
+        $list = $this->product_model->getListSearch($config['per_page'], $data['page'], $input);
+        for ($i = 0; $i < count($list); $i++) {
+            for ($j =0;$j < count($catelog);$j++){
+                if ($list[$i]['MA_LOAI_SANPHAM'] == $catelog[$j]['MA_LOAI_SANPHAM']){
+                    $list[$i]['TEN_LOAI_SANPHAM'] = $catelog[$j]['TEN_LOAI_SANPHAM'];
+                    break;
+                }
+            }
+        }
+       // pre($list);
+
         /*Thông tin các sản phẩm được khuyến mãi*/
         $promotion = $this->product_model->getProductPromotion();
         //   pre($promotion);
@@ -215,11 +225,6 @@ class Product extends MY_Controller
             //xac cac dieu kien
             $this->form_validation->set_rules('namepro', 'Tên sản phẩm', 'required');
             $this->form_validation->set_rules('warranty', 'Bảo hành', 'required');
-//            $this->form_validation->set_rules('catelog_dis', 'Phân loại', 'required');
-//            $this->form_validation->set_rules('catelog', 'Loại sản phẩm', 'required');
-//            $this->form_validation->set_rules('idmade', 'Xuất xứ', 'required');
-//            $this->form_validation->set_rules('description', 'Mô tả', 'required');
-
 
             //kiem tra dieu kien validate co form_validation thi no chay ham nay
             if ($this->form_validation->run()) {
@@ -252,24 +257,27 @@ class Product extends MY_Controller
                 $upload_data = $this->upload_library->upload($upload_path, 'image');
                 // pre($upload_data);
                 if (isset($upload_data['file_name'])) {
-
                     $namePicture = $namegroup . '/' . $upload_data['file_name'];
-
-
                 } else {
                     $namePicture = '';
                 }
 
                 //upload danh sach anh kem theo
-                // $namePicture =strtolower($namePicture);
-                $image_list = array();
                 $image_list = $this->upload_library->upload_file($upload_path, 'image_list');
-                $image_list = json_encode($image_list);
+                $img_list = array();
 
+                foreach ($image_list as $image_item){
+                    $image_item = $namegroup.'/'.$image_item;
+                    array_push($img_list,$image_item);
+                }
+
+                $img_list = json_encode($img_list);
+                $img_list = str_replace('\/','/',$img_list);
+               // pre($img_list);
                 $dt = array(
                     'TEN_SANPHAM' => $this->mb_ucwords($name),
                     'HINH_DAIDIEN' => $namePicture,
-                    'DS_HINHANH' => $image_list,
+                    'DS_HINHANH' => $img_list,
                     'BAOHANH' => $warranty,
                     'LOAI' => $catelog_dis,
                     'MA_LOAI_SANPHAM' => $catelog,
@@ -445,10 +453,10 @@ class Product extends MY_Controller
         $this->load->library('form_validation');
         $this->load->helper('form');
 
-        $where = array('sanpham.MA_SANPHAM' => $id);
-       $info = $this->product_model->getProductFull($where);
+        $where['where'] = array('sanpham.MA_SANPHAM' => $id);
+        $info = $this->product_model->getProductFull('','0',$where);
         $info = $info[0];
-       // pre($info);
+      //  pre($info);
         if (!$info) {
             $this->session->set_flashdata('message', 'Không tồn tại sản phẩm này!');
             redirect(admin_url('product'));
@@ -481,8 +489,11 @@ class Product extends MY_Controller
                 $namePicture = '';
             }
             //upload danh sach anh kem theo
-            $image_list = array();
             $image_list = $this->upload_library->upload_file($upload_path, 'image_list');
+
+
+
+            // pre($img_list);
 
             $dt = array(
                 'TEN_SANPHAM' => $name,
@@ -496,17 +507,24 @@ class Product extends MY_Controller
             if ($namePicture != '') {
                 $dt['HINH_DAIDIEN'] = $namePicture;
             }
-            if (sizeof($image_list)){
-                $image_list = json_encode($image_list);
-                $dt['DS_HINHANH'] = $image_list;
+            if (!empty($image_list)){
+                $img_list = array();
+                foreach ($image_list as $image_item){
+                    $image_item = $namegroup.'/'.$image_item;
+                    array_push($img_list,$image_item);
+                }
+                $img_list = json_encode($img_list);
+                $img_list = str_replace('\/','/',$img_list);
+               // pre($img_list);
+                $dt['DS_HINHANH'] = $img_list;
             }
-            //      pre($dt);
-            //        pre($input);
-            if ($this->product_model->update_rule($where, $dt)) {
+            $where1= array('MA_SANPHAM' => $id);
+            if ($this->product_model->update_rule($where1, $dt)) {
                 $this->session->set_flashdata('message', 'Update thành công!');
             } else {
                 $this->session->set_flashdata('message', 'Update thất bại');
             }
+//            header('Location: ' . $_SERVER['HTTP_REFERER']);
             redirect(admin_url('product'));
         }
 

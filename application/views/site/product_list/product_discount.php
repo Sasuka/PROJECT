@@ -40,7 +40,7 @@
                                     if (!empty($list_image)) {
                                         ?>
                                         <img class="second-image"
-                                             src="<?php// echo base_url('uploads/product/'.strtolower($itemProduct['TEN_NHOM_SANPHAM']).'/'. $list_image[0]) ?>"
+                                             src="<?php echo base_url('uploads/product/'. $list_image[0]) ?>"
                                              alt="<?php echo mb_strtoupper($item['TEN_SANPHAM'], 'UTF-8'); ?>"/>
 
                                     <?php }?>

@@ -32,7 +32,7 @@
     <div class="list-group_l banner-left hidden-sm hidden-xs">
 
         <a href="">
-            <img src="./theme.hstatic.net/1000177652/1000229231/14/left_image_ad.jpg?v=90">
+            <img src="<?php echo upload_url('logo').'/logo_left.gif';?>">
         </a>
 
     </div>

@@ -34,51 +34,37 @@
                          src="<?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_large.jpg"
                          alt="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">
                 </div>
-                <!--                <div id="quickview-sliderproduct">-->
-                <!--                    <div class="quickview-slider">-->
-                <!--                        <ul class="owl-carousel owl-theme" style="display: block; opacity: 1;">-->
-                <!--                            <div class="owl-wrapper-outer">-->
-                <!--                                <div class="owl-wrapper" style="width: 600px; left: 0px; display: block;">-->
-                <!--                                    <div class="owl-item" style="width: 100px;">-->
-                <!--                                        <li class="product-thumb active"><a href="javascript:void(0);"-->
-                <!--                                                                            data-image="-->
-                <?php //echo upload_url('product'); ?><!--/1_e0ed7c0240734782a8268793dce0b9b8_large.jpg">-->
-                <!--                                                <img src="-->
-                <?php //echo upload_url('product'); ?><!--/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg"></a>-->
-                <!--                                        </li>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="owl-item" style="width: 100px;">-->
-                <!--                                        <li class="product-thumb"><a href="javascript:void(0);"-->
-                <!--                                                                     data-image="-->
-                <?php //echo upload_url('product'); ?><!--/2_85fc5908867e488da92b768cb240477d_large.jpg">-->
-                <!--                                                <img src="-->
-                <?php //echo upload_url('product'); ?><!--/2_85fc5908867e488da92b768cb240477d_small.jpg"></a>-->
-                <!--                                        </li>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="owl-item" style="width: 100px;">-->
-                <!--                                        <li class="product-thumb"><a href="javascript:void(0);"-->
-                <!--                                                                     data-image="-->
-                <?php //echo upload_url('product'); ?><!--/3_30be00d496bb474aa0e9324311dd02f0_large.jpg">-->
-                <!--                                                <img src="-->
-                <?php //echo upload_url('product'); ?><!--/3_30be00d496bb474aa0e9324311dd02f0_small.jpg"></a>-->
-                <!--                                        </li>-->
-                <!--                                    </div>-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                            <div class="owl-controls clickable" style="display: none;">-->
-                <!--                                <div class="owl-pagination">-->
-                <!--                                    <div class="owl-page active">-->
-                <!--                                        <span class=""></span>-->
-                <!--                                    </div>-->
-                <!--                                </div>-->
-                <!--                                <div class="owl-buttons">-->
-                <!--                                    <div class="owl-prev">owl-prev</div>-->
-                <!--                                    <div class="owl-next">owl-next</div>-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                        </ul>-->
-                <!--                    </div>-->
-                <!--                </div>-->
+                                <div id="quickview-sliderproduct">
+                                    <div class="quickview-slider">
+                                        <ul class="owl-carousel owl-theme" style="display: block; opacity: 1;">
+                                            <div class="owl-wrapper-outer">
+                                                <div class="owl-wrapper" style="width: 600px; left: 0px; display: block;">
+
+                                                    <div class="owl-item" style="width: 100px;">
+                                                        <li class="product-thumb active"><a href="javascript:void(0);"
+                                                                                            data-image="
+                <?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_large.jpg">
+                                                                <img src="
+                <?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg"></a>
+                                                        </li>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="owl-controls clickable" style="display: none;">
+                                                <div class="owl-pagination">
+                                                    <div class="owl-page active">
+                                                        <span class=""></span>
+                                                    </div>
+                                                </div>
+                                                <div class="owl-buttons">
+                                                    <div class="owl-prev">owl-prev</div>
+                                                    <div class="owl-next">owl-next</div>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
             </div>
             <div class="col-md-7">
                 <form id="form-quickview" method="post" action="<?php echo base_url(); ?>cart/add">

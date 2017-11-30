@@ -62,10 +62,11 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $product['TRAN
                                     <?php
                                     $list_image = json_decode($product['DS_HINHANH']);
                                     if ($list_image != '') {
+                                        //pre($list_image);
                                         foreach ($list_image as $item_image) {
                                             ?>
 
-                                            <img src="<?php echo base_url('uploads/product/'.strtolower($product['TEN_NHOM_SANPHAM']).'/'. $item_image) ?>"
+                                            <img src="<?php echo base_url('uploads/product/'. $item_image) ?>"
                                                  style="width: 100px;height: 70px; margin: 5px;">
 
                                             <?php

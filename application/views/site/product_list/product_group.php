@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <h1>
-                           Danh sách sản phẩm <?php echo strtoupper($infoCate['TEN_NHOM_SANPHAM']);?>
+                            Danh sách sản phẩm<span style="color: #FF0000;font-style: italic;"> <?php echo strtoupper($infoCate['TEN_NHOM_SANPHAM']);?></span>
                         </h1>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -71,7 +71,7 @@
                                     if (!empty($list_image)) {
                                         ?>
                                         <img class="second-image"
-                                             src="<?php echo base_url('uploads/product/'.strtolower($infoCate['TEN_NHOM_SANPHAM']).'/'. $list_image[0]) ?>"
+                                             src="<?php echo base_url('uploads/product/'. $list_image[0]) ?>"
                                              alt="<?php echo mb_strtoupper($itemProduct['TEN_SANPHAM'], 'UTF-8'); ?>"/>
 
                                     <?php }?>
