@@ -70,7 +70,7 @@ $this->load->view('admin/promotions/head', $this->data);
                 </div><!-- End tab_container-->
 
                 <div class="formSubmit">
-                    <input value="Thêm mới" class="redB" type="submit">
+                    <input value="Thêm mới" class="redB" id="btnAdd" type="submit">
                     <input value="Hủy bỏ" class="basic" type="reset">
                 </div>
                 <div class="clear"></div>
@@ -79,10 +79,10 @@ $this->load->view('admin/promotions/head', $this->data);
     </form>
 </div>
 <div class="clear"></div>
+
 <script>
     $(function () {
         $('.date').datepicker();
-
         //bat buoc nhat het khi submit
         $('#form-promotion-add').submit(function (e) {
 //
@@ -120,6 +120,18 @@ $this->load->view('admin/promotions/head', $this->data);
                 $('#end').val(end);
             }
         });
+        $('.date').on('change',function () {
+           changeDate();
+        });
+        function changeDate() {
+            var begin = $('#begin').val();
+            var end = $('#end').val();
+            if(begin > end){
+                $('#btnAdd').attr("disabled", "disabled");
+            }else{
+                $('#btnAdd').removeAttr("disabled");
+            }
+        }
     });
 
 </script>

@@ -92,6 +92,9 @@ class  User extends MY_Controller
                 $address = $this->input->post(ltrim('address'," "), true);
                 $gender = $this->input->post('gender', true);
                 $birthday = $this->input->post('birthday', true);
+                /* Bắt buộc nếu ngày sinh mà lớn hơn 12 thì nó k nhận được*/
+                $birthday = str_replace('/', '-', $birthday);
+             //   pre(date("Y-m-d", strtotime($birthday)));
                 $dt = array(
                     'HO' => $this->mb_ucwords($ho),
                     'TEN' => $this->mb_ucwords($ten),
@@ -105,14 +108,14 @@ class  User extends MY_Controller
                 //  pre($dt);
 
                 //thuc hien kiem tra do co phai khach vang lai khong thong qua so dt hoac email
-                $condition = array('SDT' => $sdt, 'MATKHAU' => '');
+                $condition = array('SDT' => $sdt, 'MATKHAU IS NULL');
                 $checkClient = $this->customer_model->get_info_rule($condition);//  CLIENT DA DANG KY SDT
                 //
-                $condition1 = array('EMAIL' => $email, 'MATKHAU ' => '');
+                $condition1 = array('EMAIL' => $email, 'MATKHAU IS NULL');
                 $checkClient1 = $this->customer_model->get_info_rule($condition1);//CLIENT DA DANG KY EMAIL
                 //            // pre($checkClient1);
                 //
-                $condition2 = array('EMAIL' => $email, 'SDT' => $sdt, 'MATKHAU ' => '');
+                $condition2 = array('EMAIL' => $email, 'SDT' => $sdt, 'MATKHAU IS NULL');
                 $checkClient2 = $this->customer_model->get_info_rule($condition1);//CLIENT DA DANG KY EMAIL HOAC SDT
                 //
                 if (!empty($checkClient) || !empty($checkClient1) || !empty($checkClient2)) {

@@ -74,19 +74,19 @@ class Transaction extends MY_Controller
         }
         $where['where'] = array('MA_GIAODICH' => $idTransaction);
         $list =  $this->transaction_model->getList($where);
-        $this->data['list'] =$list;
+        $this->data['list'] =$list[0];
         $this->data['temp'] = 'admin/bill/index';
         $this->load->view('admin/main', $this->data);
 
     }
     public function transaction_suc($id = ''){
         $idEmployee = $this->input->post('employeeId');
-        $status = '1';
-
-        $data = array(
-            'MA_NHANVIEN' => $idEmployee,
-            'TRANGTHAI' => $status
-        );
+//        $status = '1';
+//
+//        $data = array(
+//            'MA_NHANVIEN' => $idEmployee,
+//            'TRANGTHAI' => $status
+//        );
         //thuc hien cac cau lenh khi lap hoa don
         $this->db->trans_start();
         $idTransaction = $this->uri->rsegment(3);
@@ -98,8 +98,12 @@ class Transaction extends MY_Controller
         $where = array('MA_GIAODICH' => $idTransaction);
         $list = $this->transactionDetail_model->getListJoin('sanpham', 'MA_SANPHAM', $where);
 
-
-       // pre($list);
+        /*Kiểm tra hàng đã được giao chưa*/
+        $transaction = $this->transaction_model->get_info_rule($where);
+        if($transaction['TRANGTHAI'] != '0'){
+            $this->session->set_flashdata('message', 'Không thành công do đã giao rồi hoặc đã đơn hàng đã hủy!');
+            redirect(admin_url('transaction'));
+        }
         //thuc hien kiem tra san pham do co so luong khach dat ton hay khong
         foreach ($list as $item) {
             if ($item['SOLUONG'] > $item['SOLUONG_BAN']) {
@@ -108,7 +112,8 @@ class Transaction extends MY_Controller
                 return false;
             }
         }
-        //neu thuc hien dung thi
+
+       /*Thực hiện giao hàng*/
         foreach ($list as $item) {
 
             $item['SOLUONG_BAN'] = $item['SOLUONG_BAN'] - $item['SOLUONG'];
@@ -116,23 +121,64 @@ class Transaction extends MY_Controller
             $dt = array('SOLUONG_BAN' => $item['SOLUONG_BAN']);
             $this->product_model->update_rule($wh, $dt);
 
-            $data = array(
-                'MA_NHANVIEN' => $idEmployee,
-                'TRANGTHAI' => '1'
-            );
-            $where1 = array('MA_GIAODICH'=>$idTransaction);
-            if($this->transaction_model->update_rule($where1, $data)){
-//                $this->data['status']='1';
-                $this->session->set_flashdata('message', 'Đang giao hàng!');
-            }
-
         }
+
+        $data = array(
+            'MA_NHANVIEN' => $idEmployee,
+            'NGAYLAP_HOADON' => date('Y-m-d'),
+            'TRANGTHAI' => '1'
+        );
+        /*Thực hiện update vào phiếu đơn hàng*/
+        $where1 = array('MA_GIAODICH'=>$idTransaction);
+        if($this->transaction_model->update_rule($where1, $data)){
+//                $this->data['status']='1';
+            $this->session->set_flashdata('message', 'Đang giao hàng!');
+        }
+
         $this->db->trans_complete();
       //  pre($storeInfo);
 
     }
     public function transaction_cancell(){
+        $idEmployee = $this->input->post('employeeId');
+        //thuc hien cac cau lenh khi lap hoa don
+        $this->db->trans_start();
+        $idTransaction = $this->uri->rsegment(3);
+        $input['where'] = array(
+            'MA_GIAODICH' => $idTransaction
+        );
 
+        $where = array('MA_GIAODICH' => $idTransaction);
+        $list = $this->transactionDetail_model->getListJoin('sanpham', 'MA_SANPHAM', $where);
+
+//        pre($list);
+       // $input['where'] = $where;
+        $transaction = $this->transaction_model->get_info_rule($where);
+       // pre($transaction);
+        /*Trả hàng là sau khi giao hàng không thành công*/
+        if($transaction['TRANGTHAI'] != '1'){
+            $this->session->set_flashdata('message', 'Trả hàng không thành công do đã trả rồi hoặc chưa giao!');
+            redirect(admin_url('transaction'));
+        }
+
+        /*update số lượng lại sản phẩm*/
+        foreach ($list as $item) {
+
+            $item['SOLUONG_BAN'] = $item['SOLUONG_BAN'] + $item['SOLUONG'];
+            $wh = array('MA_SANPHAM' => $item['MA_SANPHAM']);
+            $dt = array('SOLUONG_BAN' => $item['SOLUONG_BAN']);
+            $this->product_model->update_rule($wh, $dt);
+        }
+        $data = array(
+            'MA_NHANVIEN' => $idEmployee,
+            'NGAYLAP_HOADON' => date('Y-m-d'),
+            'TRANGTHAI' => '2'
+        );
+        /*Update lại giao dịch với KH*/
+        if($this->transaction_model->update_rule($where, $data)){
+            $this->session->set_flashdata('message', 'Đơn hàng đã hủy!');
+        }
+        $this->db->trans_complete();
     }
 
 

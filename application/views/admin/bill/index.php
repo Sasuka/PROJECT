@@ -4,7 +4,7 @@ $account = $this->session->userdata('account');
 //pre($account);
 $tmp['fname'] = $account['HO'] . ' ' . $account['TEN'];
 //pre($list);
-$tmp['status'] = (isset($_POST['status'])) ? $_POST['status'] : '0';
+$tmp['status'] = (isset($_POST['status'])) ? $_POST['status'] : $list['TRANGTHAI'];
 
 
 

@@ -206,7 +206,7 @@ class Product_model extends MY_Model
 
 
         $query = $this->db->get();
-//        pre($query->result_array());
+     //   pre($query->result_array());
         if ($query->num_rows() != 0) {
             return $query->result_array();
         } else {

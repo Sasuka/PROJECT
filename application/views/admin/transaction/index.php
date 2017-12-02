@@ -26,7 +26,7 @@ $this->load->view('admin/transaction/head', $this->data);
             <tr>
                 <td style="width:21px;">STT</td>
                 <td style="width:5px;">Mã số</td>
-                <td style="width: 25px;">Tổng số tiền  (USD)</td>
+                <td style="width: 25px;">Tổng số tiền (USD)</td>
                 <td style="width:110px;">Địa chỉ</td>
                 <td style="width:25px;">Thanh toán</td>
                 <td style="width:45px;">Ngày thực hiện</td>
@@ -39,7 +39,7 @@ $this->load->view('admin/transaction/head', $this->data);
             <tr>
                 <td colspan="7">
                     <div class="itemActions">
-                        <a href="<?php echo admin_url(''); ?>"  class="button blueB">
+                        <a href="<?php echo admin_url(''); ?>" class="button blueB">
                             <span style="color:white;">Quay lại</span>
                         </a>
                     </div>
@@ -56,13 +56,14 @@ $this->load->view('admin/transaction/head', $this->data);
             <tbody class="list_item">
             <div id="loading" style="width: 50px;height: 50px;position: absolute;z-index: 99;margin:15% 45%;"></div>
             <?php
-            $i=1;
+            $i = 1;
             foreach ($list as $item) {
                 ?>
                 <tr class="row_<?php echo $item['MA_GIAODICH']; ?>">
                     <td style="text-align: center;">
-                        <?php echo $i++;?>
-                        <input type="hidden" name="idTransaction" id="idTransaction" value="<?php echo $item['MA_GIAODICH']; ?>">
+                        <?php echo $i++; ?>
+                        <input type="hidden" name="idTransaction" id="idTransaction"
+                               value="<?php echo $item['MA_GIAODICH']; ?>">
                     </td>
 
                     <td class="textC"><?= $item['MA_GIAODICH'] ?></td>
@@ -76,13 +77,13 @@ $this->load->view('admin/transaction/head', $this->data);
                     </td>
                     <td>
                         <?php
-                            if ($item['MA_HINHTHUC']==1){
-                                echo 'Tiền mặt';
-                            }else if ($item['MA_HINHTHUC']==2){
-                                echo 'Paypal';
-                            }else {
-                                echo 'Không xác định '.$item['MA_HINHTHUC'];
-                            }
+                        if ($item['MA_HINHTHUC'] == 1) {
+                            echo 'Tiền mặt';
+                        } else if ($item['MA_HINHTHUC'] == 2) {
+                            echo 'Paypal';
+                        } else {
+                            echo 'Không xác định ' . $item['MA_HINHTHUC'];
+                        }
                         ?>
                     </td>
                     <td>
@@ -92,25 +93,27 @@ $this->load->view('admin/transaction/head', $this->data);
                     </td>
                     <td>
                         <?php
-                            if ($item['TRANGTHAI']==0){
-                                echo 'Chưa thanh toán';
-                            }else if ($item['TRANGTHAI']==1){
-                                echo 'Đang giao hàng';
-                            }else if($item['TRANGTHAI']==2) {
-                                echo "Thanh toán thất bại";
-                            }else{
-                                echo 'Đã giao hàng';
-                            }
+                        if ($item['TRANGTHAI'] == 0) {
+                            echo 'Vừa đặt hàng';
+                        } else if ($item['TRANGTHAI'] == 1) {
+                            echo 'Đang giao hàng';
+                        } else if ($item['TRANGTHAI'] == 2) {
+                            echo "Thanh toán thất bại";
+                        } else if ($item['TRANGTHAI'] == 3) {
+                            echo "Thành công";
+                        }
                         ?>
                     </td>
 
 
                     <td class="option textC">
-                        <a href="" title="Giao hàng" class="tipE" >
-<!--                            <button id="getBill">GIAO HÀNG</button>-->
-                            <img src="<?php echo public_url('admin/images') ?>/icons/color/star.png" id="getBill_<?php echo $item['MA_GIAODICH'];?>">
+                        <a href="" title="Giao hàng" class="tipE">
+                            <!--                            <button id="getBill">GIAO HÀNG</button>-->
+                            <img src="<?php echo public_url('admin/images') ?>/icons/color/star.png"
+                                 id="getBill_<?php echo $item['MA_GIAODICH']; ?>">
                         </a>
-                        <a href="<?php echo admin_url('transactionDetail/index/'.$item['MA_GIAODICH']);?>" title="Xem chi tiết sản phẩm">
+                        <a href="<?php echo admin_url('transactionDetail/index/' . $item['MA_GIAODICH']); ?>"
+                           title="Xem chi tiết sản phẩm">
                             <img src="<?php echo public_url('admin/images') ?>/icons/color/view.png">
                         </a>
                         <a href="<?php echo admin_url('transaction/view/' . $item['MA_GIAODICH']); ?>" title="Chỉnh sửa"

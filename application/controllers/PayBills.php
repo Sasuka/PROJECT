@@ -176,6 +176,7 @@ class PayBills extends MY_Controller
             $bill_info = array('DIACHI_GIAO' => $arr_ship_info['DIACHI'],
                 'MA_KHACHHANG' => $customer['MA_KHACHHANG'],
                 'MA_HINHTHUC' => $payment_method,
+                'NGAY_GIAODICH' => date('Y-m-d H:i:s')
             );
             $this->load->model(array('transaction_model', 'transactionDetail_model'));
             $this->db->trans_begin();
@@ -183,14 +184,17 @@ class PayBills extends MY_Controller
             if ($this->transaction_model->add($bill_info)) {
                 $this->session->set_flashdata('message', 'Thêm hóa đơn thành công');
                 /*Lấy mã hóa đơn mới nhất.*/
-                $new_transaction = $this->transaction_model->get_new_transaction();
-                $new_transaction = $new_transaction[0];
-               // pre($new_transaction);
+                $list = $this->transaction_model->get_info_rule($bill_info);
+//                pre($list);
+
+//                $new_transaction = $this->transaction_model->get_new_transaction();
+//                $new_transaction = $new_transaction[0];
+//                pre($new_transaction);
                 $cart_info = $this->cart->contents();
                // pre($cart_info);
                 $sum_cost = 0;
                 foreach ($cart_info as $item_cart){
-                    $data = array('MA_GIAODICH' => $new_transaction['MA_GIAODICH'],
+                    $data = array('MA_GIAODICH' => $list ['MA_GIAODICH'],
                         'MA_SANPHAM' => $item_cart['id'],
                         'SOLUONG'=> $item_cart['qty'],
                         'DONGIA_HT' => $item_cart['price_original'],
@@ -204,7 +208,7 @@ class PayBills extends MY_Controller
                     }
                 }
                 /* Cập nhật lại tổng thành tiền*/
-                $where = array('MA_GIAODICH' => $new_transaction['MA_GIAODICH']);
+                $where = array('MA_GIAODICH' => $list['MA_GIAODICH']);
                 $data = array('TONG_THANHTIEN' => $sum_cost);
                 $this->transaction_model->update_rule($where,$data);
 
