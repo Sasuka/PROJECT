@@ -101,8 +101,8 @@
 
 
                 <li>
-                    <a href="/pages/gioi-thieu" class="" title="Giới thiệu">
-                        <span>Giới thiệu</span>
+                    <a href="<?php echo base_url('contact');?>" class="" title="Liên hệ">
+                        <span>Liên hệ</span>
                     </a>
                 </li>
 

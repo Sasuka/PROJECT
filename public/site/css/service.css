@@ -135,3 +135,53 @@
     font-size: 0.8125em;
     font-weight: 600;
 }
+/*CSS CONTACT*/
+.section-info {
+    padding-top: 25px;
+}
+.titleContact {
+    border-bottom: 5px solid #329932;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 10px 0;
+    font-weight: 400;
+    color: #329932;
+    margin-bottom: 10px;
+}
+form#fContact label {
+    display: block;
+    margin: 12px 0;
+}
+form#fContact label span {
+    float: left;
+    color: #329932;
+    width: 30%;
+}
+form#fContact label input {
+    display: inline-block;
+    width: 70%;
+    height: 33px;
+    border: 1px solid #ccc;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+.clickable, label {
+    cursor: pointer;
+}
+form#fContact label textarea {
+    width: 70%;
+    display: inline-block;
+    height: 150px;
+    resize: none;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+form#fContact button[type="submit"] {
+    display: inline-block;
+    padding: 5px 30px;
+    border: none;
+    background-color: #329932;
+    color: #fff;
+    margin-right: 24px;
+}
