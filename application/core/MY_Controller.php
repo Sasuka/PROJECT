@@ -3,6 +3,7 @@
 class MY_Controller extends CI_Controller
 {
     public $data = array();
+
     //lay danh sach nhom san pham
     public function getListGroup()
     {

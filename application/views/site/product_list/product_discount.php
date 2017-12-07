@@ -79,7 +79,7 @@
                                     </h3>
                                     <div class="pro-prices">
 
-                                        <p class="pro-price discount-cost"><?php echo (1 - 0.01 * $item['PHANTRAM_KM']) * $item['DONGIA_BAN']; ?></p>
+                                        <p class="pro-price discount-cost"><?php echo round((1 - 0.01 * $item['PHANTRAM_KM']) * $item['DONGIA_BAN'],2); ?></p>
 
                                         <p class="pro-price-del text-left discount-original">
                                             <del class="compare-price"><?php echo $item['DONGIA_BAN'] ?></del>

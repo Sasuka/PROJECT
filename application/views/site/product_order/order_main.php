@@ -7,37 +7,6 @@
         <form id="form_next_step" accept-charset="UTF-8" method="post"
               action="<?php echo base_url('payBills/complete_checkout'); ?>">
             <div class="step-sections " step="2">
-                <div id="section-shipping-rate" class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">Phương thức vận chuyển</h2>
-                    </div>
-                    <div class="section-content">
-                        <div class="content-box">
-                            <div class="content-box-row">
-                                <div class="radio-wrapper">
-                                    <label class="radio-label" for="shipping_rate_id_601017">
-                                        <div class="radio-input" style="float: left">
-                                            <input id="shipping_rate_id_601017" class="input-radio"
-                                                   name="shipping_rate_id"
-                                                   value="0" type="radio" required>
-                                            <span>Giao hàng tận nơi</span>
-                                            (<span class="price_ship" style="color:red;">0</span> $ )
-                                        </div>
-
-                                        <div class="radio-input" style="float:right;">
-                                            <input id="shipping_rate_id_601017" class="input-radio"
-                                                   name="shipping_rate_id"
-                                                   value="1" type="radio" required> <span> Lấy hàng tận nơi </span>
-                                        </div>
-
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
                 <div id="section-payment-method" class="section">
                     <div class="section-header">
                         <h2 class="section-title">Phương thức thanh toán</h2>
@@ -65,10 +34,8 @@
 
             </div>
             <div class="step-footer">
-
-
                 <input name="utf8" value="✓" type="hidden">
-                <button type="submit" class="step-footer-continue-btn btn">
+                <button type="submit" class="step-footer-continue-btn btn" id="btnComeplete">
                     <span class="btn-content">Hoàn tất đơn hàng</span>
                     <i class="btn-spinner icon icon-button-spinner"></i>
                 </button>
@@ -91,9 +58,6 @@
 </div>
 <script>
     $(document).ready(function (e) {
-        $("input[name='shipping_rate_id']").click(function () {
-            $('#ship_rate').val($(this).val());
-        });
         $("input[name='payment_method_id']").click(function () {
             $('#payment_method').val($(this).val());
         });

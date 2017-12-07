@@ -92,34 +92,9 @@
                         <?php } ?>
                     </ul>
                 </li>
-<!--                <li class="dropdown">-->
-<!--                    <a href="/collections/dong-ho-nu" title="Đồng hồ nữ" class="">-->
-<!--                        <span>Đồng hồ nữ</span>-->
-<!--                    </a>-->
-<!--                    <ul class="dropdown-menu" role="menu">-->
-<!---->
-<!--                        <li>-->
-<!--                            <a href="/collections/dong-ho-nu-beesister" title="Đồng hồ Beesister">Đồng-->
-<!--                                hồ Beesister</a>-->
-<!---->
-<!--                        </li>-->
-<!---->
-<!--                        <li>-->
-<!--                            <a href="/collections/dong-ho-nu-skmei" title="Đồng hồ Skmei">Đồng hồ-->
-<!--                                Skmei</a>-->
-<!---->
-<!--                        </li>-->
-<!---->
-<!--                        <li>-->
-<!--                            <a href="/collections/dong-ho-nu-halei" title="Đồng hồ Halei">Đồng hồ-->
-<!--                                Halei</a>-->
-<!---->
-<!--                        </li>-->
-<!---->
-<!--                    </ul>-->
-<!--                </li>-->
+
                 <li>
-                    <a href="/pages/dich-vu" class="" title="Dịch vụ">
+                    <a href="<?php echo base_url('service');?>" class="" title="Dịch vụ">
                         <span>Dịch vụ</span>
                     </a>
                 </li>

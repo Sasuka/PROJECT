@@ -117,7 +117,7 @@
                                         foreach ($promotion as $itemPromotion) {
                                             if ($itemProduct['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
                                                 ?>
-                                                <p class="pro-price discount-cost"><?php echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $itemProduct['DONGIA_BAN']; ?></p>
+                                                <p class="pro-price discount-cost"><?php echo round((1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $itemProduct['DONGIA_BAN'],2); ?></p>
 
                                                 <p class="pro-price-del text-left discount-original">
                                                     <del class="compare-price"><?php echo $itemProduct['DONGIA_BAN'] ?></del>

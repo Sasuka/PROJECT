@@ -196,7 +196,7 @@
                             item.find('.discount-cost').find('i').css({'display': 'none'});
                             item.find('.summary').find('.gift-name').css({'display': 'none'});
                         } else {
-                            item.find('.quickview-price').find('span').html((1 - 0.01 * pro['PHANTRAM_KM']) * pro["DONGIA_BAN"] + " $");
+                            item.find('.quickview-price').find('span').html(Math.round((((1 - 0.01 * pro['PHANTRAM_KM']) * pro["DONGIA_BAN"])*1000)/1000) + " $");
                             item.find('.quickview-price').find('del').html(pro["DONGIA_BAN"] + " $");
                             item.find('.discount-cost').find('i').css({'display': 'block'});
                             item.find('.summary').find('.gift-name').css({'display': 'block'});

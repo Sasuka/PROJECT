@@ -11,6 +11,8 @@
 class PayBills extends MY_Controller
 {
     public $dt;
+    public $ship_info;
+    public static $ship_rate;
 
     public function __construct()
     {
@@ -18,6 +20,7 @@ class PayBills extends MY_Controller
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->model('customer_model');
+
     }
 
     public function index()
@@ -130,17 +133,22 @@ class PayBills extends MY_Controller
 
     public function complete_checkout()
     {
+//        $this->data['temp'] = 'site/paypal/index';
+//        $this->load->view('site/layout', $this->data);
         if ($this->input->post()) {
             $this->load->model('customer_model');
-            $ship_info = isset($_POST['ship_info']) ? $_POST['ship_info'] : '';
+            $this->ship_info = isset($_POST['ship_info']) ? $_POST['ship_info'] : '';
             $ship_rate = isset($_POST['ship_rate']) ? $_POST['ship_rate'] : '';
             $payment_method = $_POST['payment_method'];
-            $arr_ship_info = unserialize($ship_info);
+            $arr_ship_info = unserialize($this->ship_info);
+            //pre($ship_rate);
             /*Thông tin dữ liệu gồm có 3 loại
              * 1: Đã đăng ký.
              * 3. Chưa b
              * 2. Đã tham gia.ao giờ.
              */
+
+
             if (!($this->check_phone_exists_in_customer($arr_ship_info['SDT']))) {
                 /* 1.Đã đăng ký*/
 
@@ -185,46 +193,56 @@ class PayBills extends MY_Controller
                 $this->session->set_flashdata('message', 'Thêm hóa đơn thành công');
                 /*Lấy mã hóa đơn mới nhất.*/
                 $list = $this->transaction_model->get_info_rule($bill_info);
-//                pre($list);
 
-//                $new_transaction = $this->transaction_model->get_new_transaction();
-//                $new_transaction = $new_transaction[0];
-//                pre($new_transaction);
                 $cart_info = $this->cart->contents();
-               // pre($cart_info);
+                // pre($cart_info);
                 $sum_cost = 0;
-                foreach ($cart_info as $item_cart){
+                foreach ($cart_info as $item_cart) {
                     $data = array('MA_GIAODICH' => $list ['MA_GIAODICH'],
                         'MA_SANPHAM' => $item_cart['id'],
-                        'SOLUONG'=> $item_cart['qty'],
+                        'SOLUONG' => $item_cart['qty'],
                         'DONGIA_HT' => $item_cart['price_original'],
                         'THANHTOAN' => $item_cart['price'],
                         'TANGPHAM' => $item_cart['gitf_pro']);
 
-                    if (!$this->transactionDetail_model->add($data)){
+                    if (!$this->transactionDetail_model->add($data)) {
                         break;
-                    }else{
+                    } else {
                         $sum_cost += $item_cart['subtotal'];
                     }
+
+
                 }
                 /* Cập nhật lại tổng thành tiền*/
                 $where = array('MA_GIAODICH' => $list['MA_GIAODICH']);
                 $data = array('TONG_THANHTIEN' => $sum_cost);
-                $this->transaction_model->update_rule($where,$data);
+                $this->transaction_model->update_rule($where, $data);
+                /*Xem*/
+                if ($this->db->trans_status() === FALSE) {
+                    $this->session->set_flashdata('message', 'Thêm CT hóa đơn thất bại');
+                    $this->db->trans_rollback();
+                } else {
+                    $this->session->set_flashdata('message', 'Thêm CT hóa đơn thành công');
+                    $this->db->trans_commit();
+
+                    /*Thanh toán bằng paypal*/
+                    if ($payment_method == '2') {
+                       // pre($list);
+
+                        $_SESSION['billsInfo'] = $list;
+                        redirect('paypal');
+                    }else{
+                        $this->cart->destroy();
+                    }
+
+                }
+
 
             } else {
                 $this->session->set_flashdata('message', 'Thêm hóa đơn thất bại');
             }
 
-            if ($this->db->trans_status() === FALSE){
-                $this->session->set_flashdata('message', 'Thêm CT hóa đơn thất bại');
-                $this->db->trans_rollback();
-            }else{
-                $this->session->set_flashdata('message', 'Thêm CT hóa đơn thành công');
-                $this->db->trans_commit();
-                $this->cart->destroy();
-                redirect();
-            }
+
         }
 
         $this->data['type'] = 3;

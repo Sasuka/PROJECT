@@ -114,7 +114,7 @@ $this->load->view('admin/promotions/head', $this->data);
                 $('#end_error').html('<span style="color:red;">Vui lòng không để trống</span>');
                 return false;
             } else {
-                alert(end);
+                // alert(end);
 
                 $('#end_error').html('');
                 $('#end').val(end);

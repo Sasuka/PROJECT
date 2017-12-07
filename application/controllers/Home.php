@@ -13,7 +13,6 @@ Class Home extends MY_Controller
     {
         parent::__construct();
         $this->load->model('admin_model');
-
     }
 
     //lay ma chuc vu

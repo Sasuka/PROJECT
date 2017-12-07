@@ -1,0 +1,137 @@
+
+.newsdetail {
+    margin-bottom: 40px;
+}
+.newslist .newscol {
+    margin-bottom: 40px;
+}
+.newslist .newscol figure {
+    background: #f7f7f7;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.newslist .newscol figure .newsimg {
+    overflow: hidden;
+    display: flex;
+    height: 245px;
+    justify-content: center;
+    align-items: center;
+}
+.newslist .newscol figure figcaption {
+    padding: 30px 30px 15px 30px;
+}
+.newslist .newscol figure figcaption .newsname {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 55px;
+}
+
+.newslist .newscol figure figcaption time {
+    display: inline-block;
+    color: #999;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.newslist .newscol figure figcaption .newsdes {
+    color: #666;
+    font-size: 0.8125em;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 80px;
+}
+.newslist .newscol figure figcaption .newsbutton {
+    text-align: center;
+    border-top: 1px solid #e1e1e1;
+    padding-top: 15px;
+}
+
+.newslist .newscol figure figcaption .newsbutton a {
+    display: inline-block;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 600;
+    position: relative;
+    padding-right: 20px;
+    font-size: 0.875em;
+    transition: all,0.3s;
+}
+.newslist .newscol figure figcaption .newsbutton a::after {
+    content: '\f178';
+    font-family: 'FontAwesome';
+    font-size: 1em;
+    font-weight: 300;
+    margin-left: 10px;
+    position: absolute;
+    top: -2px;
+    right: 0;
+    transition: all 0.2s;
+    color: #666;
+}
+.newsdetail .newscontent {
+    margin-bottom: 10px;
+}
+.newsdetail .newscontent .news-title {
+    color: #329932;
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.other-article .other-item {
+    float: left;
+    width: 100%;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #e1e1e1;
+}
+.other-article .title {
+
+    color: #333;
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    border-bottom: 1px solid #333;
+
+}
+.other-article .other-item figure .item-img {
+    margin-top: 2px;
+    display: table-cell;
+    width: 42%;
+    margin-right: 5%;
+    float: left;
+}
+.other-article .other-item figure figcaption {
+    display: table-cell;
+    width: 53%;
+    float: left;
+}
+.other-article .other-item figure figcaption .item-time {
+    float: left;
+    width: 100%;
+    margin-bottom: 4px;
+    font-size: 0.75rem;
+    color: #999;
+}
+.other-article .other-item figure figcaption .item-title {
+    float: left;
+    width: 100%;
+    font-size: 0.8125em;
+    font-weight: 600;
+}
