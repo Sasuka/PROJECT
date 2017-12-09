@@ -69,7 +69,7 @@ $this->load->view('admin/transaction_detail/head', $this->data);
 
             <tfoot class="auto_check_pages">
             <tr>
-                <td colspan="7">
+                <td colspan="8">
                     <div class="itemActions">
                         <a href="<?php echo admin_url('transaction'); ?>" id="submit" class="button blueB">
                             <span style="color:white;">Quay lại</span>
@@ -98,7 +98,8 @@ $this->load->view('admin/transaction_detail/head', $this->data);
                     <td style="text-align: center;">
                         <?= $item['MA_SANPHAM'] ?>
                     </td>
-
+                    <!-- đơn giá bán nghĩa là đơn giá hiện tại đc update trên website, don gia hien tai là đon
+                    giá tính từ khi KH chọn mua-->
                     <td class="tooltip">
                         <b><?php echo $item['TEN_SANPHAM']; ?></b>
                         <span class="tooltiptext">Đơn giá: <?php echo $item['DONGIA_BAN']; ?></span>

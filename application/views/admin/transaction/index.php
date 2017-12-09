@@ -66,13 +66,13 @@ $this->load->view('admin/transaction/head', $this->data);
                                value="<?php echo $item['MA_GIAODICH']; ?>">
                     </td>
 
-                    <td class="textC"><?= $item['MA_GIAODICH'] ?></td>
+                    <td class="tipS" title="<?php echo 'KH: '.$item['HO_TEN_KH'].' | '.(($item['GIOITINH_KH']=='0') ? 'Nam' :'Nữ');?>"><?= $item['MA_GIAODICH'];?></td>
 
                     <td>
                         <?php echo $item['TONG_THANHTIEN']; ?>
                     </td>
 
-                    <td>
+                    <td class="tipS" title="<?php echo 'SDT: '.$item['SDT_KH'];?>">
                         <?php echo $item['DIACHI_GIAO']; ?>
                     </td>
                     <td>
@@ -91,7 +91,7 @@ $this->load->view('admin/transaction/head', $this->data);
                         echo date('d-m-Y', strtotime($item['NGAY_GIAODICH']));
                         ?>
                     </td>
-                    <td>
+                    <td class="tipS" title="<?php echo isset($item['HO_TEN_NV']) ? $item['HO_TEN_NV']:'' ;?>">
                         <?php
                         if ($item['TRANGTHAI'] == 0) {
                             echo 'Vừa đặt hàng';
@@ -107,13 +107,13 @@ $this->load->view('admin/transaction/head', $this->data);
 
 
                     <td class="option textC">
-                        <a href="" title="Giao hàng" class="tipE">
+                        <a href="<?php echo report_url('transactionReport/printPaybills/'.$item['MA_GIAODICH'])?>" title="In hóa đơn" class="tipE" target="_blanks">
                             <!--                            <button id="getBill">GIAO HÀNG</button>-->
-                            <img src="<?php echo public_url('admin/images') ?>/icons/color/star.png"
+                            <img src="<?php echo public_url('admin/images') ?>/icons/color/copy.png"
                                  id="getBill_<?php echo $item['MA_GIAODICH']; ?>">
                         </a>
                         <a href="<?php echo admin_url('transactionDetail/index/' . $item['MA_GIAODICH']); ?>"
-                           title="Xem chi tiết sản phẩm">
+                           title="Xem chi tiết sản phẩm" class="tipN">
                             <img src="<?php echo public_url('admin/images') ?>/icons/color/view.png">
                         </a>
                         <a href="<?php echo admin_url('transaction/view/' . $item['MA_GIAODICH']); ?>" title="Chỉnh sửa"

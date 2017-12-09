@@ -6,7 +6,7 @@ class Transaction extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('transaction_model', 'transactionDetail_model', 'store_model'));
+        $this->load->model(array('transaction_model', 'transactionDetail_model', 'store_model','admin_model','customer_model'));
     }
 
     public function index()
@@ -43,10 +43,37 @@ class Transaction extends MY_Controller
             $input['where'] = array('MA_GIAODICH' => $idProduct);
         }
 
-
+        //lấy danh sách nhân viên
+        $cond['where']= array('TRANGTHAI'=>1);
+        $staff = $this->admin_model->getList($cond);
+        //lấy danh sách khách hàng.
+        $customer = $this->customer_model->getList($cond);
         //lay danh sach giao dich
         $list = $this->transaction_model->getList($input);
-        // pre($list);
+
+        /*Tìm gán tên nhân viên lập*/
+        for ($i = 0; $i < count($list); $i++) {
+            for ($j =0;$j < count($staff);$j++){
+                if ($list[$i]['MA_NHANVIEN'] == $staff[$j]['MA_NHANVIEN']){
+                    $list[$i]['HO_TEN_NV'] = ucwords(strtolower($staff[$j]['HO'].' '.$staff[$j]['TEN']));
+                    break;
+                }
+            }
+        }
+        /*Tìm gán thông tin khách hàng mua*/
+        for ($i = 0; $i < count($list); $i++) {
+            for ($j =0;$j < count($customer);$j++){
+                if ($list[$i]['MA_KHACHHANG'] == $customer[$j]['MA_KHACHHANG']){
+                    $list[$i]['HO_TEN_KH'] = ucwords(strtolower($customer[$j]['HO'].' '.$customer[$j]['TEN']));
+                    $list[$i]['SDT_KH'] = $customer[$j]['SDT'];
+                    $list[$i]['GIOITINH_KH'] = $customer[$j]['GIOITINH'];
+                    break;
+                }
+            }
+        }
+//            echo '<pre>';
+//             print_r($list);
+//         exit();
         $this->data['list'] = $list;//danh sach tat ca giao dich
         $this->data['temp'] = 'admin/transaction/index';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);

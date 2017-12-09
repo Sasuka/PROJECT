@@ -4,6 +4,7 @@ $account = $this->session->userdata('account');
 $level = $this->session->userdata('level');
 
 ?>
+
 <div class="line"></div>
 <div class="wrapper" id="main_import">
     <?php
@@ -56,7 +57,11 @@ $level = $this->session->userdata('level');
                             <span style="color:white;">Trở lại</span>
                         </a>
                     </div>
-
+                    <div  style="padding: 10px;float: right; ">
+                        <a target="_blank" href="<?php echo report_url('paybills/printDetailPayBilss/').$id; ?>"  class="button blueB">
+                            <span style="color:white;">Xuất hóa đơn</span>
+                        </a>
+                    </div>
                     <div class="pagination">
                         <?php
                         echo $this->pagination->create_links();

@@ -14,6 +14,10 @@ function public_url($url = ''){
 function upload_url($url = ''){
     return base_url('uploads/'.$url);
 }
+//Path director folder report
+function report_url($url = ''){
+    return base_url('report/'.$url);
+}
 //Path director folder admin
 //function admin_url($url = ''){
 //    return base_url()

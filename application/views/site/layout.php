@@ -74,12 +74,12 @@
                                 <del></del>
                                 <div class="discount-cost" style="display: inline-block;">
                                     <i style="color: red;text-indent: 30px;"> Tiết kiệm : <span
-                                                style="color: #ffa20a;"></span>.</i>
+                                            style="color: #ffa20a;"></span>.</i>
                                 </div>
                             </div>
                             <div class="summary">
                                 <br><strong style="color: #0000FF;">Tên sản phẩm: <span
-                                            class="product-name" style="color: #ff9f0a; font-family: " Courier New",
+                                        class="product-name" style="color: #ff9f0a; font-family: " Courier New",
                                     Courier, mono"></span></strong>
                                 <hr>
                                 <strong style="color: #0000FF;"> Loại sản phẩm:&nbsp;<span class="categories-name"
@@ -224,7 +224,7 @@
                                 .find('.owl-wrapper').find('.owl-item')
                                 .find('li .product-thumb').find('img')
                                 .attr('src',"http://localhost/www/PROJECT/uploads/product/"+val);
-                           console.log('ê'+img);
+                            console.log('ê'+img);
                             // $('#owl-wrapper').html(
                             //
                             // );
@@ -233,10 +233,10 @@
                         });
 
                         var pro_price = $(".product-detail").find(".pro-prices").find(".pro-price").html();
-                      //  console.log("ssss" + item.find('.quickview-variants').find('.quick-view-select').val());
+                        //  console.log("ssss" + item.find('.quickview-variants').find('.quick-view-select').val());
                         //  $('#test1').text(pro["TEN_SANPHAM"]);
 
-                     //   console.log(pro);
+                        //   console.log(pro);
                     }
 
                 });
@@ -329,8 +329,6 @@
 
         });
     </script>
-
-
     <section id="page_content" class="">
         <div id="pageContainer" class="clearfix">
 
@@ -389,7 +387,6 @@
 
 
         </div>
-
         <section id="content" class="clearfix container">
             <?php
             /**Thông báo trạng thái**/
@@ -419,7 +416,6 @@
             ?>
 
         </section>
-
         <footer id="footer">
             <div class="footer-bottom">
                 <?php $this->load->view('site/footer_bottom', $this->data); ?>
@@ -431,7 +427,6 @@
         <a href="#" class="scrollToTop show">
             <i class="fa fa-chevron-up"></i>
         </a>
-
         <!--Scroll to Top-->
         <div style="display:none" id="myCart" class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog"
              aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: block;">
@@ -465,7 +460,7 @@
                                 </tr>
                                 <tr class="line-item">
                                     <td class="item-image"><img
-                                                src="<?php echo upload_url('product'); ?>/7_0590d26379fb4da3ba8d9b57564ee6b0_small.jpg">
+                                            src="<?php echo upload_url('product'); ?>/7_0590d26379fb4da3ba8d9b57564ee6b0_small.jpg">
                                     </td>
                                     <td class="item-title">
                                         <a href="/products/dong-ho-nam-tevise-1952-chay-co-cuc-chat">ĐỒNG HỒ NAM TEVISE
@@ -476,11 +471,11 @@
                                     <td class="item-price">2,400,000₫</td>
                                     <td class="item-delete text-center"><a href="javascript:void(0);"
                                                                            onclick="deleteCart(1012006173)"><i
-                                                    class="fa fa-times"></i></a></td>
+                                                class="fa fa-times"></i></a></td>
                                 </tr>
                                 <tr class="line-item">
                                     <td class="item-image"><img
-                                                src="<?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg">
+                                            src="<?php echo upload_url('product'); ?>/1_e0ed7c0240734782a8268793dce0b9b8_small.jpg">
                                     </td>
                                     <td class="item-title">
                                         <a href="/products/dong-ho-nam-skmei-kim-xanh-duong">ĐỒNG HỒ NAM SKMEI KIM XANH
@@ -491,7 +486,7 @@
                                     <td class="item-price">2,994,000₫</td>
                                     <td class="item-delete text-center"><a href="javascript:void(0);"
                                                                            onclick="deleteCart(1012030836)"><i
-                                                    class="fa fa-times"></i></a></td>
+                                                class="fa fa-times"></i></a></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -545,7 +540,7 @@
                     <g>
                         <g>
                             <polygon
-                                    points="447.992,336 181.555,336 69.539,80 0.008,80 0.008,48 90.477,48 202.492,304 447.992,304 		"/>
+                                points="447.992,336 181.555,336 69.539,80 0.008,80 0.008,48 90.477,48 202.492,304 447.992,304 		"/>
                         </g>
                         <path d="M287.992,416c0,26.5-21.5,48-48,48s-48-21.5-48-48s21.5-48,48-48S287.992,389.5,287.992,416z"/>
                         <path d="M447.992,416c0,26.5-21.5,48-48,48s-48-21.5-48-48s21.5-48,48-48S447.992,389.5,447.992,416z"/>
@@ -661,8 +656,14 @@
             </symbol>
         </svg>
 </div>
-</section>
-</div>
-
+<script>
+    $(document).ready(function() {
+       $('#filder').on('change', function (e) {
+           e.preventDefault();
+           var condition = $(this).val();
+           alert(condition);
+       })
+    });
+</script>
 </body>
 </html>

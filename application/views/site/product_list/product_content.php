@@ -50,7 +50,7 @@
                     <div class="filterBtn txtLeft showOverlay">
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
                         <span class="custom-dropdown custom-dropdown--white">
-							<select class="sort-by custom-dropdown__select custom-dropdown__select--white">
+							<select class="sort-by custom-dropdown__select custom-dropdown__select--white" name="filter" id="filter">
                                 <option value="manual">Sản phẩm nổi bật</option>
 								<option value="price-ascending">Giá: Tăng dần</option>
 								<option value="price-descending">Giá: Giảm dần</option>
@@ -58,7 +58,6 @@
 								<option value="title-descending">Tên: Z-A</option>
 								<option value="created-ascending">Cũ nhất</option>
 								<option value="created-descending">Mới nhất</option>
-
 							</select>
 						</span>
                     </div>

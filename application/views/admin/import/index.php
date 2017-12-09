@@ -36,12 +36,16 @@ $account = $this->session->userdata('account');
             <tfoot class="auto_check_pages">
             <tr>
                 <td colspan="7">
-                    <div class="list_action itemActions">
-                        <a href="#submit" id="submit" class="button blueB" url="<?php echo admin_url('import/dell_all');?>">
-                            <span style="color:white;">Xóa hết</span>
-                        </a>
-                    </div>
-
+<!--                    <div class="list_action itemActions">-->
+<!--                        <a href="#submit" id="submit" class="button blueB" url="--><?php //echo admin_url('import/dell_all');?><!--">-->
+<!--                            <span style="color:white;">Xóa hết</span>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="itemActions">-->
+<!--                        <a  target="_blank" href="--><?php //echo report_url('paybills/');?><!--" id="submit" class="button blueB">-->
+<!--                            <span style="color:white;">Xuất hóa đơn</span>-->
+<!--                        </a>-->
+<!--                    </div>-->
                     <div class="pagination">
                         <?php
                         echo $this->pagination->create_links();
