@@ -104,13 +104,14 @@ $tmp['fname'] = $account['HO'] . ' ' . $account['TEN'];
                 </div>
 
                 <div class="formSubmit">
-                    <input value="Thêm mới" class="redB" type="submit">
+                    <input value="Thêm mới" class="redB" id="btnAdd" type="submit">
                     <input value="Hủy bỏ" class="basic" type="reset">
                 </div>
                 <div class="clear"></div>
             </fieldset>
         </form>
     </div>
+   
 
 </div>
 <script>
@@ -148,12 +149,14 @@ $tmp['fname'] = $account['HO'] . ' ' . $account['TEN'];
                     url: '../checkExistPromotion',
                     data: {'data': JSON.stringify(data)},
                     success: function (html) {
-                        if (html == '1') {
-                            alert('Sản phẩm này đã có trong chương trình khuyến mãi rồi...!');
+                        if (html == 1) {
 
+                            alert('Sản phẩm này đã có trong chương trình khuyến mãi rồi...!');
+                            $('#btnAdd').attr("disabled", "disabled");
                             $('#product-promotions-add').val(0);
                         } else {
                             $('#price').val(html);
+                            $('#btnAdd').removeAttr("disabled");
                         }
                     }
                 });

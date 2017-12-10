@@ -167,7 +167,7 @@ $this->load->view('admin/catelog/head', $this->data);
                         $('#catelogName_error').html('Loại sản phẩm này đã tồn tại');
                         return false;
                     } else {
-                       alert('Thành công');
+                      // alert('Thành công');
                        return true;
                     }
                 });

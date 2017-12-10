@@ -2,6 +2,7 @@
 
 class Catelog extends MY_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -20,7 +21,19 @@ class Catelog extends MY_Controller
         $this->data['temp'] = 'admin/catelog/index';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }
-
+//   ================KIEM TRA  TEN LOẠI SẢN PHẨM CÓ TRÙNG KHÔNG================================//
+    public function check_nameCate_exists()
+    {
+        $name = $this->input->post('catelogName');
+        $where = array('TEN_LOAI_SANPHAM' => $name,'MA_LOAI_SANPHAM!=' => $this->idCategory);
+        //kiem tra table column phone
+        if ($this->catelog_model->check_exist($where)) {
+            //return error
+            $this->form_validation->set_message(__FUNCTION__, 'Tên loại sản phẩm này đã bị trùng');
+            return false;
+        } else
+            return true;
+    }
 //   ================KIEM TRA  LOAI SAN PHAM================================//
     public function checkCatelogByGroup()
     {
@@ -28,9 +41,10 @@ class Catelog extends MY_Controller
 //        print_r($arr[0]);
 
         $data['catelogName'] = strtoupper($data['catelogName']);
-        $input = array('TEN_LOAI_SANPHAM' => $data['catelogName'], 'MA_NHOM_SANPHAM' => $data['groupID']);
+//        $input = array('TEN_LOAI_SANPHAM' => $data['catelogName'], 'MA_NHOM_SANPHAM' => $data['groupID']);
 //        echo $data['groupID'];
 //
+        $input = array('TEN_LOAI_SANPHAM' => $data['catelogName']);
         if ($this->catelog_model->check_exist($input)) {
             echo '1';
         } else {
@@ -43,11 +57,13 @@ class Catelog extends MY_Controller
     {
         $data = json_decode($_GET['data'], true);
         $data['catelogName'] = strtoupper($data['catelogName']);
-        $input = array('TEN_LOAI_SANPHAM' => $data['catelogName'], 'MA_NHOM_SANPHAM' => $data['groupID'], 'MA_NHA_CUNGCAP' => $data['providersID']);
+//        $input = array('TEN_LOAI_SANPHAM' => $data['catelogName'], 'MA_NHOM_SANPHAM' => $data['groupID'], 'MA_NHA_CUNGCAP' => $data['providersID']);
+        $input = array('TEN_LOAI_SANPHAM' => $data['catelogName']);
+
         if ($this->catelog_model->check_exist($input)) {
             echo '1';
         } else {
-            $this->catelog_model->add($input);
+           // $this->catelog_model->add($input);
             echo '0';
         }
     }
@@ -167,6 +183,8 @@ class Catelog extends MY_Controller
         //lay id cua loại cần chỉnh sửa
         $id = $this->uri->segment('4');
         $id = intval($id);
+        $this->idCategory = $id;
+
         $this->load->model('providers_model');
 
         //lấy thong tin của quản trị viên
@@ -183,7 +201,7 @@ class Catelog extends MY_Controller
         //khi nhan submit
         if ($this->input->post()) {
 
-            $this->form_validation->set_rules('catelogName', 'Tên loại sản phẩm', 'required');
+            $this->form_validation->set_rules('catelogName', 'Tên loại sản phẩm', 'required|callback_check_nameCate_exists');
 
             //kiem tra dieu kien validate co form_validation thi no chay ham nay
             if ($this->form_validation->run()) {

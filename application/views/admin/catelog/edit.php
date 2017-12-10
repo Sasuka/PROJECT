@@ -38,6 +38,8 @@ $tmp['MA_NHOM_SANPHAM'] = (isset($_POST['groupID']) ? $_POST['groupID'] : $info[
                              id="catelogName_error"><?php echo form_error('catelogName'); ?></div>
                     </div>
                     <div class="clear"></div>
+                    <input name="groupID" id="groupID" type="hidden"
+                           value="<?php echo $info['MA_NHOM_SANPHAM']; ?>">
                 </div>
                 <!-- nhom san pham -->
 <!--                <div class="formRow">-->

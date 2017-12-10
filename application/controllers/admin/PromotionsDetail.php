@@ -25,11 +25,12 @@ class PromotionsDetail extends MY_Controller
             $productId = $data['productId'];
             $input = array('MA_KHUYENMAI' => $inputId,
                 'MA_SANPHAM' => $productId);
-            // print_r($this->catelog_model->getList($input));
+//             print_r($this->catelog_model->getList($input));
             $listProduct = $this->promotionDetail_model->check_exist($input);
+
             $price['where'] = array('MA_SANPHAM'=>$productId);
             if ($listProduct) {
-                echo '1';
+                echo '1';//đã tồn tại rồi
             } else {
                 //thuc hien lay gia trong san pham dua vao ma
                 $price = $this->product_model->getList($price);
