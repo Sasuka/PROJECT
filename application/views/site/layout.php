@@ -20,8 +20,8 @@
         <div class="jsQuickview">
             <p id="test1"></p>
             <div class="modal-header clearfix" style="width: 100%">
-                <a href="/products/dong-ho-nam-skmei-kim-xanh-duong" class="quickview-title text-left"
-                   title="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">
+                <a href="#" class="quickview-title text-left"
+                   title="#">
                     <h4 class="p-title modal-title"></h4>
                 </a>
                 <div class="quickview-close">
@@ -32,7 +32,7 @@
                 <div class="quickview-image image-zoom">
                     <img class="p-product-image-feature"
                          src="<?php echo upload_url('product'); ?>/"
-                         alt="ĐỒNG HỒ NAM SKMEI KIM XANH DƯƠNG">
+                         alt="#">
                 </div>
                 <div id="quickview-sliderproduct">
                     <div class="quickview-slider">

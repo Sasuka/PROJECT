@@ -5,12 +5,6 @@ class MadeIn_model extends MY_Model{
     {
         parent::__construct();
     }
-    function index(){
-
-    }
-    function add(){
-
-    }
 
 
 }
