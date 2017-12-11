@@ -30,7 +30,7 @@ $this->load->view('admin/group/head', $this->data);
                     <td style="width:10px;"><img src="<?php echo public_url('admin') ?>/images/icons/tableArrows.png">
                     </td>
                     <td style="width:80px;">Mã số</td>
-                    <td>Tên nhóm sản phẩm</td>
+                    <td>Tên thương hiệu</td>
                     <td>Logo</td>
                     <td style="width:100px;">Hành động</td>
                 </tr>
@@ -65,19 +65,21 @@ $this->load->view('admin/group/head', $this->data);
 							<?= $row['TEN_NHOM_SANPHAM'] ?>	</span>
                         </td>
                         <td><span title="<?= $row['TEN_NHOM_SANPHAM'] ?>" class="tipS">
-                            <img src="<?php echo public_url('images/').$row['LOGO']?>" alt="logo sản phẩm">
+                            <img src="<?php echo public_url('images/') . $row['LOGO'] ?>" alt="logo sản phẩm">
                             </span>
                         </td>
                         <td class="option">
-                            <a href="<?php echo admin_url('group/edit/' . $row['MA_NHOM_SANPHAM']) ?>" title="Chỉnh sửa"
+                            <?php if ($row['TRANGTHAI'] == '0'){?>
+                            <a href="<?php echo admin_url('group/edit/' . $row['MA_NHOM_SANPHAM']) ?>" title="Kích hoạt"
                                class="tipS ">
-                                <img src="<?php echo public_url('admin') ?>/images/icons/color/edit.png">
+                                <img src="<?php echo public_url('admin/') ?>images/icons/color/star.png">
                             </a>
-
-                            <a href="<?php echo admin_url('group/delete/' . $row['MA_NHOM_SANPHAM']) ?>" title="Xóa"
-                               class="tipS verify_action">
-                                <img src="<?php echo public_url('admin') ?>/images/icons/color/delete.png">
-                            </a>
+                            <?php }else{ ?>
+                                <a href="<?php echo admin_url('group/delete/' . $row['MA_NHOM_SANPHAM']) ?>" title="Xóa"
+                                   class="tipS verify_action">
+                                    <img src="<?php echo public_url('admin') ?>/images/icons/color/delete.png">
+                                </a>
+                            <?php } ?>
                         </td>
                     </tr>
                     <?php

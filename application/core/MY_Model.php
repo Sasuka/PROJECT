@@ -803,9 +803,9 @@ class MY_Model extends CI_Model
      */
     public function count_rows($where = NULL)
     {
-//        if (isset($where)) {
-//            $this->where($where);
-//        }
+        if (isset($where)) {
+            $this->where($where);
+        }
 //        if ($this->soft_deletes === TRUE) {
 //            $this->_where_trashed();
 //        }
@@ -2039,6 +2039,17 @@ class MY_Model extends CI_Model
         //tra ve du lieu
 //        pre($query->result_array());
         return $query->result_array();
+    }
+    function count_field($input = array()){
+        if (isset($input['select'])) {
+            $this->db->select($input['select']);
+        }
+        if ((isset($input['where'])) && $input['where']) {
+            $this->db->where($input['where']);
+        }
+//      $query = $this->db->count_all_results($this->table);
+        $query = $this->db->get($this->table)->result();
+        return count($query);
     }
 
 

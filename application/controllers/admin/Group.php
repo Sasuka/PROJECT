@@ -23,11 +23,11 @@ class Group extends MY_Controller
     public function checkNameExists()
     {
         $catelogName = strtoupper($this->input->post('groupName', true));
-        $where = array('TEN_NHOM_SANPHAM' =>$catelogName);
-        if ($this->group_model->check_exist($where)){
+        $where = array('TEN_NHOM_SANPHAM' => $catelogName);
+        if ($this->group_model->check_exist($where)) {
             $this->form_validation->set_message(__FUNCTION__, 'Tên nhóm này đã tồn tại');
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -64,10 +64,8 @@ class Group extends MY_Controller
                 } else {
                     $namePicture = '';
                 }
-               // pre($upload_data);
-                $dt = array(
-
-                );
+                // pre($upload_data);
+                $dt = array();
 
                 if ($this->catelog_model->add($dt)) {
                     $this->session->set_flashdata('message', 'Thêm nhóm thành công!');
@@ -84,4 +82,77 @@ class Group extends MY_Controller
         $this->load->view('admin/main', $this->data);
     }
 
+//   ================XOA NHÓM SAN PHAM================================//
+    public function delete($id, $redirect = true)
+    {
+        //lay thong tin cua mot san pham
+
+        $input = array('MA_NHOM_SANPHAM' => $id);
+        $info = $this->group_model->get_info_rule($input);
+        if (!$info) {
+            $this->session->set_flashdata('message', 'Không tồn tại thương hiệu này');
+            if ($redirect) {
+                redirect(admin_url('group'));
+            } else {
+                return false;
+            }
+        }
+        /*Xét kiểm tra có chứa loại hay không
+        *1. Không thì xóa ra khỏi DB
+        *2.Có thì update trạng thái về 0.
+        *
+         */
+        $containtCate = $this->catelog_model->get_info_rule($input);
+        /*2 Nếu rỗng được phép xóa ra khỏi DB*/
+        if (empty($containtCate)) {
+            $check = $this->group_model->del_rule($input);
+            if ($check) {
+                $this->session->set_flashdata('message', 'Thương hiệu ' . $info['TEN_NHOM_SANPHAM'] . 'đã xóa');
+                redirect(admin_url('group'));
+            } else {
+                $this->session->set_flashdata('message', 'Thương hiệu ' . $info['TEN_NHOM_SANPHAM'] . 'không xóa được');
+                return false;
+            }
+        } else {
+            $status = $this->group_model->update_rule(array('MA_NHOM_SANPHAM' => $id), array('TRANGTHAI' => '0'));
+            if ($status) {
+                $this->session->set_flashdata('message', 'Thương hiệu ' . $info['TEN_NHOM_SANPHAM'] . 'đã xóa');
+                redirect(admin_url('group'));
+            } else {
+                $this->session->set_flashdata('message', 'Thương hiệu ' . $info['TEN_NHOM_SANPHAM'] . 'không xóa được');
+                return false;
+            }
+        }
+    }
+
+    //===================XOA  ALL THUONG HIỆU=================================//
+    public function dell_all()
+    {
+        $ids = $this->input->POST('ids');
+        //pre($ids);
+        foreach ($ids as $id) {
+            $this->delete($id);
+        }
+    }
+
+    //===================CẬP NHẬT THUONG HIỆU=================================//
+    function edit($id = '')
+    {
+        $input = array('MA_NHOM_SANPHAM' => $id);
+        $info = $this->group_model->get_info_rule($input);
+        if (!$info) {
+            $this->session->set_flashdata('message', 'Không tồn tại thương hiệu này');
+            redirect(admin_url('group'));
+        }else {
+            $cond['where'] = array('MA_NHOM_SANPHAM' => $id);
+            $count = $this->catelog_model->count_field($cond);
+            $status = $this->group_model->update_rule(array('MA_NHOM_SANPHAM' => $id), array('TRANGTHAI' => ($count+1)));
+            if ($status) {
+                $this->session->set_flashdata('message', 'Thương hiệu ' . $info['TEN_NHOM_SANPHAM'] . 'đã cập nhật');
+                redirect(admin_url('group'));
+            } else {
+                $this->session->set_flashdata('message', 'Thương hiệu ' . $info['TEN_NHOM_SANPHAM'] . 'cập nhật không thành công');
+            }
+        }
+    }
 }

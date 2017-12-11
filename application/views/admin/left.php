@@ -62,7 +62,7 @@ $level = $this->session->userdata('level');
                 </li>
                 <li>
                     <a href="<?php echo admin_url('group') ?>">
-                        Nhóm sản phẩm </a>
+                        Thương hiệu </a>
                 </li>
                 <li>
                     <a href="<?php echo admin_url('catelog') ?>">
