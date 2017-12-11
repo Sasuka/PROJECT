@@ -43,38 +43,48 @@ class Group extends MY_Controller
             $this->form_validation->set_rules('groupName', 'Tên nhóm sản phẩm', 'callback_checkNameExists');
 
             //kiem tra dieu kien validate co form_validation thi no chay ham nay
-            if ($this->form_validation->run()) {
+          //  if ($this->form_validation->run()) {
                 $groupName = strtoupper($this->input->post('groupName', true));
+                /*Create folder*/
+              //  chmod(upload_url(), 0777);
+                $path   = upload_url("product/").$groupName;
+                mkdir(upload_url("product\/").$groupName);
+                pre($path);
+                //exit();
+                if (!is_dir($path)) { //create the folder if it's not already exists
+                    mkdir($path, 0755, TRUE);
+                }
+
+
+
 
                 //upload hinh logo
-                $this->load->library('upload_library');
-                $upload_path = './uploads/logo/';
-
-                $upload_data = $this->upload_library->upload($upload_path, 'image');
-
-                //   pre($upload_data);
-                if (isset($upload_data['file_name'])) {
-                    $upload_data['raw_name'] = strtolower($groupName . $upload_data['file_ext']);
-                    $upload_data['orig_name'] = strtolower($groupName . $upload_data['file_ext']);
-                    $upload_data['file_name'] = strtolower($groupName . $upload_data['file_ext']);
-                    $upload_data['client_name'] = strtolower($groupName . $upload_data['file_ext']);
-                    $namePicture = $upload_data['file_name'];
-
-
-                } else {
-                    $namePicture = '';
-                }
-                // pre($upload_data);
-                $dt = array();
-
-                if ($this->catelog_model->add($dt)) {
-                    $this->session->set_flashdata('message', 'Thêm nhóm thành công!');
-                } else {
-                    $this->session->set_flashdata('message', 'Thêm nhóm thất bại');
-                }
-
-                redirect(admin_url('group'));
-            }
+//                $this->load->library('upload_library');
+//                $upload_path = './uploads/logo/';
+//                $upload_data = $this->upload_library->upload($upload_path, 'image');
+//                //   pre($upload_data);
+//                if (isset($upload_data['file_name'])) {
+//                    $upload_data['raw_name'] = strtolower($groupName . $upload_data['file_ext']);
+//                    $upload_data['orig_name'] = strtolower($groupName . $upload_data['file_ext']);
+//                    $upload_data['file_name'] = strtolower($groupName . $upload_data['file_ext']);
+//                    $upload_data['client_name'] = strtolower($groupName . $upload_data['file_ext']);
+//                    $namePicture = $upload_data['file_name'];
+//
+//
+//                } else {
+//                    $namePicture = '';
+//                }
+//                // pre($upload_data);
+//                $dt = array();
+//
+//                if ($this->catelog_model->add($dt)) {
+//                    $this->session->set_flashdata('message', 'Thêm nhóm thành công!');
+//                } else {
+//                    $this->session->set_flashdata('message', 'Thêm nhóm thất bại');
+//                }
+//
+//                redirect(admin_url('group'));
+         //   }
         }
 
         //thuc hien load du lieu khi chua submi
@@ -135,8 +145,8 @@ class Group extends MY_Controller
         }
     }
 
-    //===================CẬP NHẬT THUONG HIỆU=================================//
-    function edit($id = '')
+    //===================KÍCH HOẠT THUONG HIỆU=================================//
+    function update($id = '')
     {
         $input = array('MA_NHOM_SANPHAM' => $id);
         $info = $this->group_model->get_info_rule($input);
@@ -154,5 +164,27 @@ class Group extends MY_Controller
                 $this->session->set_flashdata('message', 'Thương hiệu ' . $info['TEN_NHOM_SANPHAM'] . 'cập nhật không thành công');
             }
         }
+    }
+    //===================CẬP NHẬT THUONG HIỆU=================================//
+    function edit($id=''){
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+
+        $input = array('MA_NHOM_SANPHAM' => $id);
+        $info = $this->group_model->get_info_rule($input);
+        if (!$info) {
+            $this->session->set_flashdata('message', 'Không tồn tại thương hiệu này');
+            redirect(admin_url('group'));
+        }
+
+        if ($this->input->post()) {
+            if ($this->form_validation->run()) {
+                $groupName = strtoupper($this->input->post('groupName', true));
+
+            }
+        }
+        pre($info);
+        $this->data['temp'] = 'admin/group/edit';//khung tieu de cua admin duoc giu lai
+        $this->load->view('admin/main', $this->data);
     }
 }

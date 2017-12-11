@@ -69,8 +69,12 @@ $this->load->view('admin/group/head', $this->data);
                             </span>
                         </td>
                         <td class="option">
+                            <a href="<?php echo admin_url('group/edit/' . $row['MA_NHOM_SANPHAM']); ?>" title="Chỉnh sửa" target="_self"
+                               class="tipS">
+                                <img src="<?php echo public_url('admin/images') ?>/icons/color/edit.png">
+                            </a>
                             <?php if ($row['TRANGTHAI'] == '0'){?>
-                            <a href="<?php echo admin_url('group/edit/' . $row['MA_NHOM_SANPHAM']) ?>" title="Kích hoạt"
+                            <a href="<?php echo admin_url('group/update/' . $row['MA_NHOM_SANPHAM']) ?>" title="Kích hoạt"
                                class="tipS ">
                                 <img src="<?php echo public_url('admin/') ?>images/icons/color/star.png">
                             </a>

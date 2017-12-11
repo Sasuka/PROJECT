@@ -15,7 +15,7 @@ $this->load->view('admin/group/head', $this->data);
     <div class="widget">
         <div class="title">
             <img src="<?php echo public_url('admin') ?>/images/icons/dark/add.png" class="titleIcon">
-            <h6>Cập nhật thương hiệu sản phẩm</h6>
+            <h6>Chỉnh sửa thương hiệu sản phẩm</h6>
         </div>
 
         <form class="form" id="form-group-add" action="" method="post" enctype="multipart/form-data"
