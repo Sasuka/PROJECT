@@ -1,7 +1,7 @@
 <div class="titleArea">
     <div class="wrapper">
         <div class="pageTitle">
-            <h5>KhO</h5>
+            <h5>Kho</h5>
             <span>Quản lý kho</span>
         </div>
 

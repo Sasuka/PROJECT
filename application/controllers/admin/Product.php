@@ -7,7 +7,6 @@ class Product extends MY_Controller
         parent::__construct();
         $this->load->model(array("product_model", "group_model", "madeIn_model", "catelog_model", 'Transaction_model'));
     }
-
     public function index()
     {
         //lay noi dung cua messager
@@ -20,32 +19,15 @@ class Product extends MY_Controller
         if ($id != 0) {
             $input['where'] = array('MA_SANPHAM' => $idProduct);
         }
-
         //tim theo ten san pham
         $nameProduct = $this->input->get('name');
         if ($nameProduct) {
             $input['like'] = array('TEN_SANPHAM', $nameProduct);
         }
         /*tim theo thuong hieu*/
-
-//        if (isset($_GET['group']) && $_GET['group'] != '0'){
-//            $input['where'] = array('MA_NHOM_SANPHAM' => $_GET['group']);
-//        }
         if (isset($_GET['catelog']) && $_GET['catelog'] != '0') {
             $input['where'] = array('MA_LOAI_SANPHAM' => $_GET['catelog']);
         }
-        /*
-                //lay danh sach san pham
-                $list = $this->product_model->getList($input);
-                // pre($list);
-                //danh sach san pham duoc giam gia
-                //  $idSP_ProDetail = $this->productDetail_model->get
-                $listDis = $this->product_model->getProductPromotion();
-                // pre($list);
-                $this->data['listGroup'] = $this->group_model->getList();//danh sach nhom san pham
-        //        pre($this->group_model->getList());
-                $this->data['listDis'] = $listDis;//danh sach san pham dc khuyen mai
-          */
         /* Phân trang*/
         $config = array();
         $config['total_rows'] = $total_rows;//tong tat ca cac sản phẩm trên webiste
@@ -72,11 +54,9 @@ class Product extends MY_Controller
             }
         }
        // pre($list);
-
         /*Thông tin các sản phẩm được khuyến mãi*/
         $promotion = $this->product_model->getProductPromotion();
         //   pre($promotion);
-
         $this->data['list'] = $list;//danh sach tat ca san pham
         $this->data['promotion'] = $promotion;
         $this->data['listGroup'] = $this->group_model->getList();
@@ -128,17 +108,19 @@ class Product extends MY_Controller
                                 <?php
                                 //                            $dongia = $item['DONGIA_BAN'];
                                 $check = 0;
-                                foreach ($promotion as $itemPromotion) {
-                                    if ($item['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
-                                        echo '<span style="color: red;">';
-                                        echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $item['DONGIA_BAN'];
-                                        echo '</span> $ <br>';
-                                        echo '<del>';
-                                        echo $item['DONGIA_BAN'];
-                                        echo '</del>';
-                                        echo ' $';
-                                        $check = 1;
-                                        break;
+                                if(isset($promotion) &&  !empty($promotion)) {
+                                    foreach ($promotion as $itemPromotion) {
+                                        if ($item['MA_SANPHAM'] == $itemPromotion['MA_SANPHAM']) {
+                                            echo '<span style="color: red;">';
+                                            echo (1 - 0.01 * $itemPromotion['PHANTRAM_KM']) * $item['DONGIA_BAN'];
+                                            echo '</span> $ <br>';
+                                            echo '<del>';
+                                            echo $item['DONGIA_BAN'];
+                                            echo '</del>';
+                                            echo ' $';
+                                            $check = 1;
+                                            break;
+                                        }
                                     }
                                 }
                                 if ($check == 0) {
@@ -601,6 +583,34 @@ class Product extends MY_Controller
 //            }
 
         // }
+    }
+
+    public function filter(){
+        $filter = $_POST['option'];
+        switch ($filter){
+            case 'price-ascending':
+                $input['order'] = array('DONGIA_BAN','ASC');
+                break;
+            case 'price-descending':
+                $input['order'] = array('DONGIA_BAN','ASC');
+                break;
+            case 'title-ascending':
+                $input['order'] = array('DONGIA_BAN','ASC');
+                break;
+            case 'title-descending':
+                $input['order'] = array('DONGIA_BAN','ASC');
+                break;
+            case 'created-ascending':
+                $input['order'] = array('DONGIA_BAN','ASC');
+                break;
+            case 'created-descending':
+                $input['order'] = array('DONGIA_BAN','ASC');
+                break;
+        }
+        //$list =$this->product_model->getPaging('home/index');
+       // return $list;
+
+
     }
 
 }

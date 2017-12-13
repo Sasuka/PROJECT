@@ -17,7 +17,7 @@ $level = $this->session->userdata('level');
 
         <div class="title">
             <span class="titleIcon" style="width: 18px;">
-                <img src="#">
+                <img src="<?php echo $this->load->view('admin/images/icons/color/money.png');?>">
             </span>
             <h6>
                 Danh sách chi tiết khuyến mãi </h6>

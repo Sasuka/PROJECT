@@ -9,8 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | If set to TRUE, a backtrace will be displayed along with php errors. If
 | error_reporting is disabled, the backtrace will not display, regardless
 | of this setting
-|
-*/
+ddd*/
 defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
 
 /*

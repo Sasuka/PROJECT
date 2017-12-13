@@ -6,8 +6,8 @@
                     <div class="col-lg-12 col-md-12 col-sm-7 col-xs-7">
                         <!-- LOGO -->
                         <h1>
-                            <a href="#">
-                                <img src="Tiến Tài" class="img-responsive logoimg"/>
+                            <a href="<?php echo upload_url().'logo/logos.png'?>">
+                                <img src="<?php echo upload_url().'logo/logos.png'?>" class="img-responsive logoimg"/>
                             </a>
                         </h1>
                         <h1 style="display:none"><a href="/">Tiến Tài</a>

@@ -52,10 +52,7 @@ class MY_Controller extends CI_Controller
                 $this->data['listCate'] = $listCate;
 
                 $list = $this->product_model->getPaging('home/index');
-
-               //  pre($list);
                  /* Thông tin toàn bộ sản phẩm*/
-               // pre($list);
                 $this->data['listProduct'] = $list;
                 /*Thông tin các sản phẩm được khuyến mãi*/
                 $promotion = $this->product_model->getProductPromotion();
@@ -73,8 +70,7 @@ class MY_Controller extends CI_Controller
         $controller = strtolower($controller);
         //lay session
         $login = $this->session->userdata('login');
-        //khi chua dang nhap ma vao controller khac login thi cho quay lai cho dang nhap la bat buoc
-        //giong nnhu vao nha thi phai mo cua chinh
+
         if (!$login && $controller != 'login') {
             redirect(admin_url('login'));
         }

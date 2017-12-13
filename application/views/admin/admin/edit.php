@@ -164,41 +164,48 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $info[0]['TRAN
 
                 <!-- gioi tinh -->
                 <div class="formRow">
-                    <label class="formLeft" for="param_name">Giới tính:<span class="req">*</span></label>
-                    <div class="formRight">
-                                <span class="one-two"><input name="gender" id="param_name" _autocheck="true"
-                                                             type="radio"
-                                                             value="0" <?php echo $tmp['GIOITINH'] == '0' ? 'checked' : ''; ?>>
-                                </span><label>Nam</label>
-
-                        <span class="one-two"><input name="gender" id="param_name" _autocheck="true"
-                                                     type="radio"
-                                                     value="1" <?php echo $tmp['GIOITINH'] == '1' ? 'checked' : ''; ?>>
-                                </span><label>Nữ</label>
-                        <span name="name_autocheck" class="autocheck"></span>
-                        <div name="name_error" class="clear error"><?php echo form_error('gender'); ?></div>
+                    <!-- TRANG THAI -->
+                    <div class="formRow">
+                        <label class="formLeft" for="param_name">Giới tính:<span class="req">*</span></label>
+                        <div class="formRight">
+                            <label class="radio-inline"><input type="radio" id="param_name" name="gender"
+                                                               value="0"
+                                    <?php echo $tmp['GIOITINH'] == '0' ? 'checked' : ''; ?>
+                                >Nam</label>
+                            <label class="radio-inline"><input type="radio" id="param_name" name="gender"
+                                                               value="1"
+                                    <?php echo $tmp['GIOITINH'] == '1' ? 'checked' : ''; ?>
+                                >Nữ</label>
+                            <span name="status_autocheck" class="autocheck"></span>
+                            <div name="status_error" class="clear error">
+                                <?php echo form_error('status'); ?></div>
+                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="clear"></div>
+
                 </div>
                 <!-- TRANG THAI -->
                 <div class="formRow">
                     <label class="formLeft" for="param_name">Trạng thái:<span class="req">*</span></label>
                     <div class="formRight">
-                                <span class="one-two"><input name="status" id="param_status" _autocheck="true"
-                                                             type="radio" value="0"
-                                        <?php echo($tmp['TRANGTHAI'] == 0 ? 'checked' : ''); ?>
-                                    >
-                                </span><label>Nghỉ việc</label>
-                        <span class="one-two"><input name="status" id="param_status" _autocheck="true"
-                                                     type="radio" value="1"
-                                <?php echo($tmp['TRANGTHAI'] == 1 ? 'checked' : ''); ?>
-                            >
-                                </span><label>Làm việc</label>
+
+                        <label class="radio-inline"><input type="radio" id="param_status" name="status"
+                                                           value="0"
+                                <?php echo $tmp['TRANGTHAI'] == '0' ? 'checked' : ''; ?>
+                            >Nghỉ việc</label>
+                        <label class="radio-inline"><input type="radio" id="param_status" name="status"
+                                                           value="1"
+                                <?php echo $tmp['TRANGTHAI'] == '1' ? 'checked' : ''; ?>
+
+                            >Làm việc</label>
                         <span name="status_autocheck" class="autocheck"></span>
                         <div name="status_error" class="clear error">
                             <?php echo form_error('status'); ?></div>
-
                     </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formRow hide"></div>
+
                 </div><!-- End tab_container-->
                 <div class="formSubmit">
                     <input value="Cập nhật" class="redB" id="btnAdd" type="submit">

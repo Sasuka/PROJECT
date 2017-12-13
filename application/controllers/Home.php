@@ -14,20 +14,19 @@ Class Home extends MY_Controller
         parent::__construct();
         $this->load->model('admin_model');
     }
-
-    //lay ma chuc vu
     public function index()
     {
-        //$this->data['cusAccount'] = $cusAccount;
         if (isset($cusAccount)){
           $this->data['isLogin'] = '1';
         }
         $this->data['temp'] = 'site/product_list/product_content';
         $this->load->view('site/layout',$this->data);
     }
-
     function view()
     {
         $this->load->view('site/home/view');
+    }
+    function _404(){
+        $this->load->view("404");
     }
 }

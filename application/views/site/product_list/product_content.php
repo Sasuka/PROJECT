@@ -7,7 +7,8 @@
                     <li><a href="#" target="_self">Danh mục</a></li>
                     <li><a href="#"
                            target="_self"><?php echo isset($infoCate) ? $infoCate['TEN_NHOM_SANPHAM'] : ''; ?></a></li>
-                    <li class="active"><span><?php echo isset($infoCate['TEN_LOAI_SANPHAM']) ? $infoCate['TEN_LOAI_SANPHAM'] : ''; ?></span>
+                    <li class="active">
+                        <span><?php echo isset($infoCate['TEN_LOAI_SANPHAM']) ? $infoCate['TEN_LOAI_SANPHAM'] : ''; ?></span>
                     </li>
                 </ol>
             </div>
@@ -50,7 +51,8 @@
                     <div class="filterBtn txtLeft showOverlay">
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
                         <span class="custom-dropdown custom-dropdown--white">
-							<select class="sort-by custom-dropdown__select custom-dropdown__select--white" name="filter" id="filter">
+							<select class="sort-by custom-dropdown__select custom-dropdown__select--white" name="filter"
+                                    id="filter">
                                 <option value="manual">Sản phẩm nổi bật</option>
 								<option value="price-ascending">Giá: Tăng dần</option>
 								<option value="price-descending">Giá: Giảm dần</option>
@@ -73,15 +75,15 @@
     <div class="content-col col-md-9 col-sm-12 col-xs-12" data-sticky_column>
 
         <?php
-            if(isset($type) && $type == 'discount') {
-                $this->load->view('site/product_list/product_discount', $this->data);
-            }else if(isset($type) && $type == 'getProduct'){
-                $this->load->view('site/product_list/product_get', $this->data);
-            }else if(isset($type) && $type == 'getProductGroup'){
-                $this->load->view('site/product_list/product_group', $this->data);
-            }else{
-                $this->load->view('site/product_list/product_list', $this->data);
-            }
+        if (isset($type) && $type == 'discount') {
+            $this->load->view('site/product_list/product_discount', $this->data);
+        } else if (isset($type) && $type == 'getProduct') {
+            $this->load->view('site/product_list/product_get', $this->data);
+        } else if (isset($type) && $type == 'getProductGroup') {
+            $this->load->view('site/product_list/product_group', $this->data);
+        } else {
+            $this->load->view('site/product_list/product_list', $this->data);
+        }
         ?>
 
     </div>
@@ -93,42 +95,63 @@
     <!-- End no products -->
 </div>
 <script>
-    Haravan.queryParams = {};
-    if (location.search.length) {
-        for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
-            aKeyValue = aCouples[i].split('=');
-            console.log(aKeyValue);
-            if (aKeyValue.length > 1) {
-                Haravan.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
-            }
-        }
-    }
-    var collFilters = jQuery('.coll-filter');
-    collFilters.change(function () {
-        var newTags = [];
-        var newURL = '';
-        delete Haravan.queryParams.page;
-        collFilters.each(function () {
-            if (jQuery(this).val()) {
-                newTags.push(jQuery(this).val());
+    // Haravan.queryParams = {};
+    // if (location.search.length) {
+    //     for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+    //         aKeyValue = aCouples[i].split('=');
+    //         console.log(aKeyValue);
+    //         if (aKeyValue.length > 1) {
+    //             Haravan.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+    //         }
+    //     }
+    // }
+    // var collFilters = jQuery('.coll-filter');
+    // collFilters.change(function () {
+    //     var newTags = [];
+    //     var newURL = '';
+    //     delete Haravan.queryParams.page;
+    //     collFilters.each(function () {
+    //         if (jQuery(this).val()) {
+    //             newTags.push(jQuery(this).val());
+    //         }
+    //     });
+    //
+    //     newURL = '/collections/' + 'dong-ho-nam-longbo';
+    //     if (newTags.length) {
+    //         newURL += '/' + newTags.join('+');
+    //     }
+    //     var search = jQuery.param(Haravan.queryParams);
+    //     if (search.length) {
+    //         newURL += '?' + search;
+    //     }
+    //     location.href = newURL;
+    //
+    // });
+    // jQuery('.sort-by')
+    //     .val('title-ascending')
+    //     .bind('change', function () {
+    //         Haravan.queryParams.sort_by = jQuery(this).val();
+    //         location.search = jQuery.param(Haravan.queryParams);
+    //     });
+</script>
+<script>
+    $(document).ready(function (e) {
+        // e.preventDefault();
+        var option;
+        $('.sort-by').on('change', function () {
+            option = $(this).val();
+          //  alert(window.location.href);
+            if (option) {
+                $.ajax({
+                    type: 'POST',
+                  //  url: window.location.href + 'admin/product/filter',
+                    data: 'option=' + option,
+                    success: function (html) {
+                        $('#catelog-product').html(html);
+                    }
+                });
             }
         });
-
-        newURL = '/collections/' + 'dong-ho-nam-longbo';
-        if (newTags.length) {
-            newURL += '/' + newTags.join('+');
-        }
-        var search = jQuery.param(Haravan.queryParams);
-        if (search.length) {
-            newURL += '?' + search;
-        }
-        location.href = newURL;
 
     });
-    jQuery('.sort-by')
-        .val('title-ascending')
-        .bind('change', function () {
-            Haravan.queryParams.sort_by = jQuery(this).val();
-            location.search = jQuery.param(Haravan.queryParams);
-        });
 </script>

@@ -15,7 +15,7 @@ $this->load->view('admin/promotions/head', $this->data);
 
         <div class="title">
             <span class="titleIcon">
-                <img src="<?php echo public_url(''); ?>">
+                <img src="<?php echo public_url('admin/images') ?>/icons/control/16/list.png">
             </span>
             <h6>
                 Danh sách khuyến mãi </h6>

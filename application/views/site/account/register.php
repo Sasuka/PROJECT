@@ -9,7 +9,7 @@
     <div class="col-md-12">
         <form id="form_register" method="POST" action="<?php echo base_url('user/register'); ?>" role="form" class="form-horizontal">
             <div class="form-group">
-                <label class="col-sm-3 control-label">Fullname</label>
+                <label class="col-sm-3 control-label">Họ & Tên</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" name="fname" placeholder="Họ" value="<?php echo set_value('fname') ?>"/>
                     <div name="fname_error" id="fname_error"

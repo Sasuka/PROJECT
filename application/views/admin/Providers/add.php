@@ -9,7 +9,7 @@ $this->load->view('admin/providers/head', $this->data);
         <fieldset>
             <div class="widget">
                 <div class="title">
-                    <img src="<?php echo public_url('admin/images') ?>/icons/dark/add.png" class="titleIcon">
+                    <img src="<?php echo public_url('admin')?>/images/icons/control/16/add.png" class="titleIcon">
                     <h6>Thêm mới nhà cung cấp</h6>
                 </div>
 

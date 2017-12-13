@@ -147,7 +147,7 @@ class Catelog extends MY_Controller
                 $providersID = $this->input->post('providersID');
 
                 $dt = array(
-                    'TEN_LOAI_SANPHAM' => $catelogName,
+                    'TEN_LOAI_SANPHAM' => strtoupper($catelogName),
                     'MA_NHOM_SANPHAM' => $groupID,
                     'MA_NHA_CUNGCAP' => $providersID
                 );
@@ -209,7 +209,7 @@ class Catelog extends MY_Controller
                 $groupID = $this->input->post('groupID');
 //                pre($groupID);
                 $dt = array(
-                    'TEN_LOAI_SANPHAM' => $catelogName,
+                    'TEN_LOAI_SANPHAM' => strtoupper($catelogName),
                     'MA_NHOM_SANPHAM' => $groupID
                 );
 
