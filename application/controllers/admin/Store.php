@@ -5,7 +5,7 @@ class Store extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('store_model'));
+        $this->load->model(array('store_model','catelog_model','group_model'));
     }
 
 //kiem tra kho co chua loai hay khong
@@ -13,11 +13,13 @@ class Store extends MY_Controller
     {
         $cateId = $_POST['cateId'];
         $input = array('MA_LOAI_SANPHAM' => $cateId);
+        $info = $this->catelog_model->get_info_rule($input);
+        $infoGroup = $this->group_model->get_info_rule(array('MA_NHOM_SANPHAM'=> $info['MA_NHOM_SANPHAM']));
         // pre($this->store_model->check_exist($input));
         if ($this->store_model->check_exist($input)) {
             echo '1';
         } else {
-            echo '0';
+            echo $info['TEN_LOAI_SANPHAM'].'-'.$infoGroup['TEN_NHOM_SANPHAM'];
         }
     }
 

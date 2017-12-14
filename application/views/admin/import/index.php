@@ -14,7 +14,9 @@ $account = $this->session->userdata('account');
     <div class="widget">
 
         <div class="title">
-            <span class="titleIcon"><input id="titleCheck" name="titleCheck" type="checkbox"></span>
+            <span class="titleIcon">
+                <img src="<?php echo public_url('admin/images') ?>/icons/control/16/list.png">
+            </span>
             <h6>
                 Danh sách phiếu nhập </h6>
             <div class="num f12">Số lượng: <b><?php echo $total_rows; ?></b></div>
@@ -23,7 +25,6 @@ $account = $this->session->userdata('account');
         <table class="sTable mTable myTable" id="checkAll" width="100%" cellspacing="0" cellpadding="0">
             <thead>
             <tr>
-                <td style="width:21px;"><img src="<?php echo public_url('admin/images') ?>/icons/tableArrows.png"></td>
                 <td style="width:60px;">Mã số</td>
                 <td>Tên nhân viên</td>
                 <td>Tên nhà cung cấp</td>
@@ -35,7 +36,7 @@ $account = $this->session->userdata('account');
 
             <tfoot class="auto_check_pages">
             <tr>
-                <td colspan="7">
+                <td colspan="6">
 <!--                    <div class="list_action itemActions">-->
 <!--                        <a href="#submit" id="submit" class="button blueB" url="--><?php //echo admin_url('import/dell_all');?><!--">-->
 <!--                            <span style="color:white;">Xóa hết</span>-->
@@ -63,17 +64,16 @@ $account = $this->session->userdata('account');
             foreach ($list as $item) {
                 ?>
                 <tr class="row_<?php echo $item['MA_PHIEUNHAP'];?>">
-                    <td><input name="id[]" value="<?= $item['MA_PHIEUNHAP'] ?>" type="checkbox"></td>
 
                     <td class="textC"><?= $item['MA_PHIEUNHAP'] ?></td>
 
                     <td>
-                        <a href="product/view/9.html" class="tipS" title="" target="_blank">
+                        <a href="#" class="tipS" title="">
                             <b><?php echo $item['HO'].' '.$item['TEN']; ?></b>
                         </a>
                     </td>
                     <td>
-                        <a href="product/view/9.html" class="tipS" title="<?php echo $item['DIACHI_NHA_CUNGCAP']; ?>" target="_self">
+                        <a>
                             <b><?php echo $item['TEN_NHA_CUNGCAP']; ?></b>
                         </a>
                     </td>

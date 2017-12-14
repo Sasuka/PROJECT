@@ -75,7 +75,7 @@ class PromotionsDetail extends MY_Controller
         //load danh sach khuyen mai
         $list = $this->promotionDetail_model->getListThreeJoin('khuyenmai', 'MA_KHUYENMAI', 'sanpham', 'MA_SANPHAM', $id);
         $this->data['list'] = $list;
-
+       // pre($list);
         $this->data['temp'] = 'admin/promotions_detail/index';//khung tieu de cua admin duoc giu lai
         $this->load->view('admin/main', $this->data);
     }

@@ -49,10 +49,11 @@ $tmp['status'] = (isset($_POST['status'])) ? $_POST['status'] : $list['TRANGTHAI
                     <label class="formLeft" for="param_cat">Trạng thái:<span class="req">*</span></label>
                     <div class="formRight">
                         <select name="status" _autocheck="true" id='status' class="left">
-                            <option value="0" <?php echo ($tmp['status']==0) ? 'selected':'';?>>&nbsp;Chờ xử lý &nbsp;</option>
-                            <option value="1" <?php echo ($tmp['status']==1) ? 'selected':'';?>>&nbsp;Giao hàng &nbsp;</option>
-                            <option value="2" <?php echo ($tmp['status']==2) ? 'selected':'';?>>&nbsp;Hủy bỏ &nbsp;</option>
-
+                            <option value="0" <?php echo ($tmp['status']==0) ? 'selected':'';?>>&nbsp;Vừa đặt hàng&nbsp;</option>
+                            <option value="1" <?php echo ($tmp['status']==1) ? 'selected':'';?>>&nbsp;Chờ xử lý &nbsp;</option>
+                            <option value="2" <?php echo ($tmp['status']==2) ? 'selected':'';?>>&nbsp;Đang giao hàng &nbsp;</option>
+                            <option value="3" <?php echo ($tmp['status']==3) ? 'selected':'';?>>Hủy đơn hàng &nbsp;</option>
+                            <option value="3" <?php echo ($tmp['status']==3) ? 'selected':'';?>>Thành công &nbsp;</option>
                         </select>
                         <span name="status_autocheck" class="autocheck"></span>
                         <div name="status_error" class="clear error" id="status_error"></div>

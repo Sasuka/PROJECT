@@ -12,12 +12,16 @@ $level = $this->session->userdata('level');
         $this->data['message'] = $this->session->flashdata('message');
         $this->load->view('admin/messager', $this->data);
     }
+ //  pre($list);
     ?>
+
+
     <div class="widget">
+
 
         <div class="title">
             <span class="titleIcon" style="width: 18px;">
-                <img src="<?php echo $this->load->view('admin/images/icons/color/money.png');?>">
+                <img src="<?php echo public_url('admin') ?>/images/icons/dark/list.png">
             </span>
             <h6>
                 Danh sách chi tiết khuyến mãi </h6>
@@ -28,11 +32,11 @@ $level = $this->session->userdata('level');
 
             <thead>
             <tr>
-                <td style="width: 20px;">STT</td>
-                <td style="width:10px;">Mã khuyến mãi</td>
-                <td>Tên tên khuyến mãi</td>
-                <td>Tên sản phẩm</td>
-                <td>Phần trăm khuyến mãi (%)</td>
+                <td style="width: 3.8%;">STT</td>
+                <td style="width:10%;">Mã khuyến mãi</td>
+                <td style="width:30%;">Tên tên khuyến mãi</td>
+                <td style="width:15%;">Tên sản phẩm</td>
+                <td style="width:15%;">Phần trăm khuyến mãi (%)</td>
                 <td>Tặng phẩm</td>
             </tr>
             </thead>
@@ -58,9 +62,9 @@ $level = $this->session->userdata('level');
             <tbody class="list_item">
             <div id="loading" style="width: 50px;height: 50px;position: absolute;z-index: 99;margin:15% 45%;"></div>
             <?php
-            //      pre($importDe);
+                 // pre($importDe);
             $i = 0;
-            //   pre($list);
+
             for ($i = 0; $i < count($list); $i++) {
                 ?>
                 <tr class="row_<?php echo $list[$i]['MA_KHUYENMAI']; ?>">

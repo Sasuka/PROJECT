@@ -29,7 +29,7 @@ $level = $this->session->userdata('level');
 
             <a href="admin/tran.html" class=" exp">
                 <span>Quản lý bán hàng</span>
-                <strong>3</strong>
+                <strong>2</strong>
             </a>
 
             <ul class="sub">
@@ -37,10 +37,10 @@ $level = $this->session->userdata('level');
                     <a href="<?php echo admin_url('transaction'); ?>">
                         Giao dịch </a>
                 </li>
-                <li>
-                    <a href="#">
-                        Đơn hàng sản phẩm </a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="#">-->
+<!--                        Đơn hàng sản phẩm </a>-->
+<!--                </li>-->
                 <li>
                     <a href="<?php echo admin_url('store') ?>">
                         Quản lý kho </a>
@@ -113,7 +113,7 @@ $level = $this->session->userdata('level');
 
             <a href="#" class=" exp">
                 <span>Nội dung và đối tác</span>
-                <strong>1</strong>
+                <strong>2</strong>
             </a>
 
             <ul class="sub">

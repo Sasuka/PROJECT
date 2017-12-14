@@ -1,26 +1,33 @@
 <?php
     $tmp['key'] = isset($_POST['key']) ? $_POST['key'] : "";
 ?>
-<div class="container nav-wrapper check_nav">
+<div class="container nav-wrapper check_nav" xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="navbar-header">
             <div class="mobile-menu-icon-wrapper">
                 <div class="menu-logo">
 
                     <h1 class="logo logo-mobile">
-                        <a href="http://happylive.vn">
-                            <img src="<?php echo public_url('site'); ?>/design/14/logo.png?v=90"
-                                 alt="Happylive" class="img-responsive logoimg"/>
+                        <a href="#">
+                            <img src="<?php echo upload_url().'logo/logos.png'?>"
+                                 alt="LOGO T&T" class="img-responsive logoimg"/>
                         </a>
                     </h1>
 
                     <div class="nav-login">
-                        <a href="/account" class="cart " title="Tài khoản">
+                        <?php if (empty($cusAccount)){?>
+                        <a href="<?php echo base_url() . 'user/login'; ?>" class="cart " title="Tài khoản">
                             <svg class="icon icon-user" viewBox="0 0 32 32">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-user">
+                                <use xmlns:xlink="<?php echo public_url('admin/images/userPic.png') ?>" xlink:href="#icon-user">
                                 </use>
                             </svg>
                         </a>
+                        <?php }else{?>
+                        <a href="<?php echo base_url() . 'user/edit/' . $cusAccount['MA_KHACHHANG']; ?>">
+                            <i class="icon icon-user" viewBox="0 0 32 32" aria-hidden="true"></i>
+                            <span style="font-size: 0.2em;"><?php echo $cusAccount['TEN']; ?></span>
+                        </a>
+                        <?php }?>
                     </div>
                     <div class="menu-btn click-menu-mobile "><a href="#menu-mobile"
                                                                 class="navbar-toggle">
@@ -31,25 +38,26 @@
                     </div>
 
                     <div id="cart-targets" class="cart">
-                        <a href="/cart" class="cart " title="Giỏ hàng">
+                        <a href="<?php echo ($this->cart->total_items() != 0) ? base_url('cart') : "";?>" class="cart " title="Giỏ hàng">
 							<span>
 
 								<svg class="shopping-cart">
-									<use xmlns:xlink="./www.w3.org/1999/xlink" xlink:href="#icon-add-cart"/>
+									<use xmlns:xlink="#" xlink:href="#icon-add-cart"/>
 								</svg>
 							</span>
-                            <span id="cart-count" class="cart-number">0</span>
+                            <span id="cart-count" class="cart-number"><?php echo $this->cart->total_items(); ?></span>
                         </a>
                     </div>
                 </div>
                 <div class="search-bar-top">
                     <div class="search-input-top">
-                        <form action="/search">
+                        <form action="<?php echo base_url('product').'/search'?>" method="post">
                             <input type="hidden" name="type" value="product"/>
-                            <input type="text" name="q" placeholder="Tìm kiếm sản phẩm ..."/>
+                            <input type="text" name="key"  value="<?php echo $tmp['key'] ;?>" placeholder="Tìm kiếm..."
+                                   autocomplete="off"/>
                             <button type="submit" class="icon-search">
                                 <svg class="icon-search_white">
-                                    <use xmlns:xlink="./www.w3.org/1999/xlink" xlink:href="#icon-search_white"/>
+                                    <use xmlns:xlink="#" xlink:href="#icon-search_white"/>
                                 </svg>
                             </button>
                         </form>
@@ -108,7 +116,7 @@
 
 
                 <li>
-                    <a href="/blogs/news" class="" title="Blog">
+                    <a href="#" class="" title="Blog">
                         <span>Blog</span>
                     </a>
                 </li>

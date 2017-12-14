@@ -165,9 +165,12 @@ class Catelog extends MY_Controller
         //thuc hien load du lieu khi chua submit
         $input = array();
         $input['select'] = array('MA_NHOM_SANPHAM', 'TEN_NHOMSANPHAM');
-        $listGroup = $this->group_model->getList();
+        $input1['where'] = array('TRANGTHAI !='=>0);
+        $input2['where'] = array('TRANGTHAI'=>1);
+
+        $listGroup = $this->group_model->getList($input1);
         $this->load->model('providers_model');
-        $list = $this->providers_model->getList();
+        $list = $this->providers_model->getList($input2);
         $this->data['listGroup'] = $listGroup;
         $this->data['list'] = $list;
 

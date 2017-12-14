@@ -17,7 +17,9 @@ $level = $this->session->userdata('level');
     <div class="widget">
 
         <div class="title">
-            <span class="titleIcon"><input id="titleCheck" name="titleCheck" type="checkbox"></span>
+            <span class="titleIcon">
+                <img src="<?php echo public_url('admin/images') ?>/icons/control/16/list.png">
+            </span>
             <h6>
                 Danh sách phiếu nhập </h6>
             <div class="num f12">Số lượng: <b><?php echo count($list); ?></b></div>
@@ -30,7 +32,7 @@ $level = $this->session->userdata('level');
                 <td colspan="6">
             <tbody>
             <tr style="text-align: center;color: #ff0a10; font-size: 1.1em;">
-                <td colspan="6">Mã phiếu nhâp: <?php echo $id; ?></td>
+                <td colspan="5">Mã phiếu nhâp: <?php echo $id; ?></td>
             </tr>
             </tbody>
             </td>
@@ -45,7 +47,7 @@ $level = $this->session->userdata('level');
                 <td>Số lượng nhập</td>
                 <td>Đơn giá nhập <p style="color: #0000FF;">(DVT:$)</p> </td>
                 <td>Thành tiền <p style="color: #0000FF;">(DVT:$)</p></td>
-                <td style="width:120px;">Hành động</td>
+<!--                <td style="width:120px;">Hành động</td>-->
             </tr>
             </thead>
 

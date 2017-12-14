@@ -26,7 +26,7 @@ class MY_Controller extends CI_Controller
      * */
     public function __construct()
     {
-        parent::__construct();$this->load->model(array('site_model', 'product_model', 'catelog_model'));
+        parent::__construct();$this->load->model(array('site_model', 'product_model', 'catelog_model','PartTechnology_model'));
 
         $controler = $this->uri->segment(1);
         $controler = strtolower($controler);
@@ -58,6 +58,8 @@ class MY_Controller extends CI_Controller
                 $promotion = $this->product_model->getProductPromotion();
                 // pre($promotion);
                 $this->data['promotion'] = $promotion;
+                /*Lấy đặc điểm kỹ thuật*/
+                $techDetail = $this->PartTechnology_model->getList();
                 $cusAccount = $this->session->userdata('cusAccount');
                 $this->data['cusAccount'] = $cusAccount;
             }

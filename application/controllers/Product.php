@@ -147,7 +147,7 @@ class Product extends MY_Controller
             /*Lấy ra những danh sách loại thuộc nhóm đó*/
             $where1['where'] = array('MA_NHOM_SANPHAM' => $infoGroup['MA_NHOM_SANPHAM']);
             $catelog = $this->catelog_model->getList($where1);
-             /* Lấy ra những danh sách san phẩm thuộc loại*/
+            /* Lấy ra những danh sách san phẩm thuộc loại*/
             $where2['where'] = array('TRANGTHAI >' => 0);
             $product = $this->product_model->getList($where2);
             $categoriesArr = array();
@@ -155,8 +155,8 @@ class Product extends MY_Controller
                 $categoriesArr[$i] = $catelog[$i]['MA_LOAI_SANPHAM'];
             }
 
-            $status = array('TRANGTHAI!=' => 0,'DONGIA_BAN!=' => 0);
-            $list = $this->product_model->getProductCategories($categoriesArr,$status);
+            $status = array('TRANGTHAI!=' => 0, 'DONGIA_BAN!=' => 0);
+            $list = $this->product_model->getProductCategories($categoriesArr, $status);
             /*Thực hiện phân trang*/
             $this->load->library('pagination');
             $total_rows = count($list);
@@ -171,15 +171,15 @@ class Product extends MY_Controller
             $this->pagination->initialize($config);
             $start = $this->uri->segment(4);
             $start = intval($start);
-            $list = $this->product_model->getProductCategories($categoriesArr,$status,$config['per_page'],$start);
+            $list = $this->product_model->getProductCategories($categoriesArr, $status, $config['per_page'], $start);
 
             for ($i = 0; $i < count($list); $i++) {
-                 for ($j =0;$j < count($catelog);$j++){
-                     if ($list[$i]['MA_LOAI_SANPHAM'] == $catelog[$j]['MA_LOAI_SANPHAM']){
-                         $list[$i]['TEN_LOAI_SANPHAM'] = $catelog[$j]['TEN_LOAI_SANPHAM'];
-                         break;
-                     }
-                 }
+                for ($j = 0; $j < count($catelog); $j++) {
+                    if ($list[$i]['MA_LOAI_SANPHAM'] == $catelog[$j]['MA_LOAI_SANPHAM']) {
+                        $list[$i]['TEN_LOAI_SANPHAM'] = $catelog[$j]['TEN_LOAI_SANPHAM'];
+                        break;
+                    }
+                }
             }
             $this->data['infoCate'] = $infoGroup;
             $this->data['type'] = 'getProductGroup';
@@ -241,7 +241,7 @@ class Product extends MY_Controller
     public function search1()
     {
         $id = $this->uri->segment(3);
-        pre($id);
+        // pre($id);
         if ($this->uri->rsegment(3) == 1) {
             //co su dung auto complate
             $key_search = $this->input->get('term');
@@ -433,4 +433,16 @@ class Product extends MY_Controller
         $this->load->view('site/layout', $this->data);
     }
 
+    /*Show product detail*/
+    public function show_product_detail()
+    {
+        $id = $this->uri->rsegment(3);
+        $id = intval($id);
+        $input['where'] =
+        $productInfo = $this->product_model->get_info_rule(array('MA_SANPHAM' => $id));
+//        pre($productInfo);
+//        exit();
+        $this->data['temp'] = 'site/product_detail/product_detail_content';
+        $this->load->view('site/layout', $this->data);
+    }
 }

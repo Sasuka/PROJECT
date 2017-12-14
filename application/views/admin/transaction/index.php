@@ -13,7 +13,9 @@ $this->load->view('admin/transaction/head', $this->data);
     <div class="widget">
 
         <div class="title">
-            <span class="titleIcon"><input id="titleCheck" name="titleCheck" type="checkbox"></span>
+            <span class="titleIcon">
+               <img src="<?php echo public_url('admin/images/') ?>icons/control/16/order.png">
+            </span>
             <h6>
                 Danh sách sản phẩm </h6>
             <div class="num f12">Số lượng: <b><?php echo $total_rows; ?></b></div>
@@ -96,10 +98,12 @@ $this->load->view('admin/transaction/head', $this->data);
                         if ($item['TRANGTHAI'] == 0) {
                             echo 'Vừa đặt hàng';
                         } else if ($item['TRANGTHAI'] == 1) {
-                            echo 'Đang giao hàng';
+                            echo 'Chờ xử lý';
                         } else if ($item['TRANGTHAI'] == 2) {
-                            echo "Thanh toán thất bại";
+                            echo "Đang giao hàng";
                         } else if ($item['TRANGTHAI'] == 3) {
+                            echo "Đơn hàng hủy";
+                        }else if ($item['TRANGTHAI'] == 4) {
                             echo "Thành công";
                         }
                         ?>

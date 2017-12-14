@@ -13,7 +13,9 @@ $this->load->view('admin/transaction_detail/head', $this->data);
     <div class="widget">
 
         <div class="title">
-            <span class="titleIcon"><input id="titleCheck" name="titleCheck" type="checkbox"></span>
+            <span class="titleIcon">
+               <img src="<?php echo public_url('admin/images/') ?>icons/control/16/order.png">
+            </span>
             <h6>
                 Danh sách sản phẩm </h6>
             <div class="num f12">Số lượng: <b><?php echo $total_rows; ?></b></div>
@@ -21,37 +23,7 @@ $this->load->view('admin/transaction_detail/head', $this->data);
 
         <table class="sTable mTable myTable" id="checkAll" width="100%" cellspacing="0" cellpadding="0">
 
-            <thead class="filter">
-            <tr>
-                <td colspan="8">
-                    <form class="list_filter form" action="<?php echo admin_url('transaction'); ?>" method="post">
-                        <table width="100%" cellspacing="0" cellpadding="0">
-                            <tbody>
-                            <tr>
 
-                                <td class="label" style="width:40px;"><label for="filter_id">Mã số</label></td>
-                                <td class="item"><input name="id" value="<?php echo $this->input->get('id'); ?>"
-                                                        id="filter_id" style="width:55px;"
-                                                        type="text"></td>
-
-                                <td style="width:150px">
-                                    <input class="button blueB" value="Lọc" type="submit">
-                                    <input class="basic" value="Reset"
-                                           onclick="window.location.href = '<?php echo admin_url("transaction") ?>'; "
-                                           type="reset">
-                                </td>
-                                <td class="label" style="color: blue">Mã giao dịch:
-                                            <?php echo $transactionId; ?>
-
-                                </td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </form>
-                </td>
-            </tr>
-            </thead>
 
             <thead>
             <tr>

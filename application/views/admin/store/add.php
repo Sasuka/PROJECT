@@ -73,6 +73,7 @@ $this->load->view('admin/store/head', $this->data);
         //jquery  group-catelog
         $('#cate-store-add').on('change', function () {
             var cate = $(this).val();
+            var cateName = $(this).text();
             if (cate == '0') {
                 alert('Vui lòng chọn loai sản phẩm');
             }
@@ -87,6 +88,7 @@ $this->load->view('admin/store/head', $this->data);
                             alert('Đã trong kho');
                             $('#cate-store-add').val(0);
                         } else {
+                            $('#name').val(html.toUpperCase());
                             $('#name').focus();
                         }
                     }

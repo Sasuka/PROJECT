@@ -90,10 +90,10 @@ class Transaction extends MY_Controller
         if ($this->input->post()) {
             $status = $this->input->post('status');
 
-            if ($status == 1) {
+            if ($status == 2) {
                 //neu la giao hang
                 $this->transaction_suc($idTransaction);
-            } else if ($status == 2) {
+            } else if ($status == 3) {
                 //neu la huy don hang
                 $this->transaction_cancell();
             }
@@ -127,7 +127,7 @@ class Transaction extends MY_Controller
 
         /*Kiểm tra hàng đã được giao chưa*/
         $transaction = $this->transaction_model->get_info_rule($where);
-        if($transaction['TRANGTHAI'] != '0'){
+        if($transaction['TRANGTHAI'] != '1'){
             $this->session->set_flashdata('message', 'Không thành công do đã giao rồi hoặc đã đơn hàng đã hủy!');
             redirect(admin_url('transaction'));
         }
@@ -183,7 +183,7 @@ class Transaction extends MY_Controller
         $transaction = $this->transaction_model->get_info_rule($where);
        // pre($transaction);
         /*Trả hàng là sau khi giao hàng không thành công*/
-        if($transaction['TRANGTHAI'] != '1'){
+        if($transaction['TRANGTHAI'] != '2'){
             $this->session->set_flashdata('message', 'Trả hàng không thành công do đã trả rồi hoặc chưa giao!');
             redirect(admin_url('transaction'));
         }

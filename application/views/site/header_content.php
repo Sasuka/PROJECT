@@ -15,7 +15,7 @@
                     </div>
                     <div class="hidden-lg hidden-md col-sm-5 col-xs-5 mobile-icons">
                         <div>
-                            <a href="#" title="Xem giỏ hàng" class="mobile-cart"><span>5</span></a>
+                            <a href="#" title="Xem giỏ hàng" class="mobile-cart"><span>0</span></a>
                             <a href="#" id="mobile-toggle"><i class="fa fa-bars"></i></a>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
             <div class="col-lg-7 hidden-md hidden-sm hidden-xs">
                 <aside class="top-info">
                     <div class="cart-info hidden-xs">
-                        <a class="cart-link" href="<?php echo base_url('cart')?>"><span class="icon-cart"></span>
+                        <a class="cart-link" href="<?php echo ($this->cart->total_items() != 0) ? base_url('cart') : "";?>"><span class="icon-cart"></span>
                             <div class="cart-number"><?php echo $this->cart->total_items(); ?></div>
                         </a>
                         <?php if ($this->cart->contents()){?>
@@ -118,7 +118,7 @@
                                 </li>
                             </ul>
                         </nav>
-                        <div class="header_line"><p>Miễn phí vận chuyển<span class="mar-l5">ĐƠN HÀNG TRÊN 500K TP HỒ CHÍ MINH</span>
+<!--                        <div class="header_line"><p>Miễn phí vận chuyển<span class="mar-l5">ĐƠN HÀNG TRÊN 500K TP HỒ CHÍ MINH</span>-->
                             </p></div>
                     </div>
                 </aside>

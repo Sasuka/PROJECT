@@ -13,7 +13,9 @@ $this->load->view('admin/store/head', $this->data);
     <div class="widget">
 
         <div class="title">
-            <span class="titleIcon"><input id="titleCheck" name="titleCheck" type="checkbox"></span>
+            <span class="titleIcon">
+                <img src="<?php echo public_url('admin/images/') ?>icons/control/16/order.png">
+            </span>
             <h6>
                 Danh sách các ngăn kho </h6>
             <div class="num f12">Số lượng: <b><?php echo $total_rows; ?></b></div>
@@ -22,7 +24,6 @@ $this->load->view('admin/store/head', $this->data);
         <table class="sTable mTable myTable" id="checkAll" width="100%" cellspacing="0" cellpadding="0">
             <thead>
             <tr>
-                <td style="width:21px;"><img src="<?php echo public_url('admin/images') ?>/icons/tableArrows.png"></td>
                 <td style="width:60px;">Mã kho</td>
                 <td>Tên kho</td>
 <!--                <td>Số lượng tồn</td>-->
@@ -33,7 +34,7 @@ $this->load->view('admin/store/head', $this->data);
 
             <tfoot class="auto_check_pages">
             <tr>
-                <td colspan="6">
+                <td colspan="5">
                     <div class="itemActions">
                         <a href="<?php echo admin_url('home'); ?>"  class="button blueB">
                             <span style="color:white;">Quay lại</span>
@@ -55,12 +56,11 @@ $this->load->view('admin/store/head', $this->data);
             foreach ($list as $item) {
                 ?>
                 <tr class="row_<?php echo $item['MA_KHO']; ?>">
-                    <td><input name="id[]" value="<?= $item['MA_KHO'] ?>" type="checkbox"></td>
 
                     <td class="textC"><?= $item['MA_KHO'] ?></td>
 
                     <td>
-                        <a href="product/view/9.html" class="tipS" title="" target="_blank">
+                        <a>
                             <b><?php echo $item['TEN_KHO']; ?></b>
                         </a>
 
