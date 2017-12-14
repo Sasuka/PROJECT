@@ -5,7 +5,9 @@ class Product extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("product_model", "group_model", "madeIn_model", "catelog_model", 'Transaction_model'));
+        $this->load->model(array("product_model", "group_model", "madeIn_model", "catelog_model", 'Transaction_model','PartTechnology_model'));
+        $techDetail = $this->PartTechnology_model->getList();
+        $this->data['partTechnology'] = $techDetail;
     }
     public function index()
     {
@@ -215,9 +217,10 @@ class Product extends MY_Controller
                 $warranty = $this->input->post('warranty', true);
                 $catelog_dis = $this->input->post('catelog_dis', true);
                 $catelog = $this->input->post('catelog', true);
-
+                $tech_decription = $this->input->post('tech_decription', true);
                 $idmade = $this->input->post('idmade', true);
                 $description = $this->input->post('description', true);
+                $tech_decription = $this->input->post('tech_decription', true);
 
                 $idGroup = $this->input->post('group', true);
                 $input['select'] = 'TEN_NHOM_SANPHAM';
@@ -264,6 +267,7 @@ class Product extends MY_Controller
                     'LOAI' => $catelog_dis,
                     'MA_LOAI_SANPHAM' => $catelog,
                     'MA_XUATXU' => $idmade,
+                    'MA_DD_KYTHUAT' => $tech_decription,
                     'MOTA' => $description
                 );
 
@@ -330,7 +334,7 @@ class Product extends MY_Controller
 
                 $name = $this->input->post('namepro', true);
                 $warranty = $this->input->post('warranty', true);
-                //$catelog_dis = $this->input->post('catelog_dis', true);
+                $tech_decription = $this->input->post('tech_decription', true);
                 // pre($catelog_dis);
                 //  $catelog = $this->input->post('catelog', true);
 
@@ -380,6 +384,7 @@ class Product extends MY_Controller
                 $dt = array(
                     'TEN_SANPHAM' => $name,
                     'BAOHANH' => $warranty,
+                    'MA_DD_KYTHUAT' => $tech_decription,
                     //  'LOAI' => $catelog_dis,
                     // 'MA_LOAI_SANPHAM' => $catelog,
                     'MA_XUATXU' => $idmade,
@@ -438,7 +443,7 @@ class Product extends MY_Controller
         $where['where'] = array('sanpham.MA_SANPHAM' => $id);
         $info = $this->product_model->getProductFull('','0',$where);
         $info = $info[0];
-      //  pre($info);
+       // pre($info);
         if (!$info) {
             $this->session->set_flashdata('message', 'Không tồn tại sản phẩm này!');
             redirect(admin_url('product'));
@@ -454,6 +459,7 @@ class Product extends MY_Controller
             $price = $this->input->post('price', true);
             $idmade = $this->input->post('idmade', true);
             $description = $this->input->post('description', true);
+            $tech_decription = $this->input->post('tech_decription', true);
             $status = $this->input->post('status');
             $namegroup = url_title(strtolower($info['TEN_NHOM_SANPHAM']));
 
@@ -484,6 +490,7 @@ class Product extends MY_Controller
                 'LOAI' => $catelog_dis,
                 'MA_XUATXU' => $idmade,
                 'MOTA' => $description,
+                'MA_DD_KYTHUAT' => $tech_decription,
                 'TRANGTHAI' => $status
             );
             if ($namePicture != '') {

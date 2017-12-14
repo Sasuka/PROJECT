@@ -47,7 +47,7 @@
 <script src="<?php echo public_url('site') ?>/js/default_script.min.js?v=90" type='text/javascript'></script>
 <link href="<?php echo public_url('site') ?>/css/default_style.min.css?v=90" rel='stylesheet' type='text/css'
       media='all'/>
-<script src="<?php echo public_url('site')?>/design/theme-default/html5shiv.js"></script>
+<!--<script src="--><?php //echo public_url('site')?><!--/design/theme-default/html5shiv.js"></script>-->
 <script src="<?php echo public_url('site') ?>/design/theme-default/jquery-migrate-1.2.0.min.js"></script>
 <script src="<?php echo public_url('site') ?>/design/theme-default/jquery.touchSwipe.min.js"
         type='text/javascript'></script>

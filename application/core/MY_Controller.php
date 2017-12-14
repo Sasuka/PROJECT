@@ -60,6 +60,8 @@ class MY_Controller extends CI_Controller
                 $this->data['promotion'] = $promotion;
                 /*Lấy đặc điểm kỹ thuật*/
                 $techDetail = $this->PartTechnology_model->getList();
+                $this->data['partTechnology'] = $techDetail;
+               // pre($techDetail);
                 $cusAccount = $this->session->userdata('cusAccount');
                 $this->data['cusAccount'] = $cusAccount;
             }

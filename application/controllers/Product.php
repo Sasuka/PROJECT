@@ -438,10 +438,14 @@ class Product extends MY_Controller
     {
         $id = $this->uri->rsegment(3);
         $id = intval($id);
-        $input['where'] =
+        $input = array('MA_DD_KYTHUAT' => $id);
         $productInfo = $this->product_model->get_info_rule(array('MA_SANPHAM' => $id));
-//        pre($productInfo);
-//        exit();
+       // pre($productInfo);
+       // exit();
+        $this->data['productInfo'] = $productInfo;
+        $productRelative = $this->product_model->getList($input);
+        $this->data['productRelative'] = $productRelative;
+        //pre($productRelative);
         $this->data['temp'] = 'site/product_detail/product_detail_content';
         $this->load->view('site/layout', $this->data);
     }
