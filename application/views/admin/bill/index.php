@@ -53,7 +53,7 @@ $tmp['status'] = (isset($_POST['status'])) ? $_POST['status'] : $list['TRANGTHAI
                             <option value="1" <?php echo ($tmp['status']==1) ? 'selected':'';?>>&nbsp;Chờ xử lý &nbsp;</option>
                             <option value="2" <?php echo ($tmp['status']==2) ? 'selected':'';?>>&nbsp;Đang giao hàng &nbsp;</option>
                             <option value="3" <?php echo ($tmp['status']==3) ? 'selected':'';?>>Hủy đơn hàng &nbsp;</option>
-                            <option value="3" <?php echo ($tmp['status']==3) ? 'selected':'';?>>Thành công &nbsp;</option>
+                            <option value="3" <?php echo ($tmp['status']==4) ? 'selected':'';?>>Thành công &nbsp;</option>
                         </select>
                         <span name="status_autocheck" class="autocheck"></span>
                         <div name="status_error" class="clear error" id="status_error"></div>

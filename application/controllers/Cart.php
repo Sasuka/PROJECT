@@ -163,4 +163,22 @@ class Cart extends MY_Controller
         }
         redirect(base_url('cart'));
     }
+
+    public function result_paypal_suc(){
+        $this->cart->destroy();
+        $this->data['temp'] = 'site/paypal/payment_sucsess';
+        $this->load->view('site/layout', $this->data);
+    }
+    public function result_paypal_fal($id){
+        $this->load->model('transaction_model');
+        $idTrans = $id;
+        $where = array('MA_GIAODICH' => $idTrans);
+        $data = array('TRANGTHAI' => '4');
+        $this->cart->destroy();
+        $this->transaction_model->update_rule($where, $data);
+        $this->data['temp'] = 'site/paypal/payment_error';
+        $this->load->view('site/layout', $this->data);
+    }
+
+
 }

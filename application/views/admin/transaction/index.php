@@ -74,10 +74,10 @@ $this->load->view('admin/transaction/head', $this->data);
                         <?php echo $item['TONG_THANHTIEN']; ?>
                     </td>
 
-                    <td class="tipS" title="<?php echo 'SDT: '.$item['SDT_KH'];?>">
+                    <td class="tipS"  title="<?php echo 'SDT: '.$item['SDT_KH'];?>">
                         <?php echo $item['DIACHI_GIAO']; ?>
                     </td>
-                    <td>
+                    <td name="typeTrasaction" id="typeTrasaction">
                         <?php
                         if ($item['MA_HINHTHUC'] == 1) {
                             echo 'Tiền mặt';
@@ -93,7 +93,8 @@ $this->load->view('admin/transaction/head', $this->data);
                         echo date('d-m-Y', strtotime($item['NGAY_GIAODICH']));
                         ?>
                     </td>
-                    <td class="tipS" title="<?php echo isset($item['HO_TEN_NV']) ? $item['HO_TEN_NV']:'' ;?>">
+                    <td class="tipS" title="<?php echo isset($item['HO_TEN_NV']) ? $item['HO_TEN_NV']:'' ;?>"
+                       >
                         <?php
                         if ($item['TRANGTHAI'] == 0) {
                             echo 'Vừa đặt hàng';

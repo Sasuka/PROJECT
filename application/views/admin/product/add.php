@@ -1,7 +1,7 @@
 <?php
 $this->load->view('admin/product/head', $this->data);
 
-//pre($partTechnology);
+
 ?>
 <div class="line"></div>
 <div class="wrapper">
@@ -53,6 +53,25 @@ $this->load->view('admin/product/head', $this->data);
                             <div class="clear"></div>
                         </div>
 
+                        <!-- Price -->
+                        <!--                        <div class="formRow">-->
+                        <!--                            <label class="formLeft" for="param_price">-->
+                        <!--                                Giá :-->
+                        <!--                                <span class="req">*</span>-->
+                        <!--                            </label>-->
+                        <!--                            <div class="formRight">-->
+                        <!--                                <span class="oneTwo">-->
+                        <!--                                    <input name="price" style="width:100px" id="param_price" class="format_number" _autocheck="true"-->
+                        <!--                                           type="text">-->
+                        <!--                                    <img class="tipS" title="Giá bán sử dụng để giao dịch" style="margin-bottom:-8px"-->
+                        <!--                                         src="-->
+                        <?php //echo public_url('admin') ?><!--/crown/images/icons/notifications/information.png">-->
+                        <!--                                </span>-->
+                        <!--                                <span name="price_autocheck" class="autocheck"></span>-->
+                        <!--                                <div name="price_error" class="clear error"></div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="clear"></div>-->
+                        <!--                        </div>-->
 
                         <!-- warranty -->
                         <div class="formRow">
@@ -136,28 +155,6 @@ $this->load->view('admin/product/head', $this->data);
                                 <span name="idmade_autocheck" class="autocheck"></span>
                                 <div name="idmade_error" class="clear error"
                                      id="made_error"><?php echo form_error('idmade'); ?></div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <!-- DAC DIEM KY THUAT -->
-                        <div class="formRow">
-                            <label class="formLeft" for="param_cat">Mã kỹ thuật:<span class="req">*</span></label>
-                            <div class="formRight">
-                                <select name="tech_decription" _autocheck="true" id="tech_decription" class="left"
-                                        value="<?php echo set_value('tech_decription'); ?>" required>
-                                    <option value="0">-- Đặc Điểm --</option>
-                                    <?php
-
-                                    foreach ($partTechnology as $item) {
-                                        ?>
-                                        <option value="<?= $item['MA_DD_KYTHUAT']; ?>"><?= $item['MA_DD_KYTHUAT']; ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                                <span name="tech_decription_autocheck" class="autocheck"></span>
-                                <div name="tech_decription_error" class="clear error"
-                                     id="tech_decription_error"><?php echo form_error('tech_decription'); ?></div>
                             </div>
                             <div class="clear"></div>
                         </div>

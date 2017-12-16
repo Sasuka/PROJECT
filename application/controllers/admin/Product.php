@@ -5,9 +5,7 @@ class Product extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("product_model", "group_model", "madeIn_model", "catelog_model", 'Transaction_model','PartTechnology_model'));
-        $techDetail = $this->PartTechnology_model->getList();
-        $this->data['partTechnology'] = $techDetail;
+        $this->load->model(array("product_model", "group_model", "madeIn_model", "catelog_model", 'Transaction_model'));
     }
     public function index()
     {
@@ -102,7 +100,9 @@ class Product extends MY_Controller
                                 Loại: <?php echo $item['LOAI']; ?> | Kinh doanh:<span
                                         style="color:red;"> <?php echo ($item['TRANGTHAI'] == '0') ? 'Hết' : '<span style="color:forestgreen;">Còn</span>'; ?></span>
                             </div>
-
+                            <div class="f11">
+                                Số lượng tồn: <?php echo $item['SOLUONG_BAN']; ?>
+                            </div>
                         </td>
 
                         <td class="textR">
@@ -137,9 +137,9 @@ class Product extends MY_Controller
                         <td class="textC"><?php echo date('d-m-Y', strtotime($item['NGAY_CAPNHAT'])); ?></td>
 
                         <td class="option textC">
-                            <a href="" title="Gán là nhạc tiêu biểu" class="tipE">
-                                <img src="<?php echo public_url('admin/images') ?>/icons/color/star.png">
-                            </a>
+<!--                            <a href="" title="Gán là nhạc tiêu biểu" class="tipE">-->
+<!--                                <img src="--><?php //echo public_url('admin/images') ?><!--/icons/color/star.png">-->
+<!--                            </a>-->
                             <a href="product/view/9.html" target="_blank" class="tipS" title="Xem chi tiết sản phẩm">
                                 <img src="<?php echo public_url('admin/images') ?>/icons/color/view.png">
                             </a>
@@ -217,10 +217,9 @@ class Product extends MY_Controller
                 $warranty = $this->input->post('warranty', true);
                 $catelog_dis = $this->input->post('catelog_dis', true);
                 $catelog = $this->input->post('catelog', true);
-                $tech_decription = $this->input->post('tech_decription', true);
+
                 $idmade = $this->input->post('idmade', true);
                 $description = $this->input->post('description', true);
-                $tech_decription = $this->input->post('tech_decription', true);
 
                 $idGroup = $this->input->post('group', true);
                 $input['select'] = 'TEN_NHOM_SANPHAM';
@@ -267,7 +266,6 @@ class Product extends MY_Controller
                     'LOAI' => $catelog_dis,
                     'MA_LOAI_SANPHAM' => $catelog,
                     'MA_XUATXU' => $idmade,
-                    'MA_DD_KYTHUAT' => $tech_decription,
                     'MOTA' => $description
                 );
 
@@ -334,7 +332,7 @@ class Product extends MY_Controller
 
                 $name = $this->input->post('namepro', true);
                 $warranty = $this->input->post('warranty', true);
-                $tech_decription = $this->input->post('tech_decription', true);
+                //$catelog_dis = $this->input->post('catelog_dis', true);
                 // pre($catelog_dis);
                 //  $catelog = $this->input->post('catelog', true);
 
@@ -384,7 +382,6 @@ class Product extends MY_Controller
                 $dt = array(
                     'TEN_SANPHAM' => $name,
                     'BAOHANH' => $warranty,
-                    'MA_DD_KYTHUAT' => $tech_decription,
                     //  'LOAI' => $catelog_dis,
                     // 'MA_LOAI_SANPHAM' => $catelog,
                     'MA_XUATXU' => $idmade,
@@ -443,7 +440,7 @@ class Product extends MY_Controller
         $where['where'] = array('sanpham.MA_SANPHAM' => $id);
         $info = $this->product_model->getProductFull('','0',$where);
         $info = $info[0];
-       // pre($info);
+      //  pre($info);
         if (!$info) {
             $this->session->set_flashdata('message', 'Không tồn tại sản phẩm này!');
             redirect(admin_url('product'));
@@ -459,7 +456,6 @@ class Product extends MY_Controller
             $price = $this->input->post('price', true);
             $idmade = $this->input->post('idmade', true);
             $description = $this->input->post('description', true);
-            $tech_decription = $this->input->post('tech_decription', true);
             $status = $this->input->post('status');
             $namegroup = url_title(strtolower($info['TEN_NHOM_SANPHAM']));
 
@@ -490,7 +486,6 @@ class Product extends MY_Controller
                 'LOAI' => $catelog_dis,
                 'MA_XUATXU' => $idmade,
                 'MOTA' => $description,
-                'MA_DD_KYTHUAT' => $tech_decription,
                 'TRANGTHAI' => $status
             );
             if ($namePicture != '') {

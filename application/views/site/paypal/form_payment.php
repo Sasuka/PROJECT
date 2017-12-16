@@ -23,9 +23,9 @@
             <!--Loại tiền-->
             <input type="hidden" name="currency_code" value="USD">
             <!--Đường link mình cung cấp cho Paypal biết để sau khi xử lí thành công nó sẽ chuyển về theo đường link này-->
-            <input type="hidden" name="return" value="http://localhost/www/PROJECT/payment_sucsess">
+            <input type="hidden" name="return" value="http://localhost/www/PROJECT/cart/result_paypal_suc/">
             <!--Đường link mình cung cấp cho Paypal biết để nếu  xử lí KHÔNG thành công nó sẽ chuyển về theo đường link này-->
-            <input type="hidden" name="cancel_return" value="http://localhost/www/PROJECT/payment_error">
+            <input type="hidden" name="cancel_return" value="http://localhost/www/PROJECT/cart/result_paypal_fal".<?php echo $billsInfo['MA_GIAODICH'];?>>
             <!-- Nút bấm. -->
             <button type="submit" name="submit" value="Thanh toán quay Paypal">Thanh toán quay Paypal</button>
         </form>

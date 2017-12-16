@@ -74,10 +74,11 @@ class Product extends MY_Controller
             $product[0]['TEN_KHUYENMAI'] = $promotionList[0]['TEN_KHUYENMAI'];
 
         }
-        //   pre($product[0]);
-        //$input['where'] = array('MA_SANPHAM' => $id);
-        //thuc hien load danh sach san pham dua vao id loai
-        //$product= $this->product_model->getList($input);
+        /*Update lượt xem*/
+        $pro = $this->product_model->get_info_rule($where);
+        $view =$pro['VIEW']+1;
+        $dt= array('VIEW'=>$view);
+        $this->product_model->update_rule($where,$dt);
         $product = $product[0];
         $product = json_encode($product);
         echo $product;
@@ -438,14 +439,32 @@ class Product extends MY_Controller
     {
         $id = $this->uri->rsegment(3);
         $id = intval($id);
-        $input = array('MA_DD_KYTHUAT' => $id);
+        $this->load->model('partTechnology_model');
         $productInfo = $this->product_model->get_info_rule(array('MA_SANPHAM' => $id));
-       // pre($productInfo);
-       // exit();
+        // pre($productInfo);
+//        exit();
         $this->data['productInfo'] = $productInfo;
-        $productRelative = $this->product_model->getList($input);
-        $this->data['productRelative'] = $productRelative;
-        //pre($productRelative);
+        $input['where'] = array('TRANGTHAI' => 1, 'MA_DD_KYTHUAT' => $productInfo['MA_DD_KYTHUAT'], 'DONGIA_BAN >' => 0);
+        $productTech = $this->product_model->getList($input);
+        /*Đặc điểm kỹ thuât*/
+        $input1 = array('MA_DD_KYTHUAT' => $productInfo['MA_DD_KYTHUAT']);
+        $tech = $this->partTechnology_model->get_info_rule($input1);
+        // pre($tech);
+        // $productRelative = $this->product_model->getList('');
+        /*Sản phẩm mới nhất*/
+        $input2['where'] = array('TRANGTHAI' => 1, 'DONGIA_BAN>' => 0);
+        $input2['order'] = array('NGAY_CAPNHAT','DESC');
+        $input2['limit']= array('4','0');
+        $input3['order'] = array('VIEW','DESC');
+        $input3['limit']= array('3','0');
+        $productNew = $this->product_model->getList($input2);
+//        pre($productNew);
+//        exit();
+        $productView = $this->product_model->getList($input3);
+        $this->data['productView'] = $productView;
+        $this->data['productNew'] = $productNew;
+        $this->data['productTech'] = $productTech;
+        $this->data['tech'] = $tech;
         $this->data['temp'] = 'site/product_detail/product_detail_content';
         $this->load->view('site/layout', $this->data);
     }

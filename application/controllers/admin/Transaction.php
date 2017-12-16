@@ -83,19 +83,31 @@ class Transaction extends MY_Controller
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->model('transactionDetail_model', 'store_model');
-
+//        $typeTransaction = isset($_GET['typeTransaction']) ? $_GET['typeTransaction'] :'';
+//        if ($typeTransaction){
+//            $statusTrans = $_GET['statusTrans'];
+//            if ($statusTrans == 'fail'){
+//                $this->session->set_flashdata('message', 'Thanh toán paypal không thành công!');
+//                redirect(admin_url('transaction'));
+//            }
+//        }
         //lay id cua quan trị viên cần chỉnh sửa
         $idTransaction = $this->uri->segment('4');
 
         if ($this->input->post()) {
             $status = $this->input->post('status');
 
+            //pre($status);
             if ($status == 2) {
                 //neu la giao hang
                 $this->transaction_suc($idTransaction);
             } else if ($status == 3) {
                 //neu la huy don hang
                 $this->transaction_cancell();
+            }else if($status == 4){
+//                báo giao thành công.
+
+                $this->confirm_success();
             }
 
         }
@@ -153,7 +165,7 @@ class Transaction extends MY_Controller
         $data = array(
             'MA_NHANVIEN' => $idEmployee,
             'NGAYLAP_HOADON' => date('Y-m-d'),
-            'TRANGTHAI' => '1'
+            'TRANGTHAI' => '2'
         );
         /*Thực hiện update vào phiếu đơn hàng*/
         $where1 = array('MA_GIAODICH'=>$idTransaction);
@@ -199,7 +211,7 @@ class Transaction extends MY_Controller
         $data = array(
             'MA_NHANVIEN' => $idEmployee,
             'NGAYLAP_HOADON' => date('Y-m-d'),
-            'TRANGTHAI' => '2'
+            'TRANGTHAI' => '3'
         );
         /*Update lại giao dịch với KH*/
         if($this->transaction_model->update_rule($where, $data)){
@@ -207,6 +219,35 @@ class Transaction extends MY_Controller
         }
         $this->db->trans_complete();
     }
+    public function confirm_success(){
+        $idEmployee = $this->input->post('employeeId');
+        $idTransaction = $this->uri->rsegment(3);
+        $input['where'] = array(
+            'MA_GIAODICH' => $idTransaction
+        );
+
+        $where = array('MA_GIAODICH' => $idTransaction);
+        $list = $this->transactionDetail_model->getListJoin('sanpham', 'MA_SANPHAM', $where);
+
+        $transaction = $this->transaction_model->get_info_rule($where);
+
+        /*Thành công là sau khi giao hàng không thành công*/
+        if($transaction['TRANGTHAI'] != '2'){
+            $this->session->set_flashdata('message', 'Xác nhận không thành công do chưa giao hàng!');
+            redirect(admin_url('transaction'));
+        }
+        $data = array(
+            'MA_NHANVIEN' => $idEmployee,
+            'NGAYLAP_HOADON' => date('Y-m-d'),
+            'TRANGTHAI' => '3'
+        );
+        /*Update lại giao dịch với KH*/
+        if($this->transaction_model->update_rule($where, $data)){
+            $this->session->set_flashdata('message', 'Đơn hàng thành công!');
+        }
+
+    }
+
 
 
 }

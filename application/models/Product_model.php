@@ -43,7 +43,6 @@ class Product_model extends MY_Model
             $product . '.MOTA,' .
             $product . '.BAOHANH,' .
             $product . '.LOAI,' .
-            $product.'.MA_DD_KYTHUAT,'.
             $product . '.TRANGTHAI,' .
             $product . '.VIEW');
         $this->db->from($group_pro);

@@ -1,6 +1,5 @@
 <?php
 $this->load->view('admin/product/head', $this->data);
-//pre($product);
 $tmp['TEN_SANPHAM'] = (isset($_POST['namepro']) ? $_POST['namepro'] : $product['TEN_SANPHAM']);
 $tmp['HINH_DAIDIEN'] = (isset($_POST['image']) ? $_POST['image'] : $product['HINH_DAIDIEN']);
 $tmp['DONGIA_BAN'] = (isset($_POST['price']) ? $_POST['price'] : $product['DONGIA_BAN']);
@@ -8,7 +7,6 @@ $tmp['BAOHANH'] = (isset($_POST['warranty']) ? $_POST['warranty'] : $product['BA
 $tmp['LOAI'] = (isset($_POST['catelog_dis']) ? $_POST['catelog_dis'] : $product['LOAI']);
 $tmp['MOTA'] = (isset($_POST['description']) ? $_POST['description'] : $product['MOTA']);
 $tmp['MA_XUATXU'] = (isset($_POST['MA_XUATXU']) ? $_POST['MA_XUATXU'] : $product['MA_XUATXU']);
-$tmp['MA_DD_KYTHUAT'] = (isset($_POST['tech_decription']) ? $_POST['tech_decription'] : $product['MA_DD_KYTHUAT']);
 $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $product['TRANGTHAI']);
 
 ?>
@@ -170,34 +168,7 @@ $tmp['TRANGTHAI'] = (isset($_POST['status']) ? $_POST['status'] : $product['TRAN
                             </div>
                             <div class="clear"></div>
                         </div>
-                        <!-- MA_DD_KYTHUAT-->
-                        <div class="formRow">
-                            <label class="formLeft" for="param_cat">MÃ KỸ THUẬT:<span class="req">*</span></label>
-                            <div class="formRight">
-                                <select name="tech_decription" _autocheck="true" id="tech_decription" class="left"
-                                        value="<?php echo set_value('tech_decription'); ?>">
-                                    <option value="0">-- Mã kỹ thuât --</option>
-                                    <?php
-                                    //  var_dump($madeIn);
 
-                                    foreach ($partTechnology as $item) {
-                                        ?>
-                                        <option value="<?= $item['MA_DD_KYTHUAT']; ?>"
-                                            <?php
-                                            echo ($item['MA_DD_KYTHUAT'] == $tmp['MA_DD_KYTHUAT']) ? 'selected' : '';
-                                            ?>
-                                        >
-                                            <?= $item['MA_DD_KYTHUAT']; ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                                <span name="tech_decription_autocheck" class="autocheck"></span>
-                                <div name="tech_decription_error" class="clear error"
-                                     id="tech_decription_error"><?php echo form_error('tech_decription'); ?></div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
 
                         <div class="formRow">
                             <label class="formLeft" for="param_sale">Mô tả:</label>
