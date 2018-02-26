@@ -178,4 +178,6 @@ class MY_Controller extends CI_Controller
         } else
             return true;
     }
+    /*Đăng ký mới*/
+
 }

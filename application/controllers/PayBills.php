@@ -80,9 +80,17 @@ class PayBills extends MY_Controller
 //            echo $arr_ship_info['HO'];
             /*Nếu chưa login thì kiểm tra sự tồn tại của email và phone */
             if (!isset($cusAccount)){
+                $this->load->model('customer_model');
                 if($this->check_phone_exist('customer_model',$arr_ship_info['SDT']) &&
                     $this->check_email_exist('customer_model',$arr_ship_info['EMAIL'])) {
                     /* Not exists then conitnue*/
+                    /*Tạo mới khách hàng*/
+                    if ($this->customer_model->add($arr_ship_info)) {
+                        //tao noi dung thong bao
+                        $this->session->set_flashdata('message', 'Đăng ký thành công!');
+                    } else {
+                        $this->session->set_flashdata('message', 'Đăng ký thất bại');
+                    }
 
 
                 } else{
@@ -90,17 +98,10 @@ class PayBills extends MY_Controller
 
 
                 }
-//                if($this->check_phone_exist('customer_model',$arr_ship_info['SDT'])){
-//                    $this->session->set_flashdata('message', 'Email hoặc Số điện thoại này đã tồn tại!');
-//                    $this->data['type'] = 3;
-//                    $this->data['temp'] = 'site/product_order/product_order';
-//                    $this->load->view('site/layout', $this->data);
-//                }else{
-//                    /* Thực hiện create customer*/
-//                    $this->data['type'] = 2;
-//                    $this->data['temp'] = 'site/product_order/product_order';
-//                    $this->load->view('site/layout', $this->data);
-//                }
+                /*Lấy mã khách hàng vừa tạo*/
+                $where = array('SDT' => $arr_ship_info['SDT'],'EMAIL' => $arr_ship_info['EMAIL']);
+                $customer = $this->customer_model->get_info_rule($where);
+                pre($customer);
             }
         }
 
